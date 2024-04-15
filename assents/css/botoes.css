@@ -1,0 +1,23 @@
+.btn-index{
+    width: 300px;
+    height: 80px;
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color:#0bd1eb5e;
+    border: 3px solid rgba(255, 255, 255, 0.651);
+    font-family: "Oswald", Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    transition: 0.5s;
+}
+
+.btn-index:hover{
+    border: 3px solid rgba(10, 247, 255, 0.795);
+    background-color:#0bd1ebab;
+    cursor: pointer;
+
+}

@@ -1,9 +1,6 @@
  .header {
     background-color: var(--header);
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 80px; 
     padding: 20px 0;
   }
   
@@ -13,10 +10,17 @@
     color: var(--text-color);
   }
 
+  .header h4{
+    margin: 0px;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+  }
+
   .img-tile{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
   }
 
   .img-tile img{
