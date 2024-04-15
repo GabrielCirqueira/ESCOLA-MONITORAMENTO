@@ -1,62 +1,25 @@
 /* LOGIN DO ALUNO */
 
     .login-aluno{
-        max-width: 400px;
+        padding-top: 50px;
         text-align: center;
-        min-width: 350px;
-        border: 2px solid white;
-        border-radius: 10px;
-        background-color: rgba(248, 248, 248, 0.164);   
+        max-width: 400px;
+        min-width: 340px;
+        border: 2px solid white; 
+        background-color: rgba(248, 248, 248, 0.298);   
         height: 400px;
         font-family: Arial, Helvetica, sans-serif;
         box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.185);
     }
 
-    .login-aluno h3{
+    .login-aluno h1{
         font-size: 30px;
         color: white;
     }
 
-    .input-ra-aluno{
-        background-color: rgba(245, 245, 220, 0);
-        width: 80%;
-        margin: 20px;
-        padding-left: 10px;
-        height: 50px;
-        border: none;
-        font-size: 20px;
-        color: white;
-        border: 1px solid white;
-    }
-    .input-ra-aluno::placeholder{
-        color: white;
-    }
+   
 
-    .input-ra-aluno:focus{
-        outline: none;
+    #campo-email{
+        display: none;
     }
-
-    .login-aluno input[type="submit"]{
-        background-color: white;
-        border: none;
-        width: 80%;
-        margin: 20px 0px;
-        height: 40px;
-    }
-
-    .login-aluno button{
-        background-color: rgba(240, 248, 255, 0);
-        margin: 30px 0px;
-        border: none;
-        font-size: 20px;
-        text-decoration:underline;
-        color: white;
-    }
-
-    .login-aluno button:hover{
-        color: rgb(209, 209, 209);
-        cursor: pointer;
-
-    }
-
     

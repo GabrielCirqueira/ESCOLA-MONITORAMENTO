@@ -8,7 +8,7 @@
     text-decoration: none;
     background-color:#0bd1eb5e;
     border: 3px solid rgba(255, 255, 255, 0.651);
-    font-family: "Oswald", Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: "Oswald", 'Arial Narrow Bold', sans-serif;
     font-size: 30px;
     font-weight: bold;
     color: white;
@@ -19,5 +19,34 @@
     border: 3px solid rgba(10, 247, 255, 0.795);
     background-color:#0bd1ebab;
     cursor: pointer;
+}
 
+
+.login-aluno input[type="submit"]{
+    background-color: white;
+    border: none;
+    width: 70%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    margin: 20px 0px;
+    height: 60px;
+}
+
+.login-aluno input[type="submit"]:hover{
+    background-color: rgb(202, 202, 202);
+    cursor: pointer;
+}
+
+.button-enter-email{
+    background-color: rgba(240, 248, 255, 0);
+    margin: 30px 0px;
+    border: none;
+    font-size: 20px;
+    text-decoration:underline;
+    color: white;
+}
+
+.button-enter-email:hover{
+    color: rgb(209, 209, 209);
+    cursor: pointer;
 }

@@ -1,6 +1,7 @@
 <?php 
 
+
 include "views/head.php";
 include "views/header.php";
-include "views/aluno/login.php";
+include "views/main.php";
 include "views/footer.php";
