@@ -8,7 +8,7 @@
             <input class="input-campo-aluno" type="text" placeholder="Senha"  required>
         </div>
 
-        <input type="submit"> 
+        <input type="submit">
     </div>
 
 </main>

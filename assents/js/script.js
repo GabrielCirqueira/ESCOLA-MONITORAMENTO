@@ -1,24 +1,14 @@
 
-function Mostrar_campo_email(){
- 
-
-    const campo_ra = document.getElementById("campo-ra")
-    const campo_email = document.getElementById("campo-email") 
-    const container = document.querySelector(".login-aluno")
-
-    campo_ra.style.display = "none"
-    campo_email.style.display = "block"
-    campo_email.style.height = "480px"
-
+function Mostrar_campo_email() {
+    document.querySelector("#campo-ra").style.display = "none";
+    document.querySelector("#campo-email").style.display = "block";
+    const container = document.querySelector(".login-aluno");
+    container.style.height = "480px"
 }
 
-function Mostrar_campo_ra(){ 
-
-    const campo_ra = document.getElementById("campo-ra")
-    const campo_email = document.getElementById("campo-email") 
-    const container = document.querySelector(".login-aluno")
-
-    campo_ra.style.display = "block"
-    campo_email.style.display = "none"
+function Mostrar_campo_ra() {
+    document.querySelector("#campo-ra").style.display = "block";
+    document.querySelector("#campo-email").style.display = "none";
+    const container = document.querySelector(".login-aluno");
     container.style.height = "400px"
 }

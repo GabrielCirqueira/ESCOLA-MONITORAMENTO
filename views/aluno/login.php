@@ -9,6 +9,9 @@
 
         <input type="submit">
         <button onclick="Mostrar_campo_email()" class="button-enter-email">Entrar com Email e Senha</button>
+        <br>
+        <a class="Botao-voltar-lobby" href="home">Voltar</a>
+
     </div>
 
     <div id="campo-email" class="login-aluno">
@@ -21,6 +24,8 @@
 
         <input type="submit">
         <button onclick="Mostrar_campo_ra()" class="button-enter-email">Entrar com RA</button>
+        <br>
+        <a class="Botao-voltar-lobby" href="home">Voltar</a>
     </div>
 
 </main>
