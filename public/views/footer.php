@@ -4,6 +4,6 @@
       Gabriel Cirqueira
     </p>
   </footer>
-  <script src="assents/js/script.js" ></script>
+  <script src="public/assents/js/script.js"></script>
 </body>
 </html>
