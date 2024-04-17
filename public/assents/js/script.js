@@ -12,3 +12,7 @@ function Mostrar_campo_ra() {
     const container = document.querySelector(".login-aluno");
     container.style.height = "400px"
 }
+
+function Fechar_PopUp(popup){
+    document.getElementById(popup).style.display = 'none'
+}
