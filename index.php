@@ -1,49 +1,21 @@
 <?php
 
-if (isset($_GET["action"])) {
+use app\controllers\monitoramento\MainControllera;
 
-    switch ($_GET["action"]) {
+$rotas = [
+    "/" => "MainController::index()",
+    "/home" => "MainController::index()"
+];
 
-        case "login_aluno":
-            include "public/views/head.php";
-            include "public/views/header.php";
-            include "public/views/aluno/login.php";
-            include "public/views/footer.php";
-            break;
+foreach($rotas as $rota => $controlador){
+    if(isset($_GET["action"]) && $_GET["action"] == $rota){
 
-        case "login_professor":
-            include "public/views/head.php";
-            include "public/views/header.php";
-            include "public/views/professor/login.php";
-            include "public/views/footer.php";
-            break;
+        $partes = explode("::", $controlador);
+        $classe = $partes[0];
+        $metodo = $partes[1];
 
-        case "login_gestor":
-            include "public/views/head.php";
-            include "public/views/header.php";
-            include "public/views/gestor/login.php";
-            include "public/views/footer.php";
-            break;
-
-        case "login_adm":
-            include "public/views/head.php";
-            include "public/views/header.php";
-            include "public/views/adm/login.php";
-            include "public/views/footer.php";
-            break;
-        default:
-            include "public/views/head.php";
-            include "public/views/header.php";
-            include "public/views/main.php";
-            include "public/views/PopUps.php";
-            include "public/views/footer.php";
-            break;
+        $classe::$metodo();
+    }else if(!isset($_GET["action"])){
+        MainControllera::index();
     }
-
-} else {
-    include "public/views/head.php";
-    include "public/views/header.php";
-    include "public/views/main.php";
-            include "public/views/PopUps.php";
-            include "public/views/footer.php";
 }

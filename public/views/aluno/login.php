@@ -3,7 +3,7 @@
     <div id="campo-ra" class="login-aluno">
         <h1>LOGIN - ALUNO</h1>
         <form action="" method="post">
-            <!-- @csrf -->
+            
             <div class="campo-ra">
                 <input class="input-campo-aluno" id="RA" type="text" placeholder="Digite Seu RA" required>
             </div>
