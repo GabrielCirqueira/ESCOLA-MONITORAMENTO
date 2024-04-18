@@ -14,5 +14,6 @@ function Mostrar_campo_ra() {
 }
 
 function Fechar_PopUp(popup){
+    console.log("aeee")
     document.getElementById(popup).style.display = 'none'
 }
