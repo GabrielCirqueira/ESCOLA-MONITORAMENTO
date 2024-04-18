@@ -5,6 +5,7 @@
 @import url(main.css);
 @import url(botoes.css);
 @import url(campo.css);
+@import url(PopUps.css);
 
 .main {
   flex: 1 1 0;
