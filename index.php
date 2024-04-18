@@ -1,32 +1,39 @@
 <?php
 
-require "vendor/autoload.php";
+require_once "vendor/autoload.php";
 
 use app\controllers\monitoramento\MainController;
 
 $rotas = [
-    "" => "MainController",
-    "home" => "MainController::index()",
-    "login_aluno" => "MainController::login_aluno()"
+    "" => [
+        "controller" => MainController::class,
+        "method" => "index"
+    ],
+    "home" => [
+        "controller" => MainController::class,
+        "method" => "index"
+    ],
+    "login_aluno" => [
+        "controller" => MainController::class,
+        "method" => "login_aluno"
+    ],
+    "login_professor" => [
+        "controller" => MainController::class,
+        "method" => "login_professor"
+    ],
+    "login_gestor" => [
+        "controller" => MainController::class,
+        "method" => "login_gestor"
+    ],
+    "login_adm" => [
+        "controller" => MainController::class,
+        "method" => "login_adm"
+    ]
 ];
 
-foreach($rotas as $rota => $controlador){
-    if(isset($_GET["action"]) && $_GET["action"] == $rota){
-
-        $partes = explode("::", $controlador);
-        $classe = $partes[0];
-        $metodo = $partes[1];
-
-        $classe::$metodo();
-        
-    }else if(!isset($_GET["action"])){
-        MainController::index();
-    }
-}
-
-
-// include "public/views/head.php";
-// include "public/views/header.php";
-// include "public/views/main.php";
-// include "public/views/PopUps.php";
-// include "public/views/footer.php";
+$action = isset($_GET["action"]) ? $_GET["action"] : "";
+if (array_key_exists($action, $rotas)) {
+    $controller = $rotas[$action]["controller"];
+    $method = $rotas[$action]["method"];
+    $controller::$method();
+} 
