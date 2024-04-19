@@ -3,37 +3,30 @@
 require_once "vendor/autoload.php";
 
 use app\controllers\monitoramento\MainController;
+use app\controllers\monitoramento\ProfessorController;
 
 $rotas = [
-    "" => [
-        "controller" => MainController::class,
-        "method" => "index"
-    ],
-    "home" => [
-        "controller" => MainController::class,
-        "method" => "index"
-    ],
-    "login_aluno" => [
-        "controller" => MainController::class,
-        "method" => "login_aluno"
-    ],
-    "login_professor" => [
-        "controller" => MainController::class,
-        "method" => "login_professor"
-    ],
-    "login_gestor" => [
-        "controller" => MainController::class,
-        "method" => "login_gestor"
-    ],
-    "login_adm" => [
-        "controller" => MainController::class,
-        "method" => "login_adm"
-    ]
+    "home" =>  MainController::class,
+    "login_aluno"  => MainController::class,
+    "login_professor" => MainController::class,
+    "login_gestor" =>  MainController::class,
+    "login_adm" =>  MainController::class,
+    "home_professor" => ProfessorController::class
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";
+
+if($action == "home"){
+    $action = "index";
+}
+
 if (array_key_exists($action, $rotas)) {
-    $controller = $rotas[$action]["controller"];
-    $method = $rotas[$action]["method"];
+
+    $controller = $rotas[$action];
+    $method = $action;
     $controller::$method();
-} 
+
+}else{
+    MainController::index();
+}
+

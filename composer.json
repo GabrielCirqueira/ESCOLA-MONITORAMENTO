@@ -1,12 +1,8 @@
 {
     "autoload": {
         "psr-4": {
-            "app\\controllers\\eletiva\\": "app/controllers/eletiva/",
             "app\\controllers\\monitoramento\\": "app/controllers/monitoramento/",
-            "app\\controllers\\tutoria\\": "app/controllers/tutoria/",
-            "app\\models\\eletiva\\": "app/models/eletiva/",
             "app\\models\\monitoramento\\": "app/models/monitoramento/",
-            "app\\models\\tutoria\\": "app/models/tutoria/",
             "app\\config\\": "app/config/"
         }
     }

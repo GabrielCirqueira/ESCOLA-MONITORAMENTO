@@ -1,7 +1,7 @@
 <main class="main">
 
     <div id="campo-ra" class="login-aluno">
-        <h1>LOGIN - ALUNO</h1>
+        <h1> ALUNO</h1>
         <form action="" method="post">
             
             <div class="campo-ra">
@@ -17,7 +17,7 @@
     </div>
 
     <div id="campo-email" class="login-aluno">
-        <h1>LOGIN - ALUNO</h1>
+        <h1> ALUNO</h1>
         <form action="" method="post">
             <!-- @csrf -->
             <div class="campo-ra">

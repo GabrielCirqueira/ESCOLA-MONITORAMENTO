@@ -5,15 +5,15 @@ namespace app\controllers\monitoramento;
 class MainController{
 
     public static function Templates($template){
-        include "public/views/head.php";
-        include "public/views/header.php";
+        include "public/views/templates/head.php";
+        include "public/views/templates/header.php";
         include $template;
-        include "public/views/PopUps.php";
-        include "public/views/footer.php";
+        include "public/views/templates/PopUps.php";
+        include "public/views/templates/footer.php";
     }
 
     public static function index(){
-        self::Templates("public/views/main.php");
+        self::Templates("public/views/templates/main.php");
     }
 
     public static function login_aluno(){

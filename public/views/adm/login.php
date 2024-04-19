@@ -1,7 +1,7 @@
 <main class="main">
 
     <div class="login-aluno">
-        <h1>LOGIN - ADMINISTRADOR</h1>
+        <h1> ADMINISTRADOR</h1>
         <form action="" method="post">
             <!-- @csrf -->
             <div class="campo-ra">

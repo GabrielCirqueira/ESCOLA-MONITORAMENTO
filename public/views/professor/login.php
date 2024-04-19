@@ -1,13 +1,13 @@
 <main class="main">
 
     <div class="login-aluno">
-        <h1>LOGIN - PROFESSOR</h1>
+        <h1>PROFESSOR</h1>
 
-        <form action="" method="post">
+        <form action="home_professor" method="post">
             <!-- @csrf -->
             <div class="campo-ra">
-                <input class="input-campo-aluno" type="text" placeholder="Usuario" required>
-                <input class="input-campo-aluno" type="text" placeholder="Senha" required>
+                <input class="input-campo-aluno" type="text" name="user" placeholder="Usuario" required>
+                <input class="input-campo-aluno" type="text" name="senha" placeholder="Senha" required>
             </div>
             <input type="submit">
         </form>
