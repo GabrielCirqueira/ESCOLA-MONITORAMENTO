@@ -6,8 +6,7 @@
         <form action="home_professor" method="post">
             <!-- @csrf -->
             <div class="campo-ra">
-                <input class="input-campo-aluno" type="text" name="user" placeholder="Usuario" required>
-                <input class="input-campo-aluno" type="text" name="senha" placeholder="Senha" required>
+                <input class="input-campo-aluno" type="text" name="user" placeholder="Usuario" required> 
             </div>
             <input type="submit">
         </form>

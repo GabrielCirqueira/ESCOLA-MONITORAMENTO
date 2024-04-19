@@ -2,7 +2,8 @@
 
 namespace app\controllers\monitoramento;
 
-use app\models\ProfessorModel;
+use app\models\monitoramento\ProfessorModel;
+use app\controllers\monitoramento;
 
 class ProfessorController{
 
@@ -10,11 +11,9 @@ class ProfessorController{
 
         $info = ProfessorModel::verificarLogin($_POST["user"]);
         if ($info){
-
+            MainController::Templates("public/views/professor/home.php");
         } else {
-
+            header("location: login_professor");
         }
     }
-
-
 }
