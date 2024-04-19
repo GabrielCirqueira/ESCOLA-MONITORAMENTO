@@ -13,7 +13,10 @@ function Mostrar_campo_ra() {
     container.style.height = "400px"
 }
 
-function Fechar_PopUp(popup){
-    console.log("aeee")
+function Fechar_PopUp(popup){ 
     document.getElementById(popup).style.display = 'none'
+}
+
+function Mostrar_PopUp(popup){
+    document.getElementById(popup).style.display = 'block'
 }

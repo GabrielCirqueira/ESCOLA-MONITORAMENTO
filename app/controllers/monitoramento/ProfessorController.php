@@ -14,6 +14,7 @@ class ProfessorController{
             MainController::Templates("public/views/professor/home.php");
         } else {
             header("location: login_professor");
+            echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";
         }
     }
 }

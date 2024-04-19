@@ -17,7 +17,5 @@ class ProfessorModel{
         }else{
             return False;
         }
-
     }
-
 }

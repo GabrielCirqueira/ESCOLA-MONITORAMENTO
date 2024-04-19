@@ -1,6 +1,7 @@
 <?php 
 
 namespace app\config;
+
 use PDO;
 
     class Database{

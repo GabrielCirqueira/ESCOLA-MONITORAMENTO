@@ -7,6 +7,10 @@
     #PopUp_RA_NaoENC{
         display: none;
     }
+
+    #PopUp_PRF_NaoENC{
+      display: none;
+    }
   
 .PopUp-sobreposicao{ 
     position: fixed;
