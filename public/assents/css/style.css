@@ -9,3 +9,29 @@
 #campo-email {
   height: 470px;
 }
+ 
+.label-select {
+  display: block;
+  margin-bottom: 5px; 
+}
+
+.input-select {
+  width: 70%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #555;
+}
+ 
+  
+.input-checkbox + span {
+  cursor: pointer;
+  margin-right: 20px;
+  font-size: 16px;
+  color: #555;
+}
+
+.input-checkbox:checked + span {
+  font-weight: bold;
+  color: #00d9ff;
+}

@@ -1,4 +1,4 @@
-<div id="container-gestor-02" class="container-gestor-info">
+<div class="container-gestor-info">
 
         <h1>Formulário de Inserção de Professor</h1>
 

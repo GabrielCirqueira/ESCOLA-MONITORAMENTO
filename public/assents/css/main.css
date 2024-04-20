@@ -94,6 +94,6 @@
   align-items: center;
 }
 
-.campo-formulario-add label {
+.titulo-label-input,.campo-formulario-add label {
   font-size: 20px;
 }
