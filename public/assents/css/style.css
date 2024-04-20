@@ -1,4 +1,3 @@
-
 @import url(header.css);
 @import url(global.css);
 @import url(footer.css);
@@ -7,15 +6,13 @@
 @import url(campo.css);
 @import url(PopUps.css);
 
-.main {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 90vh;
+#campo-email {
+  height: 470px;
 }
 
-#campo-email{
-  height: 470px;
+#container-gestor-02,
+#container-gestor-03,
+#container-gestor-04,
+#container-gestor-05 {
+  display: none;
 }

@@ -1,12 +1,12 @@
  .header {
     background-color: var(--header);
-    height: 80px; 
+    height: 60px; 
     padding: 20px 0;
   }
   
   .header__title {
     margin: 0;
-    font-size: 50px;
+    font-size: 40px;
     color: var(--text-color);
   }
 
@@ -31,6 +31,7 @@
   .boton-header{
     height: 10px; 
     background-color:#0fb6c9;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.356);
   }
 
   .header i{

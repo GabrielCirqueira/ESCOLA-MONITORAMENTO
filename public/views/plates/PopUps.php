@@ -34,13 +34,8 @@
                     <div class="linha-unchecked-1"></div>
                     <div class="linha-unchecked-2"></div>
             </div>
-
-            <!-- <div class="check">
-                <div class="linha-checked-1"></div>
-                <div class="linha-checked-2"></div>
-            </div> -->
     
-        <p>Infelizmente não encontramos o <br> Usuario em nosso banco de dados.</p>
+        <p>Infelizmente não encontramos o <br> Usuario em nossos registros.</p>
         <button onclick="Fechar_PopUp('PopUp_PRF_NaoENC')" class="Fechar-Popup">FECHAR</button>
     </div>
 </div>
