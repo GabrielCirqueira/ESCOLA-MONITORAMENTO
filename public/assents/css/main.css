@@ -1,129 +1,95 @@
 .main {
-    flex: 1 1 0;
-    display: flex;
-    background-image: url('../../../public/assents/img/estudantes.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 90vh;
-  }
+  flex: 1 1 0;
+  display: flex;
+  background-image: url('../../../public/assents/img/estudantes.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+}
 
-  .main-home{
-    flex: 1 1 0;
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 90vh;
-    max-height: 9999999vw;
-  }
+.main-home {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+  max-height: 9999999vw;
+}
+
 /* LOGIN DO ALUNO */
 
-    .login-aluno{
-        padding-top: 50px;
-        text-align: center;
-        max-width: 400px;
-        min-width: 340px;
-        border: 2px solid white; 
-        background-color: rgba(248, 248, 248, 0.298);   
-        height: 400px;
-        font-family: Arial, Helvetica, sans-serif;
-        box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.185);
-    }
+.login-aluno {
+  padding-top: 50px;
+  text-align: center;
+  max-width: 400px;
+  min-width: 340px;
+  border: 2px solid white;
+  background-color: rgba(248, 248, 248, 0.298);
+  height: 400px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.185);
+}
 
-    .login-aluno h1{
-        font-size: 30px;
-        color: white;
-    }
+.login-aluno h1 {
+  font-size: 30px;
+  color: white;
+}
 
-    #campo-email{
-        display: none;
-    }
-    
+#campo-email {
+  display: none;
+}
+
 /*GESTOR*/
 
-.gestor-main{
+.gestor-main {
   display: flex;
   box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.219);
   margin: 20px;
-  width: 80%;  
+  width: 80%;
   overflow: hidden;
   min-height: 500px;
 }
 
-  .menu-lateral-gestor{
-    background-color: #333;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    width: 200px;
-    padding: 20px;
-  }
-
-  .info-gestor{
-    flex-grow: 1; 
-    padding: 20px;
-    background-color: #e6e6e6;
-    overflow-y: auto;
-  }
-
-.button-menu-lateral {
-  display: block;
-  background-color: #09b7ce;
+.menu-lateral-gestor {
+  background-color: #333;
   color: #fff;
-  border: none;
-  padding: 15px;
-  margin-bottom: 10px;
-  text-decoration: none;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  padding: 20px;
 }
 
-.button-menu-lateral:hover {
-  background-color: #0a91a3;
-  cursor: pointer;
+.info-gestor {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #e6e6e6;
+  overflow-y: auto;
 }
 
-.formulario-professor {
+.formulario-add-professor {
   background-color: #ffffff00;
   padding: 20px;
   border-radius: 8px;
 }
 
-.titulo-formulario {
+.container-gestor-info h1 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.campo-formulario {
+.campo-formulario-add {
   margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.rotulo {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.campo-texto {
-  width: 100%;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-.botao-enviar {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.botao-enviar:hover {
-  background-color: #0056b3;
+.campo-formulario-add label {
+  font-size: 20px;
 }

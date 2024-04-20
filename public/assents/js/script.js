@@ -31,3 +31,20 @@ function Mostrar_container_gestor(container){
     document.getElementById(container).style.display = "block";
 
 }
+
+document.getElementById('cpf').addEventListener('input', function (e) {
+    let cpf = e.target.value.replace(/\D/g, '');
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    e.target.value = cpf;
+});
+
+document.getElementById('telefone').addEventListener('input', function (e) {
+    let telefone = e.target.value;
+    // Remove todos os caracteres que não são números
+    telefone = telefone.replace(/\D/g, '');
+    // Adiciona parênteses e um espaço após os 2 primeiros números
+    telefone = telefone.replace(/^(\d{2})(\d)/g, '($1) $2');
+    e.target.value = telefone;
+});

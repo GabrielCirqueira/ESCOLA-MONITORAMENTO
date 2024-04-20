@@ -66,3 +66,32 @@
     cursor: pointer;
     color: black;
 }
+
+.button-menu-lateral {
+    display: block;
+    background-color: #09b7ce;
+    color: #fff;
+    border: none;
+    padding: 15px;
+    margin-bottom: 10px;
+    text-decoration: none;
+    text-align: center;
+  }
+  
+  .button-menu-lateral:hover {
+    background-color: #0a91a3;
+    cursor: pointer;
+  }
+  
+.botao-form-enviar {
+    background-color: #14c1d8;
+    color: #fff;
+    padding: 12px 35px;
+    border: none; 
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .botao-form-enviar:hover {
+    background-color: #0a91a3;
+  }

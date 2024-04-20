@@ -39,3 +39,17 @@
         <button onclick="Fechar_PopUp('PopUp_PRF_NaoENC')" class="Fechar-Popup">FECHAR</button>
     </div>
 </div>
+
+<div id="PopUp_add_professor_true" class="PopUp-sobreposicao">
+    <div class="conteudo-popup">
+        <h2>SUCESSO</h2>
+
+            <div class="check">
+                <div class="linha-checked-1"></div>
+                <div class="linha-checked-2"></div>
+            </div> 
+    
+        <p>Professor inserido com <br>sucesso!</p>
+        <button onclick="Fechar_PopUp('PopUp_add_professor_true')" class="Fechar-Popup">FECHAR</button>
+    </div>
+</div>

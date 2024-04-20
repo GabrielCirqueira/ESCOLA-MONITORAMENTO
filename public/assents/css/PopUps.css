@@ -11,6 +11,10 @@
     #PopUp_PRF_NaoENC{
       display: none;
     }
+
+    #PopUp_add_professor_true{
+      display: none;
+    }
   
 .PopUp-sobreposicao{ 
     position: fixed;

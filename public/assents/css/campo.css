@@ -17,3 +17,21 @@
 .input-campo-aluno:focus{
     outline: none;
 }
+
+.input-add {
+    width: 70%;
+    padding: 10px; 
+    height: 40px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  .input-add:active{
+    outline: none;
+    border: none;
+  }
+  
+  .input-add:focus {
+    outline: none;
+  }
