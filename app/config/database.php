@@ -24,7 +24,14 @@ use PDO;
                     numero varchar(30)
                 );";
             
+            $disciplinas = "CREATE TABLE IF NOT EXISTS disciplinas(
+                nome varchar(255),
+                turno varchar(255),
+                curso varhcar(255)
+            );";
+
             self::GetInstance()->query($professores);
+            self::GetInstance()->query($disciplinas);
 
     }
 

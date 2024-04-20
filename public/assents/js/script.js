@@ -21,16 +21,16 @@ function Mostrar_PopUp(popup){
     document.getElementById(popup).style.display = 'block'
 }
 
-function Mostrar_container_gestor(container){
-    document.getElementById("container-gestor-01").style.display = "none";
-    document.getElementById("container-gestor-02").style.display = "none";
-    document.getElementById("container-gestor-03").style.display = "none";
-    document.getElementById("container-gestor-04").style.display = "none";
-    document.getElementById("container-gestor-05").style.display = "none";
+// function Mostrar_container_gestor(container){
+//     document.getElementById("container-gestor-01").style.display = "none";
+//     document.getElementById("container-gestor-02").style.display = "none";
+//     document.getElementById("container-gestor-03").style.display = "none";
+//     document.getElementById("container-gestor-04").style.display = "none";
+//     document.getElementById("container-gestor-05").style.display = "none";
 
-    document.getElementById(container).style.display = "block";
+//     document.getElementById(container).style.display = "block";
 
-}
+// }
 
 document.getElementById('cpf').addEventListener('input', function (e) {
     let cpf = e.target.value.replace(/\D/g, '');

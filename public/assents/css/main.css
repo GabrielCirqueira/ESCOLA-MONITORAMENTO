@@ -55,7 +55,11 @@
   min-height: 500px;
 }
 
-.menu-lateral-gestor {
+.menu-lateral-gestor{
+  background-color: #333; 
+}
+
+.menu-lateral-gestor form{
   background-color: #333;
   color: #fff;
   display: flex;

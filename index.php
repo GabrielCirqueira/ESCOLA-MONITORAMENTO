@@ -31,7 +31,8 @@ $rotas = [
     "login_gestor_verifica" => GestorController::class,
     "gestor_home" => GestorController::class,
     "professor_home" => ProfessorController::class,
-    "adicionar_professor" => GestorController::class
+    "adicionar_professor" => GestorController::class,
+    "Gestor_info" =>GestorController::class
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";

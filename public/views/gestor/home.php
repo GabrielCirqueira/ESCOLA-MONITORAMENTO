@@ -5,14 +5,15 @@
 
       <form action="Gestor_info" method="post">
 
-          <button type="submit" class="button-menu-lateral" value="geral">VISÃO GERAL</button>
-          <button type="submit" class="button-menu-lateral" value="addprof">ADD PROF</button>
-          <button type="submit" class="button-menu-lateral" value="professores">PROFESSORES</button>
-          <button type="submit" class="button-menu-lateral" value="addturma">ADD TURMA</button>
-          <button type="submit" class="button-menu-lateral" value="addaluno">ADD ALUNO</button>
+          <button type="submit" class="button-menu-lateral" name="pag" value="VisaoGeral">VISÃO GERAL</button>
+          <button type="submit" class="button-menu-lateral" name="pag" value="addprof">ADD PROF</button>
+          <button type="submit" class="button-menu-lateral" name="pag" value="professores">PROFESSORES</button>
+          <button type="submit" class="button-menu-lateral" name="pag" value="addturma">TURMAS</button>
+          <button type="submit" class="button-menu-lateral" name="pag" value="addturma">ADD TURMA</button>
+          <button type="submit" class="button-menu-lateral" name="pag" value="addaluno">ADD ALUNO</button>
+          <button type="submit" class="button-menu-lateral" name="pag" value="addmateria">ADD DISCIPLINA</button>
     
       </form>
-
 
       <!-- <button onclick="Mostrar_container_gestor('container-gestor-01')" class="button-menu-lateral">VISÃO GERAL</button>
       <button onclick="Mostrar_container_gestor('container-gestor-02')" class="button-menu-lateral">ADD PROF</button>
@@ -24,8 +25,7 @@
     <div class="info-gestor">
 
         <?php 
-        
-          include $info;
+          require_once $info;
         ?>
 
     </div>

@@ -21,8 +21,8 @@ class GestorController{
 
     public static function gestor_home(){
         if($_SESSION["GESTOR"]){
-            $info = "public/views/gestor/VisaoGeral.php";
-            MainController::Templates("public/views/gestor/home.php");
+            $info ="public/views/gestor/VisaoGeral.php"; 
+            MainController::Templates_gestor("public/views/gestor/home.php",$info);
         }else{
             header("location: home");
         }
@@ -38,10 +38,11 @@ class GestorController{
         }
     }
 
-    public static function Gestor_info($pag){
+    public static function Gestor_info(){
         if($_SESSION["GESTOR"]){
-            $info = "public/views/gestor/" . $pag . ".php";
-            MainController::Templates("public/views/gestor/home.php");
+            $view = $_POST["pag"];
+            $info ="public/views/gestor/". $view .".php"; 
+            MainController::Templates_gestor("public/views/gestor/home.php",$info);
         }else{
             header("location: home");
         }
