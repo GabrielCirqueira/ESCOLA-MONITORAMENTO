@@ -22,10 +22,13 @@
   font-size: 16px;
   color: #555;
 }
- 
+
+.input-checkbox{
+  transform: scale(2);
+  margin: 10px;
+}
   
-.input-checkbox + span {
-  cursor: pointer;
+.input-checkbox + span { 
   margin-right: 20px;
   font-size: 16px;
   color: #555;

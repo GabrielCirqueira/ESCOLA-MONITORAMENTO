@@ -1,7 +1,7 @@
 <div class="container-gestor-info">
     <h1>Formulário de Inserção de Matérias</h1>
 
-    <form action="adicionar_professor" method="post" class="formulario-add-professor">
+    <form action="adicionar_materia" method="post" class="formulario-add-professor">
 
         <div class="campo-formulario-add">
             <label for="nome">Nome Da Matéria:</label>
@@ -21,7 +21,8 @@
 
         <div class="campo-formulario-add">
             <div>
-                <span class="titulo-label-input">Selecione o turno da eletiva:</span><br>               
+                <span class="titulo-label-input">Selecione o turno da Materia:</span><br>    
+                           
                 <input type="checkbox" class="input-checkbox" name="turno[]" value="INTERMEDIÁRIO"> <span>INTERMEDIÁRIO</span> <br>
                 <input type="checkbox" class="input-checkbox" name="turno[]" value="VESPERTINO"> <span>VESPERTINO </span> <br>
                 <input type="checkbox" class="input-checkbox" name="turno[]" value="NOTURNO"> <span> NOTURNO</span> <br>
