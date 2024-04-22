@@ -2,6 +2,8 @@
 
 namespace app\controllers\monitoramento;
 
+use app\models\monitoramento\GestorModel;
+
 class MainController{
 
     public static function Templates($template){
@@ -12,7 +14,14 @@ class MainController{
         include "public/views/plates/footer.php";
     }
 
-    public static function Templates_gestor($template,$info){
+    public static function Templates_gestor($template,$view){
+
+        $info ="public/views/gestor/". $view .".php";
+        
+        if($view == "addprof" || "materias"){
+            $materias = GestorModel::GetMaterias();
+        }
+
         include "public/views/plates/head.php";
         include "public/views/plates/header.php";
         include $template;

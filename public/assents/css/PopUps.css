@@ -15,6 +15,15 @@
     #PopUp_add_professor_true{
       display: none;
     }
+
+    #PopUp_add_materia_true{
+      display: none;
+    }
+
+    #PopUp_excluir_materia_true{
+      display: none;
+    }
+  
   
 .PopUp-sobreposicao{ 
     position: fixed;

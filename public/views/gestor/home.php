@@ -11,7 +11,7 @@
           <button type="submit" class="button-menu-lateral" name="pag" value="addturma">TURMAS</button>
           <button type="submit" class="button-menu-lateral" name="pag" value="addturma">ADD TURMA</button>
           <button type="submit" class="button-menu-lateral" name="pag" value="addaluno">ADD ALUNO</button>
-          <button type="submit" class="button-menu-lateral" name="pag" value="addmateria">ADD DISCIPLINA</button>
+          <button type="submit" class="button-menu-lateral" name="pag" value="materias">DISCIPLINAS</button>
     
       </form>
 
@@ -24,7 +24,7 @@
     </div>
     <div class="info-gestor">
 
-        <?php 
+        <?php
           require_once $info;
         ?>
 

@@ -2,6 +2,7 @@
 
 namespace app\controllers\monitoramento;
 
+use app\config\Database;
 use app\controllers\monitoramento\MainController;
 use app\models\monitoramento\GestorModel;
 
@@ -21,7 +22,7 @@ class GestorController{
 
     public static function gestor_home(){
         if($_SESSION["GESTOR"]){
-            $info ="public/views/gestor/VisaoGeral.php"; 
+            $info ="VisaoGeral"; 
             MainController::Templates_gestor("public/views/gestor/home.php",$info);
         }else{
             header("location: home");
@@ -41,10 +42,30 @@ class GestorController{
     public static function Gestor_info(){
         if($_SESSION["GESTOR"]){
             $view = $_POST["pag"];
-            $info ="public/views/gestor/". $view .".php"; 
-            MainController::Templates_gestor("public/views/gestor/home.php",$info);
+            MainController::Templates_gestor("public/views/gestor/home.php",$view);
         }else{
             header("location: home");
+        }
+    }
+
+    public static function adicionar_materia(){
+        // Converte os valores do array em uma string separada por vírgulas
+        $turnos = implode(',', $_POST['turno-materia']);
+        $insert = GestorModel::adicionar_materia($_POST["nome-materia"],$_POST["materia-curso"],$turnos);
+
+        if($insert){
+            $_SESSION["PopUp_add_materia_true"] = True;
+            header("location: gestor_home");
+            exit;
+        }
+    }
+
+    public static function excluir_disciplina(){
+        $query = GestorModel::excluir_disciplina($_POST["button-excluir-disciplina"]);
+        if($query){
+            $_SESSION["PopUp_excluir_materia_true"] = True;
+            header("location: gestor_home");
+            exit;
         }
     }
 }

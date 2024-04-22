@@ -35,3 +35,40 @@
   .input-add:focus {
     outline: none;
   }
+
+  .input-select {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .input-checkbox{
+    transform: scale(2);
+    border-radius: none;
+    border: none;
+    margin: 10px;
+  }
+    
+  .input-checkbox + span { 
+    margin-right: 20px;
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .input-checkbox:checked + span {
+    font-weight: bold;
+    color: #01a8c5;
+  }
+
+  .label-select {
+    display: block;
+    margin-bottom: 5px; 
+  }
+
+  .input-checkbox-materias{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }

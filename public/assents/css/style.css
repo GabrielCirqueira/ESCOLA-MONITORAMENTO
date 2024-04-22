@@ -9,32 +9,19 @@
 #campo-email {
   height: 470px;
 }
- 
-.label-select {
-  display: block;
-  margin-bottom: 5px; 
+
+.area-disciplinas th, tr,td{ 
+  text-align: center;
 }
 
-.input-select {
-  width: 70%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  color: #555;
+.area-disciplinas table{
+  width: 100%;
 }
 
-.input-checkbox{
-  transform: scale(2);
-  margin: 10px;
-}
-  
-.input-checkbox + span { 
-  margin-right: 20px;
-  font-size: 16px;
-  color: #555;
+.cor-linha-tabela-1{
+  background-color: rgba(156, 156, 156, 0.349);
 }
 
-.input-checkbox:checked + span {
-  font-weight: bold;
-  color: #00d9ff;
+.cor-linha-tabela-2{
+  background-color: rgba(109, 110, 110, 0.384);
 }

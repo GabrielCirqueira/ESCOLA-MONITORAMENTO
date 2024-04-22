@@ -21,13 +21,14 @@ use PDO;
                     usuario varchar(255),
                     nome varchar(255),
                     cpf varchar(14),
-                    numero varchar(30)
+                    numero varchar(30),
+                    disciplinas varchar(255)
                 );";
             
             $disciplinas = "CREATE TABLE IF NOT EXISTS disciplinas(
                 nome varchar(255),
-                turno varchar(255),
-                curso varhcar(255)
+                curso varchar(255),
+                turno varchar(255)
             );";
 
             self::GetInstance()->query($professores);

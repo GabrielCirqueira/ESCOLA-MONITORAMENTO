@@ -95,3 +95,16 @@
   .botao-form-enviar:hover {
     background-color: #0a91a3;
   }
+
+  .button-disciplina-excluir{
+    background-color: #ca214b;
+    width: 100px;
+    border: none;
+    height: 32px;
+    margin: 10px auto;
+    transition: 1s;
+  }
+  .button-disciplina-excluir:hover{
+    background-color: #ac002b;
+    cursor: pointer;
+  }
