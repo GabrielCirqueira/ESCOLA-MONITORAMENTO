@@ -23,7 +23,7 @@ if(!isset($_SESSION["PopUp_professor"])){
 
 $rotas = [
     "home" =>  MainController::class,
-    "login_aluno"  => MainController::class,
+    "ADM"  => MainController::class,
     "login_professor" => MainController::class,
     "login_gestor" =>  MainController::class,
     "login_adm" =>  MainController::class,

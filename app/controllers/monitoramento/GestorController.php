@@ -10,7 +10,7 @@ class GestorController{
 
     public static function login_gestor_verifica(){ 
         
-        if($_POST["user-gestor"] == "#VANIAMELHOTUTOR"){
+        if($_POST["user-gestor"] == "NSL"){
             $_SESSION["GESTOR"] = True;
             header("location:gestor_home");
         }else{

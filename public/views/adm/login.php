@@ -5,13 +5,12 @@
         <form action="" method="post">
             <!-- @csrf -->
             <div class="campo-ra">
-                <input class="input-campo-aluno" type="text" placeholder="Usuario" required>
-                <input class="input-campo-aluno" type="text" placeholder="Senha" required>
+                <input class="input-campo-aluno" type="text" placeholder="Usuario" required> 
             </div>
 
             <input type="submit">
-        </form>
-        <a class="Botao-voltar-lobby" href="home">Voltar</a>
+        </form><br><br>
+        <a class="Botao-voltar-lobby" href="ADM">Voltar</a>
     </div>
 
 </main>

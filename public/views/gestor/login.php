@@ -10,7 +10,8 @@
 
             <input type="submit">
         </form>
-        <a class="Botao-voltar-lobby" href="home">Voltar</a>
+        <br><br>
+        <a class="Botao-voltar-lobby" href="ADM">Voltar</a>
     </div>
 
 </main>

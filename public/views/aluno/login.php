@@ -1,7 +1,7 @@
 <main class="main">
 
     <div id="campo-ra" class="login-aluno">
-        <h1> ALUNO</h1>
+        <h1>ALUNO</h1>
         <form action="" method="post">
             
             <div class="campo-ra">
@@ -11,9 +11,7 @@
         </form>
 
         <button onclick="Mostrar_campo_email()" class="button-enter-email">Entrar com Email e Senha</button>
-        <br>
-        <a class="Botao-voltar-lobby" href="home">Voltar</a>
-
+        <br> 
     </div>
 
     <div id="campo-email" class="login-aluno">
@@ -27,10 +25,8 @@
 
             <input type="submit">
         </form>
-
         <button onclick="Mostrar_campo_ra()" class="button-enter-email">Entrar com RA</button>
-        <br>
-        <a class="Botao-voltar-lobby" href="home">Voltar</a>
+        <br> 
     </div>
 
 </main>

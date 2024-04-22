@@ -29,11 +29,11 @@ class MainController{
         include "public/views/plates/footer.php";
     }
 
-    public static function index(){
+    public static function ADM(){
         self::Templates("public/views/plates/main.php");
     }
 
-    public static function login_aluno(){
+    public static function index(){
         self::Templates("public/views/aluno/login.php");
     }
 

@@ -9,8 +9,8 @@
                 <input class="input-campo-aluno" type="text" name="user-prof" placeholder="Usuario" required> 
             </div>
             <input type="submit">
-        </form>
-        <a class="Botao-voltar-lobby" href="home">Voltar</a>
+        </form><br><br>
+        <a class="Botao-voltar-lobby" href="ADM">Voltar</a>
     </div>
 
 </main>
