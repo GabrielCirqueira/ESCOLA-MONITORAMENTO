@@ -26,6 +26,7 @@
 
     <div class="campo-formulario-add">
       <span>Disciplina(s) do professor:</span>
+      <?php if($materias != NULL){?>
       <div class="input-checkbox-materias">
         <?php
         foreach ($materias as $materia) { ?>
@@ -35,11 +36,19 @@
         </div>
         <?php } ?>
       </div>
+        <?php } else{ ?>
+            <h1>NENHUMA DISCIPLINA ADICIONADA! <br> </h1>
+
+          <?php }?>
+
     </div>
+    
+    <?php if($materias != NULL){?>
 
     <div class="campo-formulario-add">
       <button type="submit" class="botao-form-enviar">Inserir Professor</button>
     </div>
+    <?php }?>
 
   </form>
 

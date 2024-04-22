@@ -1,4 +1,13 @@
 <div class="container-gestor-info">
+
+    <div class="campo-formulario-add" >
+        <form action="Gestor_info" method="post">
+            <button type="submit" class="button-menu-lateral" name="pag" value="addmateria">ADICIONAR DISCIPLINA</button>
+        </form>
+    </div>
+
+    <?php if($materias != NULL){ ?>
+
     <div class="area-disciplinas" >
         <table>
             <thead>
@@ -48,4 +57,7 @@
             </tbody>
         </table>
     </div>
+    <?php } else{ ?>
+         <h1>NENHUMA DISCIPLINA ADICIONADA! ADICIONE NO BOTÃO ACIMA! </h1>
+         <?php }?>
 </div>
