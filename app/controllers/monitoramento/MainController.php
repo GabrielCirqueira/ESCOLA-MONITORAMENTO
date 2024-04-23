@@ -29,6 +29,15 @@ class MainController{
         include "public/views/plates/footer.php";
     }
 
+
+    public static function Verificar_sessao($sessao){
+        if($_SESSION[$sessao]){
+            return True;
+        }else{
+            return false;
+        }
+    }
+
     public static function ADM(){
         self::Templates("public/views/plates/main.php");
     }

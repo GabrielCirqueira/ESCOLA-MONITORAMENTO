@@ -21,7 +21,7 @@ class GestorController{
     }
 
     public static function gestor_home(){
-        if($_SESSION["GESTOR"]){
+        if(MainController::Verificar_sessao("GESTOR")){
             $info ="VisaoGeral"; 
             MainController::Templates_gestor("public/views/gestor/home.php",$info);
         }else{
@@ -40,7 +40,7 @@ class GestorController{
     }
 
     public static function Gestor_info(){
-        if($_SESSION["GESTOR"]){
+        if(MainController::Verificar_sessao("GESTOR")){
             $view = $_POST["pag"];
             MainController::Templates_gestor("public/views/gestor/home.php",$view);
         }else{
