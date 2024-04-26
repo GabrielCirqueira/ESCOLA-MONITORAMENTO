@@ -48,3 +48,13 @@ document.getElementById('telefone').addEventListener('input', function (e) {
     telefone = telefone.replace(/^(\d{2})(\d)/g, '($1) $2');
     e.target.value = telefone;
 });
+
+function carregarConteudo(arquivo) {
+    $.ajax({
+      url: arquivo,
+      type: 'GET',
+      success: function(response) {
+        $('#conteudo').html(response);
+      }
+    });
+  }

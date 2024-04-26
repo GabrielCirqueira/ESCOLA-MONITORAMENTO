@@ -62,6 +62,7 @@ else{
     MainController::index();
 }
 
+
 if($_SESSION["PopUp_professor"] == True){
     echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";
     $_SESSION["PopUp_professor"] = False;
