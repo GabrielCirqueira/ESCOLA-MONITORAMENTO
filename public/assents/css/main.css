@@ -18,7 +18,6 @@
   align-items: center;
   justify-content: center;
   min-height: 90vh;
-  max-height: 9999999vw;
 }
 
 /* LOGIN DO ALUNO */
@@ -52,14 +51,15 @@
   margin: 20px;
   width: 80%;
   overflow: hidden;
-  min-height: 500px;
+  min-height: 700px;
 }
 
 .menu-lateral-gestor{
+  overflow-y: auto;
   background-color: #333; 
 }
 
-.menu-lateral-gestor form{
+.menu-lateral-gestor{
   background-color: #333;
   color: #fff;
   display: flex;

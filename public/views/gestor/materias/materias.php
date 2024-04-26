@@ -1,12 +1,10 @@
 <div class="container-gestor-info">
+            
 
-    <div class="campo-formulario-add" >
-        <form action="Gestor_info" method="post">
-            <button type="submit" class="button-menu-lateral" name="pag" value="addmateria">ADICIONAR DISCIPLINA</button>
-        </form>
-    </div>
-
-    <?php if($materias != NULL){ ?>
+    <?php
+    use app\controllers\monitoramento\GestorController; 
+    $materias = GestorController::GetMaterias();
+    if($materias != NULL){ ?>
 
     <div class="area-disciplinas" >
         <table>
@@ -16,8 +14,7 @@
                 <th>TURNO</th>
                 <th>EXCLUIR</th>
             </thead>
-            <tbody>
-                    
+            <tbody> 
                 <?php  $trocarCor = True; foreach ($materias as $materia) { ?>
 
                     <?php

@@ -22,8 +22,7 @@ class GestorController{
 
     public static function gestor_home(){
         if(MainController::Verificar_sessao("GESTOR")){
-            $info ="VisaoGeral"; 
-            MainController::Templates_gestor("public/views/gestor/home.php",$info);
+            MainController::Templates("public/views/gestor/home.php");
         }else{
             header("location: home");
         }
@@ -39,13 +38,10 @@ class GestorController{
         }
     }
 
-    public static function Gestor_info(){
-        if(MainController::Verificar_sessao("GESTOR")){
-            $view = $_POST["pag"];
-            MainController::Templates_gestor("public/views/gestor/home.php",$view);
-        }else{
-            header("location: home");
-        }
+
+    public static function GetMaterias(){
+        $materias = GestorModel::GetMaterias();
+        return $materias;
     }
 
     public static function adicionar_materia(){

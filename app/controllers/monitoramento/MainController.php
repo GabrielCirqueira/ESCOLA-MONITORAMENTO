@@ -14,22 +14,6 @@ class MainController{
         include "public/views/plates/footer.php";
     }
 
-    public static function Templates_gestor($template,$view){
-
-        $info ="public/views/gestor/". $view .".php";
-        
-        if($view == "addprof" || "materias"){
-            $materias = GestorModel::GetMaterias();
-        }
-
-        include "public/views/plates/head.php";
-        include "public/views/plates/header.php";
-        include $template;
-        include "public/views/plates/PopUps.php";
-        include "public/views/plates/footer.php";
-    }
-
-
     public static function Verificar_sessao($sessao){
         if($_SESSION[$sessao]){
             return True;

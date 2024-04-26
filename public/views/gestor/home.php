@@ -3,19 +3,26 @@
   <section class="gestor-main">
     <div class="menu-lateral-gestor">
 
-  <details>
-    <summary>materias</summary>
-    <button  onclick="carregarConteudo('public/views/gestor/materias.php')" >materia</button> <br>
-<button  onclick="carregarConteudo('public/views/gestor/addmateria.php')" >add materia</button>
-  </details>
-<details>
-  <summary>TESTE</summary>
-  <li>01</li>
-  <li>02</li>
-</details>
+      <details class="details-menu-gestor" >
+        <summary class="sumary-menu-gestor" >materias</summary>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/materias/materias.php')">materia</button> 
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/materias/addmateria.php')">adicionar materia</button>
+      </details>
 
-    
-<!-- 
+      <details class="details-menu-gestor" >
+        <summary class="sumary-menu-gestor" >Professor</summary>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/AddProf.php')">Adcionar Professor</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/Professores.php')">Ver professores</button>
+      </details>
+
+      <details class="details-menu-gestor" >
+        <summary class="sumary-menu-gestor" >Turmas</summary>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/AddProf.php')">Adcionar Turma</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/Professores.php')">Ver Turmas</button>
+      </details>
+
+
+      <!-- 
       <form action="Gestor_info" method="post">
 
           <button type="submit" class="button-menu-lateral" name="pag" value="VisaoGeral">VISÃO GERAL</button>
@@ -36,12 +43,11 @@
       <button onclick="Mostrar_container_gestor('container-gestor-05')" class="button-menu-lateral">DESCRITORES</button> -->
     </div>
     <div class="info-gestor">
-
-    <div id="conteudo">
-  <!-- Aqui serão carregados os arquivos -->
-</div>
-
+      <div id="conteudo">
+          <?php
+            include "materias/materias.php";
+          ?>
+      </div>
     </div>
   </section>
-
 </main>
