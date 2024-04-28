@@ -11,13 +11,13 @@
 
       <details class="details-menu-gestor" >
         <summary class="sumary-menu-gestor" >Professor</summary>
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/AddProf.php')">Adcionar Professor</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/AddProf.php')">Adicionar Professor</button>
         <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/Professores.php')">Ver professores</button>
       </details>
 
       <details class="details-menu-gestor" >
         <summary class="sumary-menu-gestor" >Turmas</summary>
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/AddProf.php')">Adcionar Turma</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/AddProf.php')">Adicionar Turma</button>
         <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/Professores.php')">Ver Turmas</button>
       </details>
 
@@ -42,12 +42,15 @@
       <button onclick="Mostrar_container_gestor('container-gestor-04')" class="button-menu-lateral">ADD ALUNO</button>
       <button onclick="Mostrar_container_gestor('container-gestor-05')" class="button-menu-lateral">DESCRITORES</button> -->
     </div>
+
     <div class="info-gestor">
       <div id="conteudo">
-          <?php
-            include "materias/materias.php";
-          ?>
+        <div class="painel-frontal-gestor" >
+          <img src="https://telegra.ph/file/14ab586a79f8002b24880.png" alt="IMAGEM BRAZÃO">
+          <h1>PAINEL GESTOR</h1>
+        </div>
       </div>
     </div>
+
   </section>
 </main>

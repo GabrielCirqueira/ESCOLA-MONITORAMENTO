@@ -7,8 +7,8 @@
 
     <div class="img-tile">
     
-      <!-- <img src="public/assents/img/imagem3.png" alt="">
-      <h1 class="header__title">ESCOLA NSL</h1>  -->
+      <img src="public/assents/img/imagem3.png" alt="">
+      <h1 class="header__title">ESCOLA NSL</h1> 
       </a>
     
     </div>

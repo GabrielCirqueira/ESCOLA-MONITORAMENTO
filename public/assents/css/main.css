@@ -16,8 +16,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-height: 90vh;
+  justify-content: center; 
 }
 
 /* LOGIN DO ALUNO */
@@ -98,3 +97,13 @@
   font-size: 20px;
 }
 
+.painel-frontal-gestor{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.painel-frontal-gestor img{
+  width: 200px;
+}

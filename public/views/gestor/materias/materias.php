@@ -1,10 +1,9 @@
 <div class="container-gestor-info">
-            
-
     <?php
-    use app\controllers\monitoramento\GestorController; 
+    include "../../../../vendor/autoload.php";
+    use app\controllers\monitoramento\GestorController;
     $materias = GestorController::GetMaterias();
-    if($materias != NULL){ ?>
+    if($materias != NULL){?>
 
     <div class="area-disciplinas" >
         <table>
