@@ -31,8 +31,16 @@ use PDO;
                 turno varchar(255)
             );";
 
+            $turmas = "CREATE TABLE IF NOT EXISTS turmas(
+                nome varchar(255),
+                turno varchar(255),
+                serie varchar(255)
+            );";
+
+
             self::GetInstance()->query($professores);
             self::GetInstance()->query($disciplinas);
+            self::GetInstance()->query($turmas);
 
     }
 

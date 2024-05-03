@@ -54,4 +54,14 @@ class GestorModel{
         return $query;
     }
 
+    public static function adicionar_turma($nome,$serie,$turno){
+        $sql = "INSERT INTO turmas(nome,turno,serie) VALUES(:nome,:serie,:turno)";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":nome",$nome);
+        $query->bindValue(":serie",$serie);
+        $query->bindValue(":turno",$turno);
+        $query->execute();
+        return $query;
+    }
+
 }

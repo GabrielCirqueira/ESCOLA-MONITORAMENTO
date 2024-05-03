@@ -59,3 +59,15 @@ flex-direction: column;
   color: rgb(215, 207, 207);
   cursor: pointer;
 }
+
+.form-radio div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.form-radio{
+  display: flex;
+  gap: 5px;
+}

@@ -1,8 +1,7 @@
 <?php 
 
 namespace app\controllers\monitoramento;
-
-use app\config\Database;
+ 
 use app\controllers\monitoramento\MainController;
 use app\models\monitoramento\GestorModel;
 
@@ -65,6 +64,31 @@ class GestorController{
         $query = GestorModel::excluir_disciplina($_POST["button-excluir-disciplina"]);
         if($query){
             $_SESSION["PopUp_excluir_materia_true"] = True;
+            header("location: gestor_home");
+            exit;
+        }
+    }
+
+    public static function adicionar_turma(){
+        $serie = $_POST["serie-turma"];
+        $turno = $_POST["turno-turma"];
+        $curso = $_POST["curso-turma"];
+        $numero = $_POST["numero-turma"];
+
+        if($turno == "INTERMEDIÁRIO"){
+            $nome_turma = "{$serie}ºI0{$numero} {$curso}";
+        }
+        
+        else if($turno == "VESPERTINO"){
+            $nome_turma = "{$serie}ºV0{$numero} {$curso}";
+        }
+        
+        else{
+            $nome_turma = "{$serie}ºN0{$numero} {$curso}";
+        }
+        
+        if(GestorModel::adicionar_turma($nome_turma,$serie,$turno)){
+            $_SESSION["PopUp_inserir_turma"] = True;
             header("location: gestor_home");
             exit;
         }

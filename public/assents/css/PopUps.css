@@ -23,6 +23,10 @@
     #PopUp_excluir_materia_true{
       display: none;
     }
+
+    #PopUp_inserir_turma{
+      display: none;
+    }
   
   
 .PopUp-sobreposicao{ 

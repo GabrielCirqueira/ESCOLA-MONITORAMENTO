@@ -108,3 +108,12 @@
     background-color: #ac002b;
     cursor: pointer;
   }
+
+  .radio-input{
+    border: 0px;
+    width: 25px;
+    height: 30px;
+    vertical-align: middle;
+  }
+
+  

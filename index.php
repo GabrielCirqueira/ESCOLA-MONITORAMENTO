@@ -8,13 +8,14 @@ use app\controllers\monitoramento\GestorController;
 
 session_start();
 
-if(!isset($_SESSION["PopUp_professor"])){
+if(!isset($_SESSION["PopUp_inserir_turma"])){
 
     $_SESSION["PopUp_professor"] = False;
     $_SESSION["popup_not_gestor"] = False;
     $_SESSION["PopUp_add_professor_true"] = False;
     $_SESSION["PopUp_add_materia_true"] = False;
     $_SESSION["PopUp_excluir_materia_true"] = False;
+    $_SESSION["PopUp_inserir_turma"] = False;
 
     $_SESSION["GESTOR"] = False;
     $_SESSION["PROFESSOR"] = False;
@@ -33,7 +34,8 @@ $rotas = [
     "adicionar_professor" => GestorController::class,
     "Gestor_info" => GestorController::class,
     "adicionar_materia" => GestorController::class,
-    "excluir_disciplina" => GestorController::class
+    "excluir_disciplina" => GestorController::class,
+    "adicionar_turma" => GestorController::class
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";
@@ -85,4 +87,9 @@ if($_SESSION["PopUp_add_materia_true"] == True){
 if($_SESSION["PopUp_excluir_materia_true"] == True){
     echo "<script> Mostrar_PopUp('PopUp_excluir_materia_true')</script>";
     $_SESSION["PopUp_excluir_materia_true"] = False;
+}
+ 
+if($_SESSION["PopUp_inserir_turma"] == True){
+    echo "<script> Mostrar_PopUp('PopUp_inserir_turma')</script>";
+    $_SESSION["PopUp_inserir_turma"] = False;
 }
