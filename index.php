@@ -18,9 +18,8 @@ if(!isset($_SESSION["PopUp_professor"])){
 
     $_SESSION["GESTOR"] = False;
     $_SESSION["PROFESSOR"] = False;
-
 }
-
+    
 $rotas = [
     "home" =>  MainController::class,
     "ADM"  => MainController::class,

@@ -17,7 +17,7 @@
 
       <details class="details-menu-gestor" >
         <summary class="sumary-menu-gestor" >Turmas</summary>
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/AddProf.php')">Adicionar Turma</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/turmas/AddTurma.php')">Adicionar Turma</button>
         <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/Professores.php')">Ver Turmas</button>
       </details>
 

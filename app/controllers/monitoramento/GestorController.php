@@ -44,6 +44,11 @@ class GestorController{
         return $materias;
     }
 
+    public static function GetProfessores(){
+        $materias = GestorModel::GetProfessores();
+        return $materias;
+    }
+
     public static function adicionar_materia(){
         // Converte os valores do array em uma string separada por vírgulas
         $turnos = implode(',', $_POST['turno-materia']);

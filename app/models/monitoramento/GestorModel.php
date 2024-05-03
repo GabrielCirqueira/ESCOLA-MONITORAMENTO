@@ -35,6 +35,15 @@ class GestorModel{
         
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+
+    public static function GetProfessores(){
+        $sql = "SELECT * FROM professores";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+        
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     public static function excluir_disciplina($nome){
         $sql = "DELETE FROM disciplinas WHERE nome = :nome";

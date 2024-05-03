@@ -26,10 +26,14 @@
 
     <div class="campo-formulario-add">
       <span>Disciplina(s) do professor:</span>
-      <?php if($materias != NULL){?>
+      <?php
+      include "../../../../vendor/autoload.php";
+      use app\controllers\monitoramento\GestorController;
+      $materias = GestorController::GetMaterias();
+       if($materias != NULL){ ?>
       <div class="input-checkbox-materias">
         <?php
-        foreach ($materias as $materia) { ?>
+        foreach ($materias as $materia) { ?>''
         <div>
         <input class="input-checkbox" type="checkbox" value="<?php echo $materia["nome"] ?>">
           <span><?php echo $materia["nome"] ?></span>
