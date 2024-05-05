@@ -18,6 +18,7 @@ use PDO;
 
         public static function CreateTable(){
             $professores = "CREATE TABLE IF NOT EXISTS professores(
+                    id int AUTO_INCREMENT primary key,
                     usuario varchar(255),
                     nome varchar(255),
                     cpf varchar(14),
@@ -26,23 +27,33 @@ use PDO;
                 );";
             
             $disciplinas = "CREATE TABLE IF NOT EXISTS disciplinas(
+                id int AUTO_INCREMENT primary key,
                 nome varchar(255),
                 curso varchar(255),
                 turno varchar(255)
             );";
-
+            
             $turmas = "CREATE TABLE IF NOT EXISTS turmas(
+                id int AUTO_INCREMENT primary key,
                 nome varchar(255),
                 turno varchar(255),
                 serie varchar(255),
                 curso varchar(255)
             );";
 
+            $alunos = "CREATE TABLE IF NOT EXISTS alunos(
+                ra int primary key,
+                nome varchar(255),
+                data_nasc varchar(255),
+                turma varchar(255)                
+                );";
 
             self::GetInstance()->query($professores);
             self::GetInstance()->query($disciplinas);
             self::GetInstance()->query($turmas);
+            self::GetInstance()->query($alunos);
 
     }
 
 }
+

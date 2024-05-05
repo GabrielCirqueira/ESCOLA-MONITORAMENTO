@@ -28,7 +28,8 @@ class GestorController{
     }
 
     public static function adicionar_professor(){
-        $info = GestorModel::Adicionar_professor($_POST["nome"],$_POST["user"],$_POST["cpf"],$_POST["telefone"]);
+        $materias = implode(";", $_POST["materias-professor"]); 
+        $info = GestorModel::Adicionar_professor($_POST["nome"],$_POST["user"],$_POST["cpf"],$_POST["telefone"],$materias);
 
         if($info){
             $_SESSION["PopUp_add_professor_true"] = True;

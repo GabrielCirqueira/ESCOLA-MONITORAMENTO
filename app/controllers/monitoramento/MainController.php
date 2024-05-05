@@ -6,7 +6,7 @@ use app\models\monitoramento\GestorModel;
 
 class MainController{
 
-    public static function Templates($template){
+    public static function Templates($template, $data = null){
         include "public/views/plates/head.php";
         include "public/views/plates/header.php";
         include $template;

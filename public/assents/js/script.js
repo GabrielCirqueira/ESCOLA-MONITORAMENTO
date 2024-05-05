@@ -51,8 +51,7 @@ document.getElementById('telefone').addEventListener('input', function (e) {
 
 function carregarConteudo(arquivo) {
     $.ajax({
-      url: arquivo,
-      type: 'GET',
+      url: arquivo, 
       success: function(response) {
         $('#conteudo').html(response);
       }

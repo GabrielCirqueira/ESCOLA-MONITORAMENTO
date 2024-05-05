@@ -35,7 +35,7 @@
         <?php
         foreach ($materias as $materia) { ?>
         <div>
-        <input class="input-checkbox" type="checkbox" value="<?php echo $materia["nome"] ?>">
+        <input class="input-checkbox" type="checkbox" name="materias-professor[]" value="<?php echo $materia["nome"] ?>">
           <span><?php echo $materia["nome"] ?></span>
         </div>
         <?php } ?>

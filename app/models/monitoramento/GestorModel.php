@@ -7,13 +7,14 @@ use PDO;
 
 class GestorModel{
     
-    public static function Adicionar_professor($nome,$user,$cpf,$numero){
-        $sql = "INSERT INTO professores(usuario,nome,cpf,numero) VALUES(:user,:nome,:cpf,:numero)";
+    public static function Adicionar_professor($nome,$user,$cpf,$numero,$disciplinas){
+        $sql = "INSERT INTO professores(usuario,nome,cpf,numero,disciplinas) VALUES(:user,:nome,:cpf,:numero,:disciplinas)";
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":user",$user);
         $query->bindValue(":nome",$nome);
         $query->bindValue(":cpf",$cpf);
         $query->bindValue(":numero",$numero);
+        $query->bindValue(":disciplinas",$disciplinas);
         $query->execute();
         return $query;
     }

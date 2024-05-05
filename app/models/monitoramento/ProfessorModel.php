@@ -3,6 +3,7 @@
 namespace app\models\monitoramento;
 
 use app\config\Database;
+use PDO;
 
 class ProfessorModel{
     
@@ -13,7 +14,7 @@ class ProfessorModel{
         $query->execute(); 
         
         if($query->rowCount() > 0){
-            return True;
+            return $query->fetch(PDO::FETCH_ASSOC);
         }else{
             return False;
         }

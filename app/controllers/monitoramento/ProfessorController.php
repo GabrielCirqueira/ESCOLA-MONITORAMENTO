@@ -10,8 +10,13 @@ class ProfessorController{
     public static function home_professor(){
 
         $info = ProfessorModel::verificarLogin($_POST["user-prof"]);
-        if ($info){
+        if ($info != False){
             $_SESSION["PROFESSOR"] = True;
+            $_SESSION["nome"]           = $info["nome"];
+            $_SESSION["nome_usuario"]   = $info["usuario"];
+            $_SESSION["cpf"]            = $info["cpf"];
+            $_SESSION["numero"]         = $info["numero"];
+            $_SESSION["disciplinas"]    = $info["disciplinas"];
             header("location: professor_home");
         } else {
             $_SESSION["PopUp_professor"] = True;
@@ -21,7 +26,15 @@ class ProfessorController{
     }
     public static function professor_home(){
         if($_SESSION["PROFESSOR"]){
-            MainController::Templates("public/views/professor/home.php");
+
+            MainController::Templates("public/views/professor/home.php", [
+                'nome' => $_SESSION["nome"],
+                'nome_usuario' => $_SESSION["nome_usuario"],
+                'cpf' => $_SESSION["cpf"],
+                'numero' => $_SESSION["numero"],
+                'disciplinas' => $_SESSION["disciplinas"]
+            ]);
+            
         }else{
             header("location: home");
         }
