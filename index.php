@@ -35,7 +35,8 @@ $rotas = [
     "Gestor_info" => GestorController::class,
     "adicionar_materia" => GestorController::class,
     "excluir_disciplina" => GestorController::class,
-    "adicionar_turma" => GestorController::class
+    "adicionar_turma" => GestorController::class,
+    "inserir_gabarito" => ProfessorController::class,
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";

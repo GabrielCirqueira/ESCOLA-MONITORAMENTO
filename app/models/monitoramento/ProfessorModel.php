@@ -19,4 +19,11 @@ class ProfessorModel{
             return False;
         }
     }
+
+    public static function GetTurmas(){
+        $sql = "SELECT * FROM turmas";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute(); 
+        return $query->fetchAll(PDO::FETCH_ASSOC); 
+        }
 }

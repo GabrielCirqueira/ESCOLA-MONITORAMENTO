@@ -23,9 +23,7 @@
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center; 
-  min-height: 90vh;
+  align-items: center;  
 }
 
 /* LOGIN DO ALUNO */
@@ -124,11 +122,61 @@
   align-items: center;
   width: 280px;
   border-radius: 5px;
-  margin: 30px 0px;
+  margin: 60px 0px;
   height: auto;
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.226);
 }
 
 .dados-professor h3{
   margin: 4px;
+}
+
+.main-home-professor section{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.professor-area-turmas{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 200px;
+}
+
+.professor-campos{
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0px;
+}
+
+.professor-campos div{
+  display: flex;
+  flex-direction: column;
+  width: 300px; 
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.professor-campos div input{ 
+  width: 300px; 
+  font-size: 20px;
+  height: 30px;
+}
+
+@media (max-width: 500px){
+  .professor-area-turmas{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 100px;
+  }
+
+  .professor-campos{
+    display: flex;
+    flex-direction: column; 
+  }
 }

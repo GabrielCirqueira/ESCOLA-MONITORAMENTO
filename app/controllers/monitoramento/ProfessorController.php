@@ -28,14 +28,25 @@ class ProfessorController{
         if($_SESSION["PROFESSOR"]){
 
             MainController::Templates("public/views/professor/home.php", [
-                'nome' => $_SESSION["nome"],
-                'nome_usuario' => $_SESSION["nome_usuario"],
-                'cpf' => $_SESSION["cpf"],
-                'numero' => $_SESSION["numero"],
-                'disciplinas' => $_SESSION["disciplinas"]
+                'nome'          => $_SESSION["nome"],
+                'nome_usuario'  => $_SESSION["nome_usuario"],
+                'cpf'           => $_SESSION["cpf"],
+                'numero'        => $_SESSION["numero"],
+                'disciplinas'   => $_SESSION["disciplinas"]
             ]);
-            
+
         }else{
+            header("location: home");
+        }
+    }
+
+    public static function inserir_gabarito(){
+        
+        if($_SESSION["PROFESSOR"]){
+            $turmas = ProfessorModel::GetTurmas();
+            MainController::Templates("public/views/professor/inserir_gabarito.php",$turmas);
+        }
+            else{
             header("location: home");
         }
     }
