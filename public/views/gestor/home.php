@@ -18,31 +18,9 @@
       <details class="details-menu-gestor" >
         <summary class="sumary-menu-gestor" >Turmas</summary>
         <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/turmas/AddTurma.php')">Adicionar Turma</button>
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/Professores.php')">Ver Turmas</button>
-      </details>
-
-
-      <!-- 
-      <form action="Gestor_info" method="post">
-
-          <button type="submit" class="button-menu-lateral" name="pag" value="VisaoGeral">VISÃO GERAL</button>
-          <button type="submit" class="button-menu-lateral" name="pag" value="addprof">ADD PROF</button>
-          <button type="submit" class="button-menu-lateral" name="pag" value="professores">PROFESSORES</button>
-          <button type="submit" class="button-menu-lateral" name="pag" value="addturma">TURMAS</button>
-          <button type="submit" class="button-menu-lateral" name="pag" value="addturma">ADD TURMA</button>
-          <button type="submit" class="button-menu-lateral" name="pag" value="addaluno">ADD ALUNO</button>
-          <button type="submit" class="button-menu-lateral" name="pag" value="materias">DISCIPLINAS</button>
-    
-      </form> -->
-
-      <!-- <button onclick="Mostrar_container_gestor('container-gestor-01')" class="button-menu-lateral">VISÃO GERAL</button>
-      <button onclick="Mostrar_container_gestor('container-gestor-02')" class="button-menu-lateral">ADD PROF</button>
-      <button onclick="Mostrar_container_gestor('container-gestor-02')" class="button-menu-lateral">PROFESSORES</button>
-      <button onclick="Mostrar_container_gestor('container-gestor-03')" class="button-menu-lateral">ADD TURMA</button>
-      <button onclick="Mostrar_container_gestor('container-gestor-04')" class="button-menu-lateral">ADD ALUNO</button>
-      <button onclick="Mostrar_container_gestor('container-gestor-05')" class="button-menu-lateral">DESCRITORES</button> -->
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/turmas/turmas.php')">Ver Turmas</button>
+      </details> 
     </div>
-
     <div class="info-gestor">
       <div id="conteudo">
         <div class="painel-frontal-gestor" >

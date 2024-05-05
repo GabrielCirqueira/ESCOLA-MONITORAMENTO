@@ -20,7 +20,7 @@ class GestorController{
     }
 
     public static function gestor_home(){
-        if(MainController::Verificar_sessao("GESTOR")){
+        if(MainController::Verificar_sessao("GESTOR")){ 
             MainController::Templates("public/views/gestor/home.php");
         }else{
             header("location: home");
@@ -87,10 +87,15 @@ class GestorController{
             $nome_turma = "{$serie}ºN0{$numero} {$curso}";
         }
         
-        if(GestorModel::adicionar_turma($nome_turma,$serie,$turno)){
+        if(GestorModel::adicionar_turma($nome_turma,$serie,$turno,$curso)){
             $_SESSION["PopUp_inserir_turma"] = True;
             header("location: gestor_home");
             exit;
         }
+    }
+
+    public static function GetTurmas(){
+        $turmas = GestorModel::GetTurmas();
+        return $turmas;
     }
 }

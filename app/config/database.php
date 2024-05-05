@@ -34,7 +34,8 @@ use PDO;
             $turmas = "CREATE TABLE IF NOT EXISTS turmas(
                 nome varchar(255),
                 turno varchar(255),
-                serie varchar(255)
+                serie varchar(255),
+                curso varchar(255)
             );";
 
 

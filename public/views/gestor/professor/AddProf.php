@@ -33,7 +33,7 @@
        if($materias != NULL){ ?>
       <div class="input-checkbox-materias">
         <?php
-        foreach ($materias as $materia) { ?>''
+        foreach ($materias as $materia) { ?>
         <div>
         <input class="input-checkbox" type="checkbox" value="<?php echo $materia["nome"] ?>">
           <span><?php echo $materia["nome"] ?></span>

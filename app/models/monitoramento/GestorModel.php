@@ -54,14 +54,23 @@ class GestorModel{
         return $query;
     }
 
-    public static function adicionar_turma($nome,$serie,$turno){
-        $sql = "INSERT INTO turmas(nome,turno,serie) VALUES(:nome,:serie,:turno)";
+    public static function adicionar_turma($nome,$serie,$turno,$curso){
+        $sql = "INSERT INTO turmas(nome,serie,turno,curso) VALUES(:nome,:serie,:turno,:curso)";
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":nome",$nome);
         $query->bindValue(":serie",$serie);
         $query->bindValue(":turno",$turno);
+        $query->bindValue(":curso",$curso);
         $query->execute();
         return $query;
+    }
+
+    public static function GetTurmas(){
+        $sql = "SELECT * FROM turmas";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+        
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
