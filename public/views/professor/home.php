@@ -12,6 +12,7 @@
 
         <a href="inserir_gabarito" class="btn-home-professor">INSERIR GABARITO</a> <br>
         <a href="ver_gabarito" class="btn-home-professor">VER GABARITOS</a>
-
+            <br><br><br><br>
+        <br><br><br><br> 
     </section>
 </main>

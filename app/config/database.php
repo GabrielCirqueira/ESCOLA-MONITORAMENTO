@@ -48,10 +48,18 @@ use PDO;
                 turma varchar(255)                
                 );";
 
+            $descritores = "CREATE TABLE IF NOT EXISTS descritores(
+                id int AUTO_INCREMENT primary key,
+                descritor varchar(255),
+                habilidade text,
+                materia varchar(255)                
+                );";
+
             self::GetInstance()->query($professores);
             self::GetInstance()->query($disciplinas);
             self::GetInstance()->query($turmas);
             self::GetInstance()->query($alunos);
+            self::GetInstance()->query($descritores);
 
     }
 

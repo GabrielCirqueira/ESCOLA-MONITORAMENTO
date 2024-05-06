@@ -32,23 +32,6 @@ function Mostrar_PopUp(popup){
 
 // }
 
-document.getElementById('cpf').addEventListener('input', function (e) {
-    let cpf = e.target.value.replace(/\D/g, '');
-    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
-    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
-    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    e.target.value = cpf;
-});
-
-document.getElementById('telefone').addEventListener('input', function (e) {
-    let telefone = e.target.value;
-    // Remove todos os caracteres que não são números
-    telefone = telefone.replace(/\D/g, '');
-    // Adiciona parênteses e um espaço após os 2 primeiros números
-    telefone = telefone.replace(/^(\d{2})(\d)/g, '($1) $2');
-    e.target.value = telefone;
-});
-
 function carregarConteudo(arquivo) {
     $.ajax({
       url: arquivo, 
@@ -58,4 +41,58 @@ function carregarConteudo(arquivo) {
     });
   }
 
-  
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInputs = document.querySelectorAll('.searchInput');
+
+    searchInputs.forEach(searchInput => {
+        searchInput.addEventListener('input', function() {
+            const inputText = this.value.trim();
+            const index = this.dataset.index;
+            const descritoresContainer = document.querySelector(`.descritoresContainer[data-index="${index}"]`);
+
+            if (inputText.length === 0) {
+                descritoresContainer.innerHTML = '';
+                return;
+            }
+
+            fetch('app/config/GetDescritores.php')
+                .then(response => response.json())
+                .then(data => {
+                    const filteredDescritores = data.filter(descritor => {
+                        return descritor.descritor.toLowerCase().includes(inputText.toLowerCase());
+                    });
+
+                    renderDescritores(filteredDescritores, descritoresContainer);
+                })
+                .catch(error => console.error('Erro ao obter descritores:', error));
+        });
+    });
+
+    function renderDescritores(descritores, container) {
+        container.innerHTML = '';
+
+        descritores.forEach(descritor => {
+            const div = document.createElement('div');
+            div.textContent = descritor.descritor;
+            div.classList.add('descritor');
+            div.addEventListener('click', function() {
+                container.previousElementSibling.value = descritor.descritor;
+                container.innerHTML = ''; // Oculta a lista de descritores após a seleção
+            });
+            container.appendChild(div);
+        });
+    }
+
+    // Adiciona um event listener para clicar em qualquer parte do documento
+    document.addEventListener('click', function(event) {
+        const clickedElement = event.target;
+
+        // Verifica se o clique ocorreu fora do campo de busca e da lista de descritores
+        if (!clickedElement.classList.contains('searchInput') && !clickedElement.classList.contains('descritor')) {
+            const allDescritoresContainers = document.querySelectorAll('.descritoresContainer');
+            allDescritoresContainers.forEach(container => {
+                container.innerHTML = ''; // Oculta todas as listas de descritores
+            });
+        }
+    });
+});

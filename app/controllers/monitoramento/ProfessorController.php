@@ -50,4 +50,28 @@ class ProfessorController{
             header("location: home");
         }
     }
+
+    public static function criar_gabarito(){
+        $turmas = $_POST["gabarito-turmas"];
+        $perguntas = $_POST["qtn-perguntas"];
+        $valor = $_POST["valor-prova"];
+
+        if($_SESSION["PROFESSOR"]){
+            $turmas = $_POST["gabarito-turmas"];
+            $perguntas = $_POST["qtn-perguntas"];
+            $valor = $_POST["valor-prova"];
+
+            $dados = [
+                "turmas"    => $turmas,
+                "perguntas" => $perguntas,
+                "valor"     => $valor
+            ];
+            
+            MainController::Templates("public/views/professor/criar_gabarito.php",$dados);
+        }
+            else{
+            header("location: home");
+        }
+
+    }
 }

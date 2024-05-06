@@ -168,6 +168,76 @@
   height: 30px;
 }
 
+.professor-dados-gabarito-criar h3{
+  margin: 0px;
+}
+
+.professor-dados-gabarito-criar{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  border-radius: 5px; 
+  margin-bottom: 30px;
+  height: auto;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.226);
+}
+
+.campos-selecionar-descritores input{
+  width: 80px;
+}
+
+.descritoresContainer {
+  position: absolute;
+  background-color: #8f8f8f;
+  width: 100px;
+  max-height: 200px;
+  overflow-y: auto; 
+}
+
+.descritor:hover{
+  background-color: #747373;
+  cursor: pointer;
+}
+
+.professor-inserir-gabarito table{
+  border-collapse: collapse; 
+  border-spacing: 0; 
+}
+
+.professor-inserir-gabarito input[type="radio"]{
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.professor-inserir-gabarito input[type="text"]{
+  border-radius: 0px;
+  border: 1px solid black;
+  font-size: 13px;
+}
+
+.professor-inserir-gabarito input[type="text"]:focus{
+  outline: none;
+}
+
+.professor-inserir-gabarito input[type="radio"]:checked {
+  background-color: #399ff3;
+  border-color: #399ff3;
+}
+
+.professor-inserir-gabarito td,
+.professor-inserir-gabarito tr {
+  border: 1px solid black; 
+  padding: 5px;
+}
+
 @media (max-width: 500px){
   .professor-area-turmas{
     display: grid;

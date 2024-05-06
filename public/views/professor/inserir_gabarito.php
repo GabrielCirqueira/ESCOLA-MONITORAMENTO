@@ -3,7 +3,7 @@
         <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
         <h2>INSERIR GABARITO</h2>
 
-        <form action="gabarito" method="post">
+        <form action="criar_gabarito" method="post">
             <div class="turmas-container">
 
                 <h3 class="professor-titulo-turno">TURMAS INTERMEDIÁRIO</h3>
@@ -11,7 +11,7 @@
                     <?php foreach ($data as $turma) {
                         if ($turma["turno"] == "INTERMEDIÁRIO") { ?>
                             <div>
-                                <input type="checkbox" value="<?php echo $turma["id"] ?>">
+                                <input name="gabarito-turmas[]" type="checkbox" value="<?php echo $turma["nome"] ?>">
                                 <span><?php echo $turma["nome"] ?></span>
                             </div>
                     <?php }
@@ -23,7 +23,7 @@
                     <?php foreach ($data as $turma) {
                         if ($turma["turno"] == "VESPERTINO") { ?>
                             <div>
-                                <input type="checkbox" value="<?php echo $turma["id"] ?>">
+                                <input name="gabarito-turmas[]" type="checkbox" value="<?php echo $turma["nome"] ?>">
                                 <span><?php echo $turma["nome"] ?></span>
                             </div>
                     <?php }
@@ -34,11 +34,11 @@
             <div class="professor-campos">
                 <div>
                     <label for="quantidade-perguntas">Quantidade de perguntas:</label>
-                    <input id="quantidade-perguntas" type="number">
+                    <input name="qtn-perguntas" id="quantidade-perguntas" type="number">
                 </div>
                 <div>
                     <label for="valor">Valor:</label>
-                    <input id="valor" type="number">
+                    <input name="valor-prova" id="valor" type="number">
                 </div>
             </div>
             <center>
