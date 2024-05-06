@@ -33,7 +33,7 @@
 
             <div class="professor-campos">
                 <div>
-                    <label for="quantidade-perguntas">Quantidade de perguntas:</label>
+                    <label for="quantidade-perguntas">Quantidade de Questões:</label>
                     <input name="qtn-perguntas" id="quantidade-perguntas" type="number">
                 </div>
                 <div>
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <center>
-                <input type="submit" value="Criar gabarito" class="botao-form-enviar">
+                <input type="submit" value="Criar Gabarito" class="botao-form-enviar">
             </center>
             <br><br><br>
         </form>
