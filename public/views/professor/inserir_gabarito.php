@@ -4,8 +4,11 @@
         <h2>INSERIR GABARITO</h2>
 
         <form action="criar_gabarito" method="post">
+            <div class="nome_prova">
+                <label for="nome-prova">Insira o Nome da prova</label>
+                <input type="text" id="nome-prova" name="nome-prova">
+            </div>
             <div class="turmas-container">
-
                 <h3 class="professor-titulo-turno">TURMAS INTERMEDIÁRIO</h3>
                 <div class="professor-area-turmas">
                     <?php foreach ($data as $turma) {
@@ -44,6 +47,10 @@
             <center>
                 <input type="submit" value="Criar Gabarito" class="botao-form-enviar">
             </center>
+            <br><br><br>
+            <br><br><br>
+            <br><br><br>
+            <br><br><br>
             <br><br><br>
         </form>
     </section>

@@ -16,26 +16,30 @@
         </div>
 
         <div class="professor-inserir-gabarito">
-            <form action="#" method="post">
+            <form action="criar_gabarito_respostas" method="post">
+                <input type="hidden" name="numero_perguntas" value="<?php echo $data['perguntas']; ?>">
+                <input type="hidden" name="turmas_gabarito" value="<?php echo implode(",",$data['turmas']); ?>">
+                <input type="hidden" name="valor_prova" value="<?php echo $data["valor"]; ?>">
+                <input type="hidden" name="nome_prova" value="<?php echo $data["nome_prova"]; ?>">
                 <table>
                     <?php $contador = 1;
                     while ($contador <= $data["perguntas"]) { ?>
                         <tr>
                             <td>
-                                <span><?php echo $contador ?> . </span>
+                                <span><?php echo $contador ?></span>
                             </td>
                             <td>
                                 <div class="campos-selecionar-descritores">
-                                    <input type="text" class="searchInput" data-index="<?php echo $contador ?>" placeholder="DESCRITOR">
+                                    <input type="text" class="searchInput" data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}"?>" placeholder="DESCRITOR">
                                     <div class="descritoresContainer" data-index="<?php echo $contador ?>"></div>
                                 </div>
                             </td>
                             
-                            <td><input type="radio" name="<?php echo "{$contador}" ?>" value="<?php echo "{$contador},A" ?>"> <span>A</span></td>
-                            <td><input type="radio" name="<?php echo "{$contador}" ?>" value="<?php echo "{$contador},B" ?>"> <span>B</span></td>
-                            <td><input type="radio" name="<?php echo "{$contador}" ?>" value="<?php echo "{$contador},C" ?>"> <span>C</span></td>
-                            <td><input type="radio" name="<?php echo "{$contador}" ?>" value="<?php echo "{$contador},D" ?>"> <span>D</span></td>
-                            <td><input type="radio" name="<?php echo "{$contador}" ?>" value="<?php echo "{$contador},E" ?>"> <span>E</span></td>
+                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},A"?>"><span>A</span></td>
+                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},B"?>"><span>B</span></td>
+                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},C"?>"><span>C</span></td>
+                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},D"?>"><span>D</span></td>
+                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},E"?>"><span>E</span></td>
                         </tr>
                     <?php $contador++;
                     } ?>
@@ -44,9 +48,12 @@
             <center>
                 <input type="submit" value="Criar gabarito" class="botao-form-enviar">
             </center>
-            <br><br><br><br>
             </form>
         </div>
-
+        <br><br><br>
+            <br><br><br>
+            <br><br><br>
+            <br><br><br>
+            <br><br><br>
     </section>
 </main>

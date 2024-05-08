@@ -238,6 +238,25 @@
   padding: 5px;
 }
 
+.nome_prova{
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+
+.nome_prova label{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.nome_prova input[type="text"]{
+  width: 500px;
+  height: 30px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
 @media (max-width: 500px){
   .professor-area-turmas{
     display: grid;

@@ -22,22 +22,23 @@ if(!isset($_SESSION["PopUp_inserir_turma"])){
 }
     
 $rotas = [
-    "home" =>  MainController::class,
-    "ADM"  => MainController::class,
-    "login_professor" => MainController::class,
-    "login_gestor" =>  MainController::class,
-    "login_adm" =>  MainController::class,
-    "home_professor" => ProfessorController::class,
-    "login_gestor_verifica" => GestorController::class,
-    "gestor_home" => GestorController::class,
-    "professor_home" => ProfessorController::class,
-    "adicionar_professor" => GestorController::class,
-    "Gestor_info" => GestorController::class,
-    "adicionar_materia" => GestorController::class,
-    "excluir_disciplina" => GestorController::class,
-    "adicionar_turma" => GestorController::class,
-    "inserir_gabarito" => ProfessorController::class,
-    "criar_gabarito" => ProfessorController::class
+    "home"                      => MainController::class,
+    "ADM"                       => MainController::class,
+    "login_professor"           => MainController::class,
+    "login_gestor"              => MainController::class,
+    "login_adm"                 => MainController::class,
+    "home_professor"            => ProfessorController::class,
+    "login_gestor_verifica"     => GestorController::class,
+    "gestor_home"               => GestorController::class,
+    "professor_home"            => ProfessorController::class,
+    "adicionar_professor"       => GestorController::class,
+    "Gestor_info"               => GestorController::class,
+    "adicionar_materia"         => GestorController::class,
+    "excluir_disciplina"        => GestorController::class,
+    "adicionar_turma"           => GestorController::class,
+    "inserir_gabarito"          => ProfessorController::class,
+    "criar_gabarito"            => ProfessorController::class,
+    "criar_gabarito_respostas"  => ProfessorController::class
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";

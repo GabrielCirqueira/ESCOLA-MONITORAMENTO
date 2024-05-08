@@ -4,6 +4,7 @@ namespace app\controllers\monitoramento;
 
 use app\models\monitoramento\ProfessorModel;
 use app\controllers\monitoramento\MainController;
+use DateTime;
 
 class ProfessorController{
 
@@ -14,7 +15,6 @@ class ProfessorController{
             $_SESSION["PROFESSOR"] = True;
             $_SESSION["nome"]           = $info["nome"];
             $_SESSION["nome_usuario"]   = $info["usuario"];
-            $_SESSION["cpf"]            = $info["cpf"];
             $_SESSION["numero"]         = $info["numero"];
             $_SESSION["disciplinas"]    = $info["disciplinas"];
             header("location: professor_home");
@@ -55,6 +55,7 @@ class ProfessorController{
         $turmas = $_POST["gabarito-turmas"];
         $perguntas = $_POST["qtn-perguntas"];
         $valor = $_POST["valor-prova"];
+        $nome = $_POST["nome-prova"];
 
         if($_SESSION["PROFESSOR"]){
             $turmas = $_POST["gabarito-turmas"];
@@ -62,9 +63,10 @@ class ProfessorController{
             $valor = $_POST["valor-prova"];
 
             $dados = [
-                "turmas"    => $turmas,
-                "perguntas" => $perguntas,
-                "valor"     => $valor
+                "turmas"        => $turmas,
+                "perguntas"     => $perguntas,
+                "valor"         => $valor,
+                "nome_prova"    => $nome
             ];
             
             MainController::Templates("public/views/professor/criar_gabarito.php",$dados);
@@ -72,6 +74,28 @@ class ProfessorController{
             else{
             header("location: home");
         }
+    }
+
+    public static function criar_gabarito_respostas(){
+        $gabarito_prova = [];
+        $descritores_prova = [];
+        $turmas = $_POST["turmas_gabarito"];
+        $perguntas = $_POST["numero_perguntas"];
+        $valor = $_POST["valor_prova"];
+        $dataAtual = new DateTime();
+        $dataFormatada = $dataAtual->format('d-m-Y');
+        $nome_prova = $_POST["nome_prova"]; 
+
+        $contador = 1;
+        
+        while($contador <= $_POST["numero_perguntas"]){ 
+                $descritores_prova[$contador] = $contador .",". $_POST["DESCRITOR_".$contador];
+                $gabarito_prova[$contador] = $_POST[$contador];
+
+                $contador++;
+        }
+        $descritores = implode(";",$descritores_prova);
+        $gabarito = implode(";",$gabarito_prova); 
 
     }
 }

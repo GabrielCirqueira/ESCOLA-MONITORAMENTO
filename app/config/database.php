@@ -55,6 +55,18 @@ use PDO;
                 materia varchar(255)                
                 );";
 
+            $gabarito_provas_professores = "CREATE TABLE IF NOT EXISTS gabarito_professores(
+                id int AUTO_INCREMENT primary key,
+                nome_professor varchar(255),
+                nome_prova varchar(255),
+                turmas varchar(255),
+                descritores varchar(255),
+                valor int,
+                numero_perguntas int,
+                data_prova date,
+                gabarito varchar(255)     
+                );";
+
             self::GetInstance()->query($professores);
             self::GetInstance()->query($disciplinas);
             self::GetInstance()->query($turmas);
