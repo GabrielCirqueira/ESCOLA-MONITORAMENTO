@@ -13,7 +13,7 @@ class ProfessorController{
         $info = ProfessorModel::verificarLogin($_POST["user-prof"]);
         if ($info != False){
             $_SESSION["PROFESSOR"] = True;
-            $_SESSION["nome"]           = $info["nome"];
+            $_SESSION["nome_professor"] = $info["nome"];
             $_SESSION["nome_usuario"]   = $info["usuario"];
             $_SESSION["numero"]         = $info["numero"];
             $_SESSION["disciplinas"]    = $info["disciplinas"];
@@ -28,7 +28,7 @@ class ProfessorController{
         if($_SESSION["PROFESSOR"]){
 
             MainController::Templates("public/views/professor/home.php", [
-                'nome'          => $_SESSION["nome"],
+                'nome'          => $_SESSION["nome_professor"],
                 'nome_usuario'  => $_SESSION["nome_usuario"],
                 'cpf'           => $_SESSION["cpf"],
                 'numero'        => $_SESSION["numero"],
@@ -52,6 +52,7 @@ class ProfessorController{
     }
 
     public static function criar_gabarito(){
+        
         $turmas = $_POST["gabarito-turmas"];
         $perguntas = $_POST["qtn-perguntas"];
         $valor = $_POST["valor-prova"];
@@ -77,25 +78,41 @@ class ProfessorController{
     }
 
     public static function criar_gabarito_respostas(){
-        $gabarito_prova = [];
-        $descritores_prova = [];
-        $turmas = $_POST["turmas_gabarito"];
-        $perguntas = $_POST["numero_perguntas"];
-        $valor = $_POST["valor_prova"];
-        $dataAtual = new DateTime();
-        $dataFormatada = $dataAtual->format('d-m-Y');
-        $nome_prova = $_POST["nome_prova"]; 
-
-        $contador = 1;
-        
-        while($contador <= $_POST["numero_perguntas"]){ 
-                $descritores_prova[$contador] = $contador .",". $_POST["DESCRITOR_".$contador];
-                $gabarito_prova[$contador] = $_POST[$contador];
-
-                $contador++;
+        if($_SESSION["PROFESSOR"]){
+            $gabarito_prova = [];
+            $descritores_prova = [];
+            $dataAtual = new DateTime();
+            $dataFormatada = $dataAtual->format('d-m-Y');
+    
+            $contador = 1;
+            
+            while($contador <= $_POST["numero_perguntas"]){ 
+                    $descritores_prova[$contador] = $contador .",". $_POST["DESCRITOR_".$contador];
+                    $gabarito_prova[$contador] = $_POST[$contador];
+    
+                    $contador++;
+            }
+            
+            $descritores = implode(";",$descritores_prova);
+            $gabarito = implode(";",$gabarito_prova); 
+    
+            $dados = [
+                "turmas"        => $_POST["turmas_gabarito"],
+                "perguntas"     => $_POST["numero_perguntas"],
+                "valor"         => $_POST["valor_prova"],
+                "data"          => $dataFormatada,
+                "nome_prova"    => $_POST["nome_prova"],
+                "descritores"   =>  $descritores,
+                "gabarito"      =>  $gabarito,
+                "nome_prof"     =>  $_SESSION["nome_professor"]
+            ];
+            if(ProfessorModel::inserir_gabarito($dados)){
+                $_SESSION["PopUp_inserir_gabarito_professor"] = True;
+                header("location: inserir_gabarito");
         }
-        $descritores = implode(";",$descritores_prova);
-        $gabarito = implode(";",$gabarito_prova); 
-
+        }
+          else{
+            header("location: home");
+        }
     }
 }

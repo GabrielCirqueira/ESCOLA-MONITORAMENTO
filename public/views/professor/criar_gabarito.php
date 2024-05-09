@@ -30,7 +30,7 @@
                             </td>
                             <td>
                                 <div class="campos-selecionar-descritores">
-                                    <input type="text" class="searchInput" data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}"?>" placeholder="DESCRITOR">
+                                    <input type="text" class="searchInput" required data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}"?>" placeholder="DESCRITOR">
                                     <div class="descritoresContainer" data-index="<?php echo $contador ?>"></div>
                                 </div>
                             </td>

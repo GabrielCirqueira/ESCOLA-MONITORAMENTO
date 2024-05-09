@@ -16,8 +16,10 @@ if(!isset($_SESSION["PopUp_inserir_turma"])){
     $_SESSION["PopUp_add_materia_true"] = False;
     $_SESSION["PopUp_excluir_materia_true"] = False;
     $_SESSION["PopUp_inserir_turma"] = False;
-
+    $_SESSION["PopUp_inserir_gabarito_professor"] = False;
+    
     $_SESSION["GESTOR"] = False;
+    $_SESSION["ALUNO"] = False;
     $_SESSION["PROFESSOR"] = False;
 }
     
@@ -38,7 +40,8 @@ $rotas = [
     "adicionar_turma"           => GestorController::class,
     "inserir_gabarito"          => ProfessorController::class,
     "criar_gabarito"            => ProfessorController::class,
-    "criar_gabarito_respostas"  => ProfessorController::class
+    "criar_gabarito_respostas"  => ProfessorController::class,
+    "aluno_home"                => AlunoController::class
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";
@@ -52,17 +55,7 @@ if(array_key_exists($action, $rotas)) {
     $controller = $rotas[$action];
     $method = $action;
     $controller::$method();
-
-// } else if(strpos($action,"/") && strpos($action,"gestor_home")){
-
-//     $string = explode("/",$action);
-//     $pag = $string[0];
-//     $info = $string[1];
-//     $controller = $rotas[$pag];
-//}
-
-}
-else{
+} else{
     MainController::index();
 }
 
@@ -95,4 +88,9 @@ if($_SESSION["PopUp_excluir_materia_true"] == True){
 if($_SESSION["PopUp_inserir_turma"] == True){
     echo "<script> Mostrar_PopUp('PopUp_inserir_turma')</script>";
     $_SESSION["PopUp_inserir_turma"] = False;
+}
+
+if($_SESSION["PopUp_inserir_gabarito_professor"] == True){
+    echo "<script> Mostrar_PopUp('PopUp_inserir_gabarito_professor')</script>";
+    $_SESSION["PopUp_inserir_gabarito_professor"] = False;
 }

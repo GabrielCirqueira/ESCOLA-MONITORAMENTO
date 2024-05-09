@@ -27,6 +27,10 @@
     #PopUp_inserir_turma{
       display: none;
     }
+
+    #PopUp_inserir_gabarito_professor{
+      display: none;
+    }
   
   
 .PopUp-sobreposicao{ 

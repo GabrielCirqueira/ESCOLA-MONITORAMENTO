@@ -26,4 +26,23 @@ class ProfessorModel{
         $query->execute(); 
         return $query->fetchAll(PDO::FETCH_ASSOC); 
         }
+
+    public static function Inserir_gabarito($dados){
+        $sql = "INSERT INTO gabarito_professores
+        (nome_professor,nome_prova,turmas,descritores,valor,QNT_perguntas,data_prova,gabarito)
+        VALUES (:NPRF,:NPRV,:TR,:DES,:VLR,:QTPR,:DTPRV,:GABARITO)";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindvalue(":NPRF",$dados["nome_prof"]);
+        $query->bindvalue(":NPRV",$dados["nome_prova"]);
+        $query->bindvalue(":TR",$dados["turmas"]);
+        $query->bindvalue(":DES",$dados["descritores"]);
+        $query->bindvalue(":VLR",$dados["valor"]);
+        $query->bindvalue(":QTPR",$dados["perguntas"]);
+        $query->bindvalue(":DTPRV",$dados["data"]);
+        $query->bindvalue(":GABARITO",$dados["gabarito"]);
+        $query->execute();
+
+        return $query;
+    }
 }
