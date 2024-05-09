@@ -5,10 +5,11 @@ require_once "vendor/autoload.php";
 use app\controllers\monitoramento\MainController;
 use app\controllers\monitoramento\ProfessorController;
 use app\controllers\monitoramento\GestorController;
+use app\controllers\monitoramento\AlunoController;
 
 session_start();
 
-if(!isset($_SESSION["PopUp_inserir_turma"])){
+if(!isset($_SESSION["PopUp_RA_NaoENC"])){
 
     $_SESSION["PopUp_professor"] = False;
     $_SESSION["popup_not_gestor"] = False;
@@ -17,6 +18,7 @@ if(!isset($_SESSION["PopUp_inserir_turma"])){
     $_SESSION["PopUp_excluir_materia_true"] = False;
     $_SESSION["PopUp_inserir_turma"] = False;
     $_SESSION["PopUp_inserir_gabarito_professor"] = False;
+    $_SESSION["PopUp_RA_NaoENC"] = False;
     
     $_SESSION["GESTOR"] = False;
     $_SESSION["ALUNO"] = False;
@@ -24,24 +26,25 @@ if(!isset($_SESSION["PopUp_inserir_turma"])){
 }
     
 $rotas = [
+    "aluno_home"                => AlunoController::class,
+    "login_aluno_entrar"        => AlunoController::class,
     "home"                      => MainController::class,
     "ADM"                       => MainController::class,
     "login_professor"           => MainController::class,
     "login_gestor"              => MainController::class,
     "login_adm"                 => MainController::class,
-    "home_professor"            => ProfessorController::class,
     "login_gestor_verifica"     => GestorController::class,
     "gestor_home"               => GestorController::class,
-    "professor_home"            => ProfessorController::class,
     "adicionar_professor"       => GestorController::class,
     "Gestor_info"               => GestorController::class,
     "adicionar_materia"         => GestorController::class,
     "excluir_disciplina"        => GestorController::class,
     "adicionar_turma"           => GestorController::class,
+    "home_professor"            => ProfessorController::class,
+    "professor_home"            => ProfessorController::class,
     "inserir_gabarito"          => ProfessorController::class,
     "criar_gabarito"            => ProfessorController::class,
-    "criar_gabarito_respostas"  => ProfessorController::class,
-    "aluno_home"                => AlunoController::class
+    "criar_gabarito_respostas"  => ProfessorController::class
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";
@@ -63,6 +66,11 @@ if(array_key_exists($action, $rotas)) {
 if($_SESSION["PopUp_professor"] == True){
     echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";
     $_SESSION["PopUp_professor"] = False;
+}
+
+if($_SESSION["PopUp_RA_NaoENC"] == True){
+    echo "<script> Mostrar_PopUp('PopUp_RA_NaoENC')</script>";
+    $_SESSION["PopUp_RA_NaoENC"] = False;
 }
 
 if($_SESSION["popup_not_gestor"] == True){
@@ -93,4 +101,9 @@ if($_SESSION["PopUp_inserir_turma"] == True){
 if($_SESSION["PopUp_inserir_gabarito_professor"] == True){
     echo "<script> Mostrar_PopUp('PopUp_inserir_gabarito_professor')</script>";
     $_SESSION["PopUp_inserir_gabarito_professor"] = False;
+}
+
+if($_SESSION["PopUp_RA_NaoENC"] == True){
+    echo "<script> Mostrar_PopUp('PopUp_RA_NaoENC')</script>";
+    $_SESSION["PopUp_RA_NaoENC"] = False;
 }
