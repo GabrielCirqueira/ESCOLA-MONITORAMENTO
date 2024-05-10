@@ -61,6 +61,7 @@ use PDO;
                 nome_prova      varchar(255),
                 turmas          varchar(255),
                 descritores     varchar(255),
+                disciplina     varchar(255),
                 valor           int,
                 QNT_perguntas   int,
                 data_prova      date,

@@ -17,7 +17,7 @@
                                 <input name="gabarito-turmas[]" type="checkbox" value="<?php echo $turma["nome"] ?>">
                                 <span><?php echo $turma["nome"] ?></span>
                             </div>
-                    <?php }
+                        <?php }
                     } ?>
                 </div>
 
@@ -29,8 +29,28 @@
                                 <input name="gabarito-turmas[]" type="checkbox" value="<?php echo $turma["nome"] ?>">
                                 <span><?php echo $turma["nome"] ?></span>
                             </div>
-                    <?php }
+                        <?php }
                     } ?>
+                </div>
+
+            </div>
+
+            <div class="disciplinas-gabarito-professor">
+                <h3>SELECIONE A DISCIPLINA CORRESPONDENTE:</h3>
+                <div class="professor-area-disciplinas">
+                    <?php 
+                    if(strpos($_SESSION["disciplinas"],";")){
+                        $materias = explode(";",$_SESSION["disciplinas"]);
+                        foreach ($materias as $materia) { ?>
+                        <div>
+                            <input type="radio" name="Materias-professor-gabarito" value="<?php echo $materia?>"><span><?php echo $materia?></span>
+                            </div>
+                        <?php }
+                    }else{ ?>
+                        <div>
+                        <input type="radio" name="Materias-professor-gabarito" value="<?php echo $_SESSION["disciplinas"]?>"><span><?php echo $_SESSION["disciplinas"]?></span>
+                        </div>
+                    <?php }?>
                 </div>
             </div>
 

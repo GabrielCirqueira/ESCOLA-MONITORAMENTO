@@ -97,3 +97,21 @@ td {
   gap: 10px;
   flex-wrap: wrap;
 }
+
+.disciplinas-gabarito-professor{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.professor-area-disciplinas{
+  display: flex; 
+  gap: 20px;
+}
+
+.professor-area-disciplinas div{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}

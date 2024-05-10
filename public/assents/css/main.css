@@ -206,7 +206,7 @@
   border-spacing: 0; 
 }
 
-.professor-inserir-gabarito input[type="radio"]{
+.professor-area-disciplinas  input[type="radio"],.professor-inserir-gabarito input[type="radio"]{
   appearance: none;
   width: 20px;
   height: 20px;
@@ -227,7 +227,7 @@
   outline: none;
 }
 
-.professor-inserir-gabarito input[type="radio"]:checked {
+.professor-area-disciplinas  input[type="radio"]:checked,.professor-inserir-gabarito input[type="radio"]:checked {
   background-color: #399ff3;
   border-color: #399ff3;
 }

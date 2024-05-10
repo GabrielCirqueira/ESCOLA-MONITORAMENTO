@@ -21,6 +21,7 @@
                 <input type="hidden" name="turmas_gabarito" value="<?php echo implode(",",$data['turmas']); ?>">
                 <input type="hidden" name="valor_prova" value="<?php echo $data["valor"]; ?>">
                 <input type="hidden" name="nome_prova" value="<?php echo $data["nome_prova"]; ?>">
+                <input type="hidden" name="materia_prova" value="<?php echo $data["materia"]; ?>">
                 <table>
                     <?php $contador = 1;
                     while ($contador <= $data["perguntas"]) { ?>

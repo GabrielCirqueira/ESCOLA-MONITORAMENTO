@@ -29,8 +29,8 @@ class ProfessorModel{
 
     public static function Inserir_gabarito($dados){
         $sql = "INSERT INTO gabarito_professores
-        (nome_professor,nome_prova,turmas,descritores,valor,QNT_perguntas,data_prova,gabarito)
-        VALUES (:NPRF,:NPRV,:TR,:DES,:VLR,:QTPR,:DTPRV,:GABARITO)";
+        (nome_professor,nome_prova,turmas,descritores,valor,QNT_perguntas,data_prova,gabarito,disciplina)
+        VALUES (:NPRF,:NPRV,:TR,:DES,:VLR,:QTPR,:DTPRV,:GABARITO,:MT)";
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindvalue(":NPRF",$dados["nome_prof"]);
@@ -41,6 +41,7 @@ class ProfessorModel{
         $query->bindvalue(":QTPR",$dados["perguntas"]);
         $query->bindvalue(":DTPRV",$dados["data"]);
         $query->bindvalue(":GABARITO",$dados["gabarito"]);
+        $query->bindvalue(":MT",$dados["materia"]);
         $query->execute();
 
         return $query;
