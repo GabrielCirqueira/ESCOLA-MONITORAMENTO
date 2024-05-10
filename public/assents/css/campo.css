@@ -1,78 +1,171 @@
-.input-campo-aluno{
-    background-color: rgba(245, 245, 220, 0);
-    width: 70%;
-    margin: 20px;
-    padding-left: 10px;
-    height: 50px;
-    border: none;
-    font-size: 20px;
-    color: white;
-    border: 1px solid white;
+#campo-email {
+  display: none;
 }
 
-.input-campo-aluno::placeholder{
-    color: white;
+.input-campo-aluno {
+  background-color: rgba(245, 245, 220, 0);
+  width: 70%;
+  margin: 20px;
+  padding-left: 10px;
+  height: 50px;
+  border: none;
+  font-size: 20px;
+  color: white;
+  border: 1px solid white;
 }
 
-.input-campo-aluno:focus{
-    outline: none;
+.input-campo-aluno::placeholder {
+  color: white;
+}
+
+.input-campo-aluno:focus {
+  outline: none;
 }
 
 .input-add {
-    width: 70%;
-    padding: 10px; 
-    height: 40px;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  
-  .input-add:active{
-    outline: none;
-    border: none;
-  }
-  
-  .input-add:focus {
-    outline: none;
-  }
+  width: 70%;
+  padding: 10px;
+  height: 40px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
 
-  .input-select {
-    width: 70%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    color: #555;
-  }
-  
-  .input-checkbox{
-    transform: scale(2);
-    border-radius: none;
-    border: none;
-    margin: 10px;
-  }
-    
-  .input-checkbox + span { 
-    margin-right: 20px;
-    font-size: 16px;
-    color: #555;
-  }
-  
-  .input-checkbox:checked + span {
-    font-weight: bold;
-    color: #01a8c5;
-  }
+.input-add:active {
+  outline: none;
+  border: none;
+}
 
-  .label-select {
-    display: block;
-    margin-bottom: 5px; 
-  }
+.input-add:focus {
+  outline: none;
+}
 
-  .input-checkbox-materias{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
+.input-select {
+  width: 70%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  color: #555;
+}
 
-  .titulo-NSL{
-    color: #01a8c5;
-  }
+.input-checkbox {
+  transform: scale(2);
+  border-radius: none;
+  border: none;
+  margin: 10px;
+}
+
+.input-checkbox+span {
+  margin-right: 20px;
+  font-size: 16px;
+  color: #555;
+}
+
+.input-checkbox:checked+span {
+  font-weight: bold;
+  color: #01a8c5;
+}
+
+.label-select {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-checkbox-materias {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.titulo-NSL {
+  color: #01a8c5;
+}
+
+.campos-selecionar-descritores input {
+  width: 80px;
+}
+
+.caixa-turmas {
+  width: 100px;
+  height: 100px;
+  background-color: rgb(26, 85, 172);
+  color: black;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.caixa-turmas:hover {
+  background-color: rgb(21, 71, 145);
+  cursor: pointer;
+}
+
+.form-radio div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.form-radio {
+  display: flex;
+  gap: 5px;
+}
+
+.nome_prova input[type="text"] {
+  width: 500px;
+  height: 30px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.professor-inserir-gabarito td,
+.professor-inserir-gabarito tr {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.professor-area-disciplinas input[type="radio"],
+.professor-inserir-gabarito input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.professor-inserir-gabarito input[type="text"] {
+  border-radius: 0px;
+  border: 1px solid black;
+  font-size: 13px;
+}
+
+.professor-inserir-gabarito input[type="text"]:focus {
+  outline: none;
+}
+
+.professor-area-disciplinas input[type="radio"]:checked,
+.professor-inserir-gabarito input[type="radio"]:checked {
+  background-color: #399ff3;
+  border-color: #399ff3;
+}
+
+.descritor:hover {
+  background-color: #747373;
+  cursor: pointer;
+}
+
+.professor-campos div input {
+  width: 300px;
+  font-size: 20px;
+  height: 30px;
+}
+
+.painel-frontal-gestor img {
+  width: 200px;
+}

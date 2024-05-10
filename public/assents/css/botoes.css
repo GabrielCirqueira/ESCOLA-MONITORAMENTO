@@ -1,139 +1,174 @@
-.btn-index{
-    width: 300px;
-    height: 80px;
-    margin: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    background-color:#0bd1eb5e;
-    border: 3px solid rgba(255, 255, 255, 0.651);
-    font-family: "Oswald", 'Arial Narrow Bold', sans-serif;
-    font-size: 30px;
-    font-weight: bold;
-    color: white;
-    transition: 0.5s;
+.btn-index {
+  width: 300px;
+  height: 80px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #0bd1eb5e;
+  border: 3px solid rgba(255, 255, 255, 0.651);
+  font-family: "Oswald", 'Arial Narrow Bold', sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  transition: 0.5s;
 }
 
-.btn-index:hover{
-    border: 3px solid rgba(10, 247, 255, 0.795);
-    background-color:#0bd1ebab;
-    cursor: pointer;
+.btn-index:hover {
+  border: 3px solid rgba(10, 247, 255, 0.795);
+  background-color: #0bd1ebab;
+  cursor: pointer;
 }
 
 
-.login-aluno input[type="submit"]{
-    background-color: white;
-    border: none;
-    width: 70%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
-    margin: 20px 0px;
-    height: 60px;
+.login-aluno input[type="submit"] {
+  background-color: white;
+  border: none;
+  width: 70%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  margin: 20px 0px;
+  height: 60px;
 }
 
-.login-aluno input[type="submit"]:hover{
-    background-color: rgb(202, 202, 202);
-    cursor: pointer;
+.login-aluno input[type="submit"]:hover {
+  background-color: rgb(202, 202, 202);
+  cursor: pointer;
 }
 
-.button-enter-email{
-    background-color: rgba(240, 248, 255, 0); 
-    border: none;
-    font-size: 20px;
-    margin-bottom: 20px;
-    text-decoration:underline;
-    color: white;
+.button-enter-email {
+  background-color: rgba(240, 248, 255, 0);
+  border: none;
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-decoration: underline;
+  color: white;
 }
 
-.button-enter-email:hover{
-    color: rgb(209, 209, 209);
-    cursor: pointer;
+.button-enter-email:hover {
+  color: rgb(209, 209, 209);
+  cursor: pointer;
 }
 
-.Botao-voltar-lobby{
-    background-color: rgba(0, 0, 0, 0.603);
-    color: white;
-    margin: 20px;
-    padding: 10px 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 15px;
-    text-decoration: none;
+.Botao-voltar-lobby {
+  background-color: rgba(0, 0, 0, 0.603);
+  color: white;
+  margin: 20px;
+  padding: 10px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  text-decoration: none;
 }
 
-.Botao-voltar-lobby:hover{
-    background-color: rgba(0, 0, 0, 0.331);
-    cursor: pointer;
-    color: black;
+.Botao-voltar-lobby:hover {
+  background-color: rgba(0, 0, 0, 0.331);
+  cursor: pointer;
+  color: black;
 }
 
 .button-menu-lateral {
-    display: block;
-    background-color: #09b7ce;
-    color: #fff;
-    border: none;
-    padding: 15px;
-    margin-bottom: 10px;
-    text-decoration: none;
-    text-align: center;
-  }
-  
-  .button-menu-lateral:hover {
-    background-color: #0a91a3;
-    cursor: pointer;
-  }
-  
+  display: block;
+  background-color: #09b7ce;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.button-menu-lateral:hover {
+  background-color: #0a91a3;
+  cursor: pointer;
+}
+
 .botao-form-enviar {
-    background-color: #14c1d8;
-    color: #fff;
-    padding: 12px 35px;
-    border: none; 
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .botao-form-enviar:hover {
-    background-color: #0a91a3;
-  }
+  background-color: #14c1d8;
+  color: #fff;
+  padding: 12px 35px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
 
-  .button-disciplina-excluir{
-    background-color: #ca214b;
-    width: 100px;
-    border: none;
-    height: 32px;
-    margin: 10px auto;
-    transition: 1s;
-  }
-  .button-disciplina-excluir:hover{
-    background-color: #ac002b;
-    cursor: pointer;
-  }
+.botao-form-enviar:hover {
+  background-color: #0a91a3;
+}
 
-  .radio-input{
-    border: 0px;
-    width: 25px;
-    height: 30px;
-    vertical-align: middle;
-  }
+.button-disciplina-excluir {
+  background-color: #ca214b;
+  width: 100px;
+  border: none;
+  height: 32px;
+  margin: 10px auto;
+  transition: 1s;
+}
 
-  .btn-home-professor{
-    width: 250px;
-    height: 60px;
-    margin: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    background-color:#29a5b6fa;
-    border: 3px solid rgba(107, 107, 107, 0.651);
-    font-family: "Oswald", 'Arial Narrow Bold', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    transition: 0.5s;
-  }
+.button-disciplina-excluir:hover {
+  background-color: #ac002b;
+  cursor: pointer;
+}
 
-  .btn-home-professor:hover{
-    background-color:#1a6974fa;
-    border: 3px solid rgba(77, 75, 75, 0.651);
-  }
+.radio-input {
+  border: 0px;
+  width: 25px;
+  height: 30px;
+  vertical-align: middle;
+}
+
+.btn-home-professor {
+  width: 250px;
+  height: 60px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  background-color: #29a5b6fa;
+  border: 3px solid rgba(107, 107, 107, 0.651);
+  font-family: "Oswald", 'Arial Narrow Bold', sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  transition: 0.5s;
+}
+
+.btn-home-professor:hover {
+  background-color: #1a6974fa;
+  border: 3px solid rgba(77, 75, 75, 0.651);
+}
+
+.details-menu-gestor {
+  display: flex;
+  flex-direction: column;
+}
+
+.sumary-menu-gestor {
+  margin: 5px 20px;
+  color: white;
+  font-weight: bold;
+  transition: 0.5s;
+  font-size: 19px;
+}
+
+.sumary-menu-gestor:hover {
+  cursor: pointer;
+  color: rgb(193, 199, 204);
+}
+
+.button-details-menu-gestor {
+  background-color: rgba(240, 248, 255, 0);
+  border: none;
+  color: white;
+  font-size: 16px;
+  margin: 0px;
+  margin-left: 40px;
+  margin-bottom: 10px;
+  transition: 0.5s;
+}
+
+.button-details-menu-gestor:hover {
+  color: rgb(215, 207, 207);
+  cursor: pointer;
+}

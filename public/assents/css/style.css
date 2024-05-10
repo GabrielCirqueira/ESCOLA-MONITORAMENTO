@@ -1,7 +1,9 @@
 @import url(header.css);
 @import url(global.css);
 @import url(footer.css);
-@import url(main.css);
+@import url(containers.css);
+@import url(resposivo.css);
+@import url(text.css);
 @import url(botoes.css);
 @import url(campo.css);
 @import url(PopUps.css);
@@ -26,92 +28,4 @@ td {
 
 .cor-linha-tabela-2 {
   background-color: rgba(109, 110, 110, 0.384);
-}
-
-.details-menu-gestor {
-  display: flex;
-  flex-direction: column;
-}
-
-.sumary-menu-gestor {
-  margin: 5px 20px;
-  color: white;
-  font-weight: bold;
-  transition: 0.5s;
-  font-size: 19px;
-}
-
-.sumary-menu-gestor:hover {
-  cursor: pointer;
-  color: rgb(193, 199, 204);
-}
-
-.button-details-menu-gestor {
-  background-color: rgba(240, 248, 255, 0);
-  border: none;
-  color: white;
-  font-size: 16px;
-  margin: 0px;
-  margin-left: 40px;
-  margin-bottom: 10px;
-  transition: 0.5s;
-}
-
-.button-details-menu-gestor:hover {
-  color: rgb(215, 207, 207);
-  cursor: pointer;
-}
-
-.form-radio div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-}
-
-.form-radio {
-  display: flex;
-  gap: 5px;
-}
-
-.caixa-turmas {
-  width: 100px;
-  height: 100px;
-  background-color: rgb(26, 85, 172);
-  color: black;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 15px;
-}
-
-.caixa-turmas:hover {
-  background-color: rgb(21, 71, 145);
-  cursor: pointer;
-}
-
-.area-caixas-turmas {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.disciplinas-gabarito-professor{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.professor-area-disciplinas{
-  display: flex; 
-  gap: 20px;
-}
-
-.professor-area-disciplinas div{
-  display: flex;
-  justify-content: center; 
-  align-items: center;
 }

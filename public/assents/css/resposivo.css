@@ -1,0 +1,51 @@
+@media (max-width: 500px) {
+
+    .main {
+        flex: 1 1 0;
+        display: flex;
+        background-image: url('../../../public/assents/img/FULL\ FRAME\ MOBILE\ 3.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+    }
+
+    .img-tile img {
+        width: 40px;
+        margin-right: 20px;
+    }
+
+    .header__title {
+        font-size: 30px;
+    }
+
+    .user i {
+        position: absolute;
+        right: 20px;
+        top: 30px;
+    }
+
+    .header {
+        height: 55px;
+    }
+
+    .menu i {
+        position: absolute;
+        left: 20px;
+        top: 35px;
+    }
+
+    .professor-area-turmas {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px 100px;
+    }
+
+    .professor-campos {
+        display: flex;
+        flex-direction: column;
+    }
+}
