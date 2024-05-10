@@ -113,9 +113,9 @@ class ProfessorController{
                 $_SESSION["PopUp_inserir_gabarito_professor"] = True;
                 header("location: inserir_gabarito");
                 exit;
+            }
         }
-        }
-          else{
+        else{
             header("location: home");
         }
     }

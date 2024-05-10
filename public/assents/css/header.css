@@ -1,5 +1,5 @@
  .header {
-    background-color: var(--header);
+    background-color: #04a1b2;
     height: 60px; 
     padding: 20px 0;
   }
@@ -7,7 +7,7 @@
   .header__title {
     margin: 0;
     font-size: 40px;
-    color: var(--text-color);
+    color: #ffffff;
   }
 
   .header h4{
@@ -30,7 +30,7 @@
 
   .boton-header{
     height: 10px; 
-    background-color:#0fb6c9;
+    background-color: #038998;
     box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.356);
   }
 
