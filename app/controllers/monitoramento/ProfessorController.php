@@ -27,10 +27,9 @@ class ProfessorController{
     public static function professor_home(){
         if($_SESSION["PROFESSOR"]){
 
-            MainController::Templates("public/views/professor/home.php", [
+            MainController::Templates("public/views/professor/home.php","PROFESSOR", [
                 'nome'          => $_SESSION["nome_professor"],
-                'nome_usuario'  => $_SESSION["nome_usuario"],
-                'cpf'           => $_SESSION["cpf"],
+                'nome_usuario'  => $_SESSION["nome_usuario"], 
                 'numero'        => $_SESSION["numero"],
                 'disciplinas'   => $_SESSION["disciplinas"]
             ]);
@@ -44,7 +43,7 @@ class ProfessorController{
         
         if($_SESSION["PROFESSOR"]){
             $turmas = ProfessorModel::GetTurmas();
-            MainController::Templates("public/views/professor/inserir_gabarito.php",$turmas);
+            MainController::Templates("public/views/professor/inserir_gabarito.php","PROFESSOR",$turmas);
         }
             else{
             header("location: home");
@@ -72,7 +71,7 @@ class ProfessorController{
                 "materia"       => $materia
             ];
             
-            MainController::Templates("public/views/professor/criar_gabarito.php",$dados);
+            MainController::Templates("public/views/professor/criar_gabarito.php","PROFESSOR",$dados);
         }
             else{
             header("location: home");

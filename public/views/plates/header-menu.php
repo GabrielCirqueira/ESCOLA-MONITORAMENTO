@@ -16,9 +16,9 @@
     <!-- <h4>SISTEMA DE MONITORAMENTO</h4> -->
 
     <div class="user">
-      <?php if($user != "home"){?>
-      <i class="far fa-user fa-2x" id="icone-menu-lateral" style="color:gray"></i>
-      <?php }?>
+      <?php if ($user != "home") { ?>
+        <i class="far fa-user fa-2x" id="icone-menu-lateral" style="color:gray"></i>
+      <?php } ?>
     </div>
 
   </header>
@@ -47,17 +47,40 @@
         <h2>Perfil</h2>
       </div>
       <div class="menu-lateral-main-main">
-        <h4>NOME:</h4>
-        <span><?= $_SESSION["nome_aluno"] ?></span>
-        <hr>
-        <h4>RA:</h4>
-        <span><?= $_SESSION["ra"] ?></span>
-        <hr>
-        <h4>TURMA:</h4>
-        <span><?= $_SESSION["turma"] ?></span>
-        <hr>
-        <br>
-        <button>Sair</button>
+        <?php if ($user == "ALUNO") { ?>
+          <h4>NOME:</h4>
+          <span><?= $_SESSION["nome_aluno"] ?></span>
+          <hr>
+          <h4>RA:</h4>
+          <span><?= $_SESSION["ra"] ?></span>
+          <hr>
+          <h4>TURMA:</h4>
+          <span><?= $_SESSION["turma"] ?></span>
+          <hr>
+          <br>
+
+        <?php } else if ($user == "PROFESSOR") { ?>
+          <h4>NOME:</h4>
+          <span><?= $_SESSION["nome_professor"] ?></span>
+          <hr>
+          <h4>DISCIPLINA(S):</h4>
+          <span>
+            <?php 
+            
+            if(strpos($_SESSION["disciplinas"],";")){
+              $materias = explode(";",$_SESSION["disciplinas"]);
+              foreach ($materias as $materia) { ?>
+              <span><?= $materia ?> <br> </span>
+              <?php }}else{?>
+                <span><?= $materia ?></span>
+              <?php }?>
+          </span>
+          <hr>
+        <?php } else if ($user == "GESTOR") { ?>
+
+
+        <?php } ?>
+        <a href="encerrar_sessao" >Sair</a>
 
       </div>
 

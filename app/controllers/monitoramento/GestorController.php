@@ -21,7 +21,7 @@ class GestorController{
 
     public static function gestor_home(){
         if(MainController::Verificar_sessao("GESTOR")){ 
-            MainController::Templates("public/views/gestor/home.php");
+            MainController::Templates("public/views/gestor/home.php","GESTOR");
         }else{
             header("location: home");
         }

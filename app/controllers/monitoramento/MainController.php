@@ -22,6 +22,14 @@ class MainController{
         }
     }
 
+    public static function encerrar_sessao(){
+        $_SESSION = array();
+ 
+        session_destroy();
+
+        header("location:home");
+    }
+
     public static function ADM(){
         self::Templates("public/views/plates/main.php","home");
     }
