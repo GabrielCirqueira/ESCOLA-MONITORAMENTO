@@ -26,13 +26,13 @@ if(!isset($_SESSION["PopUp_RA_NaoENC"])){
 }
     
 $rotas = [
-    "aluno_home"                => AlunoController::class,
-    "login_aluno_entrar"        => AlunoController::class,
     "home"                      => MainController::class,
     "ADM"                       => MainController::class,
     "login_professor"           => MainController::class,
     "login_gestor"              => MainController::class,
     "login_adm"                 => MainController::class,
+    "aluno_home"                => AlunoController::class,
+    "login_aluno_entrar"        => AlunoController::class,
     "login_gestor_verifica"     => GestorController::class,
     "gestor_home"               => GestorController::class,
     "adicionar_professor"       => GestorController::class,

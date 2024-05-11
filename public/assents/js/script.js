@@ -14,13 +14,13 @@ function Mostrar_campo_ra() {
 }
 
 function Fechar_PopUp(popup){ 
-    document.getElementById(popup).style.display = 'none'
+    document.getElementById(popup).style.display = 'none';
 }
 
 function Mostrar_PopUp(popup){
-    document.getElementById(popup).style.display = 'block'
+    document.getElementById(popup).style.display = 'block';
 }
-
+ 
 // function Mostrar_container_gestor(container){
 //     document.getElementById("container-gestor-01").style.display = "none";
 //     document.getElementById("container-gestor-02").style.display = "none";
@@ -96,3 +96,24 @@ function carregarConteudo(arquivo) {
         }
     });
 });
+ 
+const menuBtn = document.getElementById("icone-menu-lateral")
+const menu = document.getElementById("area_menu_lateral")
+const menu_conteudo = document.getElementById("menu-lateral-icone-conteudo")
+const icone_fechar_menu = document.querySelector(".icone-menu-lateral-fechar")
+
+console.log(menu)
+
+icone_fechar_menu.addEventListener('click', function() {
+    console.log("sefsf")
+    menu.style.display = "none"
+    menu.style.backgroundColor = "rgba(0, 0, 0, 0)"
+    menu_conteudo.style.right = '-320px'
+})
+
+menuBtn.addEventListener('click', function() {
+    console.log("sefsf")
+    menu.style.display = "block"
+    menu.style.backgroundColor = "rgba(0, 0, 0, 0.507)"
+    menu_conteudo.style.right = '0px'
+})

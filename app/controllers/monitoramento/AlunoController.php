@@ -31,7 +31,7 @@ class AlunoController{
     public static function aluno_home(){
         if($_SESSION["ALUNO"]){
 
-            MainController::Templates("public/views/aluno/home.php", [
+            MainController::Templates("public/views/aluno/home.php","ALUNO", [
                 "ra"                => $_SESSION["ra"],   
                 "nome_aluno"        => $_SESSION["nome_aluno"],   
                 "turma_aluno"       => $_SESSION["turma"],   
