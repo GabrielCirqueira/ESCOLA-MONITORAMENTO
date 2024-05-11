@@ -9,22 +9,27 @@ use app\controllers\monitoramento\AlunoController;
 
 session_start();
 
-if(!isset($_SESSION["PopUp_RA_NaoENC"])){
+$options = [
+    "PopUp_professor" => "PopUp_PRF_NaoENC",
+    "PopUp_RA_NaoENC" => "PopUp_RA_NaoENC",
+    "popup_not_gestor" => "PopUp_PRF_NaoENC",
+    "PopUp_add_professor_true" => "PopUp_add_professor_true",
+    "PopUp_add_materia_true" => "PopUp_add_materia_true",
+    "PopUp_excluir_materia_true" => "PopUp_excluir_materia_true",
+    "PopUp_inserir_turma" => "PopUp_inserir_turma",
+    "PopUp_inserir_gabarito_professor" => "PopUp_inserir_gabarito_professor",
+];
 
-    $_SESSION["PopUp_professor"] = False;
-    $_SESSION["popup_not_gestor"] = False;
-    $_SESSION["PopUp_add_professor_true"] = False;
-    $_SESSION["PopUp_add_materia_true"] = False;
-    $_SESSION["PopUp_excluir_materia_true"] = False;
-    $_SESSION["PopUp_inserir_turma"] = False;
-    $_SESSION["PopUp_inserir_gabarito_professor"] = False;
-    $_SESSION["PopUp_RA_NaoENC"] = False;
-    
-    $_SESSION["GESTOR"] = False;
-    $_SESSION["ALUNO"] = False;
-    $_SESSION["PROFESSOR"] = False;
+if (!isset($_SESSION["PopUp_RA_NaoENC"])) {
+    foreach ($options as $key => $value) {
+        $_SESSION[$key] = false;
+    }
+
+    $_SESSION["GESTOR"] = false;
+    $_SESSION["ALUNO"] = false;
+    $_SESSION["PROFESSOR"] = false;
 }
-    
+
 $rotas = [
     "aluno_home"                => AlunoController::class,
     "login_aluno_entrar"        => AlunoController::class,
@@ -48,61 +53,19 @@ $rotas = [
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";
+if ($action == "home") $action = "index";
 
-if($action == "home"){
-    $action = "index";
-}
-
-if(array_key_exists($action, $rotas)) {
-
+if (array_key_exists($action, $rotas)) {
     $controller = $rotas[$action];
     $method = $action;
     $controller::$method();
-} else{
+} else {
     MainController::index();
 }
 
-if($_SESSION["PopUp_professor"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";
-    $_SESSION["PopUp_professor"] = False;
-}
-
-if($_SESSION["PopUp_RA_NaoENC"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_RA_NaoENC')</script>";
-    $_SESSION["PopUp_RA_NaoENC"] = False;
-}
-
-if($_SESSION["popup_not_gestor"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";
-    $_SESSION["popup_not_gestor"] = False;
-}
-
-if($_SESSION["PopUp_add_professor_true"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_add_professor_true')</script>";
-    $_SESSION["PopUp_add_professor_true"] = False;
-}
-
-if($_SESSION["PopUp_add_materia_true"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_add_materia_true')</script>";
-    $_SESSION["PopUp_add_materia_true"] = False;
-}
- 
-if($_SESSION["PopUp_excluir_materia_true"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_excluir_materia_true')</script>";
-    $_SESSION["PopUp_excluir_materia_true"] = False;
-}
- 
-if($_SESSION["PopUp_inserir_turma"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_inserir_turma')</script>";
-    $_SESSION["PopUp_inserir_turma"] = False;
-}
-
-if($_SESSION["PopUp_inserir_gabarito_professor"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_inserir_gabarito_professor')</script>";
-    $_SESSION["PopUp_inserir_gabarito_professor"] = False;
-}
-
-if($_SESSION["PopUp_RA_NaoENC"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_RA_NaoENC')</script>";
-    $_SESSION["PopUp_RA_NaoENC"] = False;
+foreach ($options as $key => $value) {
+    if ($_SESSION[$key]) {
+        echo "<script> Mostrar_PopUp('$value')</script>";
+        $_SESSION[$key] = false;
+    }
 }
