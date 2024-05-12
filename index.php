@@ -34,6 +34,7 @@ $rotas = [
     "encerrar_sessao"           => MainController::class,
     "aluno_home"                => AlunoController::class,
     "login_aluno_entrar"        => AlunoController::class,
+    "gabarito_aluno"            => AlunoController::class,
     "login_gestor_verifica"     => GestorController::class,
     "gestor_home"               => GestorController::class,
     "adicionar_professor"       => GestorController::class,

@@ -122,10 +122,10 @@ td {
 
 .conteudo-prova{
   padding: 10px;
+  width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
+  justify-content: space-between;
+  align-items: center; 
 }
 
 .button-ver-prova button{
@@ -148,3 +148,18 @@ td {
   font-weight: bold;
   font-size: 12px;
 } 
+
+.nao_tem_prova{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nao_tem_prova img{
+  width: 200px;
+}
+
+.nao_tem_prova p{
+  margin: 0px;
+}

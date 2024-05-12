@@ -83,7 +83,7 @@ class ProfessorController{
             $gabarito_prova = [];
             $descritores_prova = [];
             $dataAtual = new DateTime();
-            $dataFormatada = $dataAtual->format('d-m-Y');
+            $dataFormatada = $dataAtual->format('Y-m-d');
     
             $contador = 1;
             
