@@ -19,6 +19,15 @@
     justify-content: center;
 }
 
+.main-home-aluno{
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
 .professor-inserir-gabarito table {
     border-collapse: collapse;
     border-spacing: 0;

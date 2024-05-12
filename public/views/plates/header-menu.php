@@ -80,6 +80,7 @@
 
 
         <?php } ?>
+        <br>
         <a href="encerrar_sessao" >Sair</a>
 
       </div>

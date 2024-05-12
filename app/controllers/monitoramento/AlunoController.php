@@ -31,11 +31,14 @@ class AlunoController{
     public static function aluno_home(){
         if($_SESSION["ALUNO"]){
 
+            $dados = AlunoModel::GetProvas() ;
+
             MainController::Templates("public/views/aluno/home.php","ALUNO", [
                 "ra"                => $_SESSION["ra"],   
                 "nome_aluno"        => $_SESSION["nome_aluno"],   
                 "turma_aluno"       => $_SESSION["turma"],   
-                "data_nasc_aluno"   => $_SESSION["data_nasc"]
+                "data_nasc_aluno"   => $_SESSION["data_nasc"],
+                "provas"            => $dados
             ]);
 
         }else{
