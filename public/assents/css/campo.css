@@ -120,6 +120,13 @@
   font-size: 17px;
   font-weight: bold;
 }
+
+.PopUp-sobreposicao td,
+.PopUp-sobreposicao tr{
+  border: 1px solid black;
+  font-size: 10px;
+}
+
 .aluno_inserir_gabarito td,
 .aluno_inserir_gabarito tr,
 .professor-inserir-gabarito td,

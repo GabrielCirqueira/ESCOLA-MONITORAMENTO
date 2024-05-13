@@ -115,3 +115,8 @@ if($_SESSION["PopUp_RA_NaoENC"] == True){
     echo "<script> Mostrar_PopUp('PopUp_RA_NaoENC')</script>";
     $_SESSION["PopUp_RA_NaoENC"] = False;
 }
+
+if($_SESSION["PopUp_inserir_prova"] == True){
+    echo "<script> Mostrar_PopUp('PopUp_inserir_prova')</script>";
+    $_SESSION["PopUp_inserir_prova"] = False;
+}

@@ -31,4 +31,43 @@ class AlunoModel{
         }
     }
 
+    public static function GetProvasFinalizadas(){
+        $sql = "SELECT * FROM gabarito_alunos";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+        if($query->rowCount() > 0){
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return False;
+        }
+    }
+
+    public static function Inserir_dados_prova($dados){
+        $sql = "INSERT INTO gabarito_alunos
+        (aluno, ra, turma, id_prova, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas)
+        VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS)";
+    
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":ALUNO", $dados["aluno"]);
+        $query->bindValue(":RA", $dados["ra"]);
+        $query->bindValue(":TURMA", $dados["turma"]);
+        $query->bindValue(":ID_PROVA", $dados["id_prova"]);
+        $query->bindValue(":NOME_PROFESSOR", $dados["nome_professor"]);
+        $query->bindValue(":DESCRITORES", $dados["descritores"]);
+        $query->bindValue(":DISCIPLINA", $dados["disciplina"]);
+        $query->bindValue(":NOME_PROVA", $dados["nome_prova"]);
+        $query->bindValue(":PONTOS_PROVA", $dados["pontos_prova"]);
+        $query->bindValue(":QNT_PERGUNTAS", $dados["QNT_perguntas"]);
+        $query->bindValue(":DATA_ALUNO", $dados["data_aluno"]);
+        $query->bindValue(":ACERTOS", $dados["acertos"]);
+        $query->bindValue(":PONTOS_ALUNO", $dados["pontos_aluno"]);
+        $query->bindValue(":PERGUNTAS_CERTAS", $dados["perguntas_certas"]);
+        $query->bindValue(":DESCRITORES_CERTOS", $dados["descritores_certos"]);
+        $query->bindValue(":DESCRITORES_ERRADOS", $dados["descritores_errados"]);
+        $query->bindValue(":PERG_ERRADAS", $dados["perguntas_erradas"]);
+        $query->execute();
+    
+        return $query;
+    }
+
 }

@@ -31,6 +31,7 @@
     justify-content: center;
 }
 
+.PopUp-sobreposicao table,
 .aluno_inserir_gabarito table,
 .professor-inserir-gabarito table {
     border-collapse: collapse;

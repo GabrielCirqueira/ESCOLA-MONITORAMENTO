@@ -11,6 +11,9 @@
     #PopUp_PRF_NaoENC {
       display: none;
     }
+    #PopUp_inserir_prova {
+      display: none;
+    }
 
     #popup_not_turmas {
       display: none;

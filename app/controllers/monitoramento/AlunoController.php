@@ -35,7 +35,9 @@ class AlunoController
         if ($_SESSION["ALUNO"]) {
 
             $dados = AlunoModel::GetProvas();
+            $provas_feitas = AlunoModel::GetProvasFinalizadas();
             $provas_aluno = []; 
+            $provas_aluno_feitas = []; 
             if ($dados != null) {
                 foreach ($dados as $prova) {
                     if (strpos($prova["turmas"], ",")) {
@@ -55,8 +57,19 @@ class AlunoController
                 $provas_aluno = null;
             }
 
+            if($provas_aluno != null) {
+                foreach ($provas_feitas as $prova) {
+                    if ($prova["ra"] == $_SESSION["ra"]) {
+                        $provas_aluno_feitas[] = $prova;
+                    }
+                }
+            } else {
+                $provas_aluno_feitas = null;
+            }
+
             MainController::Templates("public/views/aluno/home.php", "ALUNO", [
-                "provas"            => $provas_aluno
+                "provas"            => $provas_aluno,
+                "provas_feitas"     => $provas_aluno_feitas
             ]);
         } else {
             header("location: home");
@@ -85,6 +98,7 @@ class AlunoController
             $gabarito_professor = explode(";",$_SESSION["prova_gabarito"]["gabarito"]); 
             $gabarito_aluno = [];
             $perguntas_certas = [];
+            $perguntas_erradas = [];
             $descritores_corretos = [];
             $descritores_errados = [];
             $acertos_aluno = 0; 
@@ -109,6 +123,7 @@ class AlunoController
                     $perguntas_certas[] = $gabarito_aluno[$contador];  
                 }else{
                     $descritores_errados[] = $descritor_questao[1];
+                    $perguntas_erradas[] = $gabarito_aluno[$contador];
                 }
 
                 $contador++;
@@ -134,13 +149,15 @@ class AlunoController
                 "acertos"               => $acertos_aluno,
                 "pontos_aluno"          => $pontos_aluno,
                 "perguntas_certas"      => implode(";",$perguntas_certas),
+                "perguntas_erradas"     => implode(";",$perguntas_erradas),
                 "descritores_certos"    => implode(";",$descritores_corretos),
                 "descritores_errados"   => implode(";",$descritores_errados)
             ];
 
-            echo "<pre>";
-            print_r($dados);
-            echo "<pre>";
+            if(AlunoModel::Inserir_dados_prova($dados)){
+                $_SESSION["PopUp_inserir_prova"] = True;
+                header("location:aluno_home");
+            }
     }
     else{
         header("location: home");

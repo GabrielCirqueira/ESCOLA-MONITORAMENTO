@@ -132,17 +132,23 @@ td {
   background-color: #1ac3d6;
   border-radius: 5px;
   border: none;
-  width: 70px;
+  width: 90px;
   height: 30px;
   font-weight: bold;
   font-size: 16px;
   color: black;
+  transition: 0.5s ease-in-out;
+}
+
+.button-ver-prova button:hover{
+  background-color: #1193a1;
+  cursor: pointer;
 }
 
 .prova-nome-disciplina{
   font-weight: bold;
   font-size: 15px;
-} 
+}
 
 .prova-nome-professor{
   font-weight: bold;
@@ -197,3 +203,9 @@ justify-content: center;
 flex-direction: column; 
 align-items: center;
 }
+
+ 
+    .alternativa-marcada {
+        background-color: #b1afaf; /* Cor cinza */
+    }
+ 
