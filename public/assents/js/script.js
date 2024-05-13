@@ -95,7 +95,7 @@ function carregarConteudo(arquivo) {
             });
         }
     });
-});
+}); 
  
 const menuBtn = document.getElementById("icone-menu-lateral")
 const menu = document.getElementById("area_menu_lateral")

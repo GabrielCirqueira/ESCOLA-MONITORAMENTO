@@ -19,6 +19,7 @@ if(!isset($_SESSION["PopUp_RA_NaoENC"])){
     $_SESSION["PopUp_inserir_turma"] = False;
     $_SESSION["PopUp_inserir_gabarito_professor"] = False;
     $_SESSION["PopUp_RA_NaoENC"] = False;
+    $_SESSION["popup_not_turmas"] = False;
     
     $_SESSION["GESTOR"] = False;
     $_SESSION["ALUNO"] = False;
@@ -34,6 +35,7 @@ $rotas = [
     "encerrar_sessao"           => MainController::class,
     "aluno_home"                => AlunoController::class,
     "login_aluno_entrar"        => AlunoController::class,
+    "cadastrar_gabarito_aluno"  => AlunoController::class,
     "gabarito_aluno"            => AlunoController::class,
     "login_gestor_verifica"     => GestorController::class,
     "gestor_home"               => GestorController::class,
@@ -72,6 +74,11 @@ if($_SESSION["PopUp_professor"] == True){
 if($_SESSION["PopUp_RA_NaoENC"] == True){
     echo "<script> Mostrar_PopUp('PopUp_RA_NaoENC')</script>";
     $_SESSION["PopUp_RA_NaoENC"] = False;
+}
+
+if($_SESSION["popup_not_turmas"] == True){
+    echo "<script> Mostrar_PopUp('popup_not_turmas')</script>";
+    $_SESSION["popup_not_turmas"] = False;
 }
 
 if($_SESSION["popup_not_gestor"] == True){

@@ -55,6 +55,26 @@ use PDO;
                     materia     varchar(255)                
                 );";
 
+            $gabarito_provas_alunos = "CREATE TABLE IF NOT EXISTS gabarito_alunos(
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    aluno VARCHAR(255),
+                    ra VARCHAR(255),
+                    turma VARCHAR(255),
+                    id_prova INT,
+                    nome_professor VARCHAR(255),
+                    descritores VARCHAR(255),
+                    disciplina VARCHAR(255),
+                    nome_prova VARCHAR(255),
+                    pontos_prova FLOAT,
+                    QNT_perguntas INT,
+                    data_aluno DATE,
+                    acertos INT,
+                    pontos_aluno FLOAT,
+                    perguntas_certas VARCHAR(255),
+                    descritores_certos VARCHAR(255),
+                    descritores_errados VARCHAR(255)
+                ";
+
             $gabarito_provas_professores = "CREATE TABLE IF NOT EXISTS gabarito_professores(
                 id              int AUTO_INCREMENT primary key,
                 nome_professor  varchar(255),
@@ -74,6 +94,7 @@ use PDO;
         self::GetInstance()->query($alunos);
         self::GetInstance()->query($descritores);
         self::GetInstance()->query($gabarito_provas_professores);
+        self::GetInstance()->query($gabarito_provas_alunos);
     }
 }
 

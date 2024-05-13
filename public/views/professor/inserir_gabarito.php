@@ -6,8 +6,20 @@
         <form action="criar_gabarito" method="post">
             <div class="nome_prova">
                 <label for="nome-prova">Insira o Nome da prova</label>
-                <input type="text" id="nome-prova" name="nome-prova">
+                <input type="text" required id="nome-prova" name="nome-prova">
             </div>
+
+            <div class="professor-descritores">
+                
+                <H3>DESCRITORES:</H3>
+
+                <div class="professor-descritores-marcar" >
+                    <div><input type="radio" required name="descritores" value="sim"><span>SIM</span></div>
+                    <div><input type="radio" required name="descritores" value="não"><span>NÃO</span></div>
+                </div>
+            </div>
+ 
+
             <div class="turmas-container">
                 <h3 class="professor-titulo-turno">TURMAS INTERMEDIÁRIO</h3>
                 <div class="professor-area-turmas">
@@ -43,27 +55,33 @@
                         $materias = explode(";",$_SESSION["disciplinas"]);
                         foreach ($materias as $materia) { ?>
                         <div>
-                            <input type="radio" name="Materias-professor-gabarito" value="<?php echo $materia?>"><span><?php echo $materia?></span>
+                            <input type="radio" name="Materias-professor-gabarito" required value="<?php echo $materia?>"><span><?php echo $materia?></span>
                             </div>
                         <?php }
                     }else{ ?>
                         <div>
-                        <input type="radio" name="Materias-professor-gabarito" value="<?php echo $_SESSION["disciplinas"]?>"><span><?php echo $_SESSION["disciplinas"]?></span>
+                        <input type="radio" name="Materias-professor-gabarito" required value="<?php echo $_SESSION["disciplinas"]?>"><span><?php echo $_SESSION["disciplinas"]?></span>
                         </div>
                     <?php }?>
                 </div>
             </div>
 
+
             <div class="professor-campos">
                 <div>
                     <label for="quantidade-perguntas">Quantidade de Questões:</label>
-                    <input name="qtn-perguntas" id="quantidade-perguntas" type="number">
+                    <input name="qtn-perguntas" required  id="quantidade-perguntas" type="number">
                 </div>
                 <div>
                     <label for="valor">Valor:</label>
-                    <input name="valor-prova" id="valor" type="number">
+                    <input name="valor-prova" required id="valor" type="number">
                 </div>
             </div>
+
+
+
+
+
             <center>
                 <input type="submit" value="Criar Gabarito" class="botao-form-enviar">
             </center>

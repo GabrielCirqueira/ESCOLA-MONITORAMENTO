@@ -42,6 +42,20 @@
         </div>
     </div>
 
+    <div id="popup_not_turmas" class="PopUp-sobreposicao">
+        <div class="conteudo-popup">
+            <h2>TURMAS NÃO SELECIONADAS!</h2>
+
+            <div class="uncheck">
+                <div class="linha-unchecked-1"></div>
+                <div class="linha-unchecked-2"></div>
+            </div>
+
+            <p>Por favor, insira pelo menos uma <br> 1 turma para proseeguir.</p>
+            <button onclick="Fechar_PopUp('popup_not_turmas')" class="Fechar-Popup">FECHAR</button>
+        </div>
+    </div>
+
     <div id="PopUp_add_professor_true" class="PopUp-sobreposicao">
         <div class="conteudo-popup">
             <h2>SUCESSO</h2>

@@ -163,3 +163,37 @@ td {
 .nao_tem_prova p{
   margin: 0px;
 }
+
+.aluno_inserir_gabarito span{
+    font-size: 27px;
+}
+
+.aluno_inserir_gabarito td div{
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+}
+
+ 
+.professor-descritores-marcar div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.professor-descritores-marcar{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+
+.professor-descritores{
+display: flex;
+justify-content: center; 
+flex-direction: column; 
+align-items: center;
+}

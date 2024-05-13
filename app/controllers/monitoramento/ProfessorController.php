@@ -51,12 +51,19 @@ class ProfessorController{
     }
 
     public static function criar_gabarito(){
+
+        if($_POST["gabarito-turmas"] == null){
+            $_SESSION["popup_not_turmas"] = True;
+            header("location: inserir_gabarito");
+            exit;
+        }
         
         $turmas = $_POST["gabarito-turmas"];
         $perguntas = $_POST["qtn-perguntas"];
         $valor = $_POST["valor-prova"];
         $nome = $_POST["nome-prova"];
         $materia = $_POST["Materias-professor-gabarito"];
+        $descritores = $_POST["descritores"]; 
 
         if($_SESSION["PROFESSOR"]){
             $turmas = $_POST["gabarito-turmas"];
@@ -68,7 +75,8 @@ class ProfessorController{
                 "perguntas"     => $perguntas,
                 "valor"         => $valor,
                 "nome_prova"    => $nome,
-                "materia"       => $materia
+                "materia"       => $materia,
+                "descritores"   => $descritores
             ];
             
             MainController::Templates("public/views/professor/criar_gabarito.php","PROFESSOR",$dados);
@@ -95,7 +103,12 @@ class ProfessorController{
             }
             
             $descritores = implode(";",$descritores_prova);
-            $gabarito = implode(";",$gabarito_prova); 
+
+            if($_POST["descritor"] == "não"){
+                $descritores = NULL;
+            }
+
+            $gabarito = implode(";",$gabarito_prova);
     
             $dados = [
                 "turmas"        => $_POST["turmas_gabarito"],

@@ -22,6 +22,8 @@
                 <input type="hidden" name="valor_prova" value="<?php echo $data["valor"]; ?>">
                 <input type="hidden" name="nome_prova" value="<?php echo $data["nome_prova"]; ?>">
                 <input type="hidden" name="materia_prova" value="<?php echo $data["materia"]; ?>">
+                <input type="hidden" name="descritor" value="<?php echo $data["descritores"]; ?>">
+
                 <table>
                     <?php $contador = 1;
                     while ($contador <= $data["perguntas"]) { ?>
@@ -29,12 +31,14 @@
                             <td>
                                 <span><?php echo $contador ?></span>
                             </td>
+                            <?php if($data["descritores"] == "sim"){  ?>
                             <td>
                                 <div class="campos-selecionar-descritores">
-                                    <input type="text" class="searchInput"   data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}"?>" placeholder="DESCRITOR">
+                                    <input type="text" class="searchInput" required data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}"?>" placeholder="DESCRITOR">
                                     <div class="descritoresContainer" data-index="<?php echo $contador ?>"></div>
                                 </div>
                             </td>
+                            <?php }?>
                             
                             <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},A"?>"><span>A</span></td>
                             <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},B"?>"><span>B</span></td>

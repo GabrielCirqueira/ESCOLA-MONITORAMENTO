@@ -1,4 +1,4 @@
-<main class="main-home-aluno">
+<main class="main-home-aluno height">
 <h2>Provas Pendentes</h2>
 
     <?php

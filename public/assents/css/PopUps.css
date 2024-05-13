@@ -12,6 +12,10 @@
       display: none;
     }
 
+    #popup_not_turmas {
+      display: none;
+    }
+
     #PopUp_add_professor_true {
       display: none;
     }

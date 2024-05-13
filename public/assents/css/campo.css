@@ -115,23 +115,26 @@
 }
 
 .nome_prova input[type="text"] {
-  width: 500px;
+  width: 400px;
   height: 30px;
   font-size: 17px;
   font-weight: bold;
 }
-
+.aluno_inserir_gabarito td,
+.aluno_inserir_gabarito tr,
 .professor-inserir-gabarito td,
 .professor-inserir-gabarito tr {
   border: 1px solid black;
   padding: 5px;
 }
 
+.professor-descritores input[type="radio"],
+.aluno_inserir_gabarito input[type="radio"],
 .professor-area-disciplinas input[type="radio"],
 .professor-inserir-gabarito input[type="radio"] {
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   border: 2px solid;
   outline: none;
@@ -149,6 +152,8 @@
   outline: none;
 }
 
+.professor-descritores input[type="radio"]:checked,
+.aluno_inserir_gabarito input[type="radio"]:checked,
 .professor-area-disciplinas input[type="radio"]:checked,
 .professor-inserir-gabarito input[type="radio"]:checked {
   background-color: #399ff3;
