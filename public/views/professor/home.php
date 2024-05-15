@@ -1,18 +1,25 @@
-<main class="main-home-professor">
+<main class="main-home-professor height gray">
+    <br><br>
+    <center>
+        <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1> 
+    </center>
+    <br><br>
     <section>
-        <div class="dados-professor">
-            <h1>DADOS DO PROFESSOR</h1>
-            <h3>Nome:</h3>
-            <?php echo $data["nome"] ?></span>
-            <h3>Disciplina(s)</h3>
-            <?php echo str_replace(";", "<br>", $data["disciplinas"]) ?></span>
-            <br>
-            <br>
-        </div>
 
-        <a href="inserir_gabarito" class="btn-home-professor">INSERIR GABARITO</a> <br>
-        <a href="ver_gabarito" class="btn-home-professor">VER RELATÓRIO</a>
-            <br><br><br><br>
-        <br><br><br><br> 
+
+        <a href="inserir_gabarito" class="btn-home-professor">
+            <i class="fas fa-pencil-alt fa-3x"></i>
+            <h3>INSERIR GABARITO</h3>
+        </a>
+        <a href="ver_provas" class="btn-home-professor">
+            <i class="fas fa-file-alt fa-3x"></i>
+            <h3>PROVAS LANÇADAS</h3>
+        </a>
+        <a href="ver_provas" class="btn-home-professor">
+            <i class="fas fa-chart-bar fa-3x"></i>
+            <h3>VER RELATÓRIOS</h3>
+        </a>
+        <br>
     </section>
+    <br>
 </main>

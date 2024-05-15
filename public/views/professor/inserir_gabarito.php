@@ -1,6 +1,8 @@
 <main class="main-home-professor">
-    <section>
-        <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
+    <center>
+    <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
+
+    </center>
         <h2>INSERIR GABARITO</h2>
 
         <form action="criar_gabarito" method="post">
@@ -91,5 +93,4 @@
             <br><br><br>
             <br><br><br>
         </form>
-    </section>
 </main>

@@ -1,5 +1,9 @@
 @media (max-width: 500px) {
 
+    .main-home-professor section { 
+        flex-direction: column; 
+    }
+
     .main {
         flex: 1 1 0;
         display: flex;

@@ -47,6 +47,7 @@ $rotas = [
     "home_professor"            => ProfessorController::class,
     "professor_home"            => ProfessorController::class,
     "inserir_gabarito"          => ProfessorController::class,
+    "ver_provas"                => ProfessorController::class,
     "criar_gabarito"            => ProfessorController::class,
     "criar_gabarito_respostas"  => ProfessorController::class
 ];

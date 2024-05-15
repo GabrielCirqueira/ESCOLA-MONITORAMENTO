@@ -131,4 +131,10 @@ class ProfessorController{
             header("location: home");
         }
     }
+
+    public static function ver_provas(){
+        if($_SESSION["PROFESSOR"]){
+            
+        }
+    }
 }
