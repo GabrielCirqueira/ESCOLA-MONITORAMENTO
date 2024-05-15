@@ -57,7 +57,7 @@ class AlunoController
                 $provas_aluno = null;
             }
 
-            if($provas_aluno != null) {
+            if($provas_feitas != null) {
                 foreach ($provas_feitas as $prova) {
                     if ($prova["ra"] == $_SESSION["ra"]) {
                         $provas_aluno_feitas[] = $prova;

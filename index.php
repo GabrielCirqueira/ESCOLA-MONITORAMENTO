@@ -9,7 +9,7 @@ use app\controllers\monitoramento\AlunoController;
 
 session_start();
 
-if(!isset($_SESSION["PopUp_RA_NaoENC"])){
+if(!isset($_SESSION["PopUp_inserir_prova"])){
 
     $_SESSION["PopUp_professor"] = False;
     $_SESSION["popup_not_gestor"] = False;
@@ -20,6 +20,7 @@ if(!isset($_SESSION["PopUp_RA_NaoENC"])){
     $_SESSION["PopUp_inserir_gabarito_professor"] = False;
     $_SESSION["PopUp_RA_NaoENC"] = False;
     $_SESSION["popup_not_turmas"] = False;
+    $_SESSION["PopUp_inserir_prova"] = False;
     
     $_SESSION["GESTOR"] = False;
     $_SESSION["ALUNO"] = False;

@@ -208,6 +208,17 @@ align-items: center;
     .alternativa-marcada {
         background-color: #b1afaf; /* Cor cinza */
     }
+
+    .alternativa-marcada-true{
+      background-color: #07c968cf; /* Cor cinza */
+
+    }
+
+    
+    .alternativa-marcada-false{
+      background-color: #bf2e2ec8; /* Cor cinza */
+
+    }
  
 
 .gray{

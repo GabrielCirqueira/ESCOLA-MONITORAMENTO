@@ -1,5 +1,4 @@
-<main class="main-home-professor">
-    <section>
+<main class="main-home-professor"> 
         <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
         <h2>GABARITO</h2>
 
@@ -59,6 +58,5 @@
             <br><br><br>
             <br><br><br>
             <br><br><br>
-            <br><br><br>
-    </section>
+            <br><br><br> 
 </main>
