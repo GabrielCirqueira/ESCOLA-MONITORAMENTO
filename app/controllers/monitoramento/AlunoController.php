@@ -99,6 +99,7 @@ class AlunoController
             $gabarito_aluno = [];
             $perguntas_certas = [];
             $perguntas_erradas = [];
+            $perguntas_respostas = [];
             $descritores_corretos = [];
             $descritores_errados = [];
             $acertos_aluno = 0; 
@@ -121,8 +122,10 @@ class AlunoController
                     $descritores_corretos[] = $descritor_questao[1];
                     $acertos_aluno++;
                     $perguntas_certas[] = $gabarito_aluno[$contador];  
+                    $perguntas_respostas[] = $gabarito_aluno[$contador];  
                 }else{
                     $descritores_errados[] = $descritor_questao[1];
+                    $perguntas_respostas[] = $gabarito_aluno[$contador];  
                     $perguntas_erradas[] = $gabarito_aluno[$contador];
                 }
 
@@ -149,6 +152,7 @@ class AlunoController
                 "acertos"               => $acertos_aluno,
                 "pontos_aluno"          => $pontos_aluno,
                 "perguntas_certas"      => implode(";",$perguntas_certas),
+                "perguntas_respostas"   => implode(";",$perguntas_respostas),
                 "perguntas_erradas"     => implode(";",$perguntas_erradas),
                 "descritores_certos"    => implode(";",$descritores_corretos),
                 "descritores_errados"   => implode(";",$descritores_errados)

@@ -210,10 +210,23 @@ align-items: center;
     }
 
     .alternativa-marcada-true{
-      background-color: #07c968cf; /* Cor cinza */
+      background-color: #04a756cf; /* Cor cinza */
 
     }
 
+    .alternativa-marcada-true-gray{
+      background-color: #00ff804a; /* Cor cinza */
+
+    }
+
+    .numero{
+      background-color: #f6e200b6; /* Cor cinza */
+      font-size: 17px;
+      width: 30px;
+      font-weight: bold;
+
+    }
+ 
     
     .alternativa-marcada-false{
       background-color: #bf2e2ec8; /* Cor cinza */

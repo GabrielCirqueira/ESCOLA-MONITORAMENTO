@@ -107,12 +107,12 @@
                     </div>
 
                     <div class="button-ver-prova">
-                        <button onclick="Mostrar_PopUp('popup-prova-<?= $prova['id'] ?>')">Resultado</button>
+                        <button onclick="Mostrar_PopUp('popup-gabarito-<?= $prova['id'] ?>')">Resultado</button>
                     </div>
                 </div>
             </div><br>
 
-            <div style="display: none;" id="popup-prova-<?= $prova["id"] ?>" class="PopUp-sobreposicao">
+            <div style="display: none;" id="popup-gabarito-<?= $prova["id"] ?>" class="PopUp-sobreposicao">
                 <div class="conteudo-popup">
                     <h2> <?= $prova["nome_prova"] ?> </h2>
 
@@ -123,52 +123,72 @@
                         <?php
                         $contador = 1;
                         $alternativas = ["A", "B", "C", "D", "E"];
+                        $gabarito_professor = [];
+                        $gabarito_aluno = [];
+
+                        foreach ($data["provas"] as $P) {
+                            if ($P["id"] == $prova["id_prova"]) {
+                                foreach (explode(";", $P["gabarito"]) as $gabarito) {
+                                    list($questao, $resposta) = explode(",", $gabarito);
+                                    $gabarito_professor[$questao] = $resposta;
+                                    $liberado = $P["liberado"];
+                                }
+                            }
+                        }
+
+                        foreach (explode(";", $prova["perguntas_respostas"]) as $resposta) {
+                            list($questao, $resposta) = explode(",", $resposta);
+                            $gabarito_aluno[$questao] = $resposta;
+                        }
+
                         while ($contador <= $prova["QNT_perguntas"]) { ?>
                             <tr>
-                                <td><?= $contador ?></td>
+                                <td class="numero"><?= $contador ?></td>
                                 <?php
                                 $contador2 = 0;
-                                $gabarito_aluno_tudo = array_merge(explode(";", $prova["perguntas_certas"]), explode(";", $prova["perguntas_erradas"]));
+                                $resposta_correta = $gabarito_professor[$contador];
+                                $resposta_aluno = $gabarito_aluno[$contador];
 
-                                while ($contador2 < 5) {
-                                    $classe = "";
-                                    
-                                    $pergunta_respota = explode(",", $gabarito_aluno_tudo[$contador - 1]); 
-                                    if ($prova["perguntas_certas"] != null) {
-                                        if ($pergunta_respota[1] == $alternativas[$contador2]) {
-                                            $classe = "alternativa-marcada-false";
+                                if ($liberado != null) {
+                                    while ($contador2 < 5) {
+                                        $alternativa_atual = $alternativas[$contador2];
+                                        $classe = "";
 
-                                            foreach ($data["provas"] as $prov) {
-                                                if ($prov["id"] == $prova["id_prova"]) {
-                                                    $gabarito_aluno_certas = explode(";", $prova["perguntas_certas"]);
-
-                                                    foreach ($gabarito_aluno_certas as $pergunta) {
-                                                        if (strpos($pergunta, $contador) !== false) {
-                                                            if (!strpos($pergunta, $prov["gabarito"])) {
-                                                                $classe = "alternativa-marcada-true";
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
+                                        if ($resposta_aluno == $alternativa_atual) {
+                                            $classe = ($resposta_aluno == $resposta_correta) ? "alternativa-marcada-true" : "alternativa-marcada-false";
+                                        } elseif ($resposta_correta == $alternativa_atual && $resposta_aluno != $resposta_correta) {
+                                            $classe = "alternativa-marcada-true-gray";
                                         }
-                                    }else {
-                                        $classe = "alternativa-marcada-false";
+
+                                        echo "<td class='{$classe}'>{$alternativa_atual}</td>";
+
+                                        $contador2++;
                                     }
+                                } else {
+                                    while ($contador2 < 5) {
+                                        $alternativa_atual = $alternativas[$contador2];
+                                        $classe = "";
 
-                                    echo "<td class='{$classe}' >{$alternativas[$contador2]}</td>";
+                                        if ($resposta_aluno == $alternativa_atual) {
+                                            $classe = "alternativa-marcada";
+                                        }
 
-                                    $contador2++;
+                                        echo "<td class='{$classe}'>{$alternativa_atual}</td>";
+
+                                        $contador2++;
+                                    }
                                 }
                                 ?>
                             </tr>
                             <?php $contador++;
                         } ?>
-
-
                     </table>
 
-                    <button onclick="Fechar_PopUp('popup-prova-<?= $prova['id'] ?>')" class="Fechar-Popup">FECHAR</button>
+                    <?php if ($liberado == null) {
+                        echo "<h5>O PROFESSOR AINDA NÃO LIBEROU O ACESSO AS RESPOSTAS!</h5>";
+                    } ?>
+
+                    <button onclick="Fechar_PopUp('popup-gabarito-<?= $prova['id'] ?>')" class="Fechar-Popup">FECHAR</button>
                 </div>
             </div>
 

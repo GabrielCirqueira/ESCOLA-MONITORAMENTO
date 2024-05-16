@@ -70,6 +70,7 @@ use PDO;
                     data_aluno DATE,
                     acertos INT,
                     pontos_aluno FLOAT,
+                    perguntas_respostas VARCHAR(255),
                     perguntas_certas VARCHAR(255),
                     perguntas_erradas VARCHAR(255),
                     descritores_certos VARCHAR(255),
