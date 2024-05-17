@@ -72,7 +72,7 @@
               foreach ($materias as $materia) { ?>
               <span><?= $materia ?> <br> </span>
               <?php }}else{?>
-                <span><?= $materia ?></span>
+                <span><?= $_SESSION["disciplinas"] ?></span>
               <?php }?>
           </span>
           <hr>

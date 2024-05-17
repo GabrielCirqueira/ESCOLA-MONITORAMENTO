@@ -8,7 +8,7 @@
         <form action="criar_gabarito" method="post">
             <div class="nome_prova">
                 <label for="nome-prova">Insira o Nome da prova</label>
-                <input type="text" required id="nome-prova" name="nome-prova">
+                <input type="text" maxlength="25" required id="nome-prova" name="nome-prova">
             </div>
 
             <div class="professor-descritores">

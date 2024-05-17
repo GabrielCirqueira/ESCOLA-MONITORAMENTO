@@ -3,6 +3,7 @@
 namespace app\controllers\monitoramento;
 
 use app\models\monitoramento\ProfessorModel;
+use app\models\monitoramento\AlunoModel;
 use app\controllers\monitoramento\MainController;
 use DateTime;
 
@@ -133,8 +134,68 @@ class ProfessorController{
     }
 
     public static function ver_provas(){
+
         if($_SESSION["PROFESSOR"]){
-            
+            $provas_professores = AlunoModel::GetProvas();
+            $provas_alunos = AlunoModel::GetProvasFinalizadas();
+            $provas = []; 
+            foreach($provas_professores as $professor){
+                if($professor["nome_professor"] == $_SESSION["nome_professor"]){
+                    $provas[] = $professor; 
+                }
+            }
+            $dados = [ 
+                "provas"        => $provas,
+                "provas_alunos" => $provas_alunos
+            ];
+            MainController::Templates("public/views/professor/provas.php","PROFESSOR",$dados);
+
         }
     }
+
+    public static function prova(){
+        if($_SESSION["PROFESSOR"]){
+            $provas_professores = AlunoModel::GetProvas();
+            $provas_alunos = AlunoModel::GetProvasFinalizadas();
+            $id_prova = $_POST["id-prova"] ;
+            $provas = [];
+            $provas_turma = [];
+            
+            foreach($provas_professores as $prova){
+                if($prova["id"] == $id_prova){
+                    $turmas  = $prova["turmas"];
+                } 
+            }
+            
+            foreach($provas_alunos as $prova){
+                if($prova["id_prova"] == $id_prova){
+                    $provas[] = $prova;
+                } 
+            }
+
+            $turma = explode(",", $turmas) ;
+            $turma = $turma[0]; 
+
+            if(isset($_POST["turma"])){
+                $turma = $_POST["turma"];
+      
+            }
+            
+            foreach($provas as $prova){
+                if($prova["turma"] == $turma){
+                    $provas_turma[] = $prova;
+                }
+            }
+
+            $dados = [
+                "provas" => $provas,
+                "turmas" => explode(",", $turmas),
+                "turma" => $turma,
+                "provas_turma" => $provas_turma
+            ];
+
+            MainController::Templates("public/views/professor/prova.php","PROFESSOR",$dados);
+        }
+    }
+    
 }

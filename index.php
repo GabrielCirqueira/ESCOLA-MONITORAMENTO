@@ -49,6 +49,7 @@ $rotas = [
     "professor_home"            => ProfessorController::class,
     "inserir_gabarito"          => ProfessorController::class,
     "ver_provas"                => ProfessorController::class,
+    "prova"                     => ProfessorController::class,
     "criar_gabarito"            => ProfessorController::class,
     "criar_gabarito_respostas"  => ProfessorController::class
 ];
@@ -66,7 +67,7 @@ if(array_key_exists($action, $rotas)) {
     $controller::$method();
 } else{
     MainController::index();
-}
+} 
 
 if($_SESSION["PopUp_professor"] == True){
     echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";

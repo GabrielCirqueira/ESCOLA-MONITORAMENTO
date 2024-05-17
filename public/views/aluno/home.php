@@ -28,12 +28,14 @@
                         <i class="fas fa-exclamation-triangle fa-4x" style="color: #EFCC00;"></i>
 
                         <div class="prova-detalhes">
+                            <center>
                             <span class="prova-nome-disciplina">
                                 <?= $prova["disciplina"] ?>
                             </span> <br>
                             <span class="prova-nome-professor">
                                 <?= $prova["nome_professor"] ?>
                             </span>
+                            </center>
                         </div>
 
                         <div class="button-ver-prova">
@@ -116,8 +118,7 @@
                 <div class="conteudo-popup">
                     <h2> <?= $prova["nome_prova"] ?> </h2>
 
-                    <span><b>VALOR DA PROVA:</b> <?= $prova["pontos_prova"] ?></span><br>
-                    <span><b>VALOR OBTIDO:</b> <?= $prova["pontos_aluno"] ?></span><br>
+
 
                     <table>
                         <?php
@@ -186,6 +187,10 @@
 
                     <?php if ($liberado == null) {
                         echo "<h5>O PROFESSOR AINDA NÃO LIBEROU O ACESSO AS RESPOSTAS!</h5>";
+                    }else{?>
+                                        <span><b>VALOR DA PROVA:</b> <?= $prova["pontos_prova"] ?></span> 
+                    <span><b>VALOR OBTIDO:</b> <?= $prova["pontos_aluno"] ?></span> 
+                        <?php
                     } ?>
 
                     <button onclick="Fechar_PopUp('popup-gabarito-<?= $prova['id'] ?>')" class="Fechar-Popup">FECHAR</button>
