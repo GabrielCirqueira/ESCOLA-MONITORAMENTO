@@ -71,4 +71,6 @@ class AlunoModel{
         return $query;
     }
 
+
+
 }

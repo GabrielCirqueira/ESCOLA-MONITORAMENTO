@@ -152,50 +152,63 @@ class ProfessorController{
 
         }
     }
-
-    public static function prova(){
-        if($_SESSION["PROFESSOR"]){
+    public static function prova() {
+        if ($_SESSION["PROFESSOR"]) {
             $provas_professores = AlunoModel::GetProvas();
             $provas_alunos = AlunoModel::GetProvasFinalizadas();
-            $id_prova = $_POST["id-prova"] ;
+            $id_prova = $_POST["id-prova"];
             $provas = [];
             $provas_turma = [];
-            
-            foreach($provas_professores as $prova){
-                if($prova["id"] == $id_prova){
-                    $turmas  = $prova["turmas"];
-                } 
+            $liberado = false;
+    
+            foreach ($provas_professores as $prova) {
+                if ($prova["id"] == $id_prova) {
+                    $turmas = $prova["turmas"];
+                    $nome_prova = $prova["nome_prova"];
+                    $liberado = $prova["liberado"] == "SIM" ? true : false;
+                }
             }
-            
-            foreach($provas_alunos as $prova){
-                if($prova["id_prova"] == $id_prova){
+    
+            foreach ($provas_alunos as $prova) {
+                if ($prova["id_prova"] == $id_prova) {
                     $provas[] = $prova;
-                } 
+                }
             }
-
-            $turma = explode(",", $turmas) ;
-            $turma = $turma[0]; 
-
-            if(isset($_POST["turma"])){
+    
+            $turma = explode(",", $turmas);
+            $turma = $turma[0];
+    
+            if (isset($_POST["turma"])) {
                 $turma = $_POST["turma"];
-      
             }
-            
-            foreach($provas as $prova){
-                if($prova["turma"] == $turma){
+    
+            if (isset($_POST["liberar_provas"])){ 
+                if($_POST["liberar_provas"] == "on"){
+                    $estado = null;
+                }else{
+                    $estado = "SIM";
+                }
+                ProfessorModel::alterar_liberado($id_prova, $estado);
+            }
+    
+            foreach ($provas as $prova) {
+                if ($prova["turma"] == $turma) {
                     $provas_turma[] = $prova;
                 }
             }
-
+    
             $dados = [
                 "provas" => $provas,
                 "turmas" => explode(",", $turmas),
                 "turma" => $turma,
-                "provas_turma" => $provas_turma
+                "provas_turma" => $provas_turma,
+                "liberado" => $liberado,
+                "nome_prova" => $nome_prova
             ];
-
-            MainController::Templates("public/views/professor/prova.php","PROFESSOR",$dados);
+    
+            MainController::Templates("public/views/professor/prova.php", "PROFESSOR", $dados);
         }
     }
+    
     
 }

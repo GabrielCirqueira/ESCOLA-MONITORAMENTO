@@ -7,8 +7,8 @@
   <link rel="shortcut icon" href="public/assents/img/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="public/assents/css/style.css?v=1.1">
 
-  <script src="https://kit.fontawesome.com/bf7e05c402.js" crossorigin="anonymous"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://kit.fontawesome.com/bf7e05c402.js" crossorigin="anonymous"></script> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

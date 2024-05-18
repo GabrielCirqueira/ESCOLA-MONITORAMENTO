@@ -117,3 +117,9 @@ menuBtn.addEventListener('click', function() {
     menu.style.backgroundColor = "rgba(0, 0, 0, 0.507)"
     menu_conteudo.style.right = '0px'
 })
+
+$(document).ready(function() {
+    $('#toggle').change(function() {
+        $(this).closest('form').submit();
+    });
+});

@@ -237,3 +237,104 @@ align-items: center;
 .gray{
   background-color: #c7c7c75b;
 }
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.button-professor-turma{
+  height: 40px;
+  margin: 5px;
+  width: 150px;
+  background-color: #21b1f3;
+  border: none;
+  transition: 0.6s;
+  border-radius: 2px;
+}
+
+.button-professor-turma:hover{ 
+  background-color: #168ec5;
+  cursor: pointer;
+}
+
+.tabela-prova-aluno {
+  width: 70%;
+  border-collapse: collapse;
+}
+
+.tabela-prova-aluno th,
+.tabela-prova-aluno td {
+  padding: 8px;
+  border: 1px solid #c4c4c4;
+  text-align: left;
+}
+
+.tabela-prova-aluno th {
+  background-color: #d3d3d3;
+  font-weight: bold;
+}
+ 
+
+.tabela-prova-aluno tr:nth-child(even) {
+  background-color: #e7e7e7;
+}
+
+.tabela-prova-aluno tr:hover {
+  background-color: #bcfbff;
+}
