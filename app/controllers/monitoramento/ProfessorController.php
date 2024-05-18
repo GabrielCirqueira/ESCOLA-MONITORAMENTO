@@ -178,17 +178,12 @@ class ProfessorController{
             $turma = explode(",", $turmas);
             $turma = $turma[0];
     
-            if (isset($_POST["turma"])) {
-                $turma = $_POST["turma"];
-            }
-    
-            if (isset($_POST["liberar_provas"])){ 
-                if($_POST["liberar_provas"] == "on"){
-                    $estado = null;
+            if (isset($_POST["status"])) {
+                if($_POST["status"] == "sim") {
+                    ProfessorModel::alterar_liberado($id_prova,"SIM"); 
                 }else{
-                    $estado = "SIM";
+                    ProfessorModel::alterar_liberado($id_prova,null);  
                 }
-                ProfessorModel::alterar_liberado($id_prova, $estado);
             }
     
             foreach ($provas as $prova) {

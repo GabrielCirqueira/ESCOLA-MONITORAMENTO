@@ -5,7 +5,21 @@
     </center>
 
     <form method="post" action="">
-        
+    <center>
+    <div class="alternar-liberar-gabarito" >
+        <span>Aluno pode ver o resultado?</span>
+    <?php if($data["liberado"] == "SIM"){ ?>
+
+    <button type="submit" name="status" value="sim" class="button-prova-liberado" style="background-color: aqua;" >SIM</button>
+    <button type="submit" name="status" value="não" class="button-prova-liberado" >NÃO</button>
+    <?php } else{ ?>
+        <button type="submit" name="status" value="sim" class="button-prova-liberado" >SIM</button>
+    <button type="submit" name="status" value="não" class="button-prova-liberado" style="background-color: aqua;"  >NÃO</button>
+
+    <?php } ?>
+    </div>
+    </center> <br>
+
     <!-- <label class="switch">
         <input type="checkbox" name="liberar_provas" <?php // echo $data["liberado"] ? "checked" : ""?> id="toggle">
         <span class="slider round"></span>
