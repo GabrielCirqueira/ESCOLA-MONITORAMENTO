@@ -1,4 +1,4 @@
-<main class="main-home-professor " >
+<main class="main-home-professor height" >
     <center>
 
 <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
@@ -18,9 +18,9 @@ foreach($data["provas"] as $prova){
 
 
 <div class="prova-pendente">
-                    <div class="linha-vertical-campo-prova" style="background-color: #04C636;" ></div>
+                    <div class="linha-vertical-campo-prova" style="background-color: #eb7134;" ></div>
                     <div class="conteudo-prova">
-                        <i class="fas fa-file-alt fa-4x" style="color: #04C636;"></i>
+                        <i class="fas fa-chart-bar fa-4x" style="color: #eb7134;"></i>
 
                         <div class="prova-detalhes">
                             <center>
@@ -30,28 +30,18 @@ foreach($data["provas"] as $prova){
                             </span> <br>
                             <span class="prova-nome-disciplina">
                             <?= $prova["data_prova"] ?>
-                            </span> <br>
-                            <span class="prova-nome-professor">
-                                <?= $contador ?> aluno(s) Fizeram a prova.
-                            </span>
+                            </span> <br> 
                             </center>
                         </div>
  
                         
-                        <form method="post" action="prova">
-                            <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-form-enviar">Ver</button>
+                        <form method="post" action="relatorio_prova">
+                            <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-form-enviar">Relatorio</button>
                         </form>
                     </div>
                 </div><br>
 
 <?php }?>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  
 
 </main>

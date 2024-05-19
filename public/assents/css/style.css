@@ -350,4 +350,25 @@ input:checked + .slider:before {
   cursor: pointer;
 }
 
- 
+.animated-circle {
+  transition: stroke-dashoffset 2s ease-out;
+}
+
+.graficos-professor-rosca{
+  display: flex;
+  gap: 20px;
+}
+
+.graficos-professor-rosca div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.graficos-professor-rosca svg{
+  width: 200px;
+  height: 200px;
+}

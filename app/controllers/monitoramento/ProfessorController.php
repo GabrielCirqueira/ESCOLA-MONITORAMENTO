@@ -185,7 +185,11 @@ class ProfessorController{
                     ProfessorModel::alterar_liberado($id_prova,null);  
                 }
             }
-    
+            if (isset($_POST["turma"])) {
+                $turma = $_POST["turma"];
+
+            }
+
             foreach ($provas as $prova) {
                 if ($prova["turma"] == $turma) {
                     $provas_turma[] = $prova;
@@ -205,5 +209,77 @@ class ProfessorController{
         }
     }
     
+    public static function relatorio_professor(){
+        $provas_professores = AlunoModel::GetProvas();
+        $provas_alunos = AlunoModel::GetProvasFinalizadas();
+        $provas = []; 
+        foreach($provas_professores as $professor){
+            if($professor["nome_professor"] == $_SESSION["nome_professor"]){
+                $provas[] = $professor; 
+            }
+        }
+        $dados = [ 
+            "provas"        => $provas,
+            "provas_alunos" => $provas_alunos
+        ];
+        
+        MainController::Templates("public/views/professor/provas_relatorios.php", "PROFESSOR", $dados);
+    }
+
+    public static function relatorio_prova(){
+        $id_prova = $_POST["id-prova"];
+        $provas = AlunoModel::GetProvasFinalizadas();
+        $provas_professores = AlunoModel::GetProvas();
+        $dados_turmas = [] ;
+
+        foreach($provas_professores as $professor){
+            if($professor["id"] == $id_prova){
+                $turmas = explode(",", $professor["turmas"]); 
+                $nome_prova = $professor["nome_prova"];	
+            }
+        }
+
+        $alunos_por_turma = array();
+
+        foreach ($provas as $prova) {
+            if ($prova["id_prova"] == $id_prova) {
+                $turma_prova = $prova["turma"];
+                if (!isset($alunos_por_turma[$turma_prova])) {
+                    $alunos_por_turma[$turma_prova] = array();
+                }
+                $alunos_por_turma[$turma_prova][] = $prova;
+            }
+        }
+
+        foreach($alunos_por_turma as $turma){
+            $pontos = 0;
+            $alunos = 0;
+            foreach($turma as $aluno){
+                $pontos += $aluno["pontos_aluno"];
+                $alunos++;
+                $turma_nome = $aluno["turma"];
+                $pontos_prova = $aluno["pontos_prova"];
+            }
+            $porcentagem = number_format((($pontos / $alunos ) / $pontos_prova) * 100,0);
+
+            $dados_turmas[$turma_nome] = [
+                "total_pontos_turma" => $pontos,
+                "alunos" => $alunos,
+                "pontos_prova" => $pontos_prova,
+                "porcentagem" => $porcentagem,
+                "turma_nome"    => $turma_nome, 
+                "grafico"     => MainController::gerarGraficoRosca($porcentagem)
+            ];
+        } 
+
+        $dados = [
+            "dados_turma" => $dados_turmas,
+            "nome_prova"  => $nome_prova
+        ] ;
+
+        MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);
+
+
+    }
     
 }

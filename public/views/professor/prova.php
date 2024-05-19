@@ -1,4 +1,4 @@
-<main class="main-home-professor height">
+<main class="main-home-professor">
     <center>
         <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1> 
         <h2>  <?= $data["nome_prova"] ?></h2>
@@ -62,5 +62,12 @@
             ?>
         </tbody>
     </table>
-
+    <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 </main>

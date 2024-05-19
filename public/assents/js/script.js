@@ -118,8 +118,10 @@ menuBtn.addEventListener('click', function() {
     menu_conteudo.style.right = '0px'
 })
 
-$(document).ready(function() {
-    $('#toggle').change(function() {
-        $(this).closest('form').submit();
+document.addEventListener("DOMContentLoaded", function() {
+    const circles = document.querySelectorAll('.animated-circle');
+    circles.forEach(circle => {
+        const offset = circle.getAttribute('data-offset');
+        circle.style.strokeDashoffset = offset;
     });
 });
