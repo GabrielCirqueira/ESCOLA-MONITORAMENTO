@@ -65,6 +65,7 @@
             }
         } ?>
     </div>
+    <h3>Nivel de Proeficiência</h3>
 
     <?= $data["grafico_colunas"]?>
 <br><br>
@@ -105,7 +106,7 @@
             }
         } ?>
     </div>
-
+        <h3>Nivel de Proeficiência</h3>
     <?= $data["dados_turma_grafico"]["grafico_coluna"]?>    
 <?php }?>
 </main>
