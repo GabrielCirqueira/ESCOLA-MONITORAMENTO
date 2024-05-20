@@ -116,20 +116,27 @@ class AlunoController
 
             $contador = 0;
 
-            while($contador < $_SESSION["prova_gabarito"]["QNT_perguntas"]){
-                $descritor_questao = explode(",",$descritores_questoes[$contador]);
+            while($contador < $_SESSION["prova_gabarito"]["QNT_perguntas"]){ 
                 if($gabarito_aluno[$contador] == $gabarito_professor[$contador]){
-                    $descritores_corretos[] = $descritor_questao[1];
+                    $descritores_corretos[] = $descritores_questoes[$contador];
                     $acertos_aluno++;
                     $perguntas_certas[] = $gabarito_aluno[$contador];  
                     $perguntas_respostas[] = $gabarito_aluno[$contador];  
                 }else{
-                    $descritores_errados[] = $descritor_questao[1];
+                    $descritores_errados[] = $descritores_questoes[$contador];
                     $perguntas_respostas[] = $gabarito_aluno[$contador];  
                     $perguntas_erradas[] = $gabarito_aluno[$contador];
                 }
 
                 $contador++;
+            }
+
+            if($_SESSION["prova_gabarito"]["id"] == NULL){
+                $descritores_corretos = NULL;
+                $descritores_errados = NULL;
+            }else{
+                $descritores_corretos = implode(";", $descritores_corretos);
+                $descritores_errados = implode(";", $descritores_errados);
             }
 
             $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
@@ -154,8 +161,8 @@ class AlunoController
                 "perguntas_certas"      => implode(";",$perguntas_certas),
                 "perguntas_respostas"   => implode(";",$perguntas_respostas),
                 "perguntas_erradas"     => implode(";",$perguntas_erradas),
-                "descritores_certos"    => implode(";",$descritores_corretos),
-                "descritores_errados"   => implode(";",$descritores_errados)
+                "descritores_certos"    => $descritores_corretos,
+                "descritores_errados"   => $descritores_errados
             ];
 
             if(AlunoModel::Inserir_dados_prova($dados)){

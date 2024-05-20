@@ -71,6 +71,12 @@ class AlunoModel{
         return $query;
     }
 
-
-
+    public static function GetProvasbyID($id){
+        $sql = "SELECT * FROM gabarito_alunos WHERE id_prova = :id";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":ID", $id);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+ 
 }

@@ -369,6 +369,44 @@ input:checked + .slider:before {
 }
 
 .graficos-professor-rosca svg{
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
+}
+
+.professor-grafico-geral-60{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.professor-grafico-geral-60 hr{
+  height: 150px;
+}
+
+.area-graficos-descritores{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.area-graficos-descritores div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.buttons-professor form{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.graficos-professor-rosca{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
 }

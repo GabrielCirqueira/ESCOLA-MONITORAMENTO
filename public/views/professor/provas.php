@@ -5,12 +5,24 @@
         <h2>PROVAS - <?= $_SESSION["nome_professor"]?></h2>
     </center>
 <br>
-<?php 
+<?php
+$status = false;
 foreach($data["provas"] as $prova){ 
     $contador = 0;
+    if($data["provas_alunos"] != null){ 
+    
     foreach($data["provas_alunos"] as $P_aluno){
         if($P_aluno["id_prova"] == $prova["id"]){
             $contador++;
+        }
+    }
+}
+
+    if($data["provas_alunos"] != null){ 
+        foreach($data["provas_alunos"] as $prova_aluno){
+            if($prova_aluno["id_prova"] == $prova["id"]){
+                $status = true;
+            }
         }
     }
     
@@ -36,11 +48,15 @@ foreach($data["provas"] as $prova){
                             </span>
                             </center>
                         </div>
- 
-                        
-                        <form method="post" action="prova">
+  
+
+                        <?php if($status == true){?>
+                <form method="post" action="prova">
                             <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-form-enviar">Ver</button>
-                        </form>
+                </form>
+                <?php }else{?>
+                    <button class="botao-form-enviar">SEM DADOS</button>
+                <?php }?>
                     </div>
                 </div><br>
 

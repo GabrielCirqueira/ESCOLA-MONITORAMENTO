@@ -51,11 +51,33 @@ class MainController{
     }
 
     public static function gerarGraficoRosca($porcentagem) {
-        $cores = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#FFCD94'];
-        $cor = $cores[array_rand($cores)];
+        // Definindo cores para cada intervalo de porcentagem
+        if ($porcentagem < 10) {
+            $cor = "#fa4b4b"; // Rosa claro
+        } elseif ($porcentagem < 20) {
+            $cor = "#fa684b"; // Rosa claro médio
+        } elseif ($porcentagem < 30) {
+            $cor = "#fa9a4b"; // Amarelo claro
+        } elseif ($porcentagem < 40) {
+            $cor = "#fab14b"; // Salmão claro
+        } elseif ($porcentagem < 50) {
+            $cor = "#fad14b"; // Amarelo Marfim
+        } elseif ($porcentagem < 60) {
+            $cor = "#faeb4b"; // Caqui claro
+        } elseif ($porcentagem < 70) {
+            $cor = "#e8fa4b"; // Verde Pálido
+        } elseif ($porcentagem < 80) {
+            $cor = "#c5fa4b"; // Azul Pálido
+        } elseif ($porcentagem < 90) {
+            $cor = "#93ed4e"; // Pêssego Claro
+        } else {
+            $cor = "#30bf00"; // Verde Pálido (para 100%)
+        }
+    
         $raio = 50;
         $circunferencia = 2 * M_PI * $raio;
         $offset = $circunferencia * (1 - $porcentagem / 100);
+    
         return "
         <svg width='120' height='120' viewBox='0 0 120 120'>
             <circle cx='60' cy='60' r='$raio' stroke='#DDDDDD' stroke-width='20' fill='none' />
@@ -65,4 +87,5 @@ class MainController{
             <text x='50%' y='50%' text-anchor='middle' dy='.3em' font-size='20' fill='#000'>$porcentagem%</text>
         </svg>";
     }
+    
 }

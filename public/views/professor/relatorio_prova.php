@@ -1,29 +1,67 @@
 <main class="main-home-professor">
     <center>
-        <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1> 
-        <h2>  <?= $data["nome_prova"] ?></h2>
+        <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
+        <h2> <?= $data["nome_prova"] ?></h2>
     </center>
- 
 
-<h3>Desempenho total da turma</h3>
+    <h3>Classificar por:</h3>
+    <div class="buttons-professor">
+        <form action="relatorio_prova" method="post">
+                    <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
+            <button class="button-professor-turma" name="turma" value="geral" type="submit">Desempenho Geral</button>
+            <?php
+            foreach ($data["dados_turma"] as $turma) { ?>
+                <div>
+                    <button class="button-professor-turma" name="turma" value="<?= $turma["turma_nome"] ?>" type="submit"><?= $turma["turma_nome"] ?></button>
+                </div>
+            <?php
+            }
+            ?>
+
+        </form>
+    </div>
+    <h3>Desempenho total da turma</h3>
     <div class="graficos-professor-rosca">
-    <?php 
-    foreach($data["dados_turma"] as $turma){ ?> 
+        <?php
+        foreach ($data["dados_turma"] as $turma) { ?>
+            <div>
+                <?= $turma["grafico"] ?>
+                <span><?= $turma["turma_nome"] ?></span>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
+    <br><br>
+    <div class="professor-grafico-geral-60">
         <div>
-            <?= $turma["grafico"]?>
-            <span><?= $turma["turma_nome"]?></span>
+            <h3>Percentual geral:</h3>
+            <span><?= $data["media_geral_porcentagem"] ?></span>
         </div>
-        <?php 
-    }
-    ?>
+        <hr>
+        <div>
+            <h3>alunos acima de 60%:</h3>
+            <span><?= $data["porcentagem_geral_acima_60"] ?></span>
+        </div>
     </div>
 
-    <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+    <h2>PERCENTUAL DOS DESCRITORES</h2>
+
+    <div class="area-graficos-descritores">
+
+        <?php if ($data["descritores"] == false) { ?>
+            <h1>A prova não tem descritores!</h1>
+            <?php } else {
+            foreach ($data["percentual_descritores"] as $descritor => $grafico) { ?>
+                <div>
+
+                    <?= $grafico ?>
+                    <h4><?= $descritor ?></h4>
+                </div>
+
+        <?php
+            }
+        } ?>
+    </div>
+
 </main>
