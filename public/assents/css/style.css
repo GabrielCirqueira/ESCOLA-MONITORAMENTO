@@ -350,8 +350,18 @@ input:checked + .slider:before {
   cursor: pointer;
 }
 
+@keyframes draw {
+  from {
+      stroke-dashoffset: 100;
+  }
+  to {
+      stroke-dashoffset: var(--offset);
+  }
+}
+
 .animated-circle {
-  transition: stroke-dashoffset 2s ease-out;
+  stroke-dasharray: 314.159; /* Aproximadamente 2 * PI * 50 */
+  animation: draw 2s forwards;
 }
 
 .graficos-professor-rosca{

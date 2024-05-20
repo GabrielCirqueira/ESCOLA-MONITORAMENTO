@@ -122,6 +122,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const circles = document.querySelectorAll('.animated-circle');
     circles.forEach(circle => {
         const offset = circle.getAttribute('data-offset');
-        circle.style.strokeDashoffset = offset;
+        circle.style.setProperty('--offset', offset);
+        circle.style.animation = 'none';
+        void circle.offsetWidth; // Trigger reflow
+        circle.style.animation = null; // Restart animation
     });
 });

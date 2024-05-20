@@ -231,6 +231,7 @@ class ProfessorController{
         $provas = AlunoModel::GetProvasFinalizadas(); 
         $provas_professores = AlunoModel::GetProvas();
         $dados_turmas = [] ;
+        $filtro_turmas = False;
     
         foreach($provas_professores as $professor){
             if($professor["id"] == $id_prova){
@@ -302,8 +303,7 @@ class ProfessorController{
 
 
         $acertos_por_descritor = [];
-
-        // Iterar sobre os dados
+ 
         foreach ($alunos_por_turma as $turma => $alunos) {
             $acertos_por_descritor[$turma] = [];
         
@@ -375,40 +375,87 @@ foreach ($percentual_descritores_turmas as $turma) {
         
         $contador_alunos = 0;
 
-        $medida = [
+        $medida_geral = [
             "Abaixo do Básico" => 0,
             "Básico" => 0,
             "Médio" => 0,
             "Avançado" => 0,
         ];
- 
+        
+        $porcentagem_alunos_turma = [];
+        $contador_turma = 0;
+        
         foreach($alunos_por_turma as $turma){
+            $medida_turma = [
+                "Abaixo do Básico" => 0,
+                "Básico" => 0,
+                "Médio" => 0,
+                "Avançado" => 0,
+            ];
+        
+            $contador_alunos_turma = 0;
             foreach($turma as $aluno){
                 $percentual = ($aluno["acertos"] / $aluno["QNT_perguntas"]) * 100;
                 if($percentual <= 25){
-                    $medida["Abaixo do Básico"] += 1;
+                    $medida_turma["Abaixo do Básico"] += 1;
                 }else if($percentual <= 50) {
-                    $medida["Básico"] += 1;
+                    $medida_turma["Básico"] += 1;
                 }else if($percentual <= 75){
-                    $medida["Médio"] += 1;
+                    $medida_turma["Médio"] += 1;
                 }else{
-                    $medida["Avançado"] += 1;
+                    $medida_turma["Avançado"] += 1;
                 }
-                $contador_alunos++;
+                $contador_alunos_turma++;
+                $nome = $aluno["turma"];
             }
+        
+            $porcentagem_turma = [];
+            foreach ($medida_turma as $categoria => $quantidade) {
+                $porcentagem_turma[$categoria] = number_format(($quantidade / $contador_alunos_turma) * 100, 0);
+            }
+        
+            $porcentagem_alunos_turma[$nome] = $porcentagem_turma;
+         
+            foreach ($medida_turma as $categoria => $quantidade) {
+                $medida_geral[$categoria] += $quantidade;
+            }
+        
+            $contador_alunos += $contador_alunos_turma;
+        }
+         
+        $porcentagem_alunos = [];
+        foreach ($medida_geral as $categoria => $quantidade) {
+            $porcentagem_alunos[$categoria] = number_format(($quantidade / $contador_alunos) * 100, 0);
+        }
+        $dados_turma = null;
 
+        if(isset($_POST["turma-filtros"])){
+            $turma = $_POST["turma-filtros"];
+            if($turma != "geral"){
+                $filtro_turmas = True;
+
+                $grafico_descritores_turma = [];
+                foreach($percentual_descritores_turmas[$turma] as $descritor => $percentual){
+                    $grafico_descritores_turma[$descritor] = MainController::gerarGraficoRosca(number_format($percentual,1));
+                }
+    
+                $dados_turma = [
+                    "nome"=> $turma,
+                    "grafico_coluna" => MainController::gerarGraficoColunas($porcentagem_alunos_turma[$turma]),
+                    "descritores" => $grafico_descritores_turma,
+                    "percentual_turma" => MainController::gerarGraficoRosca($dados_turmas[$turma]["porcentagem"]),
+                    "percentual_turma_60" => MainController::gerarGraficoRosca($dados_turmas[$turma]["porcentagem_acima_60"]) 
+                ];
+            }else{
+                $filtro_turmas = False;
+            }
+           
         }
 
-            $porcentagem_alunos = [];
-        foreach ($medida as $categoria => $quantidade) {
-            $porcentagem_alunos[$categoria] = number_format(($quantidade / $contador_alunos) * 100,0);
-        }
-
-        //         echo "<br>";
+        // echo "<br>";
         // echo "<pre>";
-        // print_r($porcentagem_alunos);
+        // print_r($dados_turma);
         // echo "</pre>";
-
 
         $dados = [
             "dados_turma" => $dados_turmas,
@@ -417,7 +464,9 @@ foreach ($percentual_descritores_turmas as $turma) {
             "porcentagem_geral_acima_60" => MainController::gerarGraficoRosca($porcentagem_geral_acima_60),
             "descritores" => $descriotores_sn,
             "percentual_descritores" => $media_descritores_geral,
-            "grafico_colunas" => MainController::gerarGraficoColunas($porcentagem_alunos)
+            "grafico_colunas" => MainController::gerarGraficoColunas($porcentagem_alunos),
+            "dados_turma_grafico" => $dados_turma,
+            "filtro" => $filtro_turmas
         ];
     
         MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);
