@@ -305,29 +305,21 @@ class ProfessorController{
 
         // Iterar sobre os dados
         foreach ($alunos_por_turma as $turma => $alunos) {
-            // Inicializar array para armazenar os acertos de cada descritor nesta turma
             $acertos_por_descritor[$turma] = [];
         
-            // Iterar sobre os alunos desta turma
             foreach ($alunos as $aluno) {
-                // Obter os descritores certos deste aluno
                 $descritores_certos = explode(';', $aluno['descritores_certos']);
         
-                // Iterar sobre os descritores certos deste aluno
                 foreach ($descritores_certos as $descritor) {
-                    // Verificar se já existe uma entrada para este descritor nesta turma
                     if (!isset($acertos_por_descritor[$turma][$descritor])) {
-                        // Se não existir, inicializar com 1
                         $acertos_por_descritor[$turma][$descritor] = 1;
                     } else {
-                        // Se existir, incrementar o contador de acertos
                         $acertos_por_descritor[$turma][$descritor]++;
                     }
                 }
             }
         }
         
-        // Calcular o percentual de acertos de cada descritor em relação ao total de alunos da turma
         $percentual_por_descritor = [];
         
         foreach ($acertos_por_descritor as $turma => $acertos) {
@@ -344,39 +336,30 @@ class ProfessorController{
 foreach ($percentual_por_descritor as $turma => $descritores) {
     $descritores_modificados = [];
 
-    // Array para armazenar os percentuais de cada descritor sem o número da questão
     $percentuais_sem_questao = [];
 
     foreach ($descritores as $descritor => $percentual) {
-        // Remover espaços em branco ou chaves em branco
         if (!empty($descritor)) {
-            // Extrair o nome do descritor sem o número da questão
             $nome_descritor = explode(',', $descritor)[1];
 
-            // Verificar se já existe um descritor com esse nome
             if (!isset($percentuais_sem_questao[$nome_descritor])) {
-                // Se não existir, inicializar com o percentual atual
                 $percentuais_sem_questao[$nome_descritor] = [$percentual];
             } else {
-                // Se existir, adicionar o percentual à lista
                 $percentuais_sem_questao[$nome_descritor][] = $percentual;
             }
         }
     }
 
-    // Calcular a média dos percentuais de cada descritor
     foreach ($percentuais_sem_questao as $nome_descritor => $percentuais) {
         $media_percentual = array_sum($percentuais) / count($percentuais);
         $descritores_modificados[$nome_descritor] = $media_percentual;
     }
 
-    // Adicionar os descritores modificados ao array final
     $percentual_descritores_turmas[$turma] = $descritores_modificados;
 }
         
 $media_descritores_geral = array();
 
-// Percorre o array original para calcular a média
 foreach ($percentual_descritores_turmas as $turma) {
     foreach ($turma as $descritor => $percentual) {
         if (!isset($media_descritores_geral[$descritor])) {
@@ -389,11 +372,41 @@ foreach ($percentual_descritores_turmas as $turma) {
         foreach($media_descritores_geral as $descritor => $percentual) {
             $media_descritores_geral[$descritor] = MainController::gerarGraficoRosca(number_format($percentual, 1));
         }
- 
+        
+        $contador_alunos = 0;
 
-        // echo "<br>";
+        $medida = [
+            "Abaixo do Básico" => 0,
+            "Básico" => 0,
+            "Médio" => 0,
+            "Avançado" => 0,
+        ];
+ 
+        foreach($alunos_por_turma as $turma){
+            foreach($turma as $aluno){
+                $percentual = ($aluno["acertos"] / $aluno["QNT_perguntas"]) * 100;
+                if($percentual <= 25){
+                    $medida["Abaixo do Básico"] += 1;
+                }else if($percentual <= 50) {
+                    $medida["Básico"] += 1;
+                }else if($percentual <= 75){
+                    $medida["Médio"] += 1;
+                }else{
+                    $medida["Avançado"] += 1;
+                }
+                $contador_alunos++;
+            }
+
+        }
+
+            $porcentagem_alunos = [];
+        foreach ($medida as $categoria => $quantidade) {
+            $porcentagem_alunos[$categoria] = number_format(($quantidade / $contador_alunos) * 100,0);
+        }
+
+        //         echo "<br>";
         // echo "<pre>";
-        // print_r($media_descritores_geral);
+        // print_r($porcentagem_alunos);
         // echo "</pre>";
 
 
@@ -403,7 +416,8 @@ foreach ($percentual_descritores_turmas as $turma) {
             "media_geral_porcentagem" => MainController::gerarGraficoRosca($media_geral_porcentagem),
             "porcentagem_geral_acima_60" => MainController::gerarGraficoRosca($porcentagem_geral_acima_60),
             "descritores" => $descriotores_sn,
-            "percentual_descritores" => $media_descritores_geral
+            "percentual_descritores" => $media_descritores_geral,
+            "grafico_colunas" => MainController::gerarGraficoColunas($porcentagem_alunos)
         ];
     
         MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);

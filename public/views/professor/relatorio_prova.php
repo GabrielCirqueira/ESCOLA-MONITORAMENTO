@@ -64,4 +64,6 @@
         } ?>
     </div>
 
+    <?= $data["grafico_colunas"]?>
+<br><br>
 </main>

@@ -87,5 +87,42 @@ class MainController{
             <text x='50%' y='50%' text-anchor='middle' dy='.3em' font-size='20' fill='#000'>$porcentagem%</text>
         </svg>";
     }
+ 
+    public static function gerarGraficoColunas($dados) {
+        $largura_coluna = 50; // Largura de cada coluna em pixels
+        $espaco_coluna = 50; // Espaço entre as colunas
+        $altura_svg = 300; // Altura total do SVG
+    
+        // Define as cores mais claras para cada faixa de proficiência
+        $cores = array(
+            "Abaixo do Básico" => "#FFCCCC", // Vermelho claro
+            "Básico" => "#FFDDAA", // Laranja claro
+            "Médio" => "#FFFF99", // Amarelo claro
+            "Avançado" => "#CCFFCC" // Verde claro
+        );
+    
+        $svg = "<svg width='" . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 40) . "' height='$altura_svg' viewBox='0 0 " . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 40) . " $altura_svg'>";
+        $x = 20; // Posição inicial do eixo x
+    
+        foreach ($dados as $proficiencia => $quantidade) {
+            // Calcula a altura da coluna proporcional à quantidade de alunos
+            $altura_coluna = $quantidade / max($dados) * 200;
+            // Desenha a coluna com largura fixa e altura proporcional
+            $svg .= "<rect x='$x' y='" . (250 - $altura_coluna) . "' width='$largura_coluna' height='$altura_coluna' fill='" . $cores[$proficiencia] . "'>";
+            // Adiciona animação para aumentar a altura da coluna
+            $svg .= "<animate attributeName='height' from='0' to='$altura_coluna' dur='1s' fill='freeze' />";
+            $svg .= "</rect>";
+            // Adiciona texto com a porcentagem acima da coluna
+            $svg .= "<text x='" . ($x + $largura_coluna / 2) . "' y='" . (250 - $altura_coluna - 5) . "' text-anchor='middle' font-size='14'>" . round(($quantidade / array_sum($dados)) * 100) . "%</text>";
+            // Adiciona texto com o nome da proficiência abaixo da coluna
+            $svg .= "<text x='" . ($x + $largura_coluna / 2) . "' y='" . (270) . "' text-anchor='middle' font-size='14'>$proficiencia</text>";
+            $x += $largura_coluna + $espaco_coluna; // Atualiza a posição do próximo bloco
+        }
+    
+        $svg .= "<text x='" . ((count($dados) * $largura_coluna) / 2 + ((count($dados) - 1) * $espaco_coluna) / 2 + 20) . "' y='280' text-anchor='middle' font-size='16'> </text>";
+        $svg .= "</svg>";
+    
+        return $svg;
+    }
     
 }
