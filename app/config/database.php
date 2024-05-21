@@ -45,7 +45,8 @@ use PDO;
                     ra          int primary key,
                     nome        varchar(255),
                     data_nasc   varchar(255),
-                    turma       varchar(255)                
+                    turma       varchar(255),    
+                    turno       varchar(255)    
                 );";
 
             $descritores = "CREATE TABLE IF NOT EXISTS descritores(
@@ -60,7 +61,9 @@ use PDO;
                     aluno VARCHAR(255),
                     ra VARCHAR(255),
                     turma VARCHAR(255),
+                    turno VARCHAR(255),
                     id_prova INT,
+                    serie INT,
                     nome_professor VARCHAR(255),
                     descritores VARCHAR(255),
                     disciplina VARCHAR(255),
@@ -69,6 +72,7 @@ use PDO;
                     QNT_perguntas INT,
                     data_aluno DATE,
                     acertos INT,
+                    porcentagem INT,
                     pontos_aluno FLOAT,
                     perguntas_respostas VARCHAR(255),
                     perguntas_certas VARCHAR(255),

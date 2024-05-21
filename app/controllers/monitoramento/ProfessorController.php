@@ -273,7 +273,6 @@ class ProfessorController{
                 }else{
                     $descriotores_sn = true;
                 }
-
                 if ($porcentagem_aluno > 60) {
                     $alunos_acima_60++;
                     $total_acima_60++;

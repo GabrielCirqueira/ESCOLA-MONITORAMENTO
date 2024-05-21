@@ -44,8 +44,8 @@ class AlunoModel{
 
     public static function Inserir_dados_prova($dados){
         $sql = "INSERT INTO gabarito_alunos
-        (aluno, ra, turma, id_prova, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas)
-        VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP)";
+        (aluno, ra, turma, id_prova, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie)
+        VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP,:PORC,:TURNO,:SER)";
     
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":ALUNO", $dados["aluno"]);
@@ -66,6 +66,9 @@ class AlunoModel{
         $query->bindValue(":DESCRITORES_ERRADOS", $dados["descritores_errados"]);
         $query->bindValue(":PERG_ERRADAS", $dados["perguntas_erradas"]);
         $query->bindValue(":PERG_RESP", $dados["perguntas_respostas"]);
+        $query->bindValue(":PORC", $dados["porcentagem"]);
+        $query->bindValue(":TURNO", $dados["turno"]);
+        $query->bindValue(":SER", $dados["serie"]);
         $query->execute();
     
         return $query;

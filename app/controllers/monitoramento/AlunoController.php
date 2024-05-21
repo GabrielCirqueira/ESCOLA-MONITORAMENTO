@@ -19,6 +19,7 @@ class AlunoController
         if (!$query === False) {
             $_SESSION["ra"] = $ra;
             $_SESSION["nome_aluno"] = $query["nome"];
+            $_SESSION["turno"] = $query["turno"];
             $_SESSION["turma"] = $query["turma"];
             $_SESSION["data_nasc"] = $query["data_nasc"];
             $_SESSION["ALUNO"] = True;
@@ -130,6 +131,7 @@ class AlunoController
 
                 $contador++;
             }
+ 
 
             if($_SESSION["prova_gabarito"]["id"] == NULL){
                 $descritores_corretos = NULL;
@@ -155,6 +157,9 @@ class AlunoController
                 "nome_prova"            => $_SESSION["prova_gabarito"]["nome_prova"],
                 "pontos_prova"          => $_SESSION["prova_gabarito"]["valor"],
                 "QNT_perguntas"         => $_SESSION["prova_gabarito"]["QNT_perguntas"],
+                "turno"                 => $_SESSION["turno"],
+                "porcentagem"           => ($acertos_aluno / $_SESSION["prova_gabarito"]["QNT_perguntas"] ) * 100,
+                "serie"                 => substr($_SESSION["turma"],0,1),
                 "data_aluno"            => $dataFormatada,
                 "acertos"               => $acertos_aluno,
                 "pontos_aluno"          => $pontos_aluno,
