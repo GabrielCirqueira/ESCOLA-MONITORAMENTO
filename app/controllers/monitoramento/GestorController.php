@@ -20,11 +20,18 @@ class GestorController{
     }
 
     public static function gestor_home(){
-        if(MainController::Verificar_sessao("GESTOR")){
-
+        if(MainController::Verificar_sessao("GESTOR")){ 
+            $turnos = ["INTERMEDIÁRIO","VESPERTINO"];
             
 
-            MainController::Templates("public/views/gestor/graficos.php","GESTOR");
+            $dados = [ 
+                "turmas" => GestorModel::GetTurmas(),
+                "turnos" => $turnos,
+                "disciplinas" => GestorModel::GetDisciplinas(),
+                "professores" => GestorModel::GetProfessores()
+            ];
+
+            MainController::Templates("public/views/gestor/graficos.php","GESTOR",$dados);
             // MainController::Templates("public/views/gestor/home.php","GESTOR");
         }else{
             header("location: home");

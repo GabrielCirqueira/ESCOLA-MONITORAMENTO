@@ -39,7 +39,7 @@ class GestorModel{
     
 
     public static function GetProfessores(){
-        $sql = "SELECT * FROM professores";
+        $sql = "SELECT * FROM professores ORDER BY nome ASC ";
         $query = Database::GetInstance()->prepare($sql);
         $query->execute();
         
@@ -67,11 +67,23 @@ class GestorModel{
     }
 
     public static function GetTurmas(){
-        $sql = "SELECT * FROM turmas";
+        $sql = "SELECT * FROM turmas ORDER BY nome ASC ";
         $query = Database::GetInstance()->prepare($sql);
         $query->execute();
         
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+ 
+    public static function GetDisciplinas(){
+        $sql = "SELECT * FROM disciplinas ORDER BY nome ASC ";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+        
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function FiltroTurma($turma){
+
     }
 
 }
