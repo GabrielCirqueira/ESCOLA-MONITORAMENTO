@@ -1,11 +1,11 @@
 <main class="main-home ">
 
     <center>
-        <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1> 
+        <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
     </center>
 
     <div class="form">
-        <form action="" method="post">
+        <form action="gestor_home" method="post">
             <label for="turma">Turma:</label>
             <select name="turma" id="turma">
                 <option value="SELECINAR">SELECIONAR</option>
@@ -38,9 +38,25 @@
                 <?php } ?>
             </select>
 
-            <input type="submit" value="Filtrar">
+            <input type="submit" name="filtro" value="Filtrar">
         </form>
     </div> 
+    <br>
+    <br>
+    <br>
+
+
+    <?php if($data["status"] == false){ ?>
+        <?php
+            foreach($data["filtros"] as $filtro){
+                if($filtro){
+                    echo "<br>". $filtro ."<br>";
+                }
+            }
+            ?>
+        <h1>NÃO FORAM ENCONTRADOS RESULTADOS PARA ESSA CONSULTA!</h1>
+        <?php } ?>
+
     <br>
     <br>
     <br>

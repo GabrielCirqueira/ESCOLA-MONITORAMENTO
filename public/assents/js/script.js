@@ -124,7 +124,17 @@ document.addEventListener("DOMContentLoaded", function() {
         const offset = circle.getAttribute('data-offset');
         circle.style.setProperty('--offset', offset);
         circle.style.animation = 'none';
-        void circle.offsetWidth; // Trigger reflow
-        circle.style.animation = null; // Restart animation
+        void circle.offsetWidth; 
+        circle.style.animation = null; 
     });
 });
+
+// document.addEventListener('DOMContentLoaded', (event) => { 
+//     const formularios = document.querySelectorAll('form');
+
+//     formularios.forEach(formulario => {
+//         formulario.addEventListener('submit', function(event) {
+//             event.preventDefault();  
+//         });
+//     });
+// });

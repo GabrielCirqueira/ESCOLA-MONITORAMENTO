@@ -22,17 +22,44 @@ class GestorController{
     public static function gestor_home(){
         if(MainController::Verificar_sessao("GESTOR")){ 
             $turnos = ["INTERMEDIÁRIO","VESPERTINO"];
-            
+
+
+
+            $turma = $_POST['turma'] ?? null;
+            $turno = $_POST['turno'] ?? null;
+            $disciplina = $_POST['disciplina'] ?? null;
+            $professor = $_POST['professor'] ?? null;
+
+            $filtros = [
+                "turma" => $turma,
+                "turno" => $turno,
+                "disciplina" => $disciplina,
+                "professor" => $professor
+            ];
 
             $dados = [ 
                 "turmas" => GestorModel::GetTurmas(),
                 "turnos" => $turnos,
                 "disciplinas" => GestorModel::GetDisciplinas(),
-                "professores" => GestorModel::GetProfessores()
-            ];
+                "professores" => GestorModel::GetProfessores(),
+                "status" => false,
+                "filtros"   => $filtros
+                
+            ];            
 
-            MainController::Templates("public/views/gestor/graficos.php","GESTOR",$dados);
-            // MainController::Templates("public/views/gestor/home.php","GESTOR");
+            $resultados = GestorModel::GetResultadosFiltrados($filtros);
+
+            if(count($resultados) <= 0){
+                
+                $dados["status"] = false;
+
+                MainController::Templates("public/views/gestor/graficos.php","GESTOR",$dados);
+            }else{
+
+    
+                MainController::Templates("public/views/gestor/graficos.php","GESTOR",$dados);
+                // MainController::Templates("public/views/gestor/home.php","GESTOR");
+            }       
         }else{
             header("location: home");
         }

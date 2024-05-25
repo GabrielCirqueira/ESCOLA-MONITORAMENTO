@@ -82,8 +82,39 @@ class GestorModel{
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function FiltroTurma($turma){
-
+    public static function GetResultadosFiltrados($filtros){
+        $query = "SELECT * FROM gabarito_alunos WHERE 1=1";
+        
+        if($filtros['turma']){
+            $query .= " AND turma = :turma";
+        }
+        if($filtros['turno']){
+            $query .= " AND turno = :turno";
+        }
+        if($filtros['disciplina']){
+            $query .= " AND disciplina = :disciplina";
+        }
+        if($filtros['professor']){
+            $query .= " AND nome_professor = :professor";
+        }
+        
+        $stmt = Database::GetInstance()->prepare($query);
+    
+        if($filtros['turma']){
+            $stmt->bindValue(':turma', $filtros['turma']);
+        }
+        if($filtros['turno']){
+            $stmt->bindValue(':turno', $filtros['turno']);
+        }
+        if($filtros['disciplina']){
+            $stmt->bindValue(':disciplina', $filtros['disciplina']);
+        }
+        if($filtros['professor']){
+            $stmt->bindValue(':professor', $filtros['professor']);
+        }
+    
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
 }
