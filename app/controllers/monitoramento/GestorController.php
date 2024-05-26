@@ -25,10 +25,11 @@ class GestorController{
 
 
 
-            $turma = $_POST['turma'] ?? null;
-            $turno = $_POST['turno'] ?? null;
-            $disciplina = $_POST['disciplina'] ?? null;
-            $professor = $_POST['professor'] ?? null;
+            $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : $_POST['turma'];
+            $turno = ($_POST['turno'] ?? null) === "SELECIONAR" ? null : $_POST['turno'];
+            $disciplina = ($_POST['disciplina'] ?? null) === "SELECIONAR" ? null : $_POST['disciplina'];
+            $professor = ($_POST['professor'] ?? null) === "SELECIONAR" ? null : $_POST['professor'];
+            
 
             $filtros = [
                 "turma" => $turma,
@@ -55,6 +56,7 @@ class GestorController{
 
                 MainController::Templates("public/views/gestor/graficos.php","GESTOR",$dados);
             }else{
+                $dados["status"] = true;
 
     
                 MainController::Templates("public/views/gestor/graficos.php","GESTOR",$dados);
