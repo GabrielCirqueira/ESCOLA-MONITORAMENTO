@@ -80,7 +80,7 @@ class MainController{
     
         return "
         <svg width='120' height='120' viewBox='0 0 120 120'>
-            <circle cx='60' cy='60' r='$raio' stroke='#DDDDDD' stroke-width='20' fill='none' />
+            <circle cx='60' cy='60' r='$raio' stroke='#dbd9d9' stroke-width='20' fill='none' />
             <circle class='animated-circle' cx='60' cy='60' r='$raio' stroke='$cor' stroke-width='20' fill='none'
                     stroke-dasharray='$circunferencia' stroke-dashoffset='$circunferencia' data-offset='$offset'
                     transform='rotate(-90 60 60)' />
@@ -95,31 +95,30 @@ class MainController{
     
         // Define as cores mais claras para cada faixa de proficiência
         $cores = array(
-            "Abaixo do Básico" => "#FFCCCC", // Vermelho claro
-            "Básico" => "#FFDDAA", // Laranja claro
-            "Médio" => "#FFFF99", // Amarelo claro
-            "Avançado" => "#CCFFCC" // Verde claro
+            "Abaixo do Básico" => "#ff5e5e", // Vermelho claro
+            "Básico" => "#ffba52", // Laranja claro
+            "Médio" => "#b7ff42", // Amarelo claro
+            "Avançado" => "#2bd937" // Verde claro
         );
     
-        $svg = "<svg width='" . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 40) . "' height='$altura_svg' viewBox='0 0 " . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 40) . " $altura_svg'>";
-        $x = 20; // Posição inicial do eixo x
+        $svg = "<svg width='" . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 60) . "' height='$altura_svg' viewBox='0 0 " . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 60) . " $altura_svg'>";
     
+        $svg .= "<text x='" . (((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 40) / 2) . "' y='20' text-anchor='middle' font-size='16'>ALUNOS</text>";
+        for ($i = 10; $i <= 100; $i += 10) {
+            $y = 250 - ($i / 100 * 200); 
+            $svg .= "<line x1='20' y1='$y' x2='" . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 40) . "' y2='$y' stroke='#ccc' stroke-dasharray='5,5'/>";
+            $svg .= "<text x='0' y='" . ($y + 5) . "' font-size='12'>$i</text>";
+        }
+        $x = 20;
         foreach ($dados as $proficiencia => $quantidade) {
-            // Calcula a altura da coluna proporcional à quantidade de alunos
-            $altura_coluna = $quantidade / max($dados) * 200;
-            // Desenha a coluna com largura fixa e altura proporcional
+            $altura_coluna = ($quantidade / 100) * 200;
             $svg .= "<rect x='$x' y='" . (250 - $altura_coluna) . "' width='$largura_coluna' height='$altura_coluna' fill='" . $cores[$proficiencia] . "'>";
-            // Adiciona animação para aumentar a altura da coluna
             $svg .= "<animate attributeName='height' from='0' to='$altura_coluna' dur='1s' fill='freeze' />";
             $svg .= "</rect>";
-            // Adiciona texto com a porcentagem acima da coluna
-            $svg .= "<text x='" . ($x + $largura_coluna / 2) . "' y='" . (250 - $altura_coluna - 5) . "' text-anchor='middle' font-size='14'>" . round(($quantidade / array_sum($dados)) * 100) . "%</text>";
-            // Adiciona texto com o nome da proficiência abaixo da coluna
-            $svg .= "<text x='" . ($x + $largura_coluna / 2) . "' y='" . (270) . "' text-anchor='middle' font-size='14'>$proficiencia</text>";
-            $x += $largura_coluna + $espaco_coluna; // Atualiza a posição do próximo bloco
+            $svg .= "<text x='" . ($x + $largura_coluna / 2) . "' y='" . (250 - $altura_coluna - 5) . "' text-anchor='middle' font-size='14'>" . $quantidade . "%</text>";
+            $svg .= "<text x='" . ($x + $largura_coluna / 2) . "' y='270' text-anchor='middle' font-size='14'>$proficiencia</text>";
+            $x += $largura_coluna + $espaco_coluna;
         }
-    
-        $svg .= "<text x='" . ((count($dados) * $largura_coluna) / 2 + ((count($dados) - 1) * $espaco_coluna) / 2 + 20) . "' y='280' text-anchor='middle' font-size='16'> </text>";
         $svg .= "</svg>";
     
         return $svg;

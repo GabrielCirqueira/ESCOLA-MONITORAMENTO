@@ -6,10 +6,11 @@
 
     <div class="form">
         <form action="gestor_home" method="post">
+            <button type="submit" name="geral" value="geral">VISÃO GERAL</button>
             <label for="turma">Turma:</label>
             <select name="turma" id="turma">
                 <option value="SELECIONAR">SELECIONAR</option>
-                <?php foreach($data["turmas"] as $turma ){ ?>
+                <?php foreach ($data["turmas"] as $turma) { ?>
                     <option value="<?= $turma["nome"] ?>"> <?= $turma["nome"] ?> </option>
                 <?php } ?>
             </select>
@@ -17,7 +18,7 @@
             <label for="turno">Turno:</label>
             <select name="turno" id="turno">
                 <option value="SELECIONAR">SELECIONAR</option>
-                <?php foreach($data["turnos"] as $turno ){ ?>
+                <?php foreach ($data["turnos"] as $turno) { ?>
                     <option value="<?= $turno ?>"> <?= $turno ?> </option>
                 <?php } ?>
             </select>
@@ -25,7 +26,7 @@
             <label for="disciplina">Disciplina:</label>
             <select name="disciplina" id="disciplina">
                 <option value="SELECIONAR">SELECIONAR</option>
-                <?php foreach($data["disciplinas"] as $disciplina ){ ?>
+                <?php foreach ($data["disciplinas"] as $disciplina) { ?>
                     <option value="<?= $disciplina["nome"] ?>"> <?= $disciplina["nome"] ?> </option>
                 <?php } ?>
             </select>
@@ -33,61 +34,116 @@
             <label for="professor">Professor:</label>
             <select name="professor" id="professor">
                 <option value="SELECIONAR">SELECIONAR</option>
-                <?php foreach($data["professores"] as $professor ){ ?>
+                <?php foreach ($data["professores"] as $professor) { ?>
                     <option value="<?= $professor["nome"] ?>"> <?= $professor["nome"] ?> </option>
                 <?php } ?>
             </select>
 
             <input type="submit" name="filtro" value="Filtrar">
         </form>
-    </div> 
-    <br>
+    </div>
     <br>
     <br>
 
+    <br>
 
-    <?php if($data["status"] == false){ ?>
-        <?php
-            foreach($data["filtros"] as $filtro => $value ){
-                if($value != "SELECIONAR" ){
-                    echo "<br>". $filtro .": ";
-                    echo $value ."<br>";
+
+
+
+    <?php
+
+    if ($data["geral"] != true) {
+
+        if ($data["status"] == false) { ?>
+            <?php
+            foreach ($data["filtros"] as $filtro => $value) {
+                if ($value != "SELECIONAR") {
+                    echo "<br>" . $filtro . ": ";
+                    echo $value . "<br>";
                 }
             }
             ?>
-        <h1>NÃO FORAM ENCONTRADOS RESULTADOS PARA ESSA CONSULTA!</h1>
-        <?php } ?>
+            <h1>NÃO FORAM ENCONTRADOS RESULTADOS PARA ESSA CONSULTA!</h1>
+        <?php }
+    } else { ?>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+        <h1>DESEMPENHO ESCOLAR GERAL</h1>
+        <div class="gestor_desempenho_escola">
+            <div class="rosca">
+                <?= $data["roscaGeral"] ?>
+                <h3>DESEMPENHO GERAL</h3>
+            </div>
+
+            <hr>
+            
+            <div>
+                <?= $data["colunaGeral"] ?>
+                <h3>PROEFICIÊNCIA</h3>
+
+            </div>
+        </div>
+
+
+        <h1>DESEMPENHO TURMAS</h1>
+        <div class="gestor_area_turmas_geral">
+
+            <?php
+            foreach ($data["dadosturmas"] as $turma => $value) {
+            ?>
+
+                <div>
+                    <?= $value ?>
+                    <span><?= $turma ?></span>
+                </div>
+
+
+            <?php } ?>
+        </div>
+        <h1>DESEMPENHO TURNO</h1>
+        <div class="gestor_area_turnos_geral">
+            <div>
+                <?= $data["dadosturnos"]["INTERMEDIÁRIO"] ?>
+                <h3>INTERMEDIÁRIO</h3>
+            </div>
+            <hr>
+            <div>
+                <?= $data["dadosturnos"]["VESPERTINO"] ?>
+                <h3>INTERMEDIÁRIO</h3>
+            </div>
+
+        <?php } ?>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
 </main>
