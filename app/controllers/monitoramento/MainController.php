@@ -50,28 +50,32 @@ class MainController{
         self::Templates("public/views/adm/login.php");
     }
 
-    public static function gerarGraficoRosca($porcentagem) {
-        // Definindo cores para cada intervalo de porcentagem
-        if ($porcentagem < 10) {
-            $cor = "#fa4b4b"; // Vermelho claro
-        } elseif ($porcentagem < 20) {
-            $cor = "#fa684b"; // Laranja claro
-        } elseif ($porcentagem < 30) {
-            $cor = "#fa9a4b"; // Amarelo claro
-        } elseif ($porcentagem < 40) {
-            $cor = "#fab14b"; // Salmão claro
-        } elseif ($porcentagem < 50) {
-            $cor = "#fad14b"; // Amarelo Marfim
-        } elseif ($porcentagem < 60) {
-            $cor = "#faeb4b"; // Caqui claro
-        } elseif ($porcentagem < 70) {
-            $cor = "#e8fa4b"; // Verde Pálido
-        } elseif ($porcentagem < 80) {
-            $cor = "#c5fa4b"; // Azul Pálido
-        } elseif ($porcentagem < 90) {
-            $cor = "#93ed4e"; // Verde claro
+    public static function gerarGraficoRosca($porcentagem, $corPersonalizada = null) {
+        // Definindo cores para cada intervalo de porcentagem, caso não haja cor personalizada
+        if ($corPersonalizada === null) {
+            if ($porcentagem < 10) {
+                $cor = "#fa4b4b"; // Vermelho claro
+            } elseif ($porcentagem < 20) {
+                $cor = "#fa684b"; // Laranja claro
+            } elseif ($porcentagem < 30) {
+                $cor = "#fa9a4b"; // Amarelo claro
+            } elseif ($porcentagem < 40) {
+                $cor = "#fab14b"; // Salmão claro
+            } elseif ($porcentagem < 50) {
+                $cor = "#fad14b"; // Amarelo Marfim
+            } elseif ($porcentagem < 60) {
+                $cor = "#faeb4b"; // Caqui claro
+            } elseif ($porcentagem < 70) {
+                $cor = "#e8fa4b"; // Verde Pálido
+            } elseif ($porcentagem < 80) {
+                $cor = "#c5fa4b"; // Azul Pálido
+            } elseif ($porcentagem < 90) {
+                $cor = "#93ed4e"; // Verde claro
+            } else {
+                $cor = "#30bf00"; // Verde
+            }
         } else {
-            $cor = "#30bf00"; // Verde
+            $cor = $corPersonalizada;
         }
     
         $raio = 50;

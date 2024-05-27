@@ -117,4 +117,13 @@ class GestorModel{
         return $stmt->fetchAll();
     }
 
+    public static function GetFiltro($campo,$valor){
+        $sql = "SELECT * FROM gabarito_alunos WHERE $campo = :valor ";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":valor", $valor);
+        $query->execute();
+        
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

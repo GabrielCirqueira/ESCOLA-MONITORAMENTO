@@ -30,6 +30,8 @@ class GestorController{
             $turno = null;
             $disciplina = null;
             $professor = null;
+
+            
  
             // Verifica se algum filtro foi aplicado
             if(isset($_POST["filtro"])){
@@ -50,7 +52,22 @@ class GestorController{
                 "disciplina" => $disciplina,
                 "professor" => $professor
             ];
-    
+
+            $dados_turno_geral = [];
+
+            $turno = []; 
+            $turno[] = MainController::gerarGraficoRosca(self::procentagemGeral(GestorModel::GetFiltro("turno","INTERMEDIÁRIO")));
+            $turno[] = MainController::gerarGraficoColunas(self::GetProeficiencia(GestorModel::GetFiltro("turno","INTERMEDIÁRIO")));
+
+            $dados_turno_geral["INTERMEDIÁRIO"] = $turno;
+
+            $turno = [];
+
+            $turno[] = MainController::gerarGraficoRosca(self::procentagemGeral(GestorModel::GetFiltro("turno","VESPERTINO")),"#417BA8");
+            $turno[] = MainController::gerarGraficoColunas(self::GetProeficiencia(GestorModel::GetFiltro("turno","VESPERTINO")));
+
+            $dados_turno_geral["VESPERTINO"] = $turno;
+
             $dados = [ 
                 "turmas" => GestorModel::GetTurmas(),
                 "turnos" => $turnos,
@@ -58,8 +75,9 @@ class GestorController{
                 "professores" => GestorModel::GetProfessores(),
                 "status" => false,
                 "filtros"   => $filtros,
-                "roscaGeral" => self::procentagemGeral($todas_provas),
-                "colunaGeral" => MainController::gerarGraficoColunas(self::GetProeficiencia($todas_provas))
+                "roscaGeral" => MainController::gerarGraficoRosca(self::procentagemGeral($todas_provas)),
+                "colunaGeral" => MainController::gerarGraficoColunas(self::GetProeficiencia($todas_provas)),
+                "dados_turnos" => $dados_turno_geral
             ];            
             if($btnGeral){
                 $dados_turmas = self::DadosGeralTurmas($todas_provas);
@@ -95,7 +113,7 @@ class GestorController{
             $porcentagem+= $prova["porcentagem"];
         }
 
-        return MainController::gerarGraficoRosca(number_format($porcentagem / $numero_linhas,2));
+        return number_format($porcentagem / $numero_linhas,2);
 
 
     }

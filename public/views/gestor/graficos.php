@@ -75,7 +75,7 @@
             </div>
 
             <hr>
-            
+
             <div>
                 <?= $data["colunaGeral"] ?>
                 <h3>PROEFICIÊNCIA</h3>
@@ -83,6 +83,30 @@
             </div>
         </div>
 
+        <h1>DESEMPENHO TURNO</h1>
+        <div class="gestor_area_turnos_geral">
+            <?php foreach($data["dados_turnos"] as $turno => $value){ ?>
+                <center>
+                <h3><?= $turno ?></h3>
+                </center>
+                <div class="turno">
+                        <div class="turno_rosca" >
+                            <?= $value[0]?>
+                            <center>
+                            <h4>DESEMPENHO GERAL</h4>
+
+                            </center>
+                        </div>
+                        <div  class="turno_coluna"  >
+                        <?= $value[1]?>
+                        <center>
+                        <h4>PROEFICIÊNCIA</h4>
+
+                        </center>
+                        </div>
+                </div>
+            <?php }?>
+        </div>
 
         <h1>DESEMPENHO TURMAS</h1>
         <div class="gestor_area_turmas_geral">
@@ -98,19 +122,7 @@
 
 
             <?php } ?>
-        </div>
-        <h1>DESEMPENHO TURNO</h1>
-        <div class="gestor_area_turnos_geral">
-            <div>
-                <?= $data["dadosturnos"]["INTERMEDIÁRIO"] ?>
-                <h3>INTERMEDIÁRIO</h3>
-            </div>
-            <hr>
-            <div>
-                <?= $data["dadosturnos"]["VESPERTINO"] ?>
-                <h3>INTERMEDIÁRIO</h3>
-            </div>
-
+        </div> 
         <?php } ?>
         </div>
 

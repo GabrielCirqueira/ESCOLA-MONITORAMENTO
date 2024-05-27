@@ -430,22 +430,30 @@ input:checked + .slider:before {
   grid-template-columns: repeat(4, 1fr);
 }
 
-.gestor_area_turmas_geral div, .gestor_area_turnos_geral div,.gestor_desempenho_escola div{
+.gestor_area_turmas_geral div,.gestor_desempenho_escola div{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
+ 
 
-.gestor_area_turnos_geral svg{
-  width:  200px;
-  height: 200px;
+.gestor_area_turnos_geral{ 
+}
+ 
+.turno{
+  border: 2px solid rgba(130, 130, 130, 0.333);
+  display: flex;
+  width: 700px;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
 
-.gestor_area_turnos_geral{
-  display: flex;
-  gap: 50px;
+.turno_rosca svg{
+  width:  180px;
+  height: 180px;
+  padding: 59px 10px;
 }
 
 .rosca svg{
