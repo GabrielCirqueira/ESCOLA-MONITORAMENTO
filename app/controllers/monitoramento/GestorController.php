@@ -20,89 +20,77 @@ class GestorController{
             exit;
         }
     }
-    public static function gestor_home(){
-        if(MainController::Verificar_sessao("GESTOR")){ 
-                $todas_provas = AlunoModel::GetProvasFinalizadas();
-                $turnos = ["INTERMEDIÁRIO","VESPERTINO"];
-   
-            $btnGeral = $_POST["geral"] ?? null;
-            
-            $turma = null;
-            $turno = null;
-            $disciplina = null;
-            $professor = null;
-
-            
- 
-            // Verifica se algum filtro foi aplicado
-            if(isset($_POST["filtro"])){
-                $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : $_POST['turma'];
-                $turno = ($_POST['turno'] ?? null) === "SELECIONAR" ? null : $_POST['turno'];
-                $disciplina = ($_POST['disciplina'] ?? null) === "SELECIONAR" ? null : $_POST['disciplina'];
-                $professor = ($_POST['professor'] ?? null) === "SELECIONAR" ? null : $_POST['professor'];
-            }
-
-            if($turma == null && $turno == null && $disciplina == null && $professor == null){
-                $btnGeral = true;
-            }
-
-            // Array de filtros
-            $filtros = [
-                "turma" => $turma,
-                "turno" => $turno,
-                "disciplina" => $disciplina,
-                "professor" => $professor
-            ];
-
-            $dados_turno_geral = [];
-
-            $turno = []; 
-            $turno[] = MainController::gerarGraficoRosca(self::procentagemGeral(GestorModel::GetFiltro("turno","INTERMEDIÁRIO")));
-            $turno[] = MainController::gerarGraficoColunas(self::GetProeficiencia(GestorModel::GetFiltro("turno","INTERMEDIÁRIO")));
-
-            $dados_turno_geral["INTERMEDIÁRIO"] = $turno;
-
-            $turno = [];
-
-            $turno[] = MainController::gerarGraficoRosca(self::procentagemGeral(GestorModel::GetFiltro("turno","VESPERTINO")),"#417BA8");
-            $turno[] = MainController::gerarGraficoColunas(self::GetProeficiencia(GestorModel::GetFiltro("turno","VESPERTINO")));
-
-            $dados_turno_geral["VESPERTINO"] = $turno;
-
-            $dados = [ 
-                "turmas" => ADModel::GetTurmas(),
-                "turnos" => $turnos,
-                "disciplinas" => ADModel::GetDisciplinas(),
-                "professores" => ADModel::GetProfessores(),
-                "status" => false,
-                "filtros"   => $filtros,
-                "roscaGeral" => MainController::gerarGraficoRosca(self::procentagemGeral($todas_provas)),
-                "colunaGeral" => MainController::gerarGraficoColunas(self::GetProeficiencia($todas_provas)),
-                "dados_turnos" => $dados_turno_geral
-            ];            
-            if($btnGeral){
-                $dados_turmas = self::DadosGeralTurmas($todas_provas);
-                $dados_turnos = self::DadosGeralTurno($todas_provas);
-                $dados["dadosturmas"] = $dados_turmas;
-                $dados["dadosturnos"] = $dados_turnos;
-                $dados["geral"] = true;
-            }else{
-                $dados["geral"] = false;
-            }
-    
-            $resultados = GestorModel::GetResultadosFiltrados($filtros);
-    
-            if(count($resultados) <= 0){
-                $dados["status"] = false;
-            }else{
-                $dados["status"] = true;
-            }       
-    
-            // Carrega o template com os dados para exibição
-            MainController::Templates("public/views/gestor/graficos.php","GESTOR",$dados);
-        }else{
+  
+    public static function gestor_home() {
+        if ($_SESSION["ADM"]) {
+            $dados = self::processarFiltros();
+            self::carregarTemplate($dados);
+        } else {
             header("location: home");
         }
+    }
+    
+    private static function processarFiltros() {
+        $todas_provas = AlunoModel::GetProvasFinalizadas();
+        $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
+        $btnGeral = $_POST["geral"] ?? null;
+    
+        $filtros = self::obterFiltros();
+        $dados_turno_geral = self::gerarDadosTurnos();
+    
+        $dados = [
+            "turmas" => ADModel::GetTurmas(),
+            "turnos" => $turnos,
+            "disciplinas" => ADModel::GetDisciplinas(),
+            "professores" => ADModel::GetProfessores(),
+            "status" => false,
+            "filtros" => $filtros,
+            "roscaGeral" => mainController::gerarGraficoRosca(self::procentagemGeral($todas_provas)),
+            "colunaGeral" => mainController::gerarGraficoColunas(self::GetProeficiencia($todas_provas)),
+            "dados_turnos" => $dados_turno_geral,
+            "geral" => $btnGeral ? true : false,
+        ];
+    
+        if ($btnGeral) {
+            $dados["dadosturmas"] = self::DadosGeralTurmas($todas_provas);
+            $dados["dadosturnos"] = self::DadosGeralTurno($todas_provas);
+        }
+    
+        $resultados = GestorModel::GetResultadosFiltrados($filtros);
+        $dados["status"] = count($resultados) > 0;
+    
+        return $dados;
+    }
+    
+    private static function obterFiltros() {
+        $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : $_POST['turma'];
+        $turno = ($_POST['turno'] ?? null) === "SELECIONAR" ? null : $_POST['turno'];
+        $disciplina = ($_POST['disciplina'] ?? null) === "SELECIONAR" ? null : $_POST['disciplina'];
+        $professor = ($_POST['professor'] ?? null) === "SELECIONAR" ? null : $_POST['professor']; 
+        return [
+            "turma" => $turma,
+            "turno" => $turno,
+            "disciplina" => $disciplina,
+            "professor" => $professor,
+        ];
+    }
+    
+    private static function gerarDadosTurnos() {
+        $dados_turno_geral = [];
+        $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
+        
+        foreach ($turnos as $turno) {
+            $dados_turno_geral[$turno] = [
+                mainController::gerarGraficoRosca(self::procentagemGeral(GestorModel::GetFiltro("turno", $turno))),
+                mainController::gerarGraficoColunas(self::GetProeficiencia(GestorModel::GetFiltro("turno", $turno)))
+            ];
+        }
+    
+        return $dados_turno_geral;
+    }
+    
+    private static function carregarTemplate($dados) {
+        MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
     }
 
     public static function procentagemGeral($provas){
@@ -256,80 +244,5 @@ $arrayOrdenado = $turmasIntermediario + $turmasVespertino;
 
         return $arrayOrdenado;
     }
-
-    public static function adicionar_professor(){
-        $materias = implode(";", $_POST["materias-professor"]); 
-        $info = ADModel::Adicionar_professor($_POST["nome"],$_POST["user"],$_POST["cpf"],$_POST["telefone"],$materias);
-
-        if($info){
-            $_SESSION["PopUp_add_professor_true"] = True;
-            header("location: gestor_home");
-            exit;
-        }
-    }
-
-
-    public static function GetMaterias(){
-        $materias = ADModel::GetMaterias();
-        return $materias;
-    }
-
-    public static function GetProfessores(){
-        $materias = ADModel::GetProfessores();
-        return $materias;
-    }
-
-    public static function adicionar_materia(){
-        // Converte os valores do array em uma string separada por vírgulas
-        $turnos = implode(',', $_POST['turno-materia']);
-        $insert = ADModel::adicionar_materia($_POST["nome-materia"],$_POST["materia-curso"],$turnos);
-
-        if($insert){
-            $_SESSION["PopUp_add_materia_true"] = True;
-            header("location: gestor_home");
-            exit;
-        }
-    }
-
-    public static function excluir_disciplina(){
-        $query = ADModel::excluir_disciplina($_POST["button-excluir-disciplina"]);
-        if($query){
-            $_SESSION["PopUp_excluir_materia_true"] = True;
-            header("location: gestor_home");
-            exit;
-        }
-    }
-
-    public static function adicionar_turma(){
-        $serie = $_POST["serie-turma"];
-        $turno = $_POST["turno-turma"];
-        $curso = $_POST["curso-turma"];
-        $numero = $_POST["numero-turma"];
-
-        if($turno == "INTERMEDIÁRIO"){
-            $nome_turma = "{$serie}ºI0{$numero} {$curso}";
-        }
-        
-        else if($turno == "VESPERTINO"){
-            $nome_turma = "{$serie}ºV0{$numero} {$curso}";
-        }
-        
-        else{
-            $nome_turma = "{$serie}ºN0{$numero} {$curso}";
-        }
-        
-        if(ADModel::adicionar_turma($nome_turma,$serie,$turno,$curso)){
-            $_SESSION["PopUp_inserir_turma"] = True;
-            header("location: gestor_home");
-            exit;
-        }
-    }
-
-    public static function GetTurmas(){
-        $turmas = ADModel::GetTurmas();
-        return $turmas;
-    }
-
-
-
+ 
 }

@@ -5,20 +5,20 @@
 
       <details class="details-menu-gestor" >
         <summary class="sumary-menu-gestor" >materias</summary>
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/materias/materias.php')">materia</button> 
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/materias/addmateria.php')">adicionar materia</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/adm/materias/materias.php')">materia</button> 
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/adm/materias/addmateria.php')">adicionar materia</button>
       </details>
 
       <details class="details-menu-gestor" >
         <summary class="sumary-menu-gestor" >Professor</summary>
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/AddProf.php')">Adicionar Professor</button>
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/professor/Professores.php')">Ver professores</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/adm/professor/AddProf.php')">Adicionar Professor</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/adm/professor/Professores.php')">Ver professores</button>
       </details>
 
       <details class="details-menu-gestor" >
         <summary class="sumary-menu-gestor" >Turmas</summary>
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/turmas/AddTurma.php')">Adicionar Turma</button>
-        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/gestor/turmas/turmas.php')">Ver Turmas</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/adm/turmas/AddTurma.php')">Adicionar Turma</button>
+        <button class="button-details-menu-gestor" onclick="carregarConteudo('public/views/adm/turmas/turmas.php')">Ver Turmas</button>
       </details> 
     </div>
     <div class="info-gestor">
