@@ -2,10 +2,10 @@
 
     <div class="login-aluno">
         <h1> ADMINISTRADOR</h1>
-        <form action="" method="post">
+        <form action="login_adm_verifica" method="post">
             <!-- @csrf -->
             <div class="campo-ra">
-                <input class="input-campo-aluno" type="text" placeholder="Usuario" required> 
+                <input class="input-campo-aluno" name="campo_adm" type="text" placeholder="Usuario" required> 
             </div>
 
             <input type="submit">

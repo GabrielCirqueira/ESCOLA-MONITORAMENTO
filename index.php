@@ -6,6 +6,7 @@ use app\controllers\monitoramento\MainController;
 use app\controllers\monitoramento\ProfessorController;
 use app\controllers\monitoramento\GestorController;
 use app\controllers\monitoramento\AlunoController;
+use app\controllers\monitoramento\ADMcontroller;
 
 session_start();
 
@@ -24,11 +25,19 @@ if(!isset($_SESSION["PopUp_inserir_prova"])){
     
     $_SESSION["GESTOR"] = False;
     $_SESSION["ALUNO"] = False;
+    $_SESSION["ADM"] = False;
     $_SESSION["PROFESSOR"] = False;
 }
     
-$rotas = [
-    "home"                      => MainController::class,
+$rotas = [ 
+    "login_adm_verifica"        => ADMcontroller::class,
+    "adm_home"                  => ADMcontroller::class,
+    "adicionar_professor"       => ADMcontroller::class,
+    "adm_info"                  => ADMcontroller::class,
+    "adicionar_materia"         => ADMcontroller::class,
+    "excluir_disciplina"        => ADMcontroller::class,
+    "adicionar_turma"           => ADMcontroller::class,
+    "home"                      => MainController::class,    
     "ADM"                       => MainController::class,
     "login_professor"           => MainController::class,
     "login_gestor"              => MainController::class,
@@ -38,13 +47,8 @@ $rotas = [
     "login_aluno_entrar"        => AlunoController::class,
     "cadastrar_gabarito_aluno"  => AlunoController::class,
     "gabarito_aluno"            => AlunoController::class,
-    "login_gestor_verifica"     => GestorController::class,
     "gestor_home"               => GestorController::class,
-    "adicionar_professor"       => GestorController::class,
-    "Gestor_info"               => GestorController::class,
-    "adicionar_materia"         => GestorController::class,
-    "excluir_disciplina"        => GestorController::class,
-    "adicionar_turma"           => GestorController::class,
+    "login_gestor_verifica"     => GestorController::class,
     "home_professor"            => ProfessorController::class,
     "professor_home"            => ProfessorController::class,
     "inserir_gabarito"          => ProfessorController::class,

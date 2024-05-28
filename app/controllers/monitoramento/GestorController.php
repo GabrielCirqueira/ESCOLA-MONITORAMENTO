@@ -2,9 +2,10 @@
 
 namespace app\controllers\monitoramento;
  
-use app\controllers\monitoramento\MainController;
-use app\models\monitoramento\GestorModel;
+use app\controllers\monitoramento\MainController; 
 use app\models\monitoramento\AlunoModel;
+use app\models\monitoramento\ADModel;
+use app\models\monitoramento\GestorModel;
 
 class GestorController{
 
@@ -69,10 +70,10 @@ class GestorController{
             $dados_turno_geral["VESPERTINO"] = $turno;
 
             $dados = [ 
-                "turmas" => GestorModel::GetTurmas(),
+                "turmas" => ADModel::GetTurmas(),
                 "turnos" => $turnos,
-                "disciplinas" => GestorModel::GetDisciplinas(),
-                "professores" => GestorModel::GetProfessores(),
+                "disciplinas" => ADModel::GetDisciplinas(),
+                "professores" => ADModel::GetProfessores(),
                 "status" => false,
                 "filtros"   => $filtros,
                 "roscaGeral" => MainController::gerarGraficoRosca(self::procentagemGeral($todas_provas)),
@@ -258,7 +259,7 @@ $arrayOrdenado = $turmasIntermediario + $turmasVespertino;
 
     public static function adicionar_professor(){
         $materias = implode(";", $_POST["materias-professor"]); 
-        $info = GestorModel::Adicionar_professor($_POST["nome"],$_POST["user"],$_POST["cpf"],$_POST["telefone"],$materias);
+        $info = ADModel::Adicionar_professor($_POST["nome"],$_POST["user"],$_POST["cpf"],$_POST["telefone"],$materias);
 
         if($info){
             $_SESSION["PopUp_add_professor_true"] = True;
@@ -269,19 +270,19 @@ $arrayOrdenado = $turmasIntermediario + $turmasVespertino;
 
 
     public static function GetMaterias(){
-        $materias = GestorModel::GetMaterias();
+        $materias = ADModel::GetMaterias();
         return $materias;
     }
 
     public static function GetProfessores(){
-        $materias = GestorModel::GetProfessores();
+        $materias = ADModel::GetProfessores();
         return $materias;
     }
 
     public static function adicionar_materia(){
         // Converte os valores do array em uma string separada por vírgulas
         $turnos = implode(',', $_POST['turno-materia']);
-        $insert = GestorModel::adicionar_materia($_POST["nome-materia"],$_POST["materia-curso"],$turnos);
+        $insert = ADModel::adicionar_materia($_POST["nome-materia"],$_POST["materia-curso"],$turnos);
 
         if($insert){
             $_SESSION["PopUp_add_materia_true"] = True;
@@ -291,7 +292,7 @@ $arrayOrdenado = $turmasIntermediario + $turmasVespertino;
     }
 
     public static function excluir_disciplina(){
-        $query = GestorModel::excluir_disciplina($_POST["button-excluir-disciplina"]);
+        $query = ADModel::excluir_disciplina($_POST["button-excluir-disciplina"]);
         if($query){
             $_SESSION["PopUp_excluir_materia_true"] = True;
             header("location: gestor_home");
@@ -317,7 +318,7 @@ $arrayOrdenado = $turmasIntermediario + $turmasVespertino;
             $nome_turma = "{$serie}ºN0{$numero} {$curso}";
         }
         
-        if(GestorModel::adicionar_turma($nome_turma,$serie,$turno,$curso)){
+        if(ADModel::adicionar_turma($nome_turma,$serie,$turno,$curso)){
             $_SESSION["PopUp_inserir_turma"] = True;
             header("location: gestor_home");
             exit;
@@ -325,7 +326,7 @@ $arrayOrdenado = $turmasIntermediario + $turmasVespertino;
     }
 
     public static function GetTurmas(){
-        $turmas = GestorModel::GetTurmas();
+        $turmas = ADModel::GetTurmas();
         return $turmas;
     }
 
