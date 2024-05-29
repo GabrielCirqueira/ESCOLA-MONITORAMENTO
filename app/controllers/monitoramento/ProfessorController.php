@@ -479,4 +479,37 @@ foreach ($percentual_descritores_turmas as $turma) {
         return ($parte / $total) * 100;
     }
 
+    public static function editar_prova(){
+        
+        $id = $_POST["id-prova"];
+
+        $prova_professor = ProfessorModel::GetProvabyID($id);
+        $valor = $prova_professor["valor"];
+        $perguntas = $prova_professor["QNT_perguntas"];
+
+        $gabarito = explode(";",$prova_professor["gabarito"]);
+
+         
+        if($prova_professor["descritores"] == null){
+            $descritores = null;
+        }else{
+            $descritores = explode(";",$prova_professor["descritores"]);
+        }
+ 
+
+        $dados = [
+            "gabarito" => $gabarito,
+            "descritores" => $descritores,
+            "valor"     => $valor,
+            "perguntas"    => $perguntas
+        ];
+
+        // echo "<pre>";
+        // print_r($dados);
+        // echo "</pre>";
+
+        MainController::Templates("public/views/professor/editar_prova.php","PROFESSOR",$dados);
+
+    }
+
 }

@@ -58,4 +58,20 @@ class ProfessorModel{
         return $query;
     }
 
+    public static function GetProvabyID($id){
+        $sql = "SELECT * FROM gabarito_professores WHERE id = :id";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":id", $id);
+        $query->execute();
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function GetProvasFeitasbyID($id){
+        $sql = "SELECT * FROM gabarito_alunos WHERE id_prova = :id";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":ID", $id);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

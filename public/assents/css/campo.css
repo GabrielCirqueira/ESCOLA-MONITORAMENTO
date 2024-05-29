@@ -127,6 +127,8 @@
   font-size: 10px;
 }
 
+.professor-editar-gabarito td,
+.professor-editar-gabarito tr,
 .aluno_inserir_gabarito td,
 .aluno_inserir_gabarito tr,
 .professor-inserir-gabarito td,
@@ -135,6 +137,7 @@
   padding: 5px;
 }
 
+.professor-editar-gabarito input[type="radio"],
 .professor-descritores input[type="radio"],
 .aluno_inserir_gabarito input[type="radio"],
 .professor-area-disciplinas input[type="radio"],
@@ -159,6 +162,7 @@
   outline: none;
 }
 
+.professor-editar-gabarito input[type="radio"]:checked,
 .professor-descritores input[type="radio"]:checked,
 .aluno_inserir_gabarito input[type="radio"]:checked,
 .professor-area-disciplinas input[type="radio"]:checked,

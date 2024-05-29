@@ -55,6 +55,7 @@ $rotas = [
     "ver_provas"                => ProfessorController::class,
     "prova"                     => ProfessorController::class,
     "criar_gabarito"            => ProfessorController::class,
+    "editar_prova"              => ProfessorController::class,
     "relatorio_professor"       => ProfessorController::class,
     "relatorio_prova"           => ProfessorController::class,
     "criar_gabarito_respostas"  => ProfessorController::class

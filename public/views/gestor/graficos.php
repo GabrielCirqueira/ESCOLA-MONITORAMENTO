@@ -1,5 +1,4 @@
-<main class="main-home ">
-
+<main class="main-home">
     <center>
         <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
     </center>
@@ -42,30 +41,19 @@
             <input type="submit" name="filtro" value="Filtrar">
         </form>
     </div>
-    <br>
-    <br>
 
-    <br>
+    <br><br><br>
 
-
-
-
-    <?php
-
-    if ($data["geral"] != true) {
-
-        if ($data["status"] == false) { ?>
-            <?php
-            foreach ($data["filtros"] as $filtro => $value) {
-                if ($value != "SELECIONAR") {
-                    echo "<br>" . $filtro . ": ";
-                    echo $value . "<br>";
+    <?php if (!$data["geral"]) { ?>
+        <?php if (!$data["status"]) { ?>
+            <?php foreach ($data["filtros"] as $filtro => $value) {
+                if ($value != null) {
+                    echo "<br>" . ucfirst($filtro) . ": " . $value . "<br>";
                 }
-            }
-            ?>
+            } ?>
             <h1>NÃO FORAM ENCONTRADOS RESULTADOS PARA ESSA CONSULTA!</h1>
-        <?php }
-    } else { ?>
+        <?php } ?>
+    <?php } else { ?>
 
         <h1>DESEMPENHO ESCOLAR GERAL</h1>
         <div class="gestor_desempenho_escola">
@@ -73,89 +61,40 @@
                 <?= $data["roscaGeral"] ?>
                 <h3>DESEMPENHO GERAL</h3>
             </div>
-
             <hr>
-
             <div>
                 <?= $data["colunaGeral"] ?>
                 <h3>PROEFICIÊNCIA</h3>
-
             </div>
         </div>
 
         <h1>DESEMPENHO TURNO</h1>
         <div class="gestor_area_turnos_geral">
-            <?php foreach($data["dados_turnos"] as $turno => $value){ ?>
+            <?php foreach ($data["dados_turnos"] as $turno => $value) { ?>
                 <center>
-                <h3><?= $turno ?></h3>
+                    <h3><?= $turno ?></h3>
                 </center>
                 <div class="turno">
-                        <div class="turno_rosca" >
-                            <?= $value[0]?>
-                            <center>
-                            <h4>DESEMPENHO GERAL</h4>
-
-                            </center>
-                        </div>
-                        <div  class="turno_coluna"  >
-                        <?= $value[1]?>
-                        <center>
-                        <h4>PROEFICIÊNCIA</h4>
-
-                        </center>
-                        </div>
+                    <div class="turno_rosca">
+                        <?= $value[0] ?>
+                        <center><h4>DESEMPENHO GERAL</h4></center>
+                    </div>
+                    <div class="turno_coluna">
+                        <?= $value[1] ?>
+                        <center><h4>PROEFICIÊNCIA</h4></center>
+                    </div>
                 </div>
-            <?php }?>
+            <?php } ?>
         </div>
 
         <h1>DESEMPENHO TURMAS</h1>
         <div class="gestor_area_turmas_geral">
-
-            <?php
-            foreach ($data["dadosturmas"] as $turma => $value) {
-            ?>
-
+            <?php foreach ($data["dadosturmas"] as $turma => $value) { ?>
                 <div>
                     <?= $value ?>
                     <span><?= $turma ?></span>
                 </div>
-
-
             <?php } ?>
-        </div> 
-        <?php } ?>
         </div>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+    <?php } ?>
 </main>
