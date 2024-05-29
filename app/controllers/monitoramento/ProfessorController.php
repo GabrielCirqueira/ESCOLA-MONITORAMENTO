@@ -356,7 +356,7 @@ foreach ($percentual_por_descritor as $turma => $descritores) {
 
     $percentual_descritores_turmas[$turma] = $descritores_modificados;
 }
-        
+
 $media_descritores_geral = array();
 
 foreach ($percentual_descritores_turmas as $turma) {
@@ -482,6 +482,7 @@ foreach ($percentual_descritores_turmas as $turma) {
     public static function editar_prova(){
         
         $id = $_POST["id-prova"];
+        $_SESSION["ID_PROVA_EDITAR"] = $id;
 
         $prova_professor = ProfessorModel::GetProvabyID($id);
         $valor = $prova_professor["valor"];
@@ -511,5 +512,90 @@ foreach ($percentual_descritores_turmas as $turma) {
         MainController::Templates("public/views/professor/editar_prova.php","PROFESSOR",$dados);
 
     }
+
+    public static function atualizar_gabarito() {
+        if ($_SESSION["PROFESSOR"]) {
+            $id_prova = $_SESSION["ID_PROVA_EDITAR"];
+            $numero_perguntas = $_POST['numero_perguntas'];
+            $descritor_flag = $_POST['descritor'];
+    
+            // Recuperar descritores e gabarito do formulário
+            $gabarito_prova = [];
+            $descritores_prova = [];
+            
+            for ($contador = 1; $contador <= $numero_perguntas; $contador++) {
+                $descritores_prova[$contador] = $contador . "," . $_POST["DESCRITOR_" . $contador];
+                $gabarito_prova[$contador] = $_POST[$contador];
+            }
+    
+            $descritores = implode(";", $descritores_prova);
+            if ($descritor_flag == "não") {
+                $descritores = NULL;
+            }
+    
+            $gabarito = implode(";", $gabarito_prova);
+    
+            $novo_gabarito_professor = [
+                "descritores" => $descritores,
+                "valor" => $_POST['valor_prova'],
+                "gabarito" => $gabarito,
+                "ID_prova" => $id_prova
+            ];
+
+            ProfessorModel::atualizar_gabarito_professor($novo_gabarito_professor);
+      
+                // Recuperar todas as provas feitas por alunos
+                $provas_alunos = ProfessorModel::GetProvasFeitasbyID($id_prova);
+    
+                foreach ($provas_alunos as $prova_aluno) {
+                    // Recalcular os resultados para cada aluno
+                    $gabarito_professor = explode(";", $novo_gabarito_professor["gabarito"]);
+                    $gabarito_aluno = explode(";", $prova_aluno["perguntas_respostas"]);
+                    $descritores_questoes = explode(";", $prova_aluno["descritores"]);
+    
+                    $acertos_aluno = 0;
+                    $perguntas_certas = [];
+                    $perguntas_erradas = [];
+                    $descritores_corretos = [];
+                    $descritores_errados = [];
+    
+                    foreach ($gabarito_professor as $index => $resposta_correta) {
+                        if ($gabarito_aluno[$index] == $resposta_correta) {
+                            $acertos_aluno++;
+                            $perguntas_certas[] = $gabarito_aluno[$index];
+                            $descritores_corretos[] = $descritores_questoes[$index];
+                        } else {
+                            $perguntas_erradas[] = $gabarito_aluno[$index];
+                            $descritores_errados[] = $descritores_questoes[$index];
+                        }
+                    }
+    
+                    $valor_cada_pergunta = $novo_gabarito_professor["valor"] / count($gabarito_professor);
+                    $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
+    
+                    $dados_atualizacao = [
+                        "ID" => $prova_aluno["id"],
+                        "ID_prova" => $id_prova,
+                        "acertos" => $acertos_aluno,
+                        "porcentagem" => ($acertos_aluno / count($gabarito_professor)) * 100,
+                        "pontos_aluno" => $pontos_aluno,
+                        "perguntas_certas" => implode(";", $perguntas_certas),
+                        "perguntas_erradas" => implode(";", $perguntas_erradas),
+                        "descritores_certos" => implode(";", $descritores_corretos),
+                        "descritores_errados" => implode(";", $descritores_errados),
+                        "pontos_prova" => $_POST['valor_prova']
+                    ];
+  
+                    ProfessorModel::atualizar_gabarito_aluno($dados_atualizacao);
+                }
+    
+                $_SESSION["PopUp_inserir_prova"] = True;
+                header("location: professor_home");
+            
+        } else {
+            header("location: ADM");
+        }
+    }
+    
 
 }

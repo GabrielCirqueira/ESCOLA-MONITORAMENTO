@@ -1,44 +1,43 @@
-<main class="main-home-aluno">
-<center>
-<h1><?= $data["nome_prova"] ?></h1>
+<main class="main-home-professor"> 
+    <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
+    <h2>EDITAR GABARITO</h2>
+    <div class="professor-editar-gabarito">
+        <form action="atualizar_gabarito" method="post">
+            <h3>Valor:</h3>
+            <input type="text" name="valor_prova" value="<?php echo $data["valor"]; ?>"> 
+            <br><br>
 
-</center>
-    <span><b>DISCIPLINA:</b> <?= $data["disciplina"] ?></span><br>
-    <span><b>PROFESSOR: </b><?= $data["nome_professor"] ?></span><br>
-    <span><b>VALOR: </b> <?= $data["valor"] ?></span><br>
-
-    <div class="aluno_inserir_gabarito">
-        <form action="cadastrar_gabarito_aluno" method="post">
             <table>
-                <?php
+                <?php 
                 $contador = 1;
-                while ($contador <= $data["QNT_perguntas"]) { ?>
-                    <tr>
-                        <td>
-                            <span><?php echo $contador?></span>
-                        </td>
-
-                        <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},A" ?>"><span>A</span></div></td>
-                        <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},B" ?>"><span>B</span></div></td>
-                        <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},C" ?>"><span>C</span></div></td>
-                        <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},D" ?>"><span>D</span></div></td>
-                        <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},E" ?>"><span>E</span></div></td>
-     
-
-                    </tr>
-                <?php
-                    $contador++;
-                }
+                while ($contador <= $data["perguntas"]) { 
+                    $resposta = explode(",", $data["gabarito"][$contador - 1])[1];
                 ?>
+                    <tr>
+                        <td><span><?php echo $contador ?></span></td>
+                        <?php if($data["descritores"] != null){ ?>
+                        <td>
+                            <div class="campos-selecionar-descritores">
+                                <input type="text" class="searchInput" required data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}"?>" value="<?php echo substr($data['descritores'][$contador - 1], 2); ?>" placeholder="DESCRITOR">
+                                <div class="descritoresContainer" data-index="<?php echo $contador ?>"></div>
+                            </div>
+                        </td>
+                        <?php } ?>
+
+                        <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},A"?>" <?php echo $resposta == 'A' ? 'checked' : ''; ?>><span>A</span></td>
+                        <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},B"?>" <?php echo $resposta == 'B' ? 'checked' : ''; ?>><span>B</span></td>
+                        <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},C"?>" <?php echo $resposta == 'C' ? 'checked' : ''; ?>><span>C</span></td>
+                        <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},D"?>" <?php echo $resposta == 'D' ? 'checked' : ''; ?>><span>D</span></td>
+                        <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},E"?>" <?php echo $resposta == 'E' ? 'checked' : ''; ?>><span>E</span></td>
+                    </tr>
+                <?php 
+                $contador++;
+                } ?>
             </table>
-            <br><br><br><br>
+            <br><br><br>
             <center>
-                <input type="submit" value="Enviar gabarito" class="botao-form-enviar">
+                <input type="submit" value="Atualizar gabarito" class="botao-form-enviar">
             </center>
-            <br><br><br><br>
-            <br><br><br><br>
         </form>
-
-
     </div>
 </main>

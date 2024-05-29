@@ -22,7 +22,7 @@ class GestorController{
     }
   
     public static function gestor_home() {
-        if ($_SESSION["ADM"]) {
+        if ($_SESSION["GESTOR"]) {
             $dados = self::processarFiltros();
             self::carregarTemplate($dados);
         } else {
