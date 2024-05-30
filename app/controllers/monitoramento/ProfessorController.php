@@ -36,7 +36,7 @@ class ProfessorController{
             ]);
 
         }else{
-            header("location: home");
+            header("location: ADM");
         }
     }
 
@@ -47,11 +47,13 @@ class ProfessorController{
             MainController::Templates("public/views/professor/inserir_gabarito.php","PROFESSOR",$turmas);
         }
             else{
-            header("location: home");
+            header("location: ADM");
         }
     }
 
     public static function criar_gabarito(){
+
+        if($_SESSION["PROFESSOR"]){
 
         if($_POST["gabarito-turmas"] == null){
             $_SESSION["popup_not_turmas"] = True;
@@ -85,7 +87,10 @@ class ProfessorController{
             else{
             header("location: home");
         }
+    }else{
+        header("location: ADM");
     }
+}
 
     public static function criar_gabarito_respostas(){
         if($_SESSION["PROFESSOR"]){
@@ -150,6 +155,8 @@ class ProfessorController{
             ];
             MainController::Templates("public/views/professor/provas.php","PROFESSOR",$dados);
 
+        }else{
+            header("location: ADM");
         }
     }
     public static function prova() {
@@ -206,10 +213,13 @@ class ProfessorController{
             ];
     
             MainController::Templates("public/views/professor/prova.php", "PROFESSOR", $dados);
+        }else{
+            header("location: ADM");
         }
     }
     
     public static function relatorio_professor(){
+        if($_SESSION["PROFESSOR"]){
         $provas_professores = AlunoModel::GetProvas();
         $provas_alunos = AlunoModel::GetProvasFinalizadas();
         $provas = []; 
@@ -224,9 +234,13 @@ class ProfessorController{
         ];
         
         MainController::Templates("public/views/professor/provas_relatorios.php", "PROFESSOR", $dados);
+    }else{
+        header("location: ADM");
     }
+}
 
     public static function relatorio_prova(){
+        if($_SESSION["PROFESSOR"]){
         $id_prova = $_POST["id-prova"];
         $provas = AlunoModel::GetProvasFinalizadas(); 
         $provas_professores = AlunoModel::GetProvas();
@@ -469,7 +483,10 @@ foreach ($percentual_descritores_turmas as $turma) {
         ];
     
         MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);
+    }else{
+        header("location: ADM");
     }
+}
     
 
     public static function calcularPorcentagem($total, $parte){
@@ -480,7 +497,9 @@ foreach ($percentual_descritores_turmas as $turma) {
     }
 
     public static function editar_prova(){
-        
+
+        if($_SESSION["PROFESSOR"]){
+
         $id = $_POST["id-prova"];
         $_SESSION["ID_PROVA_EDITAR"] = $id;
 
@@ -511,7 +530,9 @@ foreach ($percentual_descritores_turmas as $turma) {
         // echo "</pre>";
 
         MainController::Templates("public/views/professor/editar_prova.php","PROFESSOR",$dados);
-
+    }else{
+        header("location: ADM");
+    }
     }
 
     public static function atualizar_gabarito() {

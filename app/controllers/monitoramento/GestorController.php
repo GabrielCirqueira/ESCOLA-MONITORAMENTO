@@ -20,22 +20,24 @@ class GestorController{
             exit;
         }
     }
-  
     public static function gestor_home() {
         if ($_SESSION["GESTOR"]) {
-            $dados = self::processarFiltros();
+            // Verifica se é a primeira inicialização ou se foi clicado no botão "geral"
+            $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]);
+    
+            $dados = self::processarFiltros($btnGeral);
             self::carregarTemplate($dados);
         } else {
             header("location: home");
         }
     }
     
-    private static function processarFiltros() {
+    private static function processarFiltros($btnGeral) {
         $todas_provas = AlunoModel::GetProvasFinalizadas();
         $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
-        $btnGeral = $_POST["geral"] ?? null;
     
         $filtros = self::obterFiltros();
+    
         $dados_turno_geral = self::gerarDadosTurnos();
     
         $dados = [
@@ -45,10 +47,10 @@ class GestorController{
             "professores" => ADModel::GetProfessores(),
             "status" => false,
             "filtros" => $filtros,
-            "roscaGeral" => mainController::gerarGraficoRosca(self::procentagemGeral($todas_provas)),
-            "colunaGeral" => mainController::gerarGraficoColunas(self::GetProeficiencia($todas_provas)),
+            "roscaGeral" =>  MainController::gerarGraficoRosca(self::procentagemGeral($todas_provas)),
+            "colunaGeral" => MainController::gerarGraficoColunas(self::GetProeficiencia($todas_provas)),
             "dados_turnos" => $dados_turno_geral,
-            "geral" => $btnGeral ? true : false,
+            "geral" => $btnGeral
         ];
     
         if ($btnGeral) {
@@ -63,10 +65,11 @@ class GestorController{
     }
     
     private static function obterFiltros() {
-        $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : $_POST['turma'];
-        $turno = ($_POST['turno'] ?? null) === "SELECIONAR" ? null : $_POST['turno'];
-        $disciplina = ($_POST['disciplina'] ?? null) === "SELECIONAR" ? null : $_POST['disciplina'];
-        $professor = ($_POST['professor'] ?? null) === "SELECIONAR" ? null : $_POST['professor']; 
+        $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : ($_POST['turma'] ?? null);
+        $turno = ($_POST['turno'] ?? null) === "SELECIONAR" ? null : ($_POST['turno'] ?? null);
+        $disciplina = ($_POST['disciplina'] ?? null) === "SELECIONAR" ? null : ($_POST['disciplina'] ?? null);
+        $professor = ($_POST['professor'] ?? null) === "SELECIONAR" ? null : ($_POST['professor'] ?? null);
+    
         return [
             "turma" => $turma,
             "turno" => $turno,
@@ -81,8 +84,8 @@ class GestorController{
         
         foreach ($turnos as $turno) {
             $dados_turno_geral[$turno] = [
-                mainController::gerarGraficoRosca(self::procentagemGeral(GestorModel::GetFiltro("turno", $turno))),
-                mainController::gerarGraficoColunas(self::GetProeficiencia(GestorModel::GetFiltro("turno", $turno)))
+                MainController::gerarGraficoRosca(self::procentagemGeral(GestorModel::GetFiltro("turno", $turno))),
+                MainController::gerarGraficoColunas(self::GetProeficiencia(GestorModel::GetFiltro("turno", $turno)))
             ];
         }
     
@@ -92,6 +95,7 @@ class GestorController{
     private static function carregarTemplate($dados) {
         MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
     }
+    
 
     public static function procentagemGeral($provas){
 

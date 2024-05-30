@@ -81,6 +81,7 @@
 
         <?php } ?>
         <br>
+        <?php $_SESSION["USUARIO"] = $user ?>
         <a href="encerrar_sessao" >Sair</a>
 
       </div>

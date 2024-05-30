@@ -7,6 +7,7 @@ use app\models\monitoramento\GestorModel;
 class MainController{
 
     public static function Templates($template,$user = null, $data = null){
+
         include "public/views/plates/head.php";
         include "public/views/plates/header-menu.php";
         include $template;
@@ -23,11 +24,18 @@ class MainController{
     }
 
     public static function encerrar_sessao(){
+
+        if($_SESSION["USUARIO"] == "ALUNO"){
+            $location = "home";
+        }else{
+            $location = "ADM";
+        }
+
         $_SESSION = array();
  
         session_destroy();
 
-        header("location:home");
+        header("location: {$location}");
     }
 
     public static function ADM(){
