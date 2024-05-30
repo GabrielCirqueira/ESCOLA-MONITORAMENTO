@@ -521,3 +521,29 @@ input:checked + .slider:before {
   border-radius: 0px;
   border: 1px solid gray;
 }
+
+.filtros_exibir{
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin:  50px 10px ;
+}
+
+.filtros_exibir h4{
+  margin: 0px;
+ 
+}
+
+.filtros_exibir div{
+  display: flex;
+  flex-direction: column;
+  padding: 9px;
+  background-color: rgba(159, 159, 159, 0.718);
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+ 

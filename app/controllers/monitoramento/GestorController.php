@@ -22,7 +22,7 @@ class GestorController{
     }
     public static function gestor_home() {
         if ($_SESSION["GESTOR"]) {
-            // Verifica se é a primeira inicialização ou se foi clicado no botão "geral"
+
             $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]);
     
             $dados = self::processarFiltros($btnGeral);
@@ -32,37 +32,7 @@ class GestorController{
         }
     }
     
-    private static function processarFiltros($btnGeral) {
-        $todas_provas = AlunoModel::GetProvasFinalizadas();
-        $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
-    
-        $filtros = self::obterFiltros();
-    
-        $dados_turno_geral = self::gerarDadosTurnos();
-    
-        $dados = [
-            "turmas" => ADModel::GetTurmas(),
-            "turnos" => $turnos,
-            "disciplinas" => ADModel::GetDisciplinas(),
-            "professores" => ADModel::GetProfessores(),
-            "status" => false,
-            "filtros" => $filtros,
-            "roscaGeral" =>  MainController::gerarGraficoRosca(self::procentagemGeral($todas_provas)),
-            "colunaGeral" => MainController::gerarGraficoColunas(self::GetProeficiencia($todas_provas)),
-            "dados_turnos" => $dados_turno_geral,
-            "geral" => $btnGeral
-        ];
-    
-        if ($btnGeral) {
-            $dados["dadosturmas"] = self::DadosGeralTurmas($todas_provas);
-            $dados["dadosturnos"] = self::DadosGeralTurno($todas_provas);
-        }
-    
-        $resultados = GestorModel::GetResultadosFiltrados($filtros);
-        $dados["status"] = count($resultados) > 0;
-    
-        return $dados;
-    }
+
     
     private static function obterFiltros() {
         $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : ($_POST['turma'] ?? null);
@@ -94,6 +64,59 @@ class GestorController{
     
     private static function carregarTemplate($dados) {
         MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
+    }
+
+    private static function processarFiltros($btnGeral) {
+        $todas_provas = AlunoModel::GetProvasFinalizadas();
+        $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
+    
+        $filtros = self::obterFiltros();
+    
+        $dados_turno_geral = self::gerarDadosTurnos();
+    
+        $dados = [
+            "turmas" => ADModel::GetTurmas(),
+            "turnos" => $turnos,
+            "disciplinas" => ADModel::GetDisciplinas(),
+            "professores" => ADModel::GetProfessores(),
+            "status" => false,
+            "filtros" => $filtros,
+            "roscaGeral" =>  MainController::gerarGraficoRosca(self::procentagemGeral($todas_provas)),
+            "colunaGeral" => MainController::gerarGraficoColunas(self::GetProeficiencia($todas_provas)),
+            "dados_turnos" => $dados_turno_geral,
+            "geral" => $btnGeral
+        ];
+    
+        if ($btnGeral) {
+            $dados["dadosturmas"] = self::DadosGeralTurmas($todas_provas);
+            $dados["dadosturnos"] = self::DadosGeralTurno($todas_provas);
+        }
+    
+        $resultados = GestorModel::GetResultadosFiltrados($filtros);
+        
+        if(count($resultados) > 0) {
+            $dados["graficos_filtro"] = self::GetGraficosFiltros($resultados);
+
+        }else{
+            $dados["graficos_filtro"] = NULL;
+        } 
+
+        $dados["status"] = count($resultados) > 0;
+    
+        return $dados;
+    }
+
+    public static function GetGraficosFiltros($provas){
+
+        $proeficiencia = self::GetProeficiencia($provas);
+        $porcentagem = self::procentagemGeral($provas);
+ 
+            $dados = [
+                "proeficiencia" => MainController::gerarGraficoColunas($proeficiencia),
+                "porcentagem" => MainController::gerarGraficoRosca($porcentagem)
+            ];
+            return $dados;
+        
     }
     
 

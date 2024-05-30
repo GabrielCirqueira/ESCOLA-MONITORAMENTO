@@ -46,13 +46,49 @@
 
     <?php if (!$data["geral"]) { ?>
         <?php if (!$data["status"]) { ?>
-            <?php foreach ($data["filtros"] as $filtro => $value) {
-                if ($value != null) {
-                    echo "<br>" . ucfirst($filtro) . ": " . $value . "<br>";
-                }
-            } ?>
+
+            <div class="filtros_exibir">
+                <h2>FILTROS:</h2>
+                <?php foreach($data["filtros"] as $filtro => $value ){
+                    if($value != NULL){ ?>
+                    <div>
+                        <h4> <?= $filtro?> </h4>
+                        <span> <?= $value?> </span>
+                    </div>    
+                    <?php } 
+                } ?>
+            </div>
+
             <h1>NÃO FORAM ENCONTRADOS RESULTADOS PARA ESSA CONSULTA!</h1>
-        <?php } ?>
+            <div><br><br><br><br></div>
+        <?php }else{ ?>
+
+            <div class="filtros_exibir">
+                <h2>FILTROS:</h2>
+                <?php foreach($data["filtros"] as $filtro => $value ){
+                    if($value != NULL){ ?>
+                    <div>
+                        <h4> <?= $filtro?> </h4>
+                        <span> <?= $value?> </span>
+                    </div>    
+                    <?php } 
+                } ?>
+            </div>
+
+            <div class="gestor_desempenho_escola">
+            <div class="rosca">
+                <?= $data["graficos_filtro"]["porcentagem"] ?>
+                <h3>DESEMPENHO</h3>
+            </div>
+            <hr>
+            <div>
+                <?= $data["graficos_filtro"]["proeficiencia"] ?>
+                <h3>PROEFICIÊNCIA</h3>
+            </div>
+        </div>
+        <div><br><br><br><br></div>
+            
+        <?php   } ?>
     <?php } else { ?>
 
         <h1>DESEMPENHO ESCOLAR GERAL</h1>
