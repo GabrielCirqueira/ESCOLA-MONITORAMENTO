@@ -540,10 +540,83 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   padding: 9px;
-  background-color: rgba(159, 159, 159, 0.718);
-  border-radius: 5px;
+  background-color: rgba(197, 197, 197, 0.718); 
   justify-content: center;
   align-items: center;
   height: 40px;
 }
- 
+
+.button-vsGeral{
+  width: 300px;
+  height: 30px;
+  background-color: #03a4b9;
+  border: none;
+  color: white; 
+}
+
+.button-vsGeral:hover {
+  background-color: #00899b;
+  cursor: pointer;
+}
+
+.form-filtros-gestor select{
+  width: 150px;
+  height: 30px;
+  font-weight: bold;
+  outline: none;
+  border-radius: 0px;
+  color: rgb(78, 78, 78);
+  border: 1px solid rgb(149, 149, 149);
+  background-color: rgb(255, 255, 255);
+  
+}
+
+.form-filtros-gestor select:hover{
+  background-color: rgb(226, 226, 226);
+  cursor: pointer;
+}
+
+.form-filtros-gestor input[type="submit"]{ 
+  width: 80px;
+  height: 30px; 
+  border-radius: 0px;
+  border: none;
+  background-color: rgb(87, 191, 137);
+  transition: 0.5s ease;
+
+}
+
+.form-filtros-gestor input[type="submit"]:hover{
+  cursor: pointer;
+  background-color: rgb(50, 147, 97); 
+
+}
+
+.form-filtros-gestor .fechar{ 
+  width: 80px;
+  background-color: rgb(255, 106, 106);
+  transition: 0.5s ease;
+  border: none;
+  border-radius: 0px; 
+  height: 30px;
+}
+
+.form-filtros-gestor .fechar:hover{  
+  background-color: rgb(161, 61, 61);
+  cursor: pointer;
+}
+
+.form-filtros-gestor select option{
+  border: none;
+  border-radius: 0px;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #dfdfdfaa;
+  font-size: 15px;
+}
+
+.form-filtros-gestor select option:hover{
+  cursor: pointer;
+  background-color: #00899b; 
+}
+

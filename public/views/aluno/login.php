@@ -11,9 +11,10 @@
         </form>
 
         <!-- <button onclick="Mostrar_campo_email()" class="button-enter-email">Entrar com Email e Senha</button> -->
-        <br> 
+        <br>
     </div>
-<!-- 
+
+    <!-- 
     <div id="campo-email" class="login-aluno">
         <h1> ALUNO</h1>
         <form action="" method="post">

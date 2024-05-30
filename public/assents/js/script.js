@@ -129,6 +129,18 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+function resetForm() {
+    const form = document.getElementById('filterForm');
+    form.reset();
+
+    // Reseta manualmente os selects para o primeiro item
+    document.getElementById('turma').selectedIndex = 0;
+    document.getElementById('turno').selectedIndex = 0;
+    document.getElementById('disciplina').selectedIndex = 0;
+    document.getElementById('professor').selectedIndex = 0;
+    document.getElementById('serie').selectedIndex = 0;
+}
+
 // document.addEventListener('DOMContentLoaded', (event) => { 
 //     const formularios = document.querySelectorAll('form');
 

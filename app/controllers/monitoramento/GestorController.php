@@ -21,8 +21,7 @@ class GestorController{
         }
     }
     public static function gestor_home() {
-        if ($_SESSION["GESTOR"]) {
-
+        if (isset($_SESSION["GESTOR"])) {
             $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]);
     
             $dados = self::processarFiltros($btnGeral);
@@ -32,19 +31,19 @@ class GestorController{
         }
     }
     
-
-    
     private static function obterFiltros() {
         $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : ($_POST['turma'] ?? null);
         $turno = ($_POST['turno'] ?? null) === "SELECIONAR" ? null : ($_POST['turno'] ?? null);
         $disciplina = ($_POST['disciplina'] ?? null) === "SELECIONAR" ? null : ($_POST['disciplina'] ?? null);
         $professor = ($_POST['professor'] ?? null) === "SELECIONAR" ? null : ($_POST['professor'] ?? null);
+        $serie = ($_POST['serie'] ?? null) === "SELECIONAR" ? null : ($_POST['serie'] ?? null);
     
         return [
             "turma" => $turma,
             "turno" => $turno,
             "disciplina" => $disciplina,
             "professor" => $professor,
+            "serie" => $serie
         ];
     }
     
@@ -65,7 +64,7 @@ class GestorController{
     private static function carregarTemplate($dados) {
         MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
     }
-
+    
     private static function processarFiltros($btnGeral) {
         $todas_provas = AlunoModel::GetProvasFinalizadas();
         $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
@@ -94,29 +93,26 @@ class GestorController{
     
         $resultados = GestorModel::GetResultadosFiltrados($filtros);
         
-        if(count($resultados) > 0) {
+        if (count($resultados) > 0) {
             $dados["graficos_filtro"] = self::GetGraficosFiltros($resultados);
-
-        }else{
+        } else {
             $dados["graficos_filtro"] = NULL;
-        } 
-
+        }
+    
         $dados["status"] = count($resultados) > 0;
     
         return $dados;
     }
-
-    public static function GetGraficosFiltros($provas){
-
+    
+    public static function GetGraficosFiltros($provas) {
         $proeficiencia = self::GetProeficiencia($provas);
         $porcentagem = self::procentagemGeral($provas);
- 
-            $dados = [
-                "proeficiencia" => MainController::gerarGraficoColunas($proeficiencia),
-                "porcentagem" => MainController::gerarGraficoRosca($porcentagem)
-            ];
-            return $dados;
-        
+    
+        $dados = [
+            "proeficiencia" => MainController::gerarGraficoColunas($proeficiencia),
+            "porcentagem" => MainController::gerarGraficoRosca($porcentagem)
+        ];
+        return $dados;
     }
     
 
@@ -128,6 +124,7 @@ class GestorController{
         foreach($provas as $prova){
             $porcentagem+= $prova["porcentagem"];
         }
+
 
         return number_format($porcentagem / $numero_linhas,2);
 

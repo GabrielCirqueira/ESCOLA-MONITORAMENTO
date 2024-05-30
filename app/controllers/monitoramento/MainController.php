@@ -91,12 +91,14 @@ class MainController{
         $offset = $circunferencia * (1 - $porcentagem / 100);
     
         return "
-        <svg width='120' height='120' viewBox='0 0 120 120'>
+        <svg 
+        width='120' height='120' viewBox='0 0 120 120'>
             <circle cx='60' cy='60' r='$raio' stroke='#dbd9d9' stroke-width='20' fill='none' />
             <circle class='animated-circle' cx='60' cy='60' r='$raio' stroke='$cor' stroke-width='20' fill='none'
                     stroke-dasharray='$circunferencia' stroke-dashoffset='$circunferencia' data-offset='$offset'
                     transform='rotate(-90 60 60)' />
             <text x='50%' y='50%' text-anchor='middle' dy='.3em' font-size='20' fill='#000'>$porcentagem%</text>
+
         </svg>";
     }
  

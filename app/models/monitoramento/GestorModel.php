@@ -22,7 +22,10 @@ class GestorModel{
         if($filtros['professor']){
             $query .= " AND nome_professor = :professor";
         }
-        
+        if($filtros['serie']){
+            $query .= " AND serie = :serie";
+        }
+
         $stmt = Database::GetInstance()->prepare($query);
     
         if($filtros['turma']){
@@ -36,6 +39,9 @@ class GestorModel{
         }
         if($filtros['professor']){
             $stmt->bindValue(':professor', $filtros['professor']);
+        }
+        if($filtros['serie']){
+            $stmt->bindValue(':serie', $filtros['serie']);
         }
     
         $stmt->execute();
