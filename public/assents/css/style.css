@@ -507,3 +507,17 @@ input:checked + .slider:before {
   display: flex;
   gap: 7px;
 }
+
+.valor_pontos_editar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.valor_pontos_editar input[type="text"]{
+  width: 250px;
+  height: 20px;
+  border-radius: 0px;
+  border: 1px solid gray;
+}

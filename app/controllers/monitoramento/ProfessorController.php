@@ -502,7 +502,8 @@ foreach ($percentual_descritores_turmas as $turma) {
             "gabarito" => $gabarito,
             "descritores" => $descritores,
             "valor"     => $valor,
-            "perguntas"    => $perguntas
+            "perguntas"    => $perguntas,
+            "nome"  => $prova_professor["nome_prova"],    
         ];
 
         // echo "<pre>";

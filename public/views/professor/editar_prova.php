@@ -1,12 +1,14 @@
 <main class="main-home-professor"> 
     <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
-    <h2>EDITAR GABARITO</h2>
+    <h1>EDITAR GABARITO</h1>
+    <h2><?= $data["nome"] ?></h2>
 
-    <br><br>
     <div class="professor-editar-gabarito">
         <form action="atualizar_gabarito" method="post">
-            <h3>Valor:</h3>
+            <div class="valor_pontos_editar">
+            <h2>Valor</h2>
             <input type="text" name="valor_prova" value="<?php echo $data['valor']; ?>"> 
+            </div>
             <br><br>
 
             <input type="hidden" name="numero_perguntas" value="<?php echo $data['perguntas']; ?>">
