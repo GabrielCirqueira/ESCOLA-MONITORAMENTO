@@ -442,7 +442,7 @@ foreach ($percentual_descritores_turmas as $turma) {
         }
         $dados_turma = null;
 
-        if(isset($_POST["turma-filtros"])){
+        if(isset($_POST["filtrar"])){
             $turma = $_POST["turma-filtros"];
             if($turma != "geral"){
                 $filtro_turmas = True;
@@ -468,7 +468,11 @@ foreach ($percentual_descritores_turmas as $turma) {
         // echo "<br>";
         // echo "<pre>";
         // print_r($dados_turma);
-        // echo "</pre>";
+        // echo "</pre>"; 
+
+        $turmass = array_column($dados_turmas, 'turma_nome');
+ 
+        array_multisort($turmass, SORT_ASC, $dados_turmas);
 
         $dados = [
             "dados_turma" => $dados_turmas,

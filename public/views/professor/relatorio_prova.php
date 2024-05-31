@@ -10,31 +10,26 @@
                     <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
             <button class="button-professor-turma" name="turma-filtros" value="geral" type="submit">Desempenho Geral</button>
 
+            <select name="turma-filtros" id="">
+
             <?php
             foreach ($data["dados_turma"] as $turma) { ?>
-                <div>
-                    <button class="button-professor-turma" name="turma-filtros" value="<?= $turma["turma_nome"] ?>" type="submit"><?= $turma["turma_nome"] ?></button>
-                </div>
+                    <option value="<?= $turma["turma_nome"] ?>"><?= $turma["turma_nome"] ?></option>
             <?php
             }
             ?>
+            
+            </select>
+            <button class="button-professor-turma-enviar" name="filtrar" value="filtrar" type="submit">Filtrar</button>
+ 
 
         </form>
     </div>
 
     <?php if($data["filtro"] == false){ ?>
-    <h3>Desempenho total das turmas</h3>
-    <div class="graficos-professor-rosca">
-        <?php
-        foreach ($data["dados_turma"] as $turma) { ?>
-            <div>
-                <?= $turma["grafico"] ?>
-                <span><?= $turma["turma_nome"] ?></span>
-            </div>
-        <?php
-        }
-        ?>
-    </div>
+        
+        <h1>DESEMPENHO GERAL</h1>
+ 
     <br><br>
     <div class="professor-grafico-geral-60">
         <div>
@@ -70,6 +65,19 @@
 
     <?= $data["grafico_colunas"]?>
 <br><br>
+
+<h3>Desempenho total das turmas</h3>
+    <div class="graficos-professor-rosca-turmas">
+        <?php 
+        foreach ($data["dados_turma"] as $turma) { ?>
+            <div>
+                <?= $turma["grafico"] ?>
+                <span><?= $turma["turma_nome"] ?></span>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
 
 <?php }else{?>
     <h3>Desempenho <?= $data["dados_turma_grafico"]["nome"]?></h3>

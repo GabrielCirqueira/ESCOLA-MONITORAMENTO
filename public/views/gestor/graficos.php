@@ -5,9 +5,7 @@
 
     <div class="form-filtros-gestor">
     <form id="filterForm" action="gestor_home" method="post">
-            <center>    
-                <button type="submit" name="geral" class="button-vsGeral" value="geral">VISÃO GERAL</button> <br><br>
-            </center>
+                <button type="submit" name="geral" class="button-vsGeral" value="geral">GERAL</button>
  
         <select name="turma" id="turma">
             <option value="SELECIONAR">TURMA</option>
@@ -68,8 +66,8 @@
     <?php if (!$data["geral"]) { ?>
         <?php if (!$data["status"]) { ?>
 
+                <h2>FILTROS</h2>
             <div class="filtros_exibir">
-                <h2>FILTROS:</h2>
                 <?php foreach ($data["filtros"] as $filtro => $value) {
                     if ($value != NULL) { ?>
                         <div>
@@ -88,8 +86,8 @@
             <div><br><br><br><br></div>
         <?php } else { ?>
 
+                <h2>FILTROS</h2> 
             <div class="filtros_exibir">
-                <h2>FILTROS:</h2>
                 <?php foreach ($data["filtros"] as $filtro => $value) {
                     if ($value != NULL) { ?>
                         <div>

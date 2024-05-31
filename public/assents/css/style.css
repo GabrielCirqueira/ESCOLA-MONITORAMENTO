@@ -383,6 +383,48 @@ input:checked + .slider:before {
   height: 150px;
 }
 
+.graficos-professor-rosca-turmas{
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px; 
+}
+
+.buttons-professor select,.select-turmas-professor{
+  height: 40px;
+  margin: 5px;
+  width: 150px; 
+  font-weight: bold;
+  transition: 0.5s ease;
+  outline: none;
+  border-radius: 0px;
+  color: rgb(78, 78, 78);
+  border: 1px solid rgb(149, 149, 149);
+  background-color: rgb(255, 255, 255);
+  
+}
+
+.button-professor-turma-enviar{
+  height: 40px;
+  margin: 5px;
+  width: 150px; 
+  border-radius: 0px;
+  border: none;
+  background-color: rgb(87, 191, 137);
+  transition: 0.5s ease;
+}
+
+.button-professor-turma-enviar:hover{ 
+  background-color: rgb(54, 151, 101); 
+  cursor: pointer;
+}
+
+.graficos-professor-rosca-turmas div{
+  display: flex;
+  flex-direction: rgb(52, 137, 93);
+  justify-content: center;
+  align-items: center;
+}
+
 .professor-grafico-geral-60{
   display: flex;
   align-items: center;
@@ -437,11 +479,6 @@ input:checked + .slider:before {
   justify-content: center;
 }
 
- 
-
-.gestor_area_turnos_geral{ 
-}
- 
 .turno{
   border: 2px solid rgba(130, 130, 130, 0.333);
   display: flex;
@@ -528,7 +565,7 @@ input:checked + .slider:before {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin:  50px 10px ;
+  margin-bottom: 50px;
 }
 
 .filtros_exibir h4{
@@ -547,9 +584,10 @@ input:checked + .slider:before {
 }
 
 .button-vsGeral{
-  width: 300px;
+  width: 70px;
   height: 30px;
   background-color: #03a4b9;
+  transition: 0.5s ease;
   border: none;
   color: white; 
 }
@@ -563,6 +601,7 @@ input:checked + .slider:before {
   width: 150px;
   height: 30px;
   font-weight: bold;
+  transition: 0.5s ease;
   outline: none;
   border-radius: 0px;
   color: rgb(78, 78, 78);
@@ -577,7 +616,7 @@ input:checked + .slider:before {
 }
 
 .form-filtros-gestor input[type="submit"]{ 
-  width: 80px;
+  width: 70px;
   height: 30px; 
   border-radius: 0px;
   border: none;
@@ -593,7 +632,7 @@ input:checked + .slider:before {
 }
 
 .form-filtros-gestor .fechar{ 
-  width: 80px;
+  width: 70px;
   background-color: rgb(255, 106, 106);
   transition: 0.5s ease;
   border: none;

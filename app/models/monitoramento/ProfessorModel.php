@@ -67,7 +67,7 @@ class ProfessorModel{
     }
 
     public static function GetProvasFeitasbyID($id){
-        $sql = "SELECT * FROM gabarito_alunos WHERE id_prova = :id";
+        $sql = "SELECT * FROM gabarito_alunos WHERE id_prova = :id ORDER BY turma ASC";
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":id", $id);
         $query->execute();
