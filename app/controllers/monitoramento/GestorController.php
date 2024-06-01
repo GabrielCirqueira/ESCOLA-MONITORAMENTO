@@ -29,7 +29,7 @@ class GestorController{
 
             $dados = null;
 
-            var_dump(self::Descritores());
+            self::Descritores();
 
             MainController::Templates("public/views/gestor/descritores.php", "GESTOR", $dados);
 
@@ -38,24 +38,74 @@ class GestorController{
             header("location: home");
         }
     }
-
-    public static function Descritores(){
+ 
+    public static function Descritores() {
         $provas_professores = AlunoModel::GetProvas();
-
-        $descritores = [];
-
-        foreach($provas_professores as $prova){
-            if($prova["descritores"] != null){
-                foreach(explode(";",$prova["descritores"]) as $descritor){
-                    $desc = explode(",",$descritor); 
-                    $descritores[] = $desc[1];
+        $provas_alunos = AlunoModel::GetProvasFinalizadas();
+    
+        $descritores_alunos_todos = [];
+    
+        foreach($provas_alunos as $prova){
+            if($prova["descritores"] != null){             
+                $descritor_aluno = [];
+                $descritores_P = explode(";", $prova["descritores"]);
+                $descritores_certos = $prova["descritores_certos"] ? explode(";", $prova["descritores_certos"]) : [];
+                $descritores_errados = $prova["descritores_errados"] ? explode(";", $prova["descritores_errados"]) : [];
+                
+                $contador_descritores = [];
+                $acertos_descritores = [];
+    
+                // Contar quantas questões existem para cada descritor
+                foreach($descritores_P as $descritor) { 
+                    $desc = explode(",", $descritor); 
+                    if (count($desc) == 2) { // Verifica se explode resultou em dois elementos
+                        $desc = $desc[1];
+                        
+                        if (!isset($contador_descritores[$desc])) {
+                            $contador_descritores[$desc] = 0;
+                            $acertos_descritores[$desc] = 0;
+                        }
+                        $contador_descritores[$desc]++;
+                    }
                 }
+    
+                // Contar quantos acertos para cada descritor
+                foreach($descritores_certos as $descritor) { 
+                    $desc = explode(",", $descritor);
+                    if (count($desc) == 2) { // Verifica se explode resultou em dois elementos
+                        $desc = $desc[1];
+                        if (isset($acertos_descritores[$desc])) {
+                            $acertos_descritores[$desc]++;
+                        }
+                    }
+                }
+    
+                // Calcular a porcentagem de acertos por descritor
+                foreach($contador_descritores as $desc => $total) {
+                    if ($total > 0) {
+                        $acertos = $acertos_descritores[$desc];
+                        $porcentagem = ($acertos / $total) * 100;
+                        $descritor_aluno[$desc] = $porcentagem;
+                    }
+                }
+
+                $descritor_aluno = [
+                    $prova["aluno"] => $descritor_aluno
+                ];
+    
+                $descritores_alunos_todos[] = $descritor_aluno;
             }
-
         }
-
-        return array_unique($descritores);
+    
+        echo "<pre>";
+        print_r($descritores_alunos_todos);
+        // print_r($provas_alunos);
+        echo "</pre>";
+        echo "<br>";
+    
+        return $descritores_alunos_todos;
     }
+    
     
     private static function obterFiltros() {
         $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : ($_POST['turma'] ?? null);
