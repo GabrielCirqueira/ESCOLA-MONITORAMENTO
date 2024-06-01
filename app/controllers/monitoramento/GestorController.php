@@ -22,13 +22,39 @@ class GestorController{
     }
     public static function gestor_home() {
         if (isset($_SESSION["GESTOR"])) {
-            $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]);
+            // $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]);
     
-            $dados = self::processarFiltros($btnGeral);
-            self::carregarTemplate($dados);
+            // // $dados = self::processarFiltros($btnGeral);
+            // // self::carregarTemplate($dados);
+
+            $dados = null;
+
+            var_dump(self::Descritores());
+
+            MainController::Templates("public/views/gestor/descritores.php", "GESTOR", $dados);
+
+
         } else {
             header("location: home");
         }
+    }
+
+    public static function Descritores(){
+        $provas_professores = AlunoModel::GetProvas();
+
+        $descritores = [];
+
+        foreach($provas_professores as $prova){
+            if($prova["descritores"] != null){
+                foreach(explode(";",$prova["descritores"]) as $descritor){
+                    $desc = explode(",",$descritor); 
+                    $descritores[] = $desc[1];
+                }
+            }
+
+        }
+
+        return array_unique($descritores);
     }
     
     private static function obterFiltros() {
@@ -92,6 +118,10 @@ class GestorController{
         }
     
         $resultados = GestorModel::GetResultadosFiltrados($filtros);
+
+        echo "<pre>";
+        print_r($resultados);
+        echo "</pre>";
         
         if (count($resultados) > 0) {
             $dados["graficos_filtro"] = self::GetGraficosFiltros($resultados);
