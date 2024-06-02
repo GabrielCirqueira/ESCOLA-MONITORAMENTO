@@ -59,7 +59,6 @@ class MainController{
     }
 
     public static function gerarGraficoRosca($porcentagem, $corPersonalizada = null) {
-        // Definindo cores para cada intervalo de porcentagem, caso não haja cor personalizada
         if ($corPersonalizada === null) {
             if ($porcentagem < 10) {
                 $cor = "#fa4b4b"; // Vermelho claro
@@ -103,11 +102,10 @@ class MainController{
     }
  
     public static function gerarGraficoColunas($dados) {
-        $largura_coluna = 50; // Largura de cada coluna em pixels
-        $espaco_coluna = 50; // Espaço entre as colunas
-        $altura_svg = 300; // Altura total do SVG
-    
-        // Define as cores mais claras para cada faixa de proficiência
+        $largura_coluna = 50;
+        $espaco_coluna = 50;
+        $altura_svg = 300;
+
         $cores = array(
             "Abaixo do Básico" => "#ff5e5e", // Vermelho claro
             "Básico" => "#ffba52", // Laranja claro
@@ -116,7 +114,7 @@ class MainController{
         );
     
         $svg = "<svg width='" . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 60) . "' height='$altura_svg' viewBox='0 0 " . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 60) . " $altura_svg'>";
-    
+
         $svg .= "<text x='" . (((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 40) / 2) . "' y='20' text-anchor='middle' font-size='16'>ALUNOS</text>";
         for ($i = 10; $i <= 100; $i += 10) {
             $y = 250 - ($i / 100 * 200); 
@@ -135,6 +133,57 @@ class MainController{
         }
         $svg .= "</svg>";
     
+        return $svg;
+    }
+
+    public static function gerarGraficoHorizontal($dados,$descritor){
+        $altura_barra = 55;
+        $largura_svg = 600;
+        $altura_svg = 80;
+        $margem_esquerda = 100;
+    
+        $cores = array(
+            "Abaixo do Básico" => "#FF6B6B", // Vermelho
+            "Básico" => "#FFA63D", // Laranja
+            "Médio" => "#D4FF3B", // Amarelo claro
+            "Avançado" => "#44C548" // Verde
+        );
+    
+        $total = array_sum($dados);
+    
+        $svg = "<svg width='$largura_svg' height='$altura_svg' viewBox='0 0 $largura_svg $altura_svg' xmlns='http://www.w3.org/2000/svg'>";
+        
+        $svg .= "<text x='35' y='" . ($altura_barra / 2 + 14) . "' text-anchor='start' font-size='14' fill='#666' font-weight='bold'>$descritor</text>";
+    
+        $svg .= "<line x1='100' y1='60' x2='80' y2='47.5' stroke='#ccc' />";
+        
+        $svg .= "<line x1='35' y1='" . ($altura_barra / 2 + 20) . "' x2='" . $margem_esquerda . "' y2='" . ($altura_barra / 2 + 20) . "' stroke='#ccc' />";
+        
+        $svg .= "<line x1='$margem_esquerda' y1='-10' x2='$margem_esquerda' y2='" . ($altura_barra + 50) . "' stroke='#ccc' />";
+    
+        $svg .= "<line x1='$margem_esquerda' y1='" . ($altura_barra + 20) . "' x2='" . ($largura_svg) . "' y2='" . ($altura_barra + 20) . "' stroke='#ccc' />";
+    
+        for ($i = 0; $i <= 12; $i++) {
+            if($i == 12){
+            $x_grid = ($margem_esquerda + 9.5) + $i * 40;
+            $svg .= "<line x1='$x_grid' y1='20' x2='$x_grid' y2='" . ($altura_barra + 20) . "' stroke='#ccc' />";             
+            }else{
+            $x_grid = ($margem_esquerda + 15) + $i * 40;
+            $svg .= "<line x1='$x_grid' y1='20' x2='$x_grid' y2='" . ($altura_barra + 20) . "' stroke='#ccc' />";
+    
+            }
+        }
+    
+        $x = $margem_esquerda + 10;
+    
+        foreach ($dados as $proficiencia => $quantidade) {
+            $largura_barra = ($quantidade / $total) * ($largura_svg - $margem_esquerda - 20);
+            $svg .= "<rect x='$x' y='15' width='$largura_barra' height='$altura_barra' fill='" . $cores[$proficiencia] . "' />";
+            $svg .= "<text x='" . ($x + $largura_barra / 2) . "' y='12' text-anchor='middle' font-size='16' fill='#666' font-weight='bold'>" . round(($quantidade / $total) * 100) . "%</text>";
+            $x += $largura_barra;
+        }
+    
+        $svg .= "</svg>";
         return $svg;
     }
     
