@@ -22,16 +22,16 @@ class GestorController{
     }
     public static function gestor_home() {
         if (isset($_SESSION["GESTOR"])) {
-            // $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]);
-    
-            // // $dados = self::processarFiltros($btnGeral);
-            // // self::carregarTemplate($dados);
+
+            $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]);
+            $dados = self::processarFiltros($btnGeral);
+            self::carregarTemplate($dados);
 
             $dados = null;
 
-            self::Descritores();
 
-            MainController::Templates("public/views/gestor/descritores.php", "GESTOR", $dados);
+            // MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
+            // MainController::Templates("public/views/gestor/descritores.php", "GESTOR", $dados);
 
 
         } else {
@@ -39,9 +39,9 @@ class GestorController{
         }
     }
  
-    public static function Descritores() {
+    public static function Descritores($provas_alunos) {
         $provas_professores = AlunoModel::GetProvas();
-        $provas_alunos = AlunoModel::GetProvasFinalizadas();
+        // $provas_alunos = AlunoModel::GetProvasFinalizadas();
     
         $descritores_alunos_todos = [];
     
@@ -88,24 +88,79 @@ class GestorController{
                         $descritor_aluno[$desc] = $porcentagem;
                     }
                 }
-
-                $descritor_aluno = [
-                    $prova["aluno"] => $descritor_aluno
-                ];
-    
+ 
                 $descritores_alunos_todos[] = $descritor_aluno;
             }
         }
     
-        echo "<pre>";
-        print_r($descritores_alunos_todos);
-        // print_r($provas_alunos);
-        echo "</pre>";
-        echo "<br>";
+        // echo "<pre>";
+        // print_r($descritores_alunos_todos);
+        // // print_r($provas_alunos);
+        // echo "</pre>";
+        // echo "<br>";
     
         return $descritores_alunos_todos;
     }
+
+    public static function DadosDescritores($DescAlunos) { 
+        $descritores_total = [];
     
+        // Inicialize o array descritores_total com as estruturas necessárias
+        foreach ($DescAlunos as $descritores) {
+            foreach ($descritores as $descritor => $value) {
+                if (!isset($descritores_total[$descritor])) {
+                    $descritores_total[$descritor] = [
+                        "soma_porcentagem" => 0,
+                        "quantidade" => 0,
+                        "proeficiencia" => [
+                            "Abaixo do Básico" => 0,
+                            "Básico" => 0,
+                            "Médio" => 0,
+                            "Avançado" => 0
+                        ],
+                    ];
+                }
+            }
+        }
+    
+        // Calcule a soma das porcentagens e a contagem de proficiências
+        foreach ($DescAlunos as $descritores) {
+            foreach ($descritores as $descritor => $value) {
+                $descritores_total[$descritor]["soma_porcentagem"] += $value;
+                $descritores_total[$descritor]["quantidade"]++;
+    
+                if ($value < 25) {
+                    $descritores_total[$descritor]["proeficiencia"]["Abaixo do Básico"]++;
+                } elseif ($value >= 25 && $value < 50) {
+                    $descritores_total[$descritor]["proeficiencia"]["Básico"]++;
+                } elseif ($value >= 50 && $value < 75) {
+                    $descritores_total[$descritor]["proeficiencia"]["Médio"]++;
+                } else {
+                    $descritores_total[$descritor]["proeficiencia"]["Avançado"]++;
+                }
+            }
+        }
+    
+        // Calcule a porcentagem geral e a porcentagem de cada faixa de proficiência para cada descritor
+        foreach ($descritores_total as $descritor => $data) {
+            $quantidade = $data["quantidade"];
+            $descritores_total[$descritor]["porcentagem"] = number_format($data["soma_porcentagem"] / $quantidade,1);
+    
+            // Calcular a porcentagem para cada faixa de proficiência
+            foreach ($data["proeficiencia"] as $faixa => $contagem) {
+                $descritores_total[$descritor]["proeficiencia"][$faixa] = number_format(($contagem / $quantidade) * 100,0);
+            }
+    
+            unset($descritores_total[$descritor]["soma_porcentagem"]);
+            unset($descritores_total[$descritor]["quantidade"]);
+        }
+    
+        echo "<pre>";
+        print_r($descritores_total);
+        echo "</pre>";
+    
+        return $descritores_total;
+    }
     
     private static function obterFiltros() {
         $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : ($_POST['turma'] ?? null);
@@ -169,9 +224,12 @@ class GestorController{
     
         $resultados = GestorModel::GetResultadosFiltrados($filtros);
 
-        echo "<pre>";
-        print_r($resultados);
-        echo "</pre>";
+        self::DadosDescritores(self::Descritores($resultados)); 
+
+
+        // echo "<pre>";
+        // print_r($resultados);
+        // echo "</pre>";
         
         if (count($resultados) > 0) {
             $dados["graficos_filtro"] = self::GetGraficosFiltros($resultados);
