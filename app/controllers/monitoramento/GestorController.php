@@ -24,18 +24,60 @@ class GestorController{
         if (isset($_SESSION["GESTOR"])) {
 
             $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]);
-            $dados = self::processarFiltros($btnGeral);
-            self::carregarTemplate($dados);
-
             $dados = null;
+            $dados = self::processarFiltros($btnGeral);
 
 
-            // MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
+
+            MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
             // MainController::Templates("public/views/gestor/descritores.php", "GESTOR", $dados);
 
 
         } else {
-            header("location: home");
+            header("location: ADM");
+        }
+    }
+
+    public static function gestor_descritores(){
+        if (isset($_SESSION["GESTOR"])) {
+
+            $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
+
+
+
+            $filtros = self::obterFiltros();
+            $resultados = GestorModel::GetResultadosFiltrados($filtros);
+            $descritores = self::DadosDescritores(self::Descritores($resultados));
+
+            uasort($descritores, function ($a, $b) {
+                return $a['porcentagem'] <=> $b['porcentagem'];
+            });
+
+            // echo "<pre>";
+            // print_r($descritores);
+            // echo "</pre>";
+            $disciplinas = ["Língua Portuguesa", "Matemática", "Física", "Biologia", "Química"];
+
+            $dados = [
+                "filtros"       => $filtros,
+                "turmas"        => ADModel::GetTurmas(),
+                "professores"   => ADModel::GetProfessores(),
+                "turnos"        => $turnos,
+                "descritores"   => $descritores,
+                "disciplinas"   => $disciplinas
+            ];
+ 
+            $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]); 
+
+            if($btnGeral){
+                $dados["geral"] = True;
+            }else{
+                $dados["geral"] = False;
+            }
+
+            MainController::Templates("public/views/gestor/descritores.php", "GESTOR", $dados);
+        }else{
+            header("location:ADM");
         }
     }
  
@@ -154,10 +196,16 @@ class GestorController{
             unset($descritores_total[$descritor]["soma_porcentagem"]);
             unset($descritores_total[$descritor]["quantidade"]);
         }
+
+        foreach($descritores_total as $descritor => $value){
+            $descritores_total[$descritor]["proeficiencia"] = MainController::gerarGraficoHorizontal($value["proeficiencia"],$descritor);
+            $descritores_total[$descritor]["porcentagem_grafico"] = MainController::gerarGraficoRosca($value["porcentagem"]);
+            $descritores_total[$descritor]["porcentagem"] = $value["porcentagem"];
+        }
     
-        echo "<pre>";
-        print_r($descritores_total);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($descritores_total);
+        // echo "</pre>";
     
         return $descritores_total;
     }
@@ -192,10 +240,6 @@ class GestorController{
         return $dados_turno_geral;
     }
     
-    private static function carregarTemplate($dados) {
-        MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
-    }
-    
     private static function processarFiltros($btnGeral) {
         $todas_provas = AlunoModel::GetProvasFinalizadas();
         $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
@@ -224,7 +268,7 @@ class GestorController{
     
         $resultados = GestorModel::GetResultadosFiltrados($filtros);
 
-        self::DadosDescritores(self::Descritores($resultados)); 
+        // self::DadosDescritores(self::Descritores($resultados)); 
 
 
         // echo "<pre>";

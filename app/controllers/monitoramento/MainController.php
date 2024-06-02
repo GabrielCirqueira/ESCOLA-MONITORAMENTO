@@ -136,10 +136,10 @@ class MainController{
         return $svg;
     }
 
-    public static function gerarGraficoHorizontal($dados,$descritor){
+    public static function gerarGraficoHorizontal($dados, $descritor) {
         $altura_barra = 55;
         $largura_svg = 600;
-        $altura_svg = 80;
+        $altura_svg = 90; // Aumentando a altura do SVG para 90
         $margem_esquerda = 100;
     
         $cores = array(
@@ -159,18 +159,17 @@ class MainController{
         
         $svg .= "<line x1='35' y1='" . ($altura_barra / 2 + 20) . "' x2='" . $margem_esquerda . "' y2='" . ($altura_barra / 2 + 20) . "' stroke='#ccc' />";
         
-        $svg .= "<line x1='$margem_esquerda' y1='-10' x2='$margem_esquerda' y2='" . ($altura_barra + 50) . "' stroke='#ccc' />";
+        $svg .= "<line x1='$margem_esquerda' y1='0' x2='$margem_esquerda' y2='" . ($altura_barra + 50) . "' stroke='#ccc' />";
     
-        $svg .= "<line x1='$margem_esquerda' y1='" . ($altura_barra + 20) . "' x2='" . ($largura_svg) . "' y2='" . ($altura_barra + 20) . "' stroke='#ccc' />";
+        $svg .= "<line x1='$margem_esquerda' y1='" . ($altura_barra + 35) . "' x2='" . ($largura_svg) . "' y2='" . ($altura_barra + 35) . "' stroke='#ccc' />";
     
         for ($i = 0; $i <= 12; $i++) {
-            if($i == 12){
-            $x_grid = ($margem_esquerda + 9.5) + $i * 40;
-            $svg .= "<line x1='$x_grid' y1='20' x2='$x_grid' y2='" . ($altura_barra + 20) . "' stroke='#ccc' />";             
-            }else{
-            $x_grid = ($margem_esquerda + 15) + $i * 40;
-            $svg .= "<line x1='$x_grid' y1='20' x2='$x_grid' y2='" . ($altura_barra + 20) . "' stroke='#ccc' />";
-    
+            if ($i == 12) {
+                $x_grid = ($margem_esquerda + 9.5) + $i * 40;
+                $svg .= "<line x1='$x_grid' y1='35' x2='$x_grid' y2='" . ($altura_barra + 35) . "' stroke='#ccc' />";             
+            } else {
+                $x_grid = ($margem_esquerda + 15) + $i * 40;
+                $svg .= "<line x1='$x_grid' y1='35' x2='$x_grid' y2='" . ($altura_barra + 35) . "' stroke='#ccc' />";
             }
         }
     
@@ -178,9 +177,13 @@ class MainController{
     
         foreach ($dados as $proficiencia => $quantidade) {
             $largura_barra = ($quantidade / $total) * ($largura_svg - $margem_esquerda - 20);
-            $svg .= "<rect x='$x' y='15' width='$largura_barra' height='$altura_barra' fill='" . $cores[$proficiencia] . "' />";
-            $svg .= "<text x='" . ($x + $largura_barra / 2) . "' y='12' text-anchor='middle' font-size='16' fill='#666' font-weight='bold'>" . round(($quantidade / $total) * 100) . "%</text>";
-            $x += $largura_barra;
+            $svg .= "<rect x='$x' y='23' width='0' height='$altura_barra' fill='" . $cores[$proficiencia] . "'>";
+            $svg .= "<animate attributeName='width' from='0' to='$largura_barra' dur='1s' fill='freeze' />";
+            $svg .= "</rect>";
+            if($quantidade > 0) {
+                $svg .= "<text x='" . ($x + $largura_barra / 2) . "' y='20' text-anchor='middle' font-size='16' fill='#666' font-weight='bold'>" . round(($quantidade / $total) * 100) . "%</text>";
+                $x += $largura_barra;
+            }
         }
     
         $svg .= "</svg>";

@@ -66,7 +66,7 @@
     <?php if (!$data["geral"]) { ?>
         <?php if (!$data["status"]) { ?>
 
-                <h2>FILTROS</h2>
+        <h2>FILTROS</h2>
             <div class="filtros_exibir">
                 <?php foreach ($data["filtros"] as $filtro => $value) {
                     if ($value != NULL) { ?>

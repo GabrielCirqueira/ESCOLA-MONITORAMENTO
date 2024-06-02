@@ -137,8 +137,19 @@ function resetForm() {
     document.getElementById('turma').selectedIndex = 0;
     document.getElementById('turno').selectedIndex = 0;
     document.getElementById('disciplina').selectedIndex = 0;
-    document.getElementById('professor').selectedIndex = 0;
     document.getElementById('serie').selectedIndex = 0;
+    document.getElementById('professor').selectedIndex = 0;
+}
+
+function resetFormDesc() {
+    const form = document.getElementById('filterFormDesc');
+    form.reset();
+
+    // Reseta manualmente os selects para o primeiro item
+    document.getElementById('turma').selectedIndex = 0;
+    document.getElementById('turno').selectedIndex = 0;
+    document.getElementById('disciplina').selectedIndex = 0;
+    document.getElementById('serie').selectedIndex = 0; 
 }
 
 // document.addEventListener('DOMContentLoaded', (event) => { 

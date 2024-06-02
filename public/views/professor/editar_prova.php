@@ -10,6 +10,9 @@
             <input type="text" name="valor_prova" value="<?php echo $data['valor']; ?>"> 
             </div>
             <br><br>
+            <pre>
+                <?php print_r($data["descritores"])?>
+            </pre>
 
             <input type="hidden" name="numero_perguntas" value="<?php echo $data['perguntas']; ?>">
             <input type="hidden" name="descritor" value="<?php echo isset($data['descritores']) ? 'sim' : 'não'; ?>">
@@ -27,7 +30,13 @@
                         <?php if ($data["descritores"] != null) { ?>
                         <td>
                             <div class="campos-selecionar-descritores">
-                                <input type="text" class="searchInput" required data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}" ?>" value="<?php echo substr($data['descritores'][$contador - 1], 2); ?>" placeholder="DESCRITOR">
+                                <input type="text" class="searchInput" required data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}" ?>" value="<?php if($contador < 10){
+                                    echo substr($data['descritores'][$contador - 1], 2);
+                                }else if($contador >= 10 && $contador < 100){
+                                    echo substr($data['descritores'][$contador - 1], 3);
+                                }else{
+                                    echo substr($data['descritores'][$contador - 1], 4);
+                                } ?>" placeholder="DESCRITOR">
                                 <div class="descritoresContainer" data-index="<?php echo $contador ?>"></div>
                             </div>
                         </td>

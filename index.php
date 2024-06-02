@@ -48,6 +48,7 @@ $rotas = [
     "cadastrar_gabarito_aluno"  => AlunoController::class,
     "gabarito_aluno"            => AlunoController::class,
     "gestor_home"               => GestorController::class,
+    "gestor_descritores"        => GestorController::class,
     "login_gestor_verifica"     => GestorController::class,
     "home_professor"            => ProfessorController::class,
     "professor_home"            => ProfessorController::class,
