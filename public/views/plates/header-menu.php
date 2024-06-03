@@ -2,7 +2,10 @@
   <header class="header">
 
     <div class="menu">
-      <i class="fas fa-bars fa-2x" style="color:gray;width:20px"></i>
+      <?php if ($user != "ALUNO" && $user != "home") { ?>
+        <i class="fas fa-bars fa-2x" id="icone-menu-esquerdo-lateral" style="color:gray;width:20px"></i>
+
+      <?php } ?>
     </div>
 
     <div class="img-tile">
@@ -65,15 +68,16 @@
           <hr>
           <h4>DISCIPLINA(S):</h4>
           <span>
-            <?php 
-            
-            if(strpos($_SESSION["disciplinas"],";")){
-              $materias = explode(";",$_SESSION["disciplinas"]);
+            <?php
+
+            if (strpos($_SESSION["disciplinas"], ";")) {
+              $materias = explode(";", $_SESSION["disciplinas"]);
               foreach ($materias as $materia) { ?>
-              <span><?= $materia ?> <br> </span>
-              <?php }}else{?>
-                <span><?= $_SESSION["disciplinas"] ?></span>
-              <?php }?>
+                <span><?= $materia ?> <br> </span>
+              <?php }
+            } else { ?>
+              <span><?= $_SESSION["disciplinas"] ?></span>
+            <?php } ?>
           </span>
           <hr>
         <?php } else if ($user == "GESTOR") { ?>
@@ -82,13 +86,56 @@
         <?php } ?>
         <br>
         <?php $_SESSION["USUARIO"] = $user ?>
-        <a href="encerrar_sessao" >Sair</a>
+        <a class="button-sair-menu" href="encerrar_sessao">Sair</a>
 
       </div>
 
       <div class="menu-lateral-main-footer">
         Gabriel Cirqueira $)
       </div>
+    </div>
+
+  </div>
+
+  <div id="menu-lateral-esquerdo-icone-conteudo" class="menu-lateral-esquerdo-main">
+
+
+
+    <div class="conteudo-menu-lateral-erquerdo">
+
+      <div class="menu-lateral-main-header">
+
+        <div>
+          <img src="public/assents/img/imagem3.png" alt="BRAZÃO NSL">
+        </div>
+
+        <h2>MENU</h2>
+      </div>
+      <div class="menu-lateral-main-main">
+
+        <div class="menu-lateral-esquerdo-botoes" >
+
+          <?php if ($user == "GESTOR") { ?>
+            <a class="button-menu" href="gestor_home">DESEMPENHO ESCOLAR</a>
+            <a class="button-menu" href="gestor_descritores">DESEMPENHO DESCRITORES</a>
+          <?php } else if ($user == "PROFESSOR") { ?>
+            <a class="button-menu" href="professor_home">TELA INICIAL</a>
+            <a class="button-menu" href="inserir_gabarito">ADD PROVA</a>
+            <a class="button-menu" href="ver_provas">PROVAS</a>
+            <a class="button-menu" href="relatorio_professor">RELATORIOS</a> 
+
+          <?php } ?>
+        </div>
+
+      </div>
+
+      <div class="menu-lateral-main-footer">
+        Gabriel Cirqueira $)
+      </div>
+    </div>
+
+    <div class="icone-menu-lateral-esquerdo-fechar">
+      <i class="fas fa-times fa-2x" style="color: gray;"></i>
     </div>
 
   </div>

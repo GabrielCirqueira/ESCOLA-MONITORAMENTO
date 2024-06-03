@@ -97,25 +97,38 @@ function carregarConteudo(arquivo) {
     });
 }); 
  
-const menuBtn = document.getElementById("icone-menu-lateral")
 const menu = document.getElementById("area_menu_lateral")
+const menuBtn = document.getElementById("icone-menu-lateral")
 const menu_conteudo = document.getElementById("menu-lateral-icone-conteudo")
 const icone_fechar_menu = document.querySelector(".icone-menu-lateral-fechar")
-
-console.log(menu)
+//menu esquerdo
+const menuBtnleft = document.getElementById("icone-menu-esquerdo-lateral")
+const menu_conteudo_left = document.getElementById("menu-lateral-esquerdo-icone-conteudo")
+const icone_fechar_menu_left = document.querySelector(".icone-menu-lateral-esquerdo-fechar")
+ 
 
 icone_fechar_menu.addEventListener('click', function() {
-    console.log("sefsf")
     menu.style.display = "none"
     menu.style.backgroundColor = "rgba(0, 0, 0, 0)"
     menu_conteudo.style.right = '-320px'
 })
 
 menuBtn.addEventListener('click', function() {
-    console.log("sefsf")
     menu.style.display = "block"
     menu.style.backgroundColor = "rgba(0, 0, 0, 0.507)"
     menu_conteudo.style.right = '0px'
+})
+
+icone_fechar_menu_left.addEventListener('click', function() {
+    menu.style.display = "none"
+    menu.style.backgroundColor = "rgba(0, 0, 0, 0)"
+    menu_conteudo_left.style.left = '-320px'
+})
+
+menuBtnleft.addEventListener('click', function() {
+    menu.style.display = "block"
+    menu.style.backgroundColor = "rgba(0, 0, 0, 0.507)"
+    menu_conteudo_left.style.left = '0px'
 })
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -144,7 +157,7 @@ function resetForm() {
 function resetFormDesc() {
     const form = document.getElementById('filterFormDesc');
     form.reset();
-
+ 
     // Reseta manualmente os selects para o primeiro item
     document.getElementById('turma').selectedIndex = 0;
     document.getElementById('turno').selectedIndex = 0;

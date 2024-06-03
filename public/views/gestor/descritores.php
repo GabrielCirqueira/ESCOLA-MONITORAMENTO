@@ -35,7 +35,7 @@
         <?php } ?>
     </select>
  
-        <select name="serie" id="serie">
+    <select name="serie" id="serie">
             <option value="SELECIONAR">SÉRIE</option>
             <?php
                 $selected_1 = ($data["filtros"]["serie"] ?? '') == '1' ? 'selected' : '';
@@ -55,6 +55,32 @@
 <?php if($data["geral"]){ ?>
 
 <h2> DESEMPENHO GERAL DESCRITORES</h2>
+
+<div class="area-descritores-cores">
+
+<div class="descritores-cor">
+    <div style="background-color:#FF6B6B ;" ></div>
+    <span>Abaixo do Básico
+</span>
+</div>
+
+<div class="descritores-cor">
+    <div style="background-color:#FFA63D ;" ></div>
+    <span>Básico
+</span>
+</div>
+
+<div class="descritores-cor">
+    <div style="background-color:#D4FF3B ;" ></div>
+    <span>Médio</span>
+</div>
+
+<div class="descritores-cor">
+    <div style="background-color:#44C548 ;" ></div>
+    <span>Avançado</span>
+</div>
+
+</div>
 
 <div class="area-descritores">
     <?php foreach($data["descritores"] as $descritor => $value){ ?>
@@ -87,6 +113,30 @@
                 <?php }
                 } ?>
             </div>
+
+            <div class="area-descritores-cores">
+
+<div class="descritores-cor">
+    <div style="background-color:#FF6B6B ;" ></div>
+    <span>Abaixo do Básico</span>
+</div>
+
+<div class="descritores-cor">
+    <div style="background-color:#FFA63D ;" ></div>
+    <span>Básico</span>
+</div>
+
+<div class="descritores-cor">
+    <div style="background-color:#D4FF3B ;" ></div>
+    <span>Médio</span>
+</div>
+
+<div class="descritores-cor">
+    <div style="background-color:#44C548 ;" ></div>
+    <span>Avançado</span>
+</div>
+
+</div>
 
             <div class="area-descritores">
     <?php foreach($data["descritores"] as $descritor => $value){ ?>

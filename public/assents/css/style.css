@@ -49,9 +49,25 @@ td {
   height: 100%;  
 } 
 
+.menu-lateral-esquerdo-main{
+  display: flex; 
+  top: 0px;
+  left: -320px;
+  position: fixed;
+  transition: 0.8s ease;
+  height: 100%;  
+} 
+
+
 .conteudo-menu-lateral{
   background-color: rgb(255, 255, 255);
   width: 270px;
+}
+
+.conteudo-menu-lateral-erquerdo{
+  background-color: rgb(77, 77, 77);
+  color: white;
+  width: 220px;
 }
 
 .icone-menu-lateral-fechar { 
@@ -62,6 +78,17 @@ td {
 }
 
 .icone-menu-lateral-fechar:hover {  
+  cursor: pointer;
+}
+
+.icone-menu-lateral-esquerdo-fechar { 
+  background-color: rgb(77, 77, 77);
+  height: 35px;
+  padding: 10px;
+  border-radius: 0px 0px 10px 0px;
+}
+
+.icone-menu-lateral-esquerdo-fechar:hover {  
   cursor: pointer;
 }
 
@@ -85,7 +112,7 @@ td {
   margin: 10px 0px;
 }
 
-.menu-lateral-main-main a{
+.button-sair-menu{
   background-color: rgb(167, 45, 45);
   padding: 10px 20px;
   color: white;
@@ -97,9 +124,28 @@ td {
   font-weight: bold;
 }
 
-.menu-lateral-main-main a:hover{
+.button-sair-menu:hover{
   background-color: rgb(124, 30, 30);
   cursor: pointer;
+}
+
+.button-menu{
+  background-color: rgba(174, 174, 174, 0.535);
+  width: 195px;
+  padding: 10px 5px;
+  margin-top: 20px;
+  border-radius: 3.5px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+
+}
+
+.menu-lateral-esquerdo-botoes{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 
@@ -675,6 +721,37 @@ input:checked + .slider:before {
 }
 
 .descritor-grafico-porcentagem svg{
+  margin-top: 20px;
     width:  80px;
     height: 80px;
 }
+
+.area-descritores-cores{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.descritores-cor{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s ease;
+  padding: 7px;
+  border-radius: 2px;
+}
+
+.descritores-cor:hover{
+  background-color: rgba(0, 0, 0, 0.226); 
+  cursor: pointer;
+}
+
+.descritores-cor div{
+  height: 20px;
+  width: 20px;
+  border-radius: 3px;
+  border: 0.1px solid rgb(182, 182, 182);
+  margin-right: 5px ;
+}
+
