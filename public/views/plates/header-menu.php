@@ -117,11 +117,15 @@
 
           <?php if ($user == "GESTOR") { ?>
             <a class="button-menu" href="gestor_home">DESEMPENHO ESCOLAR</a>
+            <hr>
             <a class="button-menu" href="gestor_descritores">DESEMPENHO DESCRITORES</a>
           <?php } else if ($user == "PROFESSOR") { ?>
             <a class="button-menu" href="professor_home">TELA INICIAL</a>
+            <hr>
             <a class="button-menu" href="inserir_gabarito">ADD PROVA</a>
+            <hr>
             <a class="button-menu" href="ver_provas">PROVAS</a>
+            <hr>
             <a class="button-menu" href="relatorio_professor">RELATORIOS</a> 
 
           <?php } ?>

@@ -130,22 +130,34 @@ td {
 }
 
 .button-menu{
-  background-color: rgba(174, 174, 174, 0.535);
+  background-color: rgba(174, 174, 174, 0.298);
   width: 195px;
-  padding: 10px 5px;
-  margin-top: 20px;
+  padding: 10px 5px; 
   border-radius: 3.5px;
   text-align: center;
   text-decoration: none;
   color: white;
   font-weight: bold;
+  transition: 0.5s ease;
+}
+
+.button-menu:hover{
+  background-color: rgba(128, 128, 128, 0.348);
+  cursor: pointer;
 
 }
 
 .menu-lateral-esquerdo-botoes{
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
+}
+
+.menu-lateral-esquerdo-botoes hr{
+  width: 200px;
+  border: 1px solid gray;
+  text-align: center;
+  margin: 0px;
 }
 
 
@@ -755,3 +767,18 @@ input:checked + .slider:before {
   margin-right: 5px ;
 }
 
+.form-filtros-gestor form{
+  display: flex;
+  gap: 5px;
+}
+
+.descritor-pesquisar-grafico input[type="text"]{
+  width: 85px;
+  height: 26px;
+  font-weight: bold;  
+  outline: none;
+  border-radius: 0px;
+  color: rgb(78, 78, 78);
+  border: 1px solid rgb(149, 149, 149);
+  background-color: rgb(255, 255, 255);
+}

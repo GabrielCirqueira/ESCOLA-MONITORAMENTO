@@ -163,6 +163,7 @@ function resetFormDesc() {
     document.getElementById('turno').selectedIndex = 0;
     document.getElementById('disciplina').selectedIndex = 0;
     document.getElementById('serie').selectedIndex = 0; 
+    document.getElementById('descritor').value = '';
 }
 
 // document.addEventListener('DOMContentLoaded', (event) => { 

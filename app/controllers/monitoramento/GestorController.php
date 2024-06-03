@@ -53,6 +53,7 @@ class GestorController{
                 return $a['porcentagem'] <=> $b['porcentagem'];
             });
 
+
             // echo "<pre>";
             // print_r($descritores);
             // echo "</pre>";
@@ -66,7 +67,13 @@ class GestorController{
                 "descritores"   => $descritores,
                 "disciplinas"   => $disciplinas
             ];
- 
+
+            if(isset($_POST["DESCRITOR"])){
+                $dados["descritor"] = $_POST["DESCRITOR"];
+            }else{
+                $dados["descritor"] = False;
+            }
+
             $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]); 
 
             if($btnGeral){
