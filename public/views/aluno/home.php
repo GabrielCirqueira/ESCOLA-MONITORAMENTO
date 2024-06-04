@@ -100,12 +100,17 @@
                     <i class="fas fa-check fa-4x" style="color:green"></i>
 
                     <div class="prova-detalhes">
-                        <span class="prova-nome-disciplina">
-                            <?= $prova["disciplina"] ?>
-                        </span> <br>
-                        <span class="prova-nome-professor">
-                            <?= $prova["nome_professor"] ?>
-                        </span>
+                        <center>
+                            <span class="prova-nome-disciplina">
+                                <?= $prova["disciplina"] ?>
+                            </span> <br>
+                            <span class="prova-nome-professor">
+                                <?= $prova["nome_prova"] ?>
+                            </span> <br>
+                            <span class="prova-nome-professor">
+                                <?= $prova["data_aluno"] ?>
+                            </span>
+                        </center>
                     </div>
 
                     <div class="button-ver-prova">

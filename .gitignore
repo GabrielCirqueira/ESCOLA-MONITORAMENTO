@@ -1,2 +1,4 @@
 /vendor
 .env
+/app/config/backups/
+/app/config/backup_log.txt

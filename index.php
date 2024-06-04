@@ -2,11 +2,17 @@
 
 require_once "vendor/autoload.php";
 
+
+
 use app\controllers\monitoramento\MainController;
 use app\controllers\monitoramento\ProfessorController;
 use app\controllers\monitoramento\GestorController;
 use app\controllers\monitoramento\AlunoController;
 use app\controllers\monitoramento\ADMcontroller;
+
+use app\config\Backup;
+
+Backup::runBackup();
 
 session_start();
 

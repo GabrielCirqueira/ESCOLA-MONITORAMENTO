@@ -32,7 +32,7 @@ class AlunoModel{
     }
 
     public static function GetProvasFinalizadas(){
-        $sql = "SELECT * FROM gabarito_alunos ";
+        $sql = "SELECT * FROM gabarito_alunos ORDER BY data_aluno DESC ";
         $query = Database::GetInstance()->prepare($sql);
         $query->execute();
         if($query->rowCount() > 0){
