@@ -3,14 +3,36 @@
 namespace app\config;
 
 use PDO;
+use Dotenv\Dotenv; 
+
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+$dotenv->load();
+ 
 
     class Database{
+
+        private $host;
+        private $db;
+        private $user;
+        private $pass;
+        private $port;
+    
+        private function __construct() {
+            $this->host = $_ENV["DB_HOST"];
+            $this->db = $_ENV['DB_DATABASE'];
+            $this->user = $_ENV['DB_USER'];
+            $this->pass = $_ENV['DB_PASSWORD'];
+            $this->port = $_ENV['DB_PORT'];
+        }
 
         private static $conn;
 
         public static function GetInstance(){
             if(self::$conn === NULL){
-                self::$conn = new PDO("mysql:host=localhost;dbname=monitoramento","root","");
+                $instance = new self();  
+
+                self::$conn = new PDO("mysql:host={$instance->host};port={$instance->port};dbname={$instance->db}", $instance->user, $instance->pass);
+           
                 self::CreateTable();
             }
             return self::$conn;
