@@ -33,7 +33,7 @@ class Backup {
         $lastBackupTimestamp = strtotime($lastBackupTime);
         $currentTimestamp = time();
 
-        return ($currentTimestamp - $lastBackupTimestamp) >= 1;
+        return ($currentTimestamp - $lastBackupTimestamp) >= 12 * 60 * 30;
     }
 
     private static function logBackupTime() {
@@ -45,7 +45,7 @@ class Backup {
             self::loadEnv();
             $env = self::getEnvVariables();
             $date = date('Y-m-d_H-i-s');
-            $backupFile = self::$backupDir . "/backup_$date.sql";
+            $backupFile = self::$backupDir . "/NS__backup_$date.sql";
 
             if (!is_dir(self::$backupDir)) {
                 mkdir(self::$backupDir, 0755, true);
