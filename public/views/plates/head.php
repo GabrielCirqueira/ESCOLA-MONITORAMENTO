@@ -8,8 +8,9 @@
   <link rel="stylesheet" href="public/assents/css/style.css?v=1.2">
 
   <script src="https://kit.fontawesome.com/bf7e05c402.js" crossorigin="anonymous"></script> 
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
   <script src="public/assents/js/jquery.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

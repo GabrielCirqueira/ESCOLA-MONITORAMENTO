@@ -1,3 +1,6 @@
+<?php 
+$filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["nome"]; 
+?>
 <main class="main-home-professor">
     <center>
         <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
@@ -148,5 +151,13 @@
     ?>
 </tbody>
 </table>
+
+<?php 
+if(count($data["provas_turma"]) > 0){?>
+
+    <button class="export-excel" onclick="exportToExcel('<?=  '(' . $filtro_ . ') ' .$data['nome_prova']?>')">EXPORTAR DADOS</button>
+
+<?php }?>
+
 <div><br><br><br><br><br><br><br><br></div>
 </main>

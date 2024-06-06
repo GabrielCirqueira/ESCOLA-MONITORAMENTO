@@ -40,6 +40,7 @@
 
         <thead>
             <tr>
+                
                 <th>ALUNO</th>
                 <th>PONTOS</th>
                 <th>ACERTOS</th>

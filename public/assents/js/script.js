@@ -175,3 +175,13 @@ function resetFormDesc() {
 //         });
 //     });
 // });
+ 
+function exportToExcel(nome) {
+
+    var table = XLSX.utils.table_to_sheet(document.querySelector('table'));
+
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, table, 'Dados');
+
+    XLSX.writeFile(wb, nome+'.xlsx');
+}
