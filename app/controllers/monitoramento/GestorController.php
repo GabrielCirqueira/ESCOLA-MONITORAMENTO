@@ -43,8 +43,6 @@ class GestorController{
 
             $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
 
-
-
             $filtros = self::obterFiltros();
             $resultados = GestorModel::GetResultadosFiltrados($filtros);
             $descritores = self::DadosDescritores(self::Descritores($resultados));
@@ -53,10 +51,6 @@ class GestorController{
                 return $a['porcentagem'] <=> $b['porcentagem'];
             });
 
-
-            // echo "<pre>";
-            // print_r($descritores);
-            // echo "</pre>";
             $disciplinas = ["Língua Portuguesa", "Matemática", "Física", "Biologia", "Química"];
 
             $dados = [

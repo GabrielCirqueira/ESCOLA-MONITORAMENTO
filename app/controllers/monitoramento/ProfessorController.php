@@ -465,14 +465,47 @@ foreach ($percentual_descritores_turmas as $turma) {
            
         }
 
-        // echo "<br>";
-        // echo "<pre>";
-        // print_r($dados_turma);
-        // echo "</pre>"; 
+
 
         $turmass = array_column($dados_turmas, 'turma_nome');
  
         array_multisort($turmass, SORT_ASC, $dados_turmas);
+
+        $provas_tudo = [];
+
+        foreach ($provas as $prova) {
+            if ($prova["id_prova"] == $id_prova) {
+                $provas_tudo[] = $prova;
+            }
+        }
+
+        usort($provas_tudo, function ($a, $b) {
+            // Comparar as turmas
+            $result = strcmp($a['turma'], $b['turma']);
+            if ($result === 0) {
+                // Se as turmas são iguais, comparar os nomes dos alunos
+                return strcmp($a['aluno'], $b['aluno']);
+            }
+            return $result;
+        });
+
+        if(isset($_POST["filtrar"])){
+            $turma = $_POST["turma-filtros"];
+            if($turma != "geral"){
+            $provas_filtro = [];
+            foreach($provas_tudo as $prova){
+                    if($prova["turma"] == $turma){
+                        $provas_filtro[] = $prova;
+                    }
+                }
+                $provas_tudo = $provas_filtro;
+            }           
+        }
+
+        // echo "<br>";
+        // echo "<pre>";
+        // print_r($provas_tudo);
+        // echo "</pre>"; 
 
         $dados = [
             "dados_turma" => $dados_turmas,
@@ -483,7 +516,8 @@ foreach ($percentual_descritores_turmas as $turma) {
             "percentual_descritores" => $media_descritores_geral,
             "grafico_colunas" => MainController::gerarGraficoColunas($porcentagem_alunos),
             "dados_turma_grafico" => $dados_turma,
-            "filtro" => $filtro_turmas
+            "filtro" => $filtro_turmas,
+            "provas_turma" => $provas_tudo
         ];
     
         MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);

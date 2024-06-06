@@ -118,4 +118,35 @@
         <h3>Nivel de Proeficiência</h3>
     <?= $data["dados_turma_grafico"]["grafico_coluna"]?>    
 <?php }?>
+<h2>NOTAS POR ALUNO</h2>
+<table class="tabela-prova-aluno">
+
+<thead>
+    <tr>
+        <th>ALUNO</th>
+        <th>TURMA</th>
+        <th>PONTOS</th>
+        <th>ACERTOS</th>
+        <th>P. ACERTOS</th>
+    </tr>
+</thead>
+<tbody>
+
+    <?php
+    foreach ($data["provas_turma"] as $prova) { ?>
+        <tr>
+            <td><?= $prova["aluno"] ?></td>
+            <td><?= $prova["turma"] ?></td>
+            <td><?= $prova["pontos_aluno"] ?></td>
+            <td><?= $prova["acertos"] ?></td>
+            <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 1) ?>%</td>
+        </tr>
+
+    <?php
+    }
+
+    ?>
+</tbody>
+</table>
+<div><br><br><br><br><br><br><br><br></div>
 </main>

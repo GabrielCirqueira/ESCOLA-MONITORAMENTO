@@ -117,6 +117,23 @@ $dotenv->load();
                 liberado        varchar(255)
                 );";
 
+            // $gabarito_provas_professores_gabarito = "CREATE TABLE IF NOT EXISTS gabarito_professores_recuperacao(
+            //     id              int AUTO_INCREMENT primary key,
+            //     id_prova        int,
+            //     nome_professor  varchar(255),
+            //     nome_prova      varchar(255),
+            //     turmas          varchar(255),
+            //     descritores     varchar(255),
+            //     disciplina     varchar(255),
+            //     valor           int,
+            //     QNT_perguntas   int,
+            //     data_prova_rec  date,
+            //     gabarito        varchar(255),
+            //     liberado        varchar(255),
+            //     alunos          varchar(255)
+            //     );";
+
+
         self::GetInstance()->query($professores);
         self::GetInstance()->query($disciplinas);
         self::GetInstance()->query($turmas);

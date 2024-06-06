@@ -393,7 +393,7 @@ input:checked + .slider:before {
 }
 
 .tabela-prova-aluno tr:hover {
-  background-color: #89aeff;
+  background-color: #306c4672;
 }
 
 
@@ -478,9 +478,9 @@ input:checked + .slider:before {
 
 .graficos-professor-rosca-turmas div{
   display: flex;
-  flex-direction: rgb(52, 137, 93);
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
 }
 
 .professor-grafico-geral-60{
