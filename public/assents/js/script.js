@@ -112,10 +112,12 @@ const icone_fechar_menu_left = document.querySelector(".icone-menu-lateral-esque
 icone_fechar_menu.addEventListener('click', function() {
     menu.style.display = "none"
     menu.style.backgroundColor = "rgba(0, 0, 0, 0)"
+    document.body.classList.remove('no-scroll');
     menu_conteudo.style.right = '-320px'
 })
 
 menuBtn.addEventListener('click', function() {
+    document.body.classList.add('no-scroll');
     menu.style.display = "block"
     menu.style.backgroundColor = "rgba(0, 0, 0, 0.507)"
     menu_conteudo.style.right = '0px'
@@ -125,11 +127,13 @@ icone_fechar_menu_left.addEventListener('click', function() {
     menu.style.display = "none"
     menu.style.backgroundColor = "rgba(0, 0, 0, 0)"
     menu_conteudo_left.style.left = '-320px'
+    document.body.classList.remove('no-scroll');
 })
 
 menuBtnleft.addEventListener('click', function() {
     menu.style.display = "block"
     menu.style.backgroundColor = "rgba(0, 0, 0, 0.507)"
+    document.body.classList.add('no-scroll');
     menu_conteudo_left.style.left = '0px'
 })
 

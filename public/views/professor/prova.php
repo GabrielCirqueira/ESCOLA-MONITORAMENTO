@@ -20,50 +20,48 @@
             </div>  <br><br>
             <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
 
-            <select class="select-turmas-professor" name="turma" id="">
-
-                <?php
-                foreach ($data["turmas"] as $turma) { ?>
-                    <option value="<?= $turma ?>"><?= $turma ?></option>
-                <?php
-                }
-                ?>
-
-            </select>
-            <button class="button-professor-turma-enviar" name="filtrar" value="filtrar" type="submit">Filtrar</button>
  
         </center>
     </form>
-    <h2><?= $data["turma"] ?></h2>
 
-    <table class="tabela-prova-aluno">
+    <div class="detalhes-prova">
+        <table style="width: 310px;" >
+            <th style="text-align: center;" colspan="2" >DETALHES PROVA</th>
 
-        <thead>
             <tr>
-                
-                <th>ALUNO</th>
-                <th>PONTOS</th>
-                <th>ACERTOS</th>
-                <th>P. ACERTOS</th>
+                <td>VALOR</td>
+                <td><?= $data["prova"]["valor"] ?> Pontos</td>
             </tr>
-        </thead>
-        <tbody>
+            <tr>
+                <td>PERGUNTAS</td>
+                <td><?= $data["prova"]["QNT_perguntas"] ?> Questões</td>
+            </tr>
+            <tr>
+                <th style="text-align: center;" colspan="2">TURMAS</th>
+            </tr>
+            <?php 
+$turmas = explode(",", $data["prova"]["turmas"]);
+$turmaCount = count($turmas);
+for ($i = 0; $i < $turmaCount; $i += 2) { ?>
+    <tr>
+        <td style="background-color: #E9E9E9;">
+            <?= $turmas[$i] ?>
+        </td>
+        <td style="background-color: #E9E9E9;">
+            <?= isset($turmas[$i + 1]) ? $turmas[$i + 1] : '' ?>
+        </td>
+    </tr>
+<?php 
+}
+?>
+        </table>
+    </div>
 
-            <?php
-            foreach ($data["provas_turma"] as $prova) { ?>
-                <tr>
-                    <td><?= $prova["aluno"] ?></td>
-                    <td><?= $prova["pontos_aluno"] ?></td>
-                    <td><?= $prova["acertos"] ?></td>
-                    <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 1) ?>%</td>
-                </tr>
+    <form action="add-recuperacao" method="post">
+        <button type="submit" class="button-add-recp" >ADICIONAR RECUPERAÇÃO</button>
+    </form>
 
-            <?php
-            }
-
-            ?>
-        </tbody>
-    </table>
+ 
     <br>
     <br>
     <br>

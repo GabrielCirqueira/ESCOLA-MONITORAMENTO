@@ -170,6 +170,7 @@ class ProfessorController{
     
             foreach ($provas_professores as $prova) {
                 if ($prova["id"] == $id_prova) {
+                    $provaa = $prova;
                     $turmas = $prova["turmas"];
                     $nome_prova = $prova["nome_prova"];
                     $liberado = $prova["liberado"] == "SIM" ? true : false;
@@ -209,6 +210,7 @@ class ProfessorController{
                 "turma" => $turma,
                 "provas_turma" => $provas_turma,
                 "liberado" => $liberado,
+                "prova" =>  $provaa,
                 "nome_prova" => $nome_prova
             ];
     
