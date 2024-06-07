@@ -113,7 +113,7 @@ class MainController{
             "Avançado" => "#2bd937" // Verde claro
         );
     
-        $svg = "<svg width='" . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 60) . "' height='$altura_svg' viewBox='0 0 " . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 60) . " $altura_svg'>";
+        $svg = "<svg   width='" . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 60) . "' height='$altura_svg' viewBox='0 0 " . ((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 60) . " $altura_svg'>";
 
         $svg .= "<text x='" . (((count($dados) * $largura_coluna) + ((count($dados) - 1) * $espaco_coluna) + 40) / 2) . "' y='20' text-anchor='middle' font-size='16'>ALUNOS</text>";
         for ($i = 10; $i <= 100; $i += 10) {

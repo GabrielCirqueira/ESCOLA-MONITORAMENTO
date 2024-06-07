@@ -1,3 +1,5 @@
+AOS.init();
+ 
 
 function Mostrar_campo_email() {
     document.querySelector("#campo-ra").style.display = "none";
