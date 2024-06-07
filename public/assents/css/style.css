@@ -836,3 +836,37 @@ input:checked + .slider:before {
   background-color: #1a6e23b5;
 
 }
+
+.form-area-alunos-rec{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.professor-area-alunos-rec {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+}
+.professor-area-alunos-rec h3 {
+  grid-column: span 6;
+  font-size: 25px;
+}
+.professor-rec-aluno-checkbox {
+  display: flex;
+  align-items: center; 
+}
+
+.professor-rec-aluno-checkbox label:hover,
+.professor-rec-aluno-checkbox input:hover{
+  cursor: pointer;
+}
+
+.professor-rec-aluno-checkbox input {
+  margin-right: 6px;
+  width: 20px;
+  height: 20px;
+}

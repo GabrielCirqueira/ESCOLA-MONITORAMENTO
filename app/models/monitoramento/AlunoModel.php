@@ -31,6 +31,17 @@ class AlunoModel{
         }
     }
 
+    public static function GetAlunos(){
+        $sql = "SELECT * FROM alunos ORDER BY nome ASC ";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+        if($query->rowCount() > 0){
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }else{
+            return False;
+        }
+    }
+
     public static function GetProvasFinalizadas(){
         $sql = "SELECT * FROM gabarito_alunos ORDER BY data_aluno DESC ";
         $query = Database::GetInstance()->prepare($sql);

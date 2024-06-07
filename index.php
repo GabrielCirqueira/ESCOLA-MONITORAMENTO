@@ -66,7 +66,9 @@ $rotas = [
     "editar_prova"              => ProfessorController::class,
     "relatorio_professor"       => ProfessorController::class,
     "relatorio_prova"           => ProfessorController::class,
-    "criar_gabarito_respostas"  => ProfessorController::class
+    "add_recuperacao"           => ProfessorController::class,
+    "criar_gabarito_respostas"  => ProfessorController::class,
+    "criar_gabarito_rec"        => ProfessorController::class
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";

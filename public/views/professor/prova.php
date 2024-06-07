@@ -17,16 +17,16 @@
                     <button type="submit" name="status" value="não" class="button-prova-liberado" style="background-color: #0394b9;">NÃO</button>
 
                 <?php } ?>
-            </div>  <br><br>
+            </div> <br><br>
             <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
 
- 
+
         </center>
     </form>
 
     <div class="detalhes-prova">
-        <table style="width: 310px;" >
-            <th style="text-align: center;" colspan="2" >DETALHES PROVA</th>
+        <table style="width: 360px;">
+            <th style="text-align: center;" colspan="2">DETALHES PROVA</th>
 
             <tr>
                 <td>VALOR</td>
@@ -39,32 +39,30 @@
             <tr>
                 <th style="text-align: center;" colspan="2">TURMAS</th>
             </tr>
-            <?php 
-$turmas = explode(",", $data["prova"]["turmas"]);
-$turmaCount = count($turmas);
-for ($i = 0; $i < $turmaCount; $i += 2) { ?>
-    <tr>
-        <td style="background-color: #E9E9E9;">
-            <?= $turmas[$i] ?>
-        </td>
-        <td style="background-color: #E9E9E9;">
-            <?= isset($turmas[$i + 1]) ? $turmas[$i + 1] : '' ?>
-        </td>
-    </tr>
-<?php 
-}
-?>
+            <?php
+            $turmas = explode(",", $data["prova"]["turmas"]);
+            $turmaCount = count($turmas);
+            for ($i = 0; $i < $turmaCount; $i += 2) { ?>
+                <tr>
+                    <td style="background-color: #E9E9E9;">
+                        <?= $turmas[$i] ?>
+                    </td>
+                    <td style="background-color: #E9E9E9;">
+                        <?= isset($turmas[$i + 1]) ? $turmas[$i + 1] : '' ?>
+                    </td>
+                </tr>
+            <?php
+            }
+            ?>
         </table>
     </div>
 
-    <form action="add-recuperacao" method="post">
-        <button type="submit" class="button-add-recp" >ADICIONAR RECUPERAÇÃO</button>
+    <form action="add_recuperacao" method="post"> 
+            <button type="submit" class="button-add-recp">ADICIONAR RECUPERAÇÃO</button>
     </form>
 
- 
-    <br>
-    <br>
-    <br>
+
+    <br> 
     <br>
     <br>
     <br>

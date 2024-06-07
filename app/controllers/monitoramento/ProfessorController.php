@@ -164,6 +164,7 @@ class ProfessorController{
             $provas_professores = AlunoModel::GetProvas();
             $provas_alunos = AlunoModel::GetProvasFinalizadas();
             $id_prova = $_POST["id-prova"];
+            $_SESSION["id_prova_professor"] = $_POST["id-prova"];
             $provas = [];
             $provas_turma = [];
             $liberado = false;
@@ -659,5 +660,58 @@ foreach ($percentual_descritores_turmas as $turma) {
         }
     }
     
+
+    public static function add_recuperacao(){
+        $id = $_SESSION["id_prova_professor"];
+        $provas_professores = AlunoModel::GetProvas();
+        $alunos = AlunoModel::GetAlunos();
+
+        foreach($provas_professores as $prova){
+            if($prova["id"] == $id){
+                $turmas = explode(",",$prova["turmas"]);
+            }
+        }
+        $turmas_alunos = [];
+
+        foreach($alunos as $aluno){
+
+            foreach($turmas as $turma){
+                if($aluno["turma"] == $turma){ 
+                    $turmas_alunos[$turma][$aluno["ra"]] = $aluno["nome"];  
+                }
+            }
+        }
+
+        $turmas_truncated = [];
+
+        foreach ($turmas_alunos as $turma => $alunos) {
+            foreach ($alunos as $ra => $nome) {
+                if (mb_strlen($nome) > 20) {
+                    $nome = mb_substr($nome, 0, 17) . "...";
+                }
+                $turmas_truncated[$turma][$ra] = $nome;
+            }
+        }
+
+        // echo "<pre>";
+        // print_r($turmas_truncated);
+        // echo "<pre>";
+
+        $dados = [
+            "alunos" => $turmas_truncated
+        ];
+
+
+        MainController::Templates("public/views/professor/add_recuperacao.php","PROFESSOR",$dados);
+
+    }
+
+    public static function criar_gabarito_rec(){
+        $alunos = implode(" ",$_POST["alunos"]);
+        echo $alunos;
+        // echo "<pre>";
+        // print_r($alunos);
+        // echo "<pre>";
+    }
 
 }
