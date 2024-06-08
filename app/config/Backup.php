@@ -44,7 +44,7 @@ class Backup {
         if (self::canRunBackup()) {
             self::loadEnv();
             $env = self::getEnvVariables();
-            $date = date('Y-m-d_H-i-s');
+            $date = date('Y-m-d__H-i-s');
             $backupFile = self::$backupDir . "/NS__backup_$date.sql";
 
             if (!is_dir(self::$backupDir)) {

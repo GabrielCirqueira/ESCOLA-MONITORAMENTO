@@ -106,4 +106,26 @@ class ProfessorModel{
         return $query;
     }
 
+    public static function inserir_gabarito_recuperacao($dados){
+        $sql = "INSERT INTO gabarito_professores_recuperacao
+        (id_prova, alunos, nome_professor, nome_prova, descritores, disciplina, valor, QNT_perguntas, data_prova_rec, gabarito)
+        VALUES (:IDPROVA, :ALUNOS, :NOMEPROF, :NOMEPROVA, :DESCRITORES, :DISCIPLINA, :VALOR, :QTPERGUNTAS, :DATAPROVAREC, :GABARITO)";
+    
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":IDPROVA", $dados["id_prova"]);
+        $query->bindValue(":ALUNOS", $dados["alunos"]);
+        $query->bindValue(":NOMEPROF", $dados["nome_prof"]);
+        $query->bindValue(":NOMEPROVA", $dados["nome_prova"]);
+        $query->bindValue(":DESCRITORES", $dados["descritores"]);
+        $query->bindValue(":DISCIPLINA", $dados["materia"]);
+        $query->bindValue(":VALOR", $dados["valor"]);
+        $query->bindValue(":QTPERGUNTAS", $dados["perguntas"]);
+        $query->bindValue(":DATAPROVAREC", $dados["data"]);
+        $query->bindValue(":GABARITO", $dados["gabarito"]); 
+        $query->execute();
+    
+        return $query;
+    }
+    
+
 }

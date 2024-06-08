@@ -664,6 +664,7 @@ foreach ($percentual_descritores_turmas as $turma) {
     public static function add_recuperacao(){
         $id = $_SESSION["id_prova_professor"];
         $provas_professores = AlunoModel::GetProvas();
+        $_SESSION["dados_prova_rec"]["id"] = $_POST["id-prova"];
         $alunos = AlunoModel::GetAlunos();
 
         foreach($provas_professores as $prova){
@@ -710,7 +711,9 @@ foreach ($percentual_descritores_turmas as $turma) {
         $alunos = implode(";",$_POST["alunos"]);
         $perguntas = $_POST["qtn-perguntas"];
         $descritores = $_POST["descritores"];
+        $id_prova = $_SESSION["dados_prova_rec"]["id"];
         $_SESSION["dados_prova_rec"] = [
+            "id"   => $id_prova,
             "alunos" => $alunos,
             "perguntas" => $perguntas,
             "descritores" => $descritores
@@ -729,6 +732,17 @@ foreach ($percentual_descritores_turmas as $turma) {
     }
 
     public static function criar_gabarito_rec_resp(){
+        
+        foreach(AlunoModel::GetProvas() as $prova){
+            if($prova["id"] == $_SESSION["dados_prova_rec"]["id"]){
+                $nome_prova = $prova["nome_prova"];
+                $materia = $prova["disciplina"];
+                $valor = $prova["valor"];
+            }
+        }
+        $dataHoraAtual = new DateTime();    
+        $dataFormatada = $dataHoraAtual->format('Y-m-d H:i:s');
+
         $descritores = '';
         $gabarito = '';
     
@@ -745,14 +759,34 @@ foreach ($percentual_descritores_turmas as $turma) {
         $descritores = rtrim($descritores, ";");
         $gabarito = rtrim($gabarito, ";");
 
-        echo $gabarito;
-        echo "<br>";
-        echo "<br>";
-        echo $descritores;
+        // echo $gabarito;
+        // echo "<br>";
+        // echo "<br>";
+        // echo $descritores;
 
-        // echo "<pre>";
-        // print_r($gabarito);
-        // echo "<pre>";
+        $dados = [
+            "id_prova"      => $_SESSION["dados_prova_rec"]["id"],
+            "alunos"        => $_SESSION["dados_prova_rec"]["alunos"],
+            "perguntas"     => $_SESSION["dados_prova_rec"]["perguntas"],
+            "valor"         => $valor,
+            "data"          => $dataFormatada,
+            "nome_prova"    => $nome_prova,
+            "descritores"   =>  $descritores,
+            "gabarito"      =>  $gabarito,
+            "nome_prof"     =>  $_SESSION["nome_professor"],
+            "materia"       =>  $materia
+        ];
+
+        $consulta = ProfessorModel::inserir_gabarito_recuperacao($dados);
+
+
+        if($consulta){
+            echo "True";
+        }
+
+        echo "<pre>";
+        print_r($dados);
+        echo "</pre>";
 
     }
 
