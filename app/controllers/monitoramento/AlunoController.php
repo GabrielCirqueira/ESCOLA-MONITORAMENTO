@@ -10,8 +10,7 @@ use DateTime;
 class AlunoController
 {
 
-    public static function login_aluno_entrar()
-    {
+    public static function login_aluno_entrar(){
         $ra = $_POST["ra"];
 
         $query = AlunoModel::verificarLogin($ra);
@@ -31,8 +30,7 @@ class AlunoController
         }
     }
 
-    public static function aluno_home()
-    {
+    public static function aluno_home(){
         if ($_SESSION["ALUNO"]) {
 
             $dados = AlunoModel::GetProvas();

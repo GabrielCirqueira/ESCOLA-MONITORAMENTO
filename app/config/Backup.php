@@ -37,14 +37,14 @@ class Backup {
     }
 
     private static function logBackupTime() {
-        file_put_contents(self::$logFile, date('Y-m-d H:i:s'));
+        file_put_contents(self::$logFile, date('Y-m-d H:i'));
     }
 
     public static function runBackup() {
         if (self::canRunBackup()) {
             self::loadEnv();
             $env = self::getEnvVariables();
-            $date = date('Y-m-d__H-i-s');
+            $date = date('Y-m-d__H-i');
             $backupFile = self::$backupDir . "/NS__backup_$date.sql";
 
             if (!is_dir(self::$backupDir)) {

@@ -162,9 +162,10 @@ class ProfessorController{
     public static function prova() {
         if ($_SESSION["PROFESSOR"]) {
             $provas_professores = AlunoModel::GetProvas();
-            $provas_alunos = AlunoModel::GetProvasFinalizadas();
+            $provas_alunos = AlunoModel::GetProvasFinalizadas(); 
             $id_prova = $_POST["id-prova"];
             $_SESSION["id_prova_professor"] = $_POST["id-prova"];
+
             $provas = [];
             $provas_turma = [];
             $liberado = false;
@@ -781,12 +782,14 @@ foreach ($percentual_descritores_turmas as $turma) {
 
 
         if($consulta){
-            echo "True";
+            $_SESSION["PopUp_inserir_gabarito_professor"] = True;
+            header("location: ver_provas");
+            exit();
         }
 
-        echo "<pre>";
-        print_r($dados);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r($dados);
+        // echo "</pre>";
 
     }
 
