@@ -135,6 +135,13 @@
 .professor-inserir-gabarito tr {
   border: 1px solid black;
   padding: 5px;
+} 
+
+.professor-inserir-gabarito td .Ds {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
 }
 
 .professor-editar-gabarito input[type="radio"],

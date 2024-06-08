@@ -39,11 +39,11 @@
                             </td>
                             <?php }?>
                             
-                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},A"?>"><span>A</span></td>
-                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},B"?>"><span>B</span></td>
-                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},C"?>"><span>C</span></td>
-                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},D"?>"><span>D</span></td>
-                            <td><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},E"?>"><span>E</span></td>
+                            <td><div class="Ds"><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},A"?>"><span>A</span></div></td>
+                            <td><div class="Ds"><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},B"?>"><span>B</span></div></td>
+                            <td><div class="Ds"><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},C"?>"><span>C</span></div></td>
+                            <td><div class="Ds"><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},D"?>"><span>D</span></div></td>
+                            <td><div class="Ds"><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},E"?>"><span>E</span></div></td>
                         </tr>
                     <?php $contador++;
                     } ?>

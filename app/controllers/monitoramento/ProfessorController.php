@@ -706,12 +706,55 @@ foreach ($percentual_descritores_turmas as $turma) {
 
     }
 
-    public static function criar_gabarito_rec(){
-        $alunos = implode(" ",$_POST["alunos"]);
-        echo $alunos;
+    public static function inserir_gabarito_rec(){
+        $alunos = implode(";",$_POST["alunos"]);
+        $perguntas = $_POST["qtn-perguntas"];
+        $descritores = $_POST["descritores"];
+        $_SESSION["dados_prova_rec"] = [
+            "alunos" => $alunos,
+            "perguntas" => $perguntas,
+            "descritores" => $descritores
+        ];
+        $_SESSION["GABARITO_REC"] = true;
+
+        header("location: criar_gabarito_rec");
+        // echo $alunos;
         // echo "<pre>";
-        // print_r($alunos);
+        // print_r($_SESSION);
         // echo "<pre>";
     }
+
+    public static function criar_gabarito_rec(){
+        MainController::Templates("public/views/professor/criar_gabarito_rec.php","PROFESSOR",NULL);
+    }
+
+    public static function criar_gabarito_rec_resp(){
+        $descritores = '';
+        $gabarito = '';
+    
+        $total_perguntas = $_SESSION["dados_prova_rec"]["perguntas"];
+    
+        for ($i = 1; $i <= $total_perguntas; $i++) {
+            $descritor = ($_SESSION["dados_prova_rec"]["descritores"] == "sim") ? $_POST["DESCRITOR_$i"] : "";
+            $descritores .= "$i,{$descritor};";
+            $resposta = $_POST["$i"];
+            list($numero_pergunta, $letra_resposta) = explode(",", $resposta);
+            $gabarito .= "$numero_pergunta,$letra_resposta;";
+        }
+    
+        $descritores = rtrim($descritores, ";");
+        $gabarito = rtrim($gabarito, ";");
+
+        echo $gabarito;
+        echo "<br>";
+        echo "<br>";
+        echo $descritores;
+
+        // echo "<pre>";
+        // print_r($gabarito);
+        // echo "<pre>";
+
+    }
+
 
 }

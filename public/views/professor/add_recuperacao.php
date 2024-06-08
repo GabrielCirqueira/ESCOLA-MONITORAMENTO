@@ -4,7 +4,7 @@
         <h2>ADICIONAR RECUPERAÇÃO</h2>
     </center>
 
-    <form action="criar_gabarito_rec" class="form-area-alunos-rec" method="post">
+    <form action="inserir_gabarito_rec" class="form-area-alunos-rec" method="post">
 
         <div class="professor-area-alunos-rec">
             <?php foreach ($data["alunos"] as $turma => $alunos) { ?>
