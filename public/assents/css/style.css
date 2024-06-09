@@ -148,7 +148,23 @@ td {
 .button-menu:hover{
   background-color: rgba(128, 128, 128, 0.348);
   cursor: pointer;
+}
 
+.button-menu-voltar{
+  background-color: rgba(221, 221, 221, 0.45);
+  width: 195px;
+  padding: 10px 5px; 
+  border-radius: 3.5px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: 0.5s ease;
+}
+
+.button-menu-voltar:hover{
+  background-color: rgba(128, 128, 128, 0.348);
+  cursor: pointer;
 }
 
 .menu-lateral-esquerdo-botoes{

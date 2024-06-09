@@ -5,6 +5,7 @@ namespace app\controllers\monitoramento;
 use app\models\monitoramento\AlunoModel;
 
 use app\controllers\monitoramento\MainController;
+use app\models\monitoramento\ProfessorModel;
 use DateTime;
 
 class AlunoController
@@ -12,6 +13,7 @@ class AlunoController
 
     public static function login_aluno_entrar(){
         $ra = $_POST["ra"];
+        $ra = str_replace(' ', '', $ra);
 
         $query = AlunoModel::verificarLogin($ra);
 
@@ -35,8 +37,11 @@ class AlunoController
 
             $dados = AlunoModel::GetProvas();
             $provas_feitas = AlunoModel::GetProvasFinalizadas();
+            $provas_rec = ProfessorModel::GetProvaRec();
             $provas_aluno = []; 
             $provas_aluno_feitas = []; 
+
+
             if ($dados != null) {
                 foreach ($dados as $prova) {
                     if (strpos($prova["turmas"], ",")) {
@@ -66,13 +71,44 @@ class AlunoController
                 $provas_aluno_feitas = null;
             }
 
+            $provas_aluno_rec = [];
+            foreach($provas_rec as $prova){
+                if(strpos($prova["alunos"],$_SESSION["ra"])){
+                    $provas_aluno_rec[] = $prova;
+                }
+            }
+
+            // echo "<pre>";
+            // print_r($provas_aluno_rec);
+            // echo "</pre>";
+
+            
+
             MainController::Templates("public/views/aluno/home.php", "ALUNO", [
                 "provas"            => $provas_aluno,
-                "provas_feitas"     => $provas_aluno_feitas
+                "provas_feitas"     => $provas_aluno_feitas,
+                "rec" => $provas_aluno_rec
             ]);
         } else {
             header("location: home");
         }
+    }
+
+    public static function gabarito_aluno_rec(){
+        if($_SESSION["ALUNO"]){
+            $id = $_POST["id-prova"];
+            $dados = ProfessorModel::GetProvaRec();
+            
+            foreach($dados as $prova){
+                if($prova["id"] == $id){
+                    $_SESSION["prova_gabarito"] = $prova;
+                    MainController::Templates("public/views/aluno/gabarito_rec.php", "ALUNO", $prova);
+                }
+            }
+        }else{
+            header("location: home");
+        }
+
     }
 
     public static function gabarito_aluno(){

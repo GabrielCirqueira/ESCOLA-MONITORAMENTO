@@ -16,7 +16,7 @@ Backup::runBackup();
 
 session_start();
 
-if(!isset($_SESSION["PopUp_inserir_prova"])){
+if(!isset($_SESSION["PAG_VOLTAR"])){
 
     $_SESSION["PopUp_professor"] = False;
     $_SESSION["popup_not_gestor"] = False;
@@ -54,6 +54,7 @@ $rotas = [
     "login_aluno_entrar"        => AlunoController::class,
     "cadastrar_gabarito_aluno"  => AlunoController::class,
     "gabarito_aluno"            => AlunoController::class,
+    "gabarito_aluno_rec"            => AlunoController::class,
     "gestor_home"               => GestorController::class,
     "gestor_descritores"        => GestorController::class,
     "login_gestor_verifica"     => GestorController::class,

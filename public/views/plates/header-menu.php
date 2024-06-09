@@ -113,13 +113,17 @@
       </div>
       <div class="menu-lateral-main-main">
 
-        <div class="menu-lateral-esquerdo-botoes" >
+        <div class="menu-lateral-esquerdo-botoes">
 
           <?php if ($user == "GESTOR") { ?>
             <a class="button-menu" href="gestor_home">DESEMPENHO ESCOLAR</a>
             <hr>
             <a class="button-menu" href="gestor_descritores">DESEMPENHO DESCRITORES</a>
           <?php } else if ($user == "PROFESSOR") { ?>
+            <?php if($_SESSION["PAG_VOLTAR"] != False){ ?>
+              <a class="button-menu-voltar" href="<?=$_SESSION["PAG_VOLTAR"]?>">VOLTAR</a>
+            <hr>
+            <?php } ?>
             <a class="button-menu" href="professor_home">TELA INICIAL</a>
             <hr>
             <a class="button-menu" href="inserir_gabarito">ADD PROVA</a>

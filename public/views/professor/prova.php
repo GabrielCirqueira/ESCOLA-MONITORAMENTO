@@ -18,7 +18,7 @@
 
                 <?php } ?>
             </div> <br><br>
-            <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
+            <input type="hidden" name="id-prova" value="<?= $_SESSION["id_prova_professor"]?>">
 
 
         </center>
@@ -75,7 +75,7 @@
     <?php } ?>
 
     <form action="add_recuperacao" method="post">
-        <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
+        <input type="hidden" name="id-prova" value="<?= $_SESSION["id_prova_professor"] ?>">
         <button type="submit" class="button-add-recp">ADICIONAR RECUPERAÇÃO</button>
     </form>
 

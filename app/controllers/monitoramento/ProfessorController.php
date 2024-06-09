@@ -143,7 +143,9 @@ class ProfessorController{
         if($_SESSION["PROFESSOR"]){
             $provas_professores = AlunoModel::GetProvas();
             $provas_alunos = AlunoModel::GetProvasFinalizadas();
-            $provas = []; 
+            $provas = [];     
+            $_SESSION["PAG_VOLTAR"] = "professor_home";
+
             foreach($provas_professores as $professor){
                 if($professor["nome_professor"] == $_SESSION["nome_professor"]){
                     $provas[] = $professor; 
@@ -162,10 +164,16 @@ class ProfessorController{
     public static function prova() {
         if ($_SESSION["PROFESSOR"]) {
             $provas_professores = AlunoModel::GetProvas();
-            $provas_alunos = AlunoModel::GetProvasFinalizadas();
-            $id_prova = $_POST["id-prova"];
-            $_SESSION["id_prova_professor"] = $_POST["id-prova"];
-  
+            $provas_alunos = AlunoModel::GetProvasFinalizadas();   
+            $_SESSION["PAG_VOLTAR"] = "ver_provas";
+
+            if(isset($_POST["id-prova"])){
+                $id_prova = $_POST["id-prova"];
+                $_SESSION["id_prova_professor"] = $_POST["id-prova"]; 
+            }else{
+                $id_prova = $_SESSION["id_prova_professor"]; 
+            }
+
             $provas = [];
             $provas_turma = [];
             $liberado = false;
@@ -242,6 +250,7 @@ class ProfessorController{
     public static function prova_recuperacao(){
         $id = $_POST["prova"];
         $prova = ProfessorModel::GetProvaRecbyID($id);
+        $_SESSION["PAG_VOLTAR"] = "prova";
 
         $alunos_prova = [];
         if(strpos($prova["alunos"],";")){

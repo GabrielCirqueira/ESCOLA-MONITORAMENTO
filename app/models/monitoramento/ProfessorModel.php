@@ -82,6 +82,13 @@ class ProfessorModel{
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function GetProvaRec(){
+        $sql = "SELECT * FROM gabarito_professores_recuperacao";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute(); 
+        return $query->fetchAll(PDO::FETCH_ASSOC); 
+    }
+
     public static function GetProvasFeitasbyID($id){
         $sql = "SELECT * FROM gabarito_alunos WHERE id_prova = :id ORDER BY turma ASC";
         $query = Database::GetInstance()->prepare($sql);

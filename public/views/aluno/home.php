@@ -6,7 +6,7 @@
     $provas_finalizadas = [];
     $temProvaPendente = false;
 
-    if ($data["provas"] != null) {
+    if ($data["provas"] != null || $data["rec"] != null) {
         foreach ($data["provas"] as $prova) {
             $prova_feita = false;
             if ($data["provas_feitas"] != null) {
@@ -21,7 +21,7 @@
             if (!$prova_feita) {
                 $temProvaPendente = true;
                 $provas_finalizadas[] = false;
-                ?>
+    ?>
                 <div class="prova-pendente">
                     <div class="linha-vertical-campo-prova"></div>
                     <div class="conteudo-prova">
@@ -29,12 +29,12 @@
 
                         <div class="prova-detalhes">
                             <center>
-                            <span class="prova-nome-disciplina">
-                                <?= $prova["disciplina"] ?>
-                            </span> <br>
-                            <span class="prova-nome-professor">
-                                <?= $prova["nome_professor"] ?>
-                            </span>
+                                <span class="prova-nome-disciplina">
+                                    <?= $prova["disciplina"] ?>
+                                </span> <br>
+                                <span class="prova-nome-professor">
+                                    <?= $prova["nome_professor"] ?>
+                                </span>
                             </center>
                         </div>
 
@@ -66,7 +66,60 @@
                     </div>
                 </div>
 
-                <?php
+            <?php
+            }
+        }
+
+        if ($data["rec"] != null) {
+            foreach ($data["rec"] as $provaa) { ?>
+
+
+                <div class="prova-pendente">
+                    <div style="background-color: #B35A37;" class="linha-vertical-campo-prova"></div>
+                    <div class="conteudo-prova">
+                        <i class="fas fa-exclamation-triangle fa-4x" style="color: #B35A37;"></i>
+
+                        <div class="prova-detalhes">
+                            <center>
+                                <span class="prova-nome-disciplina">RECUPERAÇÃO</span><br>
+                                <span class="prova-nome-disciplina">
+                                    <?= $provaa["disciplina"] ?>
+                                </span> <br>
+                                <span class="prova-nome-professor">
+                                    <?= $provaa["nome_professor"] ?>
+                                </span>
+                            </center>
+                        </div>
+
+                        <div class="button-ver-prova">
+                            <button onclick="Mostrar_PopUp('popup-prova-<?= $provaa['id'] ?>')">Ver</button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <div style="display: none;" id="popup-prova-<?= $provaa["id"] ?>" class="PopUp-sobreposicao">
+                    <div class="conteudo-popup">
+                        <h2> RECUPERAÇÃO </h2>
+                        <h3> <?= $provaa["nome_prova"] ?> </h3>
+                        <br>
+                        <div style="text-align:left;">
+
+                            <span><b>PROFESSOR: </b><?= $provaa["nome_professor"] ?></span><br>
+                            <span><b>DISCIPLINA:</b> <?= $provaa["disciplina"] ?></span><br>
+                            <span><b>VALOR: </b> <?= $provaa["valor"] ?></span><br> 
+                            <span><b>PERGUNTAS: </b><?= $provaa["QNT_perguntas"] ?> PERGUNTAS</span><br>
+                        </div>
+
+                        <form method="post" action="gabarito_aluno_rec">
+                            <button type="submit" value="<?= $provaa['id'] ?>" name="id-prova" class="Fechar-Popup">ENVIAR
+                                GABARITO</button>
+                        </form>
+                        <button onclick="Fechar_PopUp('popup-prova-<?= $provaa['id'] ?>')" class="Fechar-Popup">FECHAR</button>
+                    </div>
+                </div>
+
+        <?php
             }
         }
     }
@@ -85,7 +138,7 @@
                 </center>
             </div>
         </div>
-        <?php
+    <?php
     }
     ?>
 
@@ -186,16 +239,16 @@
                                 }
                                 ?>
                             </tr>
-                            <?php $contador++;
+                        <?php $contador++;
                         } ?>
                     </table>
 
                     <?php if ($liberado == null) {
                         echo "<h5>O PROFESSOR AINDA NÃO LIBEROU O ACESSO AS RESPOSTAS!</h5>";
-                    }else{?>
-                                        <span><b>VALOR DA PROVA:</b> <?= $prova["pontos_prova"] ?></span> 
-                    <span><b>VALOR OBTIDO:</b> <?= $prova["pontos_aluno"] ?></span> 
-                        <?php
+                    } else { ?>
+                        <span><b>VALOR DA PROVA:</b> <?= $prova["pontos_prova"] ?></span>
+                        <span><b>VALOR OBTIDO:</b> <?= $prova["pontos_aluno"] ?></span>
+                    <?php
                     } ?>
 
                     <button onclick="Fechar_PopUp('popup-gabarito-<?= $prova['id'] ?>')" class="Fechar-Popup">FECHAR</button>
@@ -207,7 +260,7 @@
 
         <h4>Voê não realizou nenhuma prova!</h4>
 
-        <?php
+    <?php
     } ?>
     <div>
         <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
