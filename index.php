@@ -27,7 +27,8 @@ if(!isset($_SESSION["PopUp_inserir_prova"])){
     $_SESSION["PopUp_inserir_gabarito_professor"] = False;
     $_SESSION["PopUp_RA_NaoENC"] = False;
     $_SESSION["popup_not_turmas"] = False;
-    $_SESSION["PopUp_inserir_prova"] = False; 
+    $_SESSION["PopUp_inserir_prova"] = False;
+    $_SESSION["PAG_VOLTAR"] = False;
     
     $_SESSION["GESTOR"] = False;
     $_SESSION["ALUNO"] = False;
@@ -70,7 +71,8 @@ $rotas = [
     "criar_gabarito_respostas"  => ProfessorController::class,
     "inserir_gabarito_rec"      => ProfessorController::class,
     "criar_gabarito_rec"        => ProfessorController::class,
-    "criar_gabarito_rec_resp"   => ProfessorController::class
+    "criar_gabarito_rec_resp"   => ProfessorController::class,
+    "prova_recuperacao"         => ProfessorController::class
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";

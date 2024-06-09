@@ -57,13 +57,30 @@
         </table>
     </div>
 
-    <form action="add_recuperacao" method="post"> 
-            <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
-            <button type="submit" class="button-add-recp">ADICIONAR RECUPERAÇÃO</button>
+    <?php
+    if ($data["provas_rec"] != NULL) { ?>
+        <center>
+            <div class="area_provas_rec_professor">
+                <h3>Essa prova tem <?= $data["provas_rec"]["quantidade"] ?> recuperação </h3>
+                <form action="prova_recuperacao" method="post">
+                    <?php
+                    for ($i = 0; $i < $data["provas_rec"]["quantidade"]; $i++) { ?>
+                        <button name="prova" value="<?= $data["provas_rec"]["provas"][$i]["id"] ?>"><?= $i + 1 ?>ª Recuperação</button>
+                        <br>
+                    <?php }
+                    ?>
+                </form>
+            </div>
+        </center>
+    <?php } ?>
+
+    <form action="add_recuperacao" method="post">
+        <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
+        <button type="submit" class="button-add-recp">ADICIONAR RECUPERAÇÃO</button>
     </form>
 
 
-    <br> 
+    <br>
     <br>
     <br>
     <br>

@@ -162,10 +162,10 @@ class ProfessorController{
     public static function prova() {
         if ($_SESSION["PROFESSOR"]) {
             $provas_professores = AlunoModel::GetProvas();
-            $provas_alunos = AlunoModel::GetProvasFinalizadas(); 
+            $provas_alunos = AlunoModel::GetProvasFinalizadas();
             $id_prova = $_POST["id-prova"];
             $_SESSION["id_prova_professor"] = $_POST["id-prova"];
-
+  
             $provas = [];
             $provas_turma = [];
             $liberado = false;
@@ -205,6 +205,9 @@ class ProfessorController{
                     $provas_turma[] = $prova;
                 }
             }
+
+
+
     
             $dados = [
                 "provas" => $provas,
@@ -215,11 +218,65 @@ class ProfessorController{
                 "prova" =>  $provaa,
                 "nome_prova" => $nome_prova
             ];
+
+            $provas_rec = ProfessorModel::GetProvaRecbyIDprova($id_prova);
+            if(count($provas_rec) > 0){
+                $dados["provas_rec"] = [
+                    "quantidade" => count($provas_rec),
+                    "provas"    => $provas_rec
+                ];
+            }else{
+                $dados["provas_rec"] = NULL;
+            }
+
+            // echo "<pre>";
+            // print_r($dados);
+            // echo "</pre>";
     
             MainController::Templates("public/views/professor/prova.php", "PROFESSOR", $dados);
         }else{
             header("location: ADM");
         }
+    }
+
+    public static function prova_recuperacao(){
+        $id = $_POST["prova"];
+        $prova = ProfessorModel::GetProvaRecbyID($id);
+
+        $alunos_prova = [];
+        if(strpos($prova["alunos"],";")){
+            $alunos_prova = explode(";",$prova["alunos"]);
+        }else{
+            $alunos_prova[] = $prova["alunos"];
+        }
+
+        $alunos = [];
+        foreach(AlunoModel::GetAlunos() as $aluno){
+            foreach($alunos_prova as $aln_prova){
+                if($aln_prova == $aluno["ra"]){
+                    $alunos[$aln_prova] = [
+                        "nome" => $aluno["nome"],
+                        "turma" => $aluno["turma"]
+                    ];
+                }
+            }
+        }
+
+        uasort($alunos, function($a, $b) {
+            return strcmp($a['turma'], $b['turma']);
+        });
+
+        // echo "<pre>";
+        // print_r($alunos);
+        // echo "</pre>";
+
+        $dados = [
+            "alunos" => $alunos
+        ];
+
+        MainController::Templates("public/views/professor/dados_prova_rec.php", "PROFESSOR", $dados);
+
+
     }
     
     public static function relatorio_professor(){
@@ -758,6 +815,9 @@ foreach ($percentual_descritores_turmas as $turma) {
         }
     
         $descritores = rtrim($descritores, ";");
+        if( $_SESSION["dados_prova_rec"]["descritores"] != "sim"){
+        $descritores = NULL;
+        }
         $gabarito = rtrim($gabarito, ";");
 
         // echo $gabarito;
