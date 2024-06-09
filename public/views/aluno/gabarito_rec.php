@@ -1,14 +1,14 @@
 <main class="main-home-aluno">
 <center>
 <h1><?= $data["nome_prova"] ?></h1>
+<h3>RECUPERAÇÃO</h3>
 
 </center>
     <span><b>DISCIPLINA:</b> <?= $data["disciplina"] ?></span><br>
-    <span><b>PROFESSOR: </b><?= $data["nome_professor"] ?></span><br>
     <span><b>VALOR: </b> <?= $data["valor"] ?></span><br>
 
     <div class="aluno_inserir_gabarito">
-        <form action="cadastrar_gabarito_aluno" method="post">
+        <form action="cadastrar_gabarito_aluno_rec" method="post">
             <table>
                 <?php
                 $contador = 1;
@@ -33,7 +33,7 @@
             </table>
             <br><br><br><br>
             <center>
-                <input type="submit" value="Criar gabarito" class="botao-form-enviar">
+                <input type="submit" value="Enviar gabarito" class="botao-form-enviar">
             </center>
             <br><br><br><br>
             <br><br><br><br>

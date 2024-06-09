@@ -33,7 +33,7 @@
             </table>
             <br><br><br><br>
             <center>
-                <input type="submit" value="Criar gabarito" class="botao-form-enviar">
+                <input type="submit" value="Enviar gabarito" class="botao-form-enviar">
             </center>
             <br><br><br><br>
             <br><br><br><br>

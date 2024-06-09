@@ -100,7 +100,8 @@ $dotenv->load();
                     perguntas_certas VARCHAR(255),
                     perguntas_erradas VARCHAR(255),
                     descritores_certos VARCHAR(255),
-                    descritores_errados VARCHAR(255)
+                    descritores_errados VARCHAR(255),
+                    recuperacao     varchar(255)
                 );";
 
             $gabarito_provas_professores = "CREATE TABLE IF NOT EXISTS gabarito_professores(
