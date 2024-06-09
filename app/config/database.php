@@ -39,6 +39,8 @@ $dotenv->load();
         }
 
         public static function CreateTable(){
+
+        
             $professores = "CREATE TABLE IF NOT EXISTS professores(
                     id          int AUTO_INCREMENT primary key,
                     usuario     varchar(255),
@@ -101,8 +103,61 @@ $dotenv->load();
                     perguntas_erradas VARCHAR(255),
                     descritores_certos VARCHAR(255),
                     descritores_errados VARCHAR(255),
-                    recuperacao     varchar(255)
+                    recuperacao VARCHAR(255),
+                    status VARCHAR(255)
                 );";
+                
+            $gabarito_provas_alunos_rec = "CREATE TABLE IF NOT EXISTS gabarito_alunos_recuperacao(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                aluno VARCHAR(255),
+                ra VARCHAR(255),
+                turma VARCHAR(255),
+                turno VARCHAR(255),
+                id_prova INT,
+                id_prova_rec INT,
+                serie INT,
+                nome_professor VARCHAR(255),
+                descritores VARCHAR(255),
+                disciplina VARCHAR(255),
+                nome_prova VARCHAR(255),
+                pontos_prova FLOAT,
+                QNT_perguntas INT,
+                data_aluno DATE,
+                acertos INT,
+                porcentagem INT,
+                pontos_aluno FLOAT,
+                perguntas_respostas VARCHAR(255),
+                perguntas_certas VARCHAR(255),
+                perguntas_erradas VARCHAR(255),
+                descritores_certos VARCHAR(255),
+                descritores_errados VARCHAR(255)
+            );";
+
+            
+            $gabarito_provas_alunos_prova = "CREATE TABLE IF NOT EXISTS gabarito_alunos_primeira_prova(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                aluno VARCHAR(255),
+                ra VARCHAR(255),
+                turma VARCHAR(255),
+                turno VARCHAR(255),
+                id_prova INT,
+                serie INT,
+                nome_professor VARCHAR(255),
+                descritores VARCHAR(255),
+                disciplina VARCHAR(255),
+                nome_prova VARCHAR(255),
+                pontos_prova FLOAT,
+                QNT_perguntas INT,
+                data_aluno DATE,
+                acertos INT,
+                porcentagem INT,
+                pontos_aluno FLOAT,
+                perguntas_respostas VARCHAR(255),
+                perguntas_certas VARCHAR(255),
+                perguntas_erradas VARCHAR(255),
+                descritores_certos VARCHAR(255),
+                descritores_errados VARCHAR(255)
+            );";
 
             $gabarito_provas_professores = "CREATE TABLE IF NOT EXISTS gabarito_professores(
                 id              int AUTO_INCREMENT primary key,
@@ -133,7 +188,6 @@ $dotenv->load();
                 liberado        varchar(255)
                 );";
 
-
         self::GetInstance()->query($professores);
         self::GetInstance()->query($disciplinas);
         self::GetInstance()->query($turmas);
@@ -141,6 +195,8 @@ $dotenv->load();
         self::GetInstance()->query($descritores);
         self::GetInstance()->query($gabarito_provas_professores);
         self::GetInstance()->query($gabarito_provas_alunos);
+        self::GetInstance()->query($gabarito_provas_alunos_rec);
+        self::GetInstance()->query($gabarito_provas_alunos_prova);
         self::GetInstance()->query($gabarito_provas_professores_gabarito);
     }
 }

@@ -73,7 +73,7 @@ class AlunoController
 
             $provas_aluno_rec = [];
             foreach($provas_rec as $prova){
-                if(strpos($prova["alunos"],$_SESSION["ra"])){
+                if(strpos($prova["alunos"],$_SESSION["ra"]) !== false){
                     $provas_aluno_rec[] = $prova;
                 }
             }
@@ -189,7 +189,8 @@ class AlunoController
                 "aluno"                 => $_SESSION["nome_aluno"],
                 "ra"                    => $_SESSION["ra"],
                 "turma"                 => $_SESSION["turma"],
-                "id_prova"              => $_SESSION["prova_gabarito"]["id"],
+                "id_prova_rec"          => $_SESSION["prova_gabarito"]["id"],
+                "id_prova"              => $_SESSION["prova_gabarito"]["id_prova"],
                 "nome_professor"        => $_SESSION["prova_gabarito"]["nome_professor"],
                 "descritores"           => $_SESSION["prova_gabarito"]["descritores"], 
                 "disciplina"            => $_SESSION["prova_gabarito"]["disciplina"],
@@ -197,7 +198,7 @@ class AlunoController
                 "pontos_prova"          => $_SESSION["prova_gabarito"]["valor"],
                 "QNT_perguntas"         => $_SESSION["prova_gabarito"]["QNT_perguntas"],
                 "turno"                 => $_SESSION["turno"],
-                "porcentagem"           => ($acertos_aluno / $_SESSION["prova_gabarito"]["QNT_perguntas"] ) * 100,
+                "porcentagem"           => number_format(($acertos_aluno / $_SESSION["prova_gabarito"]["QNT_perguntas"] ) * 100,1),
                 "serie"                 => substr($_SESSION["turma"],0,1),
                 "data_aluno"            => $dataFormatada,
                 "acertos"               => $acertos_aluno,
@@ -213,6 +214,8 @@ class AlunoController
             print_r($dados);
             echo "</pre>";
 
+            self::processar_rec($dados);
+
             // if(AlunoModel::Inserir_dados_prova($dados)){
             //     $_SESSION["PopUp_inserir_prova"] = True;
             //     header("location:aluno_home");
@@ -221,6 +224,37 @@ class AlunoController
     else{
         header("location: home");
     }
+    }
+
+    public static function processar_rec($prova_rec){
+        $provas = AlunoModel::GetProvasFinalizadas();
+
+        $prova_feita = null;
+        foreach($provas as $prova){
+            if($prova["id_prova"] == $prova_rec["id_prova"] && $prova["ra"] == $prova_rec["ra"] ){
+                $prova_feita = $prova;
+            }
+        }
+
+        if($prova_feita == null){
+            $status = "Fez só a recuperação";
+        
+        }else if($prova_feita != null){
+        
+            if($prova_feita["pontos_aluno"] == $prova_rec["pontos_aluno"]){
+        
+                $status = "Recuperação: mesma nota da 1º prova";
+        
+            }else if($prova_feita["pontos_aluno"] > $prova_rec["pontos_aluno"]){
+        
+                $status = "Recuperação: nota menor da 1º prova";
+        
+            }else if($prova_feita["pontos_aluno"] < $prova_rec["pontos_aluno"]){
+                $status = "Recuperação: nota maior da 1º prova";
+            }
+        }
+
+
     }
 
     public static function cadastrar_gabarito_aluno(){
