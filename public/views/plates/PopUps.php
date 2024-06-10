@@ -134,7 +134,7 @@
                 <div class="linha-checked-2"></div>
             </div>
 
-            <p>gabarito inserida com <br> sucesso!</p>
+            <p>gabarito inserido com <br> sucesso!</p>
             <button onclick="Fechar_PopUp('PopUp_inserir_gabarito_professor')" class="Fechar-Popup">FECHAR</button>
         </div>
     </div>

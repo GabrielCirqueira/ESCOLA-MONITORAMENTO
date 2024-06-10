@@ -38,8 +38,9 @@ class AlunoController
             $dados = AlunoModel::GetProvas();
             $provas_feitas = AlunoModel::GetProvasFinalizadas();
             $provas_rec = ProfessorModel::GetProvaRec();
-            $provas_aluno = []; 
-            $provas_aluno_feitas = []; 
+            $provas_rec_feitas = ProfessorModel::GetProvaRecAlunos();
+            $provas_aluno = [];
+            $provas_aluno_feitas = [];
 
 
             if ($dados != null) {
@@ -77,6 +78,17 @@ class AlunoController
                     $provas_aluno_rec[] = $prova;
                 }
             }
+ 
+
+            
+            foreach($provas_rec_feitas as $prova){
+                foreach($provas_aluno_rec as $key => $p){  
+                    if($p["id_prova"] == $prova["id_prova"] && $prova["ra"] == $_SESSION["ra"]){
+                        $provas_aluno_rec[$key]["statuss"] = "FEZ";
+                    }                    
+                }
+            }
+ 
 
             // echo "<pre>";
             // print_r($provas_aluno_rec);
@@ -238,23 +250,61 @@ class AlunoController
 
         if($prova_feita == null){
             $status = "Fez só a recuperação";
+            AlunoModel::Inserir_dados_prova_rec($prova_rec);
+            AlunoModel::Inserir_dados_prova($prova_rec,$status);
+            $_SESSION["PopUp_inserir_gabarito_professor"] = True;
+            header("location: aluno_home");
+            exit();
         
         }else if($prova_feita != null){
         
             if($prova_feita["pontos_aluno"] == $prova_rec["pontos_aluno"]){
         
                 $status = "Recuperação: mesma nota da 1º prova";
-        
+                AlunoModel::Inserir_dados_prova_rec($prova_rec);
+                AlunoModel::UpdateStatusAluno($prova_rec["ra"],$prova_rec["id_prova"],$status);
+                $_SESSION["PopUp_inserir_gabarito_professor"] = True;
+                header("location: aluno_home");
+                exit();
+                
             }else if($prova_feita["pontos_aluno"] > $prova_rec["pontos_aluno"]){
         
-                $status = "Recuperação: nota menor da 1º prova";
+                $status = "Recuperação: nota menor que a 1º prova";
+                AlunoModel::Inserir_dados_prova_rec($prova_rec);
+                AlunoModel::UpdateStatusAluno($prova_rec["ra"],$prova_rec["id_prova"],$status);
+                
+                $_SESSION["PopUp_inserir_gabarito_professor"] = True;
+                header("location: aluno_home");
+                exit();
         
             }else if($prova_feita["pontos_aluno"] < $prova_rec["pontos_aluno"]){
-                $status = "Recuperação: nota maior da 1º prova";
+                $status = "Recuperação: nota maior que a 1º prova";
+                AlunoModel::Inserir_dados_prova_rec($prova_rec);
+
+                $Update = [
+                    "QNT_perguntas" => $prova_rec["QNT_perguntas"],
+                    "porcentagem" => $prova_rec["porcentagem"],
+                    "acertos" => $prova_rec["acertos"],
+                    "pontos_aluno" => $prova_rec["pontos_aluno"],
+                    "perguntas_respostas" => $prova_rec["perguntas_respostas"],
+                    "perguntas_certas" => $prova_rec["perguntas_certas"],
+                    "perguntas_erradas" => $prova_rec["perguntas_erradas"],
+                    "descritores_certos" => $prova_rec["descritores_certos"],
+                    "descritores_errados" => $prova_rec["descritores_errados"],
+                    "status"            => $status,
+                    "ra"  => $prova_rec["ra"],
+                    "recuperacao"  => "FEZ RECUPERAÇÂO",
+                    "id_prova"  => $prova_rec["id_prova"]
+                ];
+
+                AlunoModel::UpdateGabaritoAluno($Update);
+                
+                $_SESSION["PopUp_inserir_gabarito_professor"] = True;
+                header("location: aluno_home");
+                exit();
+
             }
-        }
-
-
+        } 
     }
 
     public static function cadastrar_gabarito_aluno(){
@@ -330,12 +380,15 @@ class AlunoController
                 "perguntas_respostas"   => implode(";",$perguntas_respostas),
                 "perguntas_erradas"     => implode(";",$perguntas_erradas),
                 "descritores_certos"    => $descritores_corretos,
-                "descritores_errados"   => $descritores_errados
+                "descritores_errados"   => $descritores_errados,
+                "status"                => "fez a 1º Prova"
             ];
 
-            if(AlunoModel::Inserir_dados_prova($dados)){
+            if(AlunoModel::Inserir_dados_prova_1_prova($dados)){
+                AlunoModel::Inserir_dados_prova($dados,"fez a 1º Prova");
                 $_SESSION["PopUp_inserir_prova"] = True;
                 header("location:aluno_home");
+                exit();
             }
     }
     else{

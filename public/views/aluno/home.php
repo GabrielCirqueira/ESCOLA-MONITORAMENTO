@@ -71,7 +71,9 @@
         }
 
         if ($data["rec"] != null) {
-            foreach ($data["rec"] as $provaa) { ?>
+            foreach ($data["rec"] as $provaa) {  
+                if(!isset($provaa["statuss"])){
+                ?>
 
 
                 <div class="prova-pendente">
@@ -120,7 +122,7 @@
                 </div>
 
         <?php
-            }
+            }}
         }
     }
 

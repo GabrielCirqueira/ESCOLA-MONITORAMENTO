@@ -53,8 +53,41 @@ class AlunoModel{
         }
     }
 
-    public static function Inserir_dados_prova($dados){
+    public static function Inserir_dados_prova($dados,$string){
         $sql = "INSERT INTO gabarito_alunos
+        (aluno, ra, turma, id_prova, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie,status)
+        VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP,:PORC,:TURNO,:SER,:ALN)";
+    
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":ALUNO", $dados["aluno"]);
+        $query->bindValue(":RA", $dados["ra"]);
+        $query->bindValue(":TURMA", $dados["turma"]);
+        $query->bindValue(":ID_PROVA", $dados["id_prova"]);
+        $query->bindValue(":NOME_PROFESSOR", $dados["nome_professor"]);
+        $query->bindValue(":DESCRITORES", $dados["descritores"]);
+        $query->bindValue(":DISCIPLINA", $dados["disciplina"]);
+        $query->bindValue(":NOME_PROVA", $dados["nome_prova"]);
+        $query->bindValue(":PONTOS_PROVA", $dados["pontos_prova"]);
+        $query->bindValue(":QNT_PERGUNTAS", $dados["QNT_perguntas"]);
+        $query->bindValue(":DATA_ALUNO", $dados["data_aluno"]);
+        $query->bindValue(":ACERTOS", $dados["acertos"]);
+        $query->bindValue(":PONTOS_ALUNO", $dados["pontos_aluno"]);
+        $query->bindValue(":PERGUNTAS_CERTAS", $dados["perguntas_certas"]);
+        $query->bindValue(":DESCRITORES_CERTOS", $dados["descritores_certos"]); 
+        $query->bindValue(":DESCRITORES_ERRADOS", $dados["descritores_errados"]);
+        $query->bindValue(":PERG_ERRADAS", $dados["perguntas_erradas"]);
+        $query->bindValue(":PERG_RESP", $dados["perguntas_respostas"]);
+        $query->bindValue(":PORC", $dados["porcentagem"]);
+        $query->bindValue(":TURNO", $dados["turno"]);
+        $query->bindValue(":SER", $dados["serie"]);
+        $query->bindValue(":ALN", $string);
+        $query->execute();
+    
+        return $query;
+    }
+
+    public static function Inserir_dados_prova_1_prova($dados){
+        $sql = "INSERT INTO gabarito_alunos_primeira_prova
         (aluno, ra, turma, id_prova, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie)
         VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP,:PORC,:TURNO,:SER)";
     
@@ -63,6 +96,39 @@ class AlunoModel{
         $query->bindValue(":RA", $dados["ra"]);
         $query->bindValue(":TURMA", $dados["turma"]);
         $query->bindValue(":ID_PROVA", $dados["id_prova"]);
+        $query->bindValue(":NOME_PROFESSOR", $dados["nome_professor"]);
+        $query->bindValue(":DESCRITORES", $dados["descritores"]);
+        $query->bindValue(":DISCIPLINA", $dados["disciplina"]);
+        $query->bindValue(":NOME_PROVA", $dados["nome_prova"]);
+        $query->bindValue(":PONTOS_PROVA", $dados["pontos_prova"]);
+        $query->bindValue(":QNT_PERGUNTAS", $dados["QNT_perguntas"]);
+        $query->bindValue(":DATA_ALUNO", $dados["data_aluno"]);
+        $query->bindValue(":ACERTOS", $dados["acertos"]);
+        $query->bindValue(":PONTOS_ALUNO", $dados["pontos_aluno"]);
+        $query->bindValue(":PERGUNTAS_CERTAS", $dados["perguntas_certas"]);
+        $query->bindValue(":DESCRITORES_CERTOS", $dados["descritores_certos"]); 
+        $query->bindValue(":DESCRITORES_ERRADOS", $dados["descritores_errados"]);
+        $query->bindValue(":PERG_ERRADAS", $dados["perguntas_erradas"]);
+        $query->bindValue(":PERG_RESP", $dados["perguntas_respostas"]);
+        $query->bindValue(":PORC", $dados["porcentagem"]);
+        $query->bindValue(":TURNO", $dados["turno"]);
+        $query->bindValue(":SER", $dados["serie"]); 
+        $query->execute();
+    
+        return $query;
+    }
+
+    public static function Inserir_dados_prova_rec($dados){
+        $sql = "INSERT INTO gabarito_alunos_recuperacao
+        (aluno, ra, turma, id_prova,id_prova_rec, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie)
+        VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :ID_PROVA_REC, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP,:PORC,:TURNO,:SER)";
+    
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":ALUNO", $dados["aluno"]);
+        $query->bindValue(":RA", $dados["ra"]);
+        $query->bindValue(":TURMA", $dados["turma"]);
+        $query->bindValue(":ID_PROVA", $dados["id_prova"]);
+        $query->bindValue(":ID_PROVA_REC", $dados["id_prova_rec"]);
         $query->bindValue(":NOME_PROFESSOR", $dados["nome_professor"]);
         $query->bindValue(":DESCRITORES", $dados["descritores"]);
         $query->bindValue(":DISCIPLINA", $dados["disciplina"]);
@@ -91,6 +157,51 @@ class AlunoModel{
         $query->bindValue(":ID", $id);
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function UpdateStatusAluno($ra, $id_prova, $string) {
+        $sql = "UPDATE gabarito_alunos SET status = :STRING WHERE ra = :RA AND id_prova = :ID_PROVA";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":STRING", $string);
+        $query->bindValue(":RA", $ra);
+        $query->bindValue(":ID_PROVA", $id_prova);
+        $query->execute();
+        return $query;
+    }
+
+    public static function UpdateGabaritoAluno($dados) {
+        $sql = "UPDATE gabarito_alunos SET 
+            QNT_perguntas = :QNT_PERGUNTAS,
+            porcentagem = :PORCENTAGEM,
+            acertos = :ACERTOS,
+            pontos_aluno = :PONTOS_ALUNO,
+            perguntas_respostas = :PERG_RESP,
+            perguntas_certas = :PERGUNTAS_CERTAS,
+            perguntas_erradas = :PERG_ERRADAS,
+            descritores_certos = :DESCRITORES_CERTOS,
+            descritores_errados = :DESCRITORES_ERRADOS,
+            recuperacao = :RCPR,
+            status = :STATUS
+            WHERE ra = :RA AND id_prova = :ID_PROVA";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":QNT_PERGUNTAS", $dados["QNT_perguntas"]);
+        $query->bindValue(":PORCENTAGEM", $dados["porcentagem"]);
+        $query->bindValue(":ACERTOS", $dados["acertos"]);
+        $query->bindValue(":PONTOS_ALUNO", $dados["pontos_aluno"]);
+        $query->bindValue(":PERG_RESP", $dados["perguntas_respostas"]);
+        $query->bindValue(":PERGUNTAS_CERTAS", $dados["perguntas_certas"]);
+        $query->bindValue(":PERG_ERRADAS", $dados["perguntas_erradas"]);
+        $query->bindValue(":DESCRITORES_CERTOS", $dados["descritores_certos"]);
+        $query->bindValue(":DESCRITORES_ERRADOS", $dados["descritores_errados"]);
+        $query->bindValue(":STATUS", $dados["status"]); 
+        $query->bindValue(":RCPR", $dados["recuperacao"]); 
+        $query->bindValue(":RA", $dados["ra"]);
+        $query->bindValue(":ID_PROVA", $dados["id_prova"]);
+
+        $query->execute();
+        
+        return $query;
     }
  
 }

@@ -6,17 +6,17 @@
     </center>
     <br>
     <?php
-    $status = false;
+    $status = false; 
     foreach ($data["provas"] as $prova) {
-
+        $status = false; 
         if($data["provas_alunos"] != null){ 
             foreach($data["provas_alunos"] as $prova_aluno){
                 if($prova_aluno["id_prova"] == $prova["id"]){
-                    $status = true;
+                    $status = true; 
+
                 }
             }
-        }
-
+        } 
     ?>
 
 
