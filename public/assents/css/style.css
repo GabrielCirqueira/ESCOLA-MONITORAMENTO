@@ -58,7 +58,7 @@ td {
   top: 0px;
   left: -320px;
   position: fixed;
-  transition: 0.8s ease;
+  transition: 0.5s ease;
   height: 100%;  
 } 
 
@@ -392,7 +392,7 @@ input:checked + .slider:before {
 }
 
 .tabela-prova-aluno {
-  width: 70%;
+  width: 70%; 
   border-collapse: collapse;
 }
 
@@ -417,7 +417,7 @@ input:checked + .slider:before {
 }
 
 .tabela-prova-aluno tr:hover {
-  background-color: #306c4672;
+  background-color: #358bb955;
 }
 
 
@@ -807,27 +807,23 @@ input:checked + .slider:before {
   background-color: rgb(255, 255, 255);
 }
 
-.export-excel{
-  margin: 100px;
-  max-width: 450px;
-  min-width: 300px; 
-  height: 55px;
-  padding: 20px;
-  background-color: #3c8b95b5;
+.export-excel{ 
+  width: 70%;
+  margin-top: 1px;
+  height: 40px; 
+  background-color: #54982fb5;
   color: white;
   font-weight: bold;
-  font-size: 20px;
-  transition: 0.5s ease;
-  border: none;
-  border-radius: 9px;
+  font-size: 16px;
+  transition: 1s ease;
+  border: none; 
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.148);
 }
 
 .export-excel:hover{
   cursor: pointer; 
-  background-color: #22565db5;
-  font-size: 20.5px; 
-  box-shadow: 0px 0px 10px 10px rgba(57, 57, 57, 0.252);
+  background-color: #407523b5;
+  font-size: 16.5px;  
 }
 
 .button-add-recp{
@@ -906,4 +902,40 @@ input:checked + .slider:before {
   font-size: 19px;
   cursor: pointer;
   background-color: #80730eb5;
+}
+
+
+
+.professor-dados-gabarito-criar {
+  background-color: #f9f9f9;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.turma-colunas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Divide em duas colunas */
+  grid-gap: 10px; /* Espaçamento entre os itens */
+  gap: 10px;
+}
+
+/* Estilo opcional para os itens das turmas */
+.turma-colunas div {
+  margin-bottom: 5px;
+}
+
+.botao-ver-relatorio{
+  width: 120px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: #03a4b987;
+  border: none;
+  transition: 0.5s ease-in-out;
+}
+
+.botao-ver-relatorio:hover{
+  cursor: pointer; 
+  background-color: #02616e87; 
 }

@@ -43,7 +43,9 @@ class ProfessorController{
     public static function inserir_gabarito(){
         
         if($_SESSION["PROFESSOR"]){
-            $turmas = ProfessorModel::GetTurmas();
+            $turmas = ProfessorModel::GetTurmas();        
+            $_SESSION["PAG_VOLTAR"] = "professor_home";
+
             MainController::Templates("public/views/professor/inserir_gabarito.php","PROFESSOR",$turmas);
         }
             else{
@@ -60,7 +62,10 @@ class ProfessorController{
             header("location: inserir_gabarito");
             exit;
         }
-        
+
+
+        $_SESSION["PAG_VOLTAR"] = "inserir_gabarito";
+    
         $turmas = $_POST["gabarito-turmas"];
         $perguntas = $_POST["qtn-perguntas"];
         $valor = $_POST["valor-prova"];
@@ -250,7 +255,7 @@ class ProfessorController{
     public static function prova_recuperacao(){
         $id = $_POST["prova"];
         $prova = ProfessorModel::GetProvaRecbyID($id);
-        $_SESSION["PAG_VOLTAR"] = "prova";
+        $provas_rec = ProfessorModel::GetProvaRecAlunos();
 
         $alunos_prova = [];
         if(strpos($prova["alunos"],";")){
@@ -265,9 +270,27 @@ class ProfessorController{
                 if($aln_prova == $aluno["ra"]){
                     $alunos[$aln_prova] = [
                         "nome" => $aluno["nome"],
-                        "turma" => $aluno["turma"]
+                        "turma" => $aluno["turma"],
+                        "status" => "NÃO FEZ",
+                        "Pontos" => "NULL",
                     ];
                 }
+            }
+        }
+
+        // echo "<pre>";
+        // print_r($alunos);
+        // echo "</pre>";
+
+        
+
+        foreach($provas_rec as $prova){
+            foreach($alunos as $ra => $aluno){
+ 
+                if($ra == $prova["ra"] && $prova["id_prova_rec"] == $id){
+                    $alunos[$ra]["status"] = "FEZ";
+                    $alunos[$ra]["Pontos"] = $prova["pontos_aluno"];
+                } 
             }
         }
 
@@ -292,6 +315,7 @@ class ProfessorController{
         if($_SESSION["PROFESSOR"]){
         $provas_professores = AlunoModel::GetProvas();
         $provas_alunos = AlunoModel::GetProvasFinalizadas();
+        $_SESSION["PAG_VOLTAR"] = "professor_home";
         $provas = []; 
         foreach($provas_professores as $professor){
             if($professor["nome_professor"] == $_SESSION["nome_professor"]){
@@ -312,6 +336,7 @@ class ProfessorController{
     public static function relatorio_prova(){
         if($_SESSION["PROFESSOR"]){
         $id_prova = $_POST["id-prova"];
+        $_SESSION["PAG_VOLTAR"] = "relatorio_professor";
         $provas = AlunoModel::GetProvasFinalizadas(); 
         $provas_professores = AlunoModel::GetProvas();
         $dados_turmas = [] ;
@@ -607,6 +632,7 @@ foreach ($percentual_descritores_turmas as $turma) {
     public static function editar_prova(){
 
         if($_SESSION["PROFESSOR"]){
+            $_SESSION["PAG_VOLTAR"] = "ver_provas";
 
         $id = $_POST["id-prova"];
         $_SESSION["ID_PROVA_EDITAR"] = $id;

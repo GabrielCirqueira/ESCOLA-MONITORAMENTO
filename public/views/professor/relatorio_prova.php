@@ -107,6 +107,7 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
     <?php } ?>
 
     <h2 data-aos="fade-up">NOTAS POR ALUNO</h2>
+    
     <table data-aos="fade-up" class="tabela-prova-aluno">
         <thead>
             <tr>
@@ -133,7 +134,7 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
     </table>
 
     <?php if(count($data["provas_turma"]) > 0){ ?>
-        <button data-aos="fade-up" class="export-excel" onclick="exportToExcel('<?=  '(' . $filtro_ . ') ' .$data['nome_prova']?>')">EXPORTAR DADOS</button>
+        <button data-aos="fade-up"  class="export-excel" onclick="exportToExcel('<?=  '(' . $filtro_ . ') ' .$data['nome_prova']?>')">EXPORTAR DADOS</button>
     <?php } ?>
 
     <div><br><br><br><br><br><br><br><br></div>

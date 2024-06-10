@@ -10,9 +10,9 @@
             <input type="text" name="valor_prova" value="<?php echo $data['valor']; ?>"> 
             </div>
             <br><br>
-            <pre>
+            <!-- <pre>
                 <?php print_r($data["descritores"])?>
-            </pre>
+            </pre> -->
 
             <input type="hidden" name="numero_perguntas" value="<?php echo $data['perguntas']; ?>">
             <input type="hidden" name="descritor" value="<?php echo isset($data['descritores']) ? 'sim' : 'não'; ?>">

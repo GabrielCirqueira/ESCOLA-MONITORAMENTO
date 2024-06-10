@@ -39,10 +39,10 @@
 
                 <?php if($status == true){?>
                 <form method="post" action="relatorio_prova">
-                    <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-form-enviar">Relatorio</button>
+                    <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-ver-relatorio">Relatorio</button>
                 </form>
                 <?php }else{?>
-                    <button class="botao-form-enviar">SEM DADOS</button>
+                    <button class="botao-ver-relatorio">Sem Dados</button>
                 <?php }?>
             </div>
         </div><br>

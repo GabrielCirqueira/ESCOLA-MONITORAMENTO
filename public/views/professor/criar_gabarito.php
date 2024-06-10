@@ -3,17 +3,22 @@
         <h2>GABARITO</h2>
 
         <div class="professor-dados-gabarito-criar">
-            <h3>Turma(s):</h3>
-            <?php foreach ($data["turmas"] as $turma) {
-                echo $turma;
-                echo "<br>";
-            } ?>
-            <h3>Valor:</h3>
-            <?php echo $data["valor"] ?>
-            <h3>Perguntas:</h3>
-            <?php echo $data["perguntas"] ?>
-        </div>
+            <center>
 
+    <h3>Turma(s):</h3>
+    <br>
+    <div class="turma-colunas">
+        <?php foreach ($data["turmas"] as $turma) {
+            echo "<span>{$turma}</span>";
+        } ?>
+    </div>
+    <br>
+    <h3>Valor: <?php echo $data["valor"] ?></h3>
+    <br>
+    <h3>Perguntas: <?php echo $data["perguntas"] ?></h3>
+    </center>
+    
+</div>
         <div class="professor-inserir-gabarito">
             <form action="criar_gabarito_respostas" method="post">
                 <input type="hidden" name="numero_perguntas" value="<?php echo $data['perguntas']; ?>">

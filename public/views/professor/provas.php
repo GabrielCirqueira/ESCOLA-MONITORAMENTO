@@ -29,7 +29,7 @@
         ?>
 
 
-        <div class="prova-pendente">
+        <div   class="prova-pendente">
             <div class="linha-vertical-campo-prova" style="background-color: #04C636;"></div>
             <div class="conteudo-prova">
                 <i class="fas fa-file-alt fa-4x" style="color: #04C636;"></i>
@@ -61,7 +61,7 @@
                     </div>
 
                 <?php } else { ?>
-                    <button class="botao-form-enviar">SEM DADOS</button>
+                    <button class="botao-form-enviar">Sem Dados</button>
                 <?php } ?>
             </div>
         </div><br>

@@ -4,22 +4,31 @@
 
         <h3>ALUNOS EM RECUPERAÇÃO</h3>
 
-    <table data-aos="fade-up" class="tabela-prova-aluno">
+        
+    <table  class="tabela-prova-aluno">
             <thead>
-                <th>RA</th>
+                <!-- <th>RA</th> -->
                 <th>NOME</th>
-                <th>TURMA</th>
-                <th>PONTOS</th>
+                <th>TURMA</th> 
+                <th>PONTOS</th> 
+                <th>STATUS</th> 
             </thead>
             <tbody>
                 <?php foreach($data["alunos"] as $ra => $aluno){?>
                     <tr>
-                    <td><?= $ra?></td>
+                    <!-- <td><?= $ra?></td> -->
                     <td><?= $aluno["nome"] ?></td>
                     <td><?= $aluno["turma"] ?></td>
-                    <td>NÃO FEZ</td>
+                    <td><?= $aluno["Pontos"] ?></td> 
+                    <td><?= $aluno["status"] ?></td> 
                     </tr>
                 <?php }?>
             </tbody>
-        </table> 
+        </table>
+
+        <div>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        <br><br><br><br><br>
+        </div>
 </main>
