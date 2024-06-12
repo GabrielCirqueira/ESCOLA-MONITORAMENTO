@@ -92,6 +92,19 @@ if(array_key_exists($action, $rotas)) {
     MainController::index();
 } 
 
+$popups = array(
+    "PopUp_professor",
+    "PopUp_RA_NaoENC",
+    "popup_not_turmas",
+    "popup_not_gestor",
+    "PopUp_add_professor_true",
+    "PopUp_add_materia_true",
+    "PopUp_excluir_materia_true",
+    "PopUp_inserir_turma",
+    "PopUp_inserir_gabarito_professor",
+    "PopUp_inserir_prova"
+);
+
 if($_SESSION["PopUp_professor"] == True){
     echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";
     $_SESSION["PopUp_professor"] = False;

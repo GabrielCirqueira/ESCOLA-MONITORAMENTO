@@ -182,9 +182,8 @@ class GestorController{
                     $descritores_total[$descritor]["proeficiencia"]["Avançado"]++;
                 }
             }
-        }
-    
-        // Calcule a porcentagem geral e a porcentagem de cada faixa de proficiência para cada descritor
+        }   
+     
         foreach ($descritores_total as $descritor => $data) {
             $quantidade = $data["quantidade"];
             $descritores_total[$descritor]["porcentagem"] = number_format($data["soma_porcentagem"] / $quantidade,1);

@@ -300,7 +300,7 @@ class ProfessorController{
 
         // echo "<pre>";
         // print_r($alunos);
-        // echo "</pre>";
+        // echo "</pre>";'
 
         $dados = [
             "alunos" => $alunos
@@ -367,6 +367,12 @@ class ProfessorController{
         $total_acima_60 = 0;
         $total_alunos = 0;
     
+        // echo "<pre>";
+        // print_r($alunos_por_turma);
+        // echo "</pre>";
+        
+
+
         foreach($alunos_por_turma as $turma){
             $pontos = 0;
             $alunos = 0;
@@ -382,14 +388,14 @@ class ProfessorController{
                 }else{
                     $descriotores_sn = true;
                 }
-                if ($porcentagem_aluno > 60) {
-                    $alunos_acima_60++;
+                if ($porcentagem_aluno >= 60) {
+                    $alunos_acima_60++;                                                         
                     $total_acima_60++;
                 }
             }
             
             $porcentagem_acima_60 = number_format(($alunos_acima_60 / $alunos) * 100, 1);
-    
+            
             $dados_turmas[$turma_nome] = [
                 "total_pontos_turma" => $pontos,
                 "alunos" => $alunos,

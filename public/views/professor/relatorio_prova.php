@@ -114,7 +114,7 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
                 <th>ALUNO</th>
                 <th>TURMA</th>
                 <th>PONTOS</th>
-                <!-- <th>ACERTOS</th> -->
+                <th>ACERTOS</th>
                 <th>P. ACERTOS</th>
                 <th>STATUS</th>
             </tr>
@@ -125,7 +125,7 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
                     <td><?= $prova["aluno"] ?></td>
                     <td><?= $prova["turma"] ?></td>
                     <td><?= $prova["pontos_aluno"] ?></td>
-                    <!-- <td><?= $prova["acertos"] ?></td> --> 
+                    <td><?= $prova["acertos"] ?></td> 
                     <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 1) ?>%</td>
                     <td><?= $prova["status"] ?></td>
                 </tr>
