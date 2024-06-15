@@ -79,8 +79,6 @@ class AlunoController
                 }
             }
  
-
-            
             foreach($provas_rec_feitas as $prova){
                 foreach($provas_aluno_rec as $key => $p){  
                     if($p["id_prova"] == $prova["id_prova"] && $prova["ra"] == $_SESSION["ra"]){
@@ -89,12 +87,9 @@ class AlunoController
                 }
             }
  
-
             // echo "<pre>";
             // print_r($provas_aluno_rec);
             // echo "</pre>";
-
-            
 
             MainController::Templates("public/views/aluno/home.php", "ALUNO", [
                 "provas"            => $provas_aluno,
