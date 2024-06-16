@@ -27,11 +27,14 @@ class GestorController{
             $dados = null;
             $dados = self::processarFiltros($btnGeral);
 
+                
+            // echo "<pre>";
+            // print_r($btnGeral);
+            // echo "</pre>";
 
 
             MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
             // MainController::Templates("public/views/gestor/descritores.php", "GESTOR", $dados);
-
 
         } else {
             header("location: ADM");
@@ -101,7 +104,7 @@ class GestorController{
                 // Contar quantas questões existem para cada descritor
                 foreach($descritores_P as $descritor) { 
                     $desc = explode(",", $descritor); 
-                    if (count($desc) == 2) { // Verifica se explode resultou em dois elementos
+                    if (count($desc) == 2) {
                         $desc = $desc[1];
                         
                         if (!isset($contador_descritores[$desc])) {
@@ -112,18 +115,16 @@ class GestorController{
                     }
                 }
     
-                // Contar quantos acertos para cada descritor
                 foreach($descritores_certos as $descritor) { 
                     $desc = explode(",", $descritor);
-                    if (count($desc) == 2) { // Verifica se explode resultou em dois elementos
+                    if (count($desc) == 2) { 
                         $desc = $desc[1];
                         if (isset($acertos_descritores[$desc])) {
                             $acertos_descritores[$desc]++;
                         }
                     }
                 }
-    
-                // Calcular a porcentagem de acertos por descritor
+
                 foreach($contador_descritores as $desc => $total) {
                     if ($total > 0) {
                         $acertos = $acertos_descritores[$desc];
@@ -147,8 +148,7 @@ class GestorController{
 
     public static function DadosDescritores($DescAlunos) { 
         $descritores_total = [];
-    
-        // Inicialize o array descritores_total com as estruturas necessárias
+     
         foreach ($DescAlunos as $descritores) {
             foreach ($descritores as $descritor => $value) {
                 if (!isset($descritores_total[$descritor])) {
@@ -187,8 +187,7 @@ class GestorController{
         foreach ($descritores_total as $descritor => $data) {
             $quantidade = $data["quantidade"];
             $descritores_total[$descritor]["porcentagem"] = number_format($data["soma_porcentagem"] / $quantidade,1);
-    
-            // Calcular a porcentagem para cada faixa de proficiência
+     
             foreach ($data["proeficiencia"] as $faixa => $contagem) {
                 $descritores_total[$descritor]["proeficiencia"][$faixa] = number_format(($contagem / $quantidade) * 100,0);
             }
@@ -231,10 +230,15 @@ class GestorController{
         $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
         
         foreach ($turnos as $turno) {
-            $dados_turno_geral[$turno] = [
-                MainController::gerarGraficoRosca(self::procentagemGeral(GestorModel::GetFiltro("turno", $turno))),
-                MainController::gerarGraficoColunas(self::GetProeficiencia(GestorModel::GetFiltro("turno", $turno)))
-            ];
+            $DadosTurnos = GestorModel::GetFiltro("turno", $turno);
+            if(count($DadosTurnos) > 0){
+                $dados_turno_geral[$turno] = [
+                    MainController::gerarGraficoRosca(self::procentagemGeral($DadosTurnos)),
+                    MainController::gerarGraficoColunas(self::GetProeficiencia($DadosTurnos))
+                ];
+            }else{
+                $dados_turno_geral[$turno] = NULL; 
+            }
         }
     
         return $dados_turno_geral;
@@ -300,18 +304,23 @@ class GestorController{
 
     public static function procentagemGeral($provas){
 
+            
+        // echo "<pre>";
+        // print_r($provas); 
+        // echo "</pre>"; 
+
         $numero_linhas = count($provas);
         $porcentagem = 0;
-
+  
         foreach($provas as $prova){
-            $porcentagem+= $prova["porcentagem"];
+            $porcentagem += $prova["porcentagem"];
         }
+        
+        // echo $numero_linhas;
 
-
-        return number_format($porcentagem / $numero_linhas,2);
-
-
+        return number_format($porcentagem / $numero_linhas, 2);
     }
+    
 
     public static function GetProeficiencia($provas){
         $proficiência = array(
@@ -320,8 +329,7 @@ class GestorController{
             "Médio" => 0,
             "Avançado" => 0
         );  
-        
-        // Loop para calcular as proficiências
+         
         foreach ($provas as $prova) {
             $porcentagem = $prova["porcentagem"];
             
@@ -335,17 +343,18 @@ class GestorController{
                 $proficiência["Avançado"]++;
             }
         }
-
-        // Calcula a quantidade total de alunos
+ 
         $totalAlunos = count($provas);
-
-        // Array para armazenar as porcentagens de proficiência
+        
         $porcentagensProficiência = array();
-
-        // Calcula a porcentagem de alunos em cada nível de proficiência
+ 
         foreach ($proficiência as $nivel => $quantidade) {
-            $porcentagem = number_format((($quantidade / $totalAlunos) * 100),1);
-            $porcentagensProficiência[$nivel] = $porcentagem;
+            if($quantidade == 0){
+                $porcentagem = 0;
+            }else{
+                $porcentagem = number_format((($quantidade / $totalAlunos) * 100),1);
+            }
+        $porcentagensProficiência[$nivel] = $porcentagem;
         }
     
         return $porcentagensProficiência;
@@ -354,35 +363,29 @@ class GestorController{
     public static function DadosGeralTurno($provas){
         $dadosPorTurno = array();
 
-        // Loop para organizar os dados por turno
         foreach ($provas as $prova) {
             $turno = $prova["turno"];
             $porcentagem = $prova["porcentagem"];
             
-            // Verifica se o turno já está no array de dados por turno
             if (!isset($dadosPorTurno[$turno])) {
-                // Se não estiver, cria um novo array para o turno
+
                 $dadosPorTurno[$turno] = array(
-                    "quantidade" => 1, // Inicia a contagem de provas para o turno
-                    "soma_porcentagem" => $porcentagem // Inicia a soma das porcentagens para o turno
+                    "quantidade" => 1,
+                    "soma_porcentagem" => $porcentagem
                 );
             } else {
-                // Se já estiver, atualiza a contagem de provas e soma as porcentagens
                 $dadosPorTurno[$turno]["quantidade"]++;
                 $dadosPorTurno[$turno]["soma_porcentagem"] += $porcentagem;
             }
         }
 
-        // Array para armazenar as médias por turno
         $mediasPorTurno = array();
 
-        // Calcular média por turno
         foreach ($dadosPorTurno as $turno => $dados) {
             $quantidade = $dados["quantidade"];
             $soma_porcentagem = $dados["soma_porcentagem"];
             $media = $soma_porcentagem / $quantidade;
             
-            // Armazenar média no array de médias por turno
             $mediasPorTurno[$turno] = MainController::gerarGraficoRosca(number_format($media,2));
         }
 
@@ -392,63 +395,54 @@ class GestorController{
     public static function DadosGeralTurmas($provas){
         $dadosPorTurma = array();
 
-        // Loop para organizar os dados por turma
         foreach ($provas as $prova) {
             $turma = $prova["turma"];
             $porcentagem = $prova["porcentagem"];
             
-            // Verifica se a turma já está no array de dados por turma
             if (!isset($dadosPorTurma[$turma])) {
-                // Se não estiver, cria um novo array para a turma
+
                 $dadosPorTurma[$turma] = array(
-                    "quantidade" => 1, // Inicia a contagem de provas para a turma
-                    "soma_porcentagem" => $porcentagem // Inicia a soma das porcentagens para a turma
+                    "quantidade" => 1,
+                    "soma_porcentagem" => $porcentagem
                 );
             } else {
-                // Se já estiver, atualiza a contagem de provas e soma as porcentagens
+
                 $dadosPorTurma[$turma]["quantidade"]++;
                 $dadosPorTurma[$turma]["soma_porcentagem"] += $porcentagem;
             }
         }
         
-        // Array para armazenar as médias por turma
         $mediasPorTurma = array();
         
-        // Calcular média por turma
         foreach ($dadosPorTurma as $turma => $dados) {
             $quantidade = $dados["quantidade"];
             $soma_porcentagem = $dados["soma_porcentagem"];
             $media = $soma_porcentagem / $quantidade;
             
-            // Armazenar média no array de médias por turma
             $mediasPorTurma[$turma] = MainController::gerarGraficoRosca(number_format($media,1));
         }
 
 
-        
-// Separar as turmas por turno
-$turmasIntermediario = [];
-$turmasVespertino = [];
+                
+        $turmasIntermediario = [];
+        $turmasVespertino = [];
 
-foreach ($mediasPorTurma as $turma => $valor) {
-    $turno = substr($turma, 3, 1);
-    if ($turno === 'I') {
-        $turmasIntermediario[$turma] = $valor;
-    } else {
-        $turmasVespertino[$turma] = $valor;
-    }
-}
+        foreach ($mediasPorTurma as $turma => $valor) {
+            $turno = substr($turma, 3, 1);
+            if ($turno === 'I') {
+                $turmasIntermediario[$turma] = $valor;
+            } else {
+                $turmasVespertino[$turma] = $valor;
+            }
+        }
 
-// Ordenar as turmas intermediárias por número da série
-ksort($turmasIntermediario);
+        ksort($turmasIntermediario);
 
-// Ordenar as turmas vespertinas por número da série
-ksort($turmasVespertino);
+        ksort($turmasVespertino);
 
-// Juntar as turmas ordenadas
-$arrayOrdenado = $turmasIntermediario + $turmasVespertino;
+        $arrayOrdenado = $turmasIntermediario + $turmasVespertino;
 
-        return $arrayOrdenado;
+                return $arrayOrdenado;
     }
  
 }

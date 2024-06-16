@@ -133,7 +133,8 @@
 
         <h1>DESEMPENHO TURNO</h1>
         <div class="gestor_area_turnos_geral">
-            <?php foreach ($data["dados_turnos"] as $turno => $value) { ?>
+            <?php foreach ($data["dados_turnos"] as $turno => $value) { 
+                if($value != NULL){?>
                 <center>
                     <h3><?= $turno ?></h3>
                 </center>
@@ -151,7 +152,12 @@
                         </center>
                     </div>
                 </div>
-            <?php } ?>
+            <?php }else{?>
+                <center>
+                    <h2>SEM DADOS DO TURNO <?= $turno ?></h2>
+                </center>
+                <?php }
+        } ?>
         </div>
 
         <h1>DESEMPENHO TURMAS</h1>
