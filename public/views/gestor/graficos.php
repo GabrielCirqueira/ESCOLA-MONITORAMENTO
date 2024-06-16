@@ -62,7 +62,7 @@
 
 
     <br> 
-
+<?php if($data != NULL){?>
     <?php if (!$data["geral"]) { ?>
         <?php if (!$data["status"]) { ?>
 
@@ -173,4 +173,12 @@
         <div><br><br><br><br></div>
 
     <?php } ?>
+    <?php }else{ ?>
+        <div class="height">
+        <center>
+            <h1>SEM DADOS !</h1>
+            <h2>Nenhum Aluno inseriu alguma prova !</h2>
+        </center>
+        </div>
+        <?php } ?>
 </main>

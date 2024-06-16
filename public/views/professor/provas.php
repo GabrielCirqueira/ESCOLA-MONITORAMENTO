@@ -61,7 +61,7 @@
                     </div>
 
                 <?php } else { ?>
-                    <button class="botao-form-enviar">Sem Dados</button>
+                    <button class="botao-ver-relatorio">Sem Dados</button>
                 <?php } ?>
             </div>
         </div><br>

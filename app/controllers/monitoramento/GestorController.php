@@ -27,6 +27,8 @@ class GestorController{
             $dados = null;
             $dados = self::processarFiltros($btnGeral);
 
+            
+
                 
             // echo "<pre>";
             // print_r($btnGeral);
@@ -246,6 +248,10 @@ class GestorController{
     
     private static function processarFiltros($btnGeral) {
         $todas_provas = AlunoModel::GetProvasFinalizadas();
+
+
+        if($todas_provas != NULL){
+
         $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
     
         $filtros = self::obterFiltros();
@@ -288,7 +294,10 @@ class GestorController{
         $dados["status"] = count($resultados) > 0;
     
         return $dados;
+    }else{
+        return False;
     }
+}
     
     public static function GetGraficosFiltros($provas) {
         $proeficiencia = self::GetProeficiencia($provas);
