@@ -150,16 +150,24 @@ class ProfessorController{
             $provas_alunos = AlunoModel::GetProvasFinalizadas();
             $provas = [];     
             $_SESSION["PAG_VOLTAR"] = "professor_home";
+            
 
-            foreach($provas_professores as $professor){
-                if($professor["nome_professor"] == $_SESSION["nome_professor"]){
-                    $provas[] = $professor; 
+            if($provas_professores != NULL){
+                foreach($provas_professores as $professor){
+                    if($professor["nome_professor"] == $_SESSION["nome_professor"]){
+                        $provas[] = $professor; 
+                    }
                 }
+                $dados = [ 
+                    "provas"        => $provas,
+                    "provas_alunos" => $provas_alunos
+                ];
             }
-            $dados = [ 
-                "provas"        => $provas,
-                "provas_alunos" => $provas_alunos
-            ];
+
+            if($provas == NULL || $provas_professores == NULL){
+                $dados = NULL;
+            }
+            
             MainController::Templates("public/views/professor/provas.php","PROFESSOR",$dados);
 
         }else{
@@ -321,15 +329,20 @@ class ProfessorController{
         $provas_alunos = AlunoModel::GetProvasFinalizadas();
         $_SESSION["PAG_VOLTAR"] = "professor_home";
         $provas = []; 
-        foreach($provas_professores as $professor){
-            if($professor["nome_professor"] == $_SESSION["nome_professor"]){
-                $provas[] = $professor; 
+        if($provas_professores != NULL){
+            foreach($provas_professores as $professor){
+                if($professor["nome_professor"] == $_SESSION["nome_professor"]){
+                    $provas[] = $professor; 
+                }
             }
+            $dados = [ 
+                "provas"        => $provas,
+                "provas_alunos" => $provas_alunos
+            ];
+        } 
+        if($provas == NULL || $provas_professores == NULL){
+            $dados = NULL;
         }
-        $dados = [ 
-            "provas"        => $provas,
-            "provas_alunos" => $provas_alunos
-        ];
         
         MainController::Templates("public/views/professor/provas_relatorios.php", "PROFESSOR", $dados);
     }else{

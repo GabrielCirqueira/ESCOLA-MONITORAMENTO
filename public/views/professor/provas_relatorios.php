@@ -6,48 +6,55 @@
     </center>
     <br>
     <?php
-    $status = false; 
-    foreach ($data["provas"] as $prova) {
-        $status = false; 
-        if($data["provas_alunos"] != null){ 
-            foreach($data["provas_alunos"] as $prova_aluno){
-                if($prova_aluno["id_prova"] == $prova["id"]){
-                    $status = true; 
-
+    $status = false;
+    if ($data != NULL) {
+        foreach ($data["provas"] as $prova) {
+            $status = false;
+            if ($data["provas_alunos"] != null) {
+                foreach ($data["provas_alunos"] as $prova_aluno) {
+                    if ($prova_aluno["id_prova"] == $prova["id"]) {
+                        $status = true;
+                    }
                 }
             }
-        } 
     ?>
 
 
-        <div class="prova-pendente">
-            <div class="linha-vertical-campo-prova" style="background-color: #eb7134;"></div>
-            <div class="conteudo-prova">
-                <i class="fas fa-chart-bar fa-4x" style="color: #eb7134;"></i>
+            <div class="prova-pendente">
+                <div class="linha-vertical-campo-prova" style="background-color: #eb7134;"></div>
+                <div class="conteudo-prova">
+                    <i class="fas fa-chart-bar fa-4x" style="color: #eb7134;"></i>
 
-                <div class="prova-detalhes">
-                    <center>
+                    <div class="prova-detalhes">
+                        <center>
 
-                        <span class="prova-nome-disciplina">
-                            <?= $prova["nome_prova"] ?>
-                        </span> <br>
-                        <span class="prova-nome-disciplina">
-                            <?= $prova["data_prova"] ?>
-                        </span> <br>
-                    </center>
+                            <span class="prova-nome-disciplina">
+                                <?= $prova["nome_prova"] ?>
+                            </span> <br>
+                            <span class="prova-nome-disciplina">
+                                <?= $prova["data_prova"] ?>
+                            </span> <br>
+                        </center>
+                    </div>
+
+                    <?php if ($status == true) { ?>
+                        <form method="post" action="relatorio_prova">
+                            <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-ver-relatorio">Relatorio</button>
+                        </form>
+                    <?php } else { ?>
+                        <button class="botao-ver-relatorio">Sem Dados</button>
+                    <?php } ?>
                 </div>
+            </div><br>
 
-                <?php if($status == true){?>
-                <form method="post" action="relatorio_prova">
-                    <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-ver-relatorio">Relatorio</button>
-                </form>
-                <?php }else{?>
-                    <button class="botao-ver-relatorio">Sem Dados</button>
-                <?php }?>
-            </div>
-        </div><br>
-
+        <?php }
+    } else { ?>
+        <div class="height">
+            <center>
+                <h1>SEM DADOS !</h1>
+                <h2>Você não inseriu nenhuma prova !</h2>
+            </center>
+        </div>
     <?php } ?>
-
 
 </main>

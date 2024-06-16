@@ -7,6 +7,7 @@
     <br>
     <?php
     $status = false;
+    if($data != NULL){
     foreach ($data["provas"] as $prova) {
         $contador = 0;
         if ($data["provas_alunos"] != null) {
@@ -66,14 +67,15 @@
             </div>
         </div><br>
 
+    <?php }
+    }else{ ?>
+    <div class="height">
+        <center>
+            <h1>SEM DADOS !</h1>
+            <h2>Você não inseriu nenhuma prova !</h2>
+        </center>
+        </div>
     <?php } ?>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+ 
 
 </main>

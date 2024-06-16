@@ -26,8 +26,8 @@
                 <?php foreach ($data as $turma) {
                     if ($turma["turno"] == "INTERMEDIÁRIO") { ?>
                         <div>
-                            <input name="gabarito-turmas[]" type="checkbox" value="<?php echo $turma["nome"] ?>">
-                            <span><?php echo $turma["nome"] ?></span>
+                            <input name="gabarito-turmas[]" id="<?= $turma["nome"]?>" type="checkbox" value="<?php echo $turma["nome"] ?>">
+                            <label for="<?= $turma["nome"]?>" ><?php echo $turma["nome"] ?></label>
                         </div>
                     <?php }
                 } ?>
@@ -38,8 +38,8 @@
                 <?php foreach ($data as $turma) {
                     if ($turma["turno"] == "VESPERTINO") { ?>
                         <div>
-                            <input name="gabarito-turmas[]" type="checkbox" value="<?php echo $turma["nome"] ?>">
-                            <span><?php echo $turma["nome"] ?></span>
+                            <input name="gabarito-turmas[]" id="<?= $turma["nome"]?>" type="checkbox" value="<?php echo $turma["nome"] ?>">
+                            <label for="<?= $turma["nome"]?>" ><?php echo $turma["nome"] ?></label>
                         </div>
                     <?php }
                 } ?>
