@@ -49,7 +49,6 @@ class ADMcontroller{
     }
 
     public static function adicionar_materia(){
-        // Converte os valores do array em uma string separada por vírgulas
         $turnos = implode(',', $_POST['turno-materia']);
         $insert = ADModel::adicionar_materia($_POST["nome-materia"],$_POST["materia-curso"],$turnos);
 
@@ -75,16 +74,24 @@ class ADMcontroller{
         $curso = $_POST["curso-turma"];
         $numero = $_POST["numero-turma"];
 
+        if($curso == "INFORMÁTICA"){
+            $curso = "IPI";
+        }else if($curso == "ADMINISTRAÇÃO"){
+            $curso = "ADM";
+        }else{
+            $curso = "HUM";
+        }
+
         if($turno == "INTERMEDIÁRIO"){
-            $nome_turma = "{$serie}ºI0{$numero} {$curso}";
+            $nome_turma = "{$serie}ºIM0{$numero}-EMI-{$curso}";
         }
         
         else if($turno == "VESPERTINO"){
-            $nome_turma = "{$serie}ºV0{$numero} {$curso}";
+            $nome_turma = "{$serie}ºV0{$numero}-EM-{$curso}";
         }
         
         else{
-            $nome_turma = "{$serie}ºN0{$numero} {$curso}";
+            $nome_turma = "{$serie}ºN0{$numero}-EM-{$curso}";
         }
         
         if(ADModel::adicionar_turma($nome_turma,$serie,$turno,$curso)){

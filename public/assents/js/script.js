@@ -191,3 +191,16 @@ function exportToExcel(nome) {
 
     XLSX.writeFile(wb, nome+'.xlsx');
 }
+
+function mostarTabela(tabela) {
+    var descritores = document.getElementById("table-descritores");
+    var notas = document.getElementById("table-notas");
+
+    if (tabela === "DESCRITORES") {
+        notas.classList.remove("hidden");
+        descritores.classList.add("hidden");
+    } else { 
+        descritores.classList.remove("hidden");
+        notas.classList.add("hidden");
+    }
+}

@@ -1,5 +1,8 @@
-<?php 
-$filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["nome"]; 
+<?php
+$filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["nome"];
+if($data["descritores_alunos"] != NULL){
+    $Qdescritores = count($data["descritores_alunos"]["descritores"]) + 1; 
+}
 ?>
 
 <main class="main-home-professor">
@@ -22,10 +25,10 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
         </form>
     </div>
 
-    <?php if($data["filtro"] == false){ ?>
-        
+    <?php if ($data["filtro"] == false) { ?>
+
         <h1 data-aos="fade-up">DESEMPENHO GERAL</h1>
- 
+
         <br><br>
         <div data-aos="fade-up" class="professor-grafico-geral-60">
             <div>
@@ -44,19 +47,19 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
         <div data-aos="fade-up" class="area-graficos-descritores">
             <?php if ($data["descritores"] == false) { ?>
                 <h1>A prova não tem descritores!</h1>
-            <?php } else {
+                <?php } else {
                 foreach ($data["percentual_descritores"] as $descritor => $grafico) { ?>
                     <div data-aos="fade-up">
                         <?= $grafico ?>
                         <h4><?= $descritor ?></h4>
                     </div>
-                <?php } 
+            <?php }
             } ?>
         </div>
-        
+
         <h3 data-aos="fade-up">Nível de Proficiência</h3>
         <div data-aos="fade-up">
-        <?= $data["grafico_colunas"]?>
+            <?= $data["grafico_colunas"] ?>
 
         </div>
         <br><br>
@@ -71,7 +74,7 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
             <?php } ?>
         </div>
     <?php } else { ?>
-        <h3 data-aos="fade-up">Desempenho <?= $data["dados_turma_grafico"]["nome"]?></h3>
+        <h3 data-aos="fade-up">Desempenho <?= $data["dados_turma_grafico"]["nome"] ?></h3>
         <div data-aos="fade-up" class="graficos-professor-rosca">
         </div>
         <br><br>
@@ -92,24 +95,66 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
         <div data-aos="fade-up" class="area-graficos-descritores">
             <?php if ($data["descritores"] == false) { ?>
                 <h1>A prova não tem descritores!</h1>
-            <?php } else {
+                <?php } else {
                 foreach ($data["dados_turma_grafico"]["descritores"] as $descritor => $grafico) { ?>
                     <div data-aos="fade-up">
                         <?= $grafico ?>
                         <h4><?= $descritor ?></h4>
                     </div>
-                <?php } 
+            <?php }
             } ?>
         </div>
-        
+
         <h3 data-aos="fade-up">Nível de Proficiência</h3>
-        <?= $data["dados_turma_grafico"]["grafico_coluna"]?>    
+        <?= $data["dados_turma_grafico"]["grafico_coluna"] ?>
     <?php } ?>
 
-    <h2 data-aos="fade-up">NOTAS POR ALUNO</h2>
-    
-    <table data-aos="fade-up" class="tabela-prova-aluno">
+<div><br><br><br><br></div>
+    <?php if($data["descritores_alunos"] != NULL){ ?>
+    <div class="area_button_tabelas">
+        <button onclick="mostarTabela('NOTAS')" >DESCRITORES POR ALUNOS</button>
+        <button onclick="mostarTabela('DESCRITORES')" >NOTAS ALUNOS</button>
+    </div>
+    <table id="table-descritores" class="tabela-prova-aluno hidden">
         <thead>
+            <tr>
+                <th colspan="<?= $Qdescritores?>">
+                    <center>
+                        <h2 style="margin: 3px;">DESCRITORES ALUNOS</h2>
+                    </center>
+                </th>
+            </tr>
+            <tr>
+                <th>ALUNO</th>
+                <?php foreach ($data["descritores_alunos"]["descritores"] as $descritor) {
+                    echo "<th>{$descritor}</th>";
+                } ?>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($data["descritores_alunos"]["ALUNOS"] as $aluno => $descritores ) { ?>
+            <tr>
+                <td> <?= $aluno ?> </td>
+                <?php 
+                foreach($descritores as $descritor){?>
+                <td> <?= number_format($descritor,0)?>%</td>
+                <?php }?>
+            </tr>
+            <?php 
+        } ?>
+        </tbody>
+    </table>
+    <?php } ?>
+
+    <table id="table-notas" data-aos="fade-up" class="tabela-prova-aluno">
+        <thead>
+            <tr>
+                <th colspan="6">
+                    <center>
+                        <h2 style="margin: 3px;">NOTAS POR ALUNO</h2>
+                    </center>
+                </th>
+            </tr>
             <tr>
                 <th>ALUNO</th>
                 <th>TURMA</th>
@@ -121,11 +166,11 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
         </thead>
         <tbody>
             <?php foreach ($data["provas_turma"] as $prova) { ?>
-                <tr >
+                <tr>
                     <td><?= $prova["aluno"] ?></td>
                     <td><?= $prova["turma"] ?></td>
                     <td><?= $prova["pontos_aluno"] ?></td>
-                    <td><?= $prova["acertos"] ?></td> 
+                    <td><?= $prova["acertos"] ?></td>
                     <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 1) ?>%</td>
                     <td><?= $prova["status"] ?></td>
                 </tr>
@@ -133,8 +178,8 @@ $filtro_ = $data["filtro"] == false ? "GERAL" : $data["dados_turma_grafico"]["no
         </tbody>
     </table>
 
-    <?php if(count($data["provas_turma"]) > 0){ ?>
-        <button data-aos="fade-up"  class="export-excel" onclick="exportToExcel('<?=  '(' . $filtro_ . ') ' .$data['nome_prova']?>')">EXPORTAR DADOS</button>
+    <?php if (count($data["provas_turma"]) > 0) { ?>
+        <button data-aos="fade-up" class="export-excel" onclick="exportToExcel('<?= '(' . $filtro_ . ') ' . $data['nome_prova'] ?>')">EXPORTAR DADOS</button>
     <?php } ?>
 
     <div><br><br><br><br><br><br><br><br></div>

@@ -393,6 +393,7 @@ input:checked + .slider:before {
 
 .tabela-prova-aluno {
   width: 70%; 
+  transition: 0.5 ease;
   border-collapse: collapse;
 }
 
@@ -808,10 +809,9 @@ input:checked + .slider:before {
 }
 
 .export-excel{ 
-  width: 70%;
-  margin-top: 1px;
+  width: 70%; 
   height: 40px; 
-  background-color: #54982fb5;
+  background-color: #0f783f;
   color: white;
   font-weight: bold;
   font-size: 16px;
@@ -822,8 +822,7 @@ input:checked + .slider:before {
 
 .export-excel:hover{
   cursor: pointer; 
-  background-color: #407523b5;
-  font-size: 16.5px;  
+  background-color: #0a572d; 
 }
 
 .button-add-recp{
@@ -938,4 +937,29 @@ input:checked + .slider:before {
 .botao-ver-relatorio:hover{
   cursor: pointer; 
   background-color: #02616e87; 
+}
+
+.hidden {
+  display: none;
+}
+
+
+.area_button_tabelas{
+  display: flex;
+  gap: 10px;
+  margin: 30px;
+}
+
+.area_button_tabelas button{
+  width: 200px;
+  height: 40px;
+  background-color: #3a9a23;
+  border: none;
+  transition: 0.5s ease-in-out;
+}
+
+.area_button_tabelas button:hover{
+  background-color: #266517;
+  cursor: pointer;
+
 }

@@ -21,7 +21,7 @@ class AlunoModel{
     }
 
     public static function GetProvas(){
-        $sql = "SELECT * FROM gabarito_professores";
+        $sql = "SELECT * FROM gabarito_professores ORDER BY data_prova ASC";
         $query = Database::GetInstance()->prepare($sql);
         $query->execute();
         if($query->rowCount() > 0){

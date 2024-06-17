@@ -102,8 +102,7 @@ class GestorController{
                 
                 $contador_descritores = [];
                 $acertos_descritores = [];
-    
-                // Contar quantas questões existem para cada descritor
+
                 foreach($descritores_P as $descritor) { 
                     $desc = explode(",", $descritor); 
                     if (count($desc) == 2) {
@@ -116,7 +115,7 @@ class GestorController{
                         $contador_descritores[$desc]++;
                     }
                 }
-    
+
                 foreach($descritores_certos as $descritor) { 
                     $desc = explode(",", $descritor);
                     if (count($desc) == 2) { 
@@ -134,7 +133,7 @@ class GestorController{
                         $descritor_aluno[$desc] = $porcentagem;
                     }
                 }
- 
+
                 $descritores_alunos_todos[] = $descritor_aluno;
             }
         }

@@ -358,12 +358,18 @@ class ProfessorController{
         $provas_professores = AlunoModel::GetProvas();
         $dados_turmas = [] ;
         $filtro_turmas = False;
+        $status_desc = False;
     
         foreach($provas_professores as $professor){
             if($professor["id"] == $id_prova){
                 $turmas = explode(",", $professor["turmas"]); 
                 $nome_prova = $professor["nome_prova"];
                 $descritores = explode(";",$professor["descritores"]);
+                if($professor["descritores"] != NULL){
+                    $status_desc = True;
+                }else{
+                    $status_desc = False;
+                }
             }
         } 
     
@@ -619,11 +625,100 @@ foreach ($percentual_descritores_turmas as $turma) {
                 $provas_tudo = $provas_filtro;
             }           
         }
+          
+        if($status_desc == True){
 
-        // echo "<br>";
-        // echo "<pre>";
-        // print_r($provas_tudo);
-        // echo "</pre>"; 
+
+        $descritores_por_aluno = [
+            "descritores" => [], 
+            "ALUNOS" => []
+        ];
+
+        foreach ($alunos_por_turma as $turma => $alunos) {
+            foreach ($alunos as $aluno) {
+                $descritores_aluno = [];
+                $descritores_raw = explode(';', $aluno['descritores']);
+                foreach ($descritores_raw as $descritor_raw) {
+                    $partes_descritor = explode(',', $descritor_raw);
+                    $descritor = $partes_descritor[1]; 
+                    $descritores_aluno[$descritor] = 0;
+                }
+
+                $descritores_certos = explode(';', $aluno['descritores_certos']);
+                $total_acertos_aluno = $aluno['acertos'];
+
+                foreach ($descritores_certos as $descritor_certos) {
+                    $partes_certos = explode(',', $descritor_certos);
+                    if (count($partes_certos) >= 2) {
+                        $descritor_certos = $partes_certos[1];
+
+                        $quantidade_descritor = substr_count($aluno['descritores'], ',' . $descritor_certos);
+
+                        if (isset($descritores_aluno[$descritor_certos])) {
+                            $quantidade_acertos = substr_count($aluno['descritores_certos'], $descritor_certos);
+                            $percentual = ($quantidade_acertos / $quantidade_descritor) * 100;
+                            $descritores_aluno[$descritor_certos] = number_format($percentual, 1);
+                        }
+                    }
+                }
+
+                $descritores_por_aluno["ALUNOS"][$aluno["aluno"]] = $descritores_aluno;
+            }
+        }
+
+        $primeiro_aluno = array_key_first($descritores_por_aluno["ALUNOS"]);
+        if ($primeiro_aluno !== null) {
+            $descritores_por_aluno["descritores"] = array_keys($descritores_por_aluno["ALUNOS"][$primeiro_aluno]);
+        }
+        if (isset($_POST["filtrar"])) {
+            $turma = $_POST["turma-filtros"];
+            if ($turma != "geral" && isset($alunos_por_turma[$turma])) {
+                $descritores_por_aluno = [
+                    "descritores" => [],
+                    "ALUNOS" => []
+                ];
+
+                foreach ($alunos_por_turma[$turma] as $aluno) {
+                    $descritores_aluno = [];
+                    $descritores_raw = explode(';', $aluno['descritores']);
+                    foreach ($descritores_raw as $descritor_raw) {
+                        $partes_descritor = explode(',', $descritor_raw);
+                        $descritor = $partes_descritor[1];
+                        $descritores_aluno[$descritor] = 0;
+                    }
+
+                    $descritores_certos = explode(';', $aluno['descritores_certos']);
+                    $total_acertos_aluno = $aluno['acertos'];
+
+                    foreach ($descritores_certos as $descritor_certos) {
+                        $partes_certos = explode(',', $descritor_certos);
+                        if (count($partes_certos) >= 2) {
+                            $descritor_certos = $partes_certos[1];
+
+                            $quantidade_descritor = substr_count($aluno['descritores'], ',' . $descritor_certos);
+
+                            if (isset($descritores_aluno[$descritor_certos])) {
+                                $quantidade_acertos = substr_count($aluno['descritores_certos'], $descritor_certos);
+                                $percentual = ($quantidade_acertos / $quantidade_descritor) * 100;
+                                $descritores_aluno[$descritor_certos] = number_format($percentual, 1);
+                            }
+                        }
+                    }
+
+                    $descritores_por_aluno["ALUNOS"][$aluno["aluno"]] = $descritores_aluno;
+                }
+
+                $descritores_por_aluno["descritores"] = array_keys($descritores_por_aluno["ALUNOS"][array_key_first($descritores_por_aluno["ALUNOS"])]);
+            }
+        }
+    }else{
+        $descritores_por_aluno = NULL;
+    }
+
+        echo "<br>";
+        echo "<pre>";
+        print_r($alunos_por_turma);
+        echo "</pre>"; 
 
         $dados = [
             "dados_turma" => $dados_turmas,
@@ -635,7 +730,8 @@ foreach ($percentual_descritores_turmas as $turma) {
             "grafico_colunas" => MainController::gerarGraficoColunas($porcentagem_alunos),
             "dados_turma_grafico" => $dados_turma,
             "filtro" => $filtro_turmas,
-            "provas_turma" => $provas_tudo
+            "provas_turma" => $provas_tudo,
+            "descritores_alunos" => $descritores_por_aluno
         ];
     
         MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);
