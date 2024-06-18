@@ -1,6 +1,5 @@
-<main class="main-home-professor ">
+<main class="main-home-professor">
     <center>
-
         <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
         <h2>PROVAS - <?= $_SESSION["nome_professor"] ?></h2>
     </center>
@@ -67,8 +66,11 @@
             </div>
         </div><br>
 
-    <?php }
-    }else{ ?>
+
+        <?php } ?>
+        <div><br><br><br><br><br><br><br><br><br></div>
+        <div><br><br><br><br><br><br><br><br><br></div>
+        <?php } else { ?>
     <div class="height">
         <center>
             <h1>SEM DADOS !</h1>

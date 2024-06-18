@@ -126,18 +126,18 @@ if($data["descritores_alunos"] != NULL){
             </tr>
             <tr>
                 <th>ALUNO</th>
-                <?php foreach ($data["descritores_alunos"]["descritores"] as $descritor) {
-                    echo "<th>{$descritor}</th>";
+                <?php foreach ($data["descritores_alunos"]["descritores"] as $indice => $value) {
+                    echo "<th><center>{$indice} {$value}</center></th>";
                 } ?>
             </tr>
         </thead>
         <tbody>
-        <?php foreach ($data["descritores_alunos"]["ALUNOS"] as $aluno => $descritores ) { ?>
+        <?php foreach ($data["descritores_alunos"]["ALUNOS"] as $aluno => $perguntas ) { ?>
             <tr>
                 <td> <?= $aluno ?> </td>
                 <?php 
-                foreach($descritores as $descritor){?>
-                <td> <?= number_format($descritor,0)?>%</td>
+                foreach($perguntas as $pergunta => $value){?>
+                <td> <?= $value?></td>
                 <?php }?>
             </tr>
             <?php 
