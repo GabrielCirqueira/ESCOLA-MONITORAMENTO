@@ -210,8 +210,9 @@ if($data["descritores_alunos"] != NULL){
                 <th>ALUNO</th>
                 <th>TURMA</th>
                 <th>PONTOS</th>
-                <th>ACERTOS</th>
-                <th>P. ACERTOS</th>
+                <!-- <th>PONTOS REC</th> -->
+                <!-- <th>ACERTOS</th>
+                <th>P. ACERTOS</th> -->
                 <th>STATUS</th>
             </tr>
         </thead>
@@ -221,8 +222,9 @@ if($data["descritores_alunos"] != NULL){
                     <td><?= $prova["aluno"] ?></td>
                     <td><?= $prova["turma"] ?></td>
                     <td><?= $prova["pontos_aluno"] ?></td>
-                    <td><?= $prova["acertos"] ?></td>
-                    <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 1) ?>%</td>
+                    <!-- <td><?= $prova["acertos"] ?></td>
+                    <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 1) ?>%</td> -->
+                    <!-- <td><?= $prova["notaRec"] ?></td> -->
                     <td><?= $prova["status"] ?></td>
                 </tr>
             <?php } ?>

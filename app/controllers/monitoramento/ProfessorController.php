@@ -612,8 +612,6 @@ foreach ($percentual_descritores_turmas as $turma) {
            
         }
 
-
-
         $turmass = array_column($dados_turmas, 'turma_nome');
  
         array_multisort($turmass, SORT_ASC, $dados_turmas);
@@ -643,6 +641,7 @@ foreach ($percentual_descritores_turmas as $turma) {
                         $provas_filtro[] = $prova;
                     }
                 }
+                
                 $provas_tudo = $provas_filtro;
             }           
         }
@@ -650,10 +649,10 @@ foreach ($percentual_descritores_turmas as $turma) {
         $descritores_por_aluno_primeira = $status_desc ? self::calcular_descritores_por_aluno($alunos_por_turma_primeira) : null;
         $descritores_por_aluno_rec = $status_desc ? self::calcular_descritores_por_aluno($alunos_por_turma_rec) : null;
 
-        echo "<br>";
-        echo "<pre>";
-        print_r($alunos_por_turma_primeira);
-        echo "</pre>"; 
+        // echo "<br>";
+        // echo "<pre>";
+        // print_r($alunos_por_turma_primeira);
+        // echo "</pre>"; 
 
         $dados = [
             "dados_turma"                   => $dados_turmas,
