@@ -193,14 +193,26 @@ function exportToExcel(nome) {
 }
 
 function mostarTabela(tabela) {
-    var descritores = document.getElementById("table-descritores");
+    var descritores = document.getElementById("table-descritores-primeira");
+    var descritores_rec = document.getElementById("table-descritores-rec");
+    var botoes_descritores = document.getElementById("botoes-alternar-prova");
     var notas = document.getElementById("table-notas");
 
-    if (tabela === "DESCRITORES") {
-        notas.classList.remove("hidden");
-        descritores.classList.add("hidden");
-    } else { 
+    if (tabela == "DESCRITORES") {
         descritores.classList.remove("hidden");
         notas.classList.add("hidden");
+        descritores_rec.classList.add("hidden");
+        botoes_descritores.classList.remove("hidden");
+    } else if(tabela == "NOTAS"){ 
+        notas.classList.remove("hidden");
+        descritores.classList.add("hidden");
+        descritores_rec.classList.add("hidden");
+        botoes_descritores.classList.add("hidden");
+
+    }else{
+        descritores_rec.classList.remove("hidden");
+        notas.classList.add("hidden");
+        descritores.classList.add("hidden");
+
     }
 }

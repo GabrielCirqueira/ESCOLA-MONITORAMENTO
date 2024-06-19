@@ -961,5 +961,16 @@ input:checked + .slider:before {
 .area_button_tabelas button:hover{
   background-color: #266517;
   cursor: pointer;
+}
 
+#botoes-alternar-prova button{
+  margin-bottom: 20px;
+  border: none;
+  padding: 10px;
+  background-color: rgba(92, 186, 186, 0.59);
+}
+
+#botoes-alternar-prova button:hover{
+  cursor: pointer;
+  background-color: rgba(47, 123, 123, 0.59);
 }

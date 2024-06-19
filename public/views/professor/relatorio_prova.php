@@ -112,10 +112,55 @@ if($data["descritores_alunos"] != NULL){
 <div><br><br><br><br></div>
     <?php if($data["descritores_alunos"] != NULL){ ?>
     <div class="area_button_tabelas">
-        <button onclick="mostarTabela('NOTAS')" >DESCRITORES POR ALUNOS</button>
-        <button onclick="mostarTabela('DESCRITORES')" >NOTAS ALUNOS</button>
+        <button onclick="mostarTabela('DESCRITORES')" >DESCRITORES POR ALUNOS</button>
+        <button onclick="mostarTabela('NOTAS')" >NOTAS ALUNOS</button>
     </div>
-    <table id="table-descritores" class="tabela-prova-aluno hidden">
+    
+    <?php if($data["descritores_alunos_rec"] != NULL){ ?>
+        <div id="botoes-alternar-prova" class=" hidden" >
+        <button onclick="mostarTabela('DESCRITORES')" >1º PROVA</button>
+        <button onclick="mostarTabela('REC')" >RECUPERAÇÃO</button>
+    </div>
+
+    <table id="table-descritores-rec" class="tabela-prova-aluno hidden">
+        <thead>
+            <tr>
+                <th colspan="<?= count($data["descritores_alunos_rec"]["descritores"]) + 1 ?>">
+                    <center>
+                        <h2 style="margin: 3px;">DESCRITORES ALUNOS RECUPERAÇÃO</h2>
+                    </center>
+                </th>
+            </tr>
+            <tr>
+                <th>ALUNO</th>
+                <?php foreach ($data["descritores_alunos_rec"]["descritores"] as $indice => $value) {
+                    echo "<th><center>{$indice} {$value}</center></th>";
+                } ?>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($data["descritores_alunos_rec"]["ALUNOS"] as $aluno => $perguntas ) { ?>
+            <tr>
+                <td style="background-color: #B4F1E7;" > <?= $aluno ?> </td>
+                <?php 
+                foreach($perguntas as $pergunta => $value){?>
+                <?php 
+                if($value == "ACERTOU"){
+                    echo "<td class='alternativa-marcada-true' >$value</td>";
+                }else{
+                    echo "<td class='alternativa-marcada-false' >$value</td>";
+                }
+                ?> 
+                <?php }?>
+            </tr>
+            <?php 
+        } ?>
+        </tbody>
+    </table>
+
+    <?php } ?>
+
+    <table id="table-descritores-primeira" class="tabela-prova-aluno hidden">
         <thead>
             <tr>
                 <th colspan="<?= $Qdescritores?>">
@@ -134,10 +179,16 @@ if($data["descritores_alunos"] != NULL){
         <tbody>
         <?php foreach ($data["descritores_alunos"]["ALUNOS"] as $aluno => $perguntas ) { ?>
             <tr>
-                <td> <?= $aluno ?> </td>
+                <td style="background-color: #B4F1E7;" > <?= $aluno ?> </td>
                 <?php 
                 foreach($perguntas as $pergunta => $value){?>
-                <td> <?= $value?></td>
+                        <?php 
+                if($value == "ACERTOU"){
+                    echo "<td class='alternativa-marcada-true' >$value</td>";
+                }else{
+                    echo "<td class='alternativa-marcada-false' >$value</td>";
+                }
+                ?> 
                 <?php }?>
             </tr>
             <?php 
@@ -181,6 +232,7 @@ if($data["descritores_alunos"] != NULL){
     <?php if (count($data["provas_turma"]) > 0) { ?>
         <button data-aos="fade-up" class="export-excel" onclick="exportToExcel('<?= '(' . $filtro_ . ') ' . $data['nome_prova'] ?>')">EXPORTAR DADOS</button>
     <?php } ?>
-
+    <div id="botoes-alternar-prova" class=" hidden" >
+    </div>
     <div><br><br><br><br><br><br><br><br></div>
 </main>

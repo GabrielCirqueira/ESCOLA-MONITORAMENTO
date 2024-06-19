@@ -355,10 +355,12 @@ class ProfessorController{
         $id_prova = $_POST["id-prova"];
         $_SESSION["PAG_VOLTAR"] = "relatorio_professor";
         $provas = AlunoModel::GetProvasFinalizadas(); 
+        $provasRec = ProfessorModel::GetProvaRecAlunos(); 
+        $provasPrimeira = ProfessorModel::GetProvaPrimeira(); 
         $provas_professores = AlunoModel::GetProvas();
-        $dados_turmas = [] ;
+        $dados_turmas = [];
         $filtro_turmas = False;
-        $status_desc = False;
+        $status_desc = False; 
     
         foreach($provas_professores as $professor){
             if($professor["id"] == $id_prova){
@@ -381,6 +383,28 @@ class ProfessorController{
                     $alunos_por_turma[$turma_prova] = array();
                 }
                 $alunos_por_turma[$turma_prova][] = $prova;
+            }
+        }
+
+        $alunos_por_turma_rec = array();
+        foreach ($provasRec as $prova) {
+            if ($prova["id_prova"] == $id_prova) {
+                $turma_prova = $prova["turma"];
+                if (!isset($alunos_por_turma_rec[$turma_prova])) {
+                    $alunos_por_turma_rec[$turma_prova] = array();
+                }
+                $alunos_por_turma_rec[$turma_prova][] = $prova;
+            }
+        }
+
+        $alunos_por_turma_primeira = array();
+        foreach ($provasPrimeira as $prova) {
+            if ($prova["id_prova"] == $id_prova) {
+                $turma_prova = $prova["turma"];
+                if (!isset($alunos_por_turma_primeira[$turma_prova])) {
+                    $alunos_por_turma_primeira[$turma_prova] = array();
+                }
+                $alunos_por_turma_primeira[$turma_prova][] = $prova;
             }
         }
     
@@ -622,68 +646,14 @@ foreach ($percentual_descritores_turmas as $turma) {
                 $provas_tudo = $provas_filtro;
             }           
         }
-          
-        if ($status_desc == True) {
-            $descritores_por_aluno = [
-                "descritores" => [],
-                "ALUNOS" => []
-            ];
         
-            if (isset($_POST["filtrar"])) {
-                $turma = $_POST["turma-filtros"];
-                if ($turma != "geral" && isset($alunos_por_turma[$turma])) {
-                    $alunos_para_processar = $alunos_por_turma[$turma];
-                } else {
-                    $alunos_para_processar = [];
-                    foreach ($alunos_por_turma as $turma_alunos) {
-                        $alunos_para_processar = array_merge($alunos_para_processar, $turma_alunos);
-                    }
-                }
-            } else {
-                $alunos_para_processar = [];
-                foreach ($alunos_por_turma as $turma_alunos) {
-                    $alunos_para_processar = array_merge($alunos_para_processar, $turma_alunos);
-                }
-            }
-        
-            foreach ($alunos_para_processar as $aluno) {
-                $descritores_aluno = [];
-                $descritores_raw = explode(';', $aluno['descritores']);
-                $descritor_index = 1;
-        
-                foreach ($descritores_raw as $descritor_raw) {
-                    $partes_descritor = explode(',', $descritor_raw);
-                    $descritor = $partes_descritor[1];
-                    $descritores_aluno[$descritor_index] = "ERROU";
-                    $descritores_por_aluno["descritores"][$descritor_index] = $descritor;
-                    $descritor_index++;
-                }
-        
-                $descritores_certos = explode(';', $aluno['descritores_certos']);
-                foreach ($descritores_certos as $descritor_certos) {
-                    $partes_certos = explode(',', $descritor_certos);
-                    if (count($partes_certos) >= 2) {
-                        $descritor_certos = $partes_certos[1];
-        
-                        foreach ($descritores_aluno as $index => $status) {
-                            if ($descritores_por_aluno["descritores"][$index] == $descritor_certos) {
-                                $descritores_aluno[$index] = "ACERTOU";
-                            }
-                        }
-                    }
-                }
-                $descritores_por_aluno["ALUNOS"][$aluno["aluno"]] = $descritores_aluno;
-            }
-        
-            ksort($descritores_por_aluno["descritores"]); 
-        } else {
-            $descritores_por_aluno = NULL;
-        }
+        $descritores_por_aluno_primeira = $status_desc ? self::calcular_descritores_por_aluno($alunos_por_turma_primeira) : null;
+        $descritores_por_aluno_rec = $status_desc ? self::calcular_descritores_por_aluno($alunos_por_turma_rec) : null;
 
-        // echo "<br>";
-        // echo "<pre>";
-        // print_r($descritores_por_aluno);
-        // echo "</pre>"; 
+        echo "<br>";
+        echo "<pre>";
+        print_r($alunos_por_turma_primeira);
+        echo "</pre>"; 
 
         $dados = [
             "dados_turma"                   => $dados_turmas,
@@ -696,7 +666,8 @@ foreach ($percentual_descritores_turmas as $turma) {
             "dados_turma_grafico"           => $dados_turma,
             "filtro"                        => $filtro_turmas,
             "provas_turma"                  => $provas_tudo,
-            "descritores_alunos"            => $descritores_por_aluno
+            "descritores_alunos"            => $descritores_por_aluno_primeira,
+            "descritores_alunos_rec"        => $descritores_por_aluno_rec
         ];
     
         MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);
@@ -705,6 +676,64 @@ foreach ($percentual_descritores_turmas as $turma) {
     }
 }
     
+    
+private static function calcular_descritores_por_aluno($alunos_por_turma) {
+    $descritores_por_aluno = ["descritores" => [], "ALUNOS" => []];
+    $alunos_para_processar = [];
+
+    if (isset($_POST["filtrar"])) {
+        $turma = $_POST["turma-filtros"];
+        if ($turma != "geral" && isset($alunos_por_turma[$turma])) {
+            $alunos_para_processar = $alunos_por_turma[$turma];
+        } else {
+            foreach ($alunos_por_turma as $turma_alunos) {
+                $alunos_para_processar = array_merge($alunos_para_processar, $turma_alunos);
+            }
+        }
+    } else {
+        foreach ($alunos_por_turma as $turma_alunos) {
+            $alunos_para_processar = array_merge($alunos_para_processar, $turma_alunos);
+        }
+    }
+
+    foreach ($alunos_para_processar as $aluno) {
+        $descritores_aluno = [];
+        $descritores_raw = explode(';', $aluno['descritores']);
+        $descritor_index = 1;
+
+        foreach ($descritores_raw as $descritor_raw) {
+            $partes_descritor = explode(',', $descritor_raw);
+            $descritor = $partes_descritor[1];
+            $descritores_aluno[$descritor_index] = "ERROU";
+            $descritores_por_aluno["descritores"][$descritor_index] = $descritor;
+            $descritor_index++;
+        }
+
+        $descritores_certos = explode(';', $aluno['descritores_certos']);
+        foreach ($descritores_certos as $descritor_certos) {
+            $partes_certos = explode(',', $descritor_certos);
+            if (count($partes_certos) >= 2) {
+                $descritor_certos = $partes_certos[1];
+
+                foreach ($descritores_aluno as $index => $status) {
+                    if ($descritores_por_aluno["descritores"][$index] == $descritor_certos) {
+                        $descritores_aluno[$index] = "ACERTOU";
+                    }
+                }
+            }
+        }
+        $descritores_por_aluno["ALUNOS"][$aluno["aluno"]] = $descritores_aluno;
+    }
+
+    ksort($descritores_por_aluno["descritores"]);
+
+    if($descritores_por_aluno["ALUNOS"] == NULL){
+        $descritores_por_aluno = NULL;
+    }
+
+    return $descritores_por_aluno;
+}
+
 
     public static function calcularPorcentagem($total, $parte){
         if ($total == 0) {
