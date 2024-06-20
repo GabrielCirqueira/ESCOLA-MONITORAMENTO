@@ -620,6 +620,28 @@ foreach ($percentual_descritores_turmas as $turma) {
 
         foreach ($provas as $prova) {
             if ($prova["id_prova"] == $id_prova) {
+
+                $prova["NotaP"] = "INDEFINIDO";
+                foreach($provasPrimeira as $pm){
+                    if($pm["id_prova"] == $prova["id_prova"]){
+                        if($pm["ra"] == $prova["ra"]){
+                            $prova["NotaP"] = $pm["pontos_aluno"];
+                        }
+                    }
+                }
+
+                if($prova["recuperacao"] != NULL){
+                    foreach($provasRec as $pr){
+                        if($pr["id_prova"] == $prova["id_prova"]){
+                            if($pr["ra"] == $prova["ra"]){
+                                $prova["notaRec"] = $pr["pontos_aluno"];
+                            }
+                        }
+                    }
+                }else{
+                    $prova["notaRec"] = "INDEFINIDO";
+                }
+
                 $provas_tudo[] = $prova;
             }
         }

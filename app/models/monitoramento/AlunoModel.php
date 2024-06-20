@@ -80,6 +80,7 @@ class AlunoModel{
         $query->bindValue(":PORC", $dados["porcentagem"]);
         $query->bindValue(":TURNO", $dados["turno"]);
         $query->bindValue(":SER", $dados["serie"]);
+
         $query->bindValue(":ALN", $string);
         $query->execute();
     
@@ -163,6 +164,15 @@ class AlunoModel{
         $sql = "UPDATE gabarito_alunos SET status = :STRING WHERE ra = :RA AND id_prova = :ID_PROVA";
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":STRING", $string);
+        $query->bindValue(":RA", $ra);
+        $query->bindValue(":ID_PROVA", $id_prova);
+        $query->execute();
+        return $query;
+    }
+
+    public static function SetRecAluno($id_prova,$ra) {
+        $sql = "UPDATE gabarito_alunos WHERE id_prova = :ID_PROVA AND ra = :RA";
+        $query = Database::GetInstance()->prepare($sql); 
         $query->bindValue(":RA", $ra);
         $query->bindValue(":ID_PROVA", $id_prova);
         $query->execute();

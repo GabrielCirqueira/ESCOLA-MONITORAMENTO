@@ -258,6 +258,7 @@ class AlunoController
                 $status = "Recuperação: mesma nota da 1º prova";
                 AlunoModel::Inserir_dados_prova_rec($prova_rec);
                 AlunoModel::UpdateStatusAluno($prova_rec["ra"],$prova_rec["id_prova"],$status);
+                AlunoModel::SetRecAluno($prova["id_prova"],$prova["ra"]);
                 $_SESSION["PopUp_inserir_gabarito_professor"] = True;
                 header("location: aluno_home");
                 exit();
@@ -266,6 +267,7 @@ class AlunoController
         
                 $status = "Recuperação: nota menor que a 1º prova";
                 AlunoModel::Inserir_dados_prova_rec($prova_rec);
+                AlunoModel::SetRecAluno($prova["id_prova"],$prova["ra"]);
                 AlunoModel::UpdateStatusAluno($prova_rec["ra"],$prova_rec["id_prova"],$status);
                 
                 $_SESSION["PopUp_inserir_gabarito_professor"] = True;
