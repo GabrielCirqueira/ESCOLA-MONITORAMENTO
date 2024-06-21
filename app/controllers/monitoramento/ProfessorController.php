@@ -197,6 +197,11 @@ class ProfessorController{
                     $turmas = $prova["turmas"];
                     $nome_prova = $prova["nome_prova"];
                     $liberado = $prova["liberado"] == "SIM" ? true : false;
+                    if($prova["liberar_prova"] == NULL){
+                        $liberar_prova = True;
+                    }else{
+                        $liberar_prova = False;
+                    }
                 }
             }
     
@@ -212,10 +217,23 @@ class ProfessorController{
             if (isset($_POST["status"])) {
                 if($_POST["status"] == "sim") {
                     ProfessorModel::alterar_liberado($id_prova,"SIM"); 
+                    header("Location: prova");
                 }else{
                     ProfessorModel::alterar_liberado($id_prova,null);  
+                    header("Location: prova");
                 }
             }
+
+            if (isset($_POST["status-liberado"])) {
+                if($_POST["status-liberado"] == "sim") {
+                    ProfessorModel::alterar_liberado_ver($id_prova,null); 
+                    header("Location: prova");
+                }else{
+                    ProfessorModel::alterar_liberado_ver($id_prova,"NÃO");  
+                    header("Location: prova");
+                }
+            }
+
             if (isset($_POST["turma"])) {
                 $turma = $_POST["turma"];
 
@@ -227,15 +245,13 @@ class ProfessorController{
                 }
             }
 
-
-
-    
             $dados = [
                 "provas" => $provas,
                 "turmas" => explode(",", $turmas),
                 "turma" => $turma,
                 "provas_turma" => $provas_turma,
                 "liberado" => $liberado,
+                "liberar_prova" => $liberar_prova,
                 "prova" =>  $provaa,
                 "nome_prova" => $nome_prova
             ];

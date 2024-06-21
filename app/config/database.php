@@ -172,7 +172,8 @@ $dotenv->load();
                 QNT_perguntas   int,
                 data_prova      date,
                 gabarito        varchar(255),
-                liberado        varchar(255)
+                liberado        varchar(255),
+                liberar_prova   varchar(255)
                 );";
 
             $gabarito_provas_professores_gabarito = "CREATE TABLE IF NOT EXISTS gabarito_professores_recuperacao(

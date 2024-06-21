@@ -7,7 +7,7 @@
     <form method="post" action="">
         <center>
             <div class="alternar-liberar-gabarito">
-                <span>Aluno pode ver o resultado?</span>
+                <span>Aluno pode ver o resultado(gabarito)?</span><br><br>
                 <?php if ($data["liberado"] == "SIM") { ?>
 
                     <button type="submit" name="status" value="sim" class="button-prova-liberado" style="background-color: #0394b9;">SIM</button>
@@ -18,11 +18,29 @@
 
                 <?php } ?>
             </div> <br><br>
+
+            <div class="alternar-liberar-gabarito">
+                <span>O aluno poderá ver e fazer a prova? <br> Se "Não", não poderá realizar a prova.</span><br><br>
+
+                <?php if ($data["liberar_prova"] == True) { ?>
+
+                    <button type="submit" name="status-liberado" value="sim" class="button-prova-liberado" style="background-color: #0394b9;">SIM</button>
+                    <button type="submit" name="status-liberado" value="não" class="button-prova-liberado">NÃO</button>
+                <?php } else { ?>
+                    <button type="submit" name="status-liberado" value="sim" class="button-prova-liberado">SIM</button>
+                    <button type="submit" name="status-liberado" value="não" class="button-prova-liberado" style="background-color: #0394b9;">NÃO</button>
+
+                <?php } ?>
+            </div> <br><br>
+
+
             <input type="hidden" name="id-prova" value="<?= $_SESSION["id_prova_professor"]?>">
 
 
         </center>
     </form>
+
+    
 
     <div class="detalhes-prova">
         <table style="width: 360px;">

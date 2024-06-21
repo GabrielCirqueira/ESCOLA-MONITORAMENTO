@@ -18,6 +18,11 @@
                     }
                 }
             }
+            
+            if($prova["liberar_prova"] != NULL){
+                $prova_feita = true;
+            }
+
             if (!$prova_feita) {
                 $temProvaPendente = true;
                 $provas_finalizadas[] = false;

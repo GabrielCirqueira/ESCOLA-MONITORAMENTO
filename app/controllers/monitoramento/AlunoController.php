@@ -88,7 +88,7 @@ class AlunoController
             }
  
             // echo "<pre>";
-            // print_r($provas_aluno_rec);
+            // print_r($provas_aluno);
             // echo "</pre>";
 
             MainController::Templates("public/views/aluno/home.php", "ALUNO", [
