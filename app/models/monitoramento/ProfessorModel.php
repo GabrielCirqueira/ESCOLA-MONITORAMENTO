@@ -176,4 +176,24 @@ class ProfessorModel{
     }
     
 
+    public static function ExcluirProvaAluno($id){
+        $sql = "DELETE FROM gabarito_alunos WHERE id_prova = :id";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":id", $id);
+        $query->execute();
+
+        return $query;
+    }
+
+    public static function ExcluirProvaProf($id){
+        $sql = "DELETE FROM gabarito_professores WHERE id = :id";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":id", $id);
+        $query->execute();
+
+        return $query;
+    }
+
 }

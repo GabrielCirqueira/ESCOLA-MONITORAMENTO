@@ -97,6 +97,30 @@
         <button type="submit" class="button-add-recp">ADICIONAR RECUPERAÇÃO</button>
     </form>
 
+    <button class="excluir-prova" onclick="Mostrar_PopUp('PopUp_excluir_prova')" >Excluir Prova</button>
+
+
+    <div id="PopUp_excluir_prova" class="PopUp-sobreposicao">
+        <div class="conteudo-popup">
+            <h2>CUIDADO!</h2> 
+            <p>Excluir a prova resultará na perda de todos os dados registrados, incluindo os dos alunos que fizeram essa prova!</p>
+
+            <b><p>Deseja excluir?</p></b>
+
+            <div class="inserir-usuario-excluir-prova">
+                <form method="post" action="">
+                    <div>
+                        <label for="user">Insira seu Usuario:</label>
+                        <input required id="user" name="user" type="text">
+                    </div> 
+                    <br><br>
+                    <button type="submit" name="enviar-user" value="e" class="botao-form-enviar">Excluir Prova</button>
+                </form> 
+            </div>
+
+            <button onclick="Fechar_PopUp('PopUp_excluir_prova')" class="Fechar-Popup-icon">X</button>
+        </div>
+    </div>
 
     <br>
     <br>

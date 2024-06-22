@@ -245,6 +245,17 @@ class ProfessorController{
                 }
             }
 
+            if(isset($_POST["enviar-user"])){
+                if($_POST["user"] == $_SESSION["nome_usuario"]){
+                    ProfessorModel::ExcluirProvaAluno($id_prova);
+                    ProfessorModel::ExcluirProvaProf($id_prova);
+                    header("Location: ver_provas");
+                    $_SESSION["PopUp_Excluir_prova"] = True;
+                }else{
+                    echo "<script> window.alert('Nome de usuario Incorreto!') </script>";
+                }
+            }
+
             $dados = [
                 "provas" => $provas,
                 "turmas" => explode(",", $turmas),
@@ -897,6 +908,7 @@ private static function calcular_descritores_por_aluno($alunos_por_turma) {
     
                 $_SESSION["PopUp_inserir_prova"] = True;
                 header("location: professor_home");
+                exit();
             
         } else {
             header("location: ADM");

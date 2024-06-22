@@ -974,3 +974,37 @@ input:checked + .slider:before {
   cursor: pointer;
   background-color: rgba(47, 123, 123, 0.59);
 }
+
+.excluir-prova{ 
+  max-width: 450px;
+  min-width: 300px; 
+  height: 45px;
+  padding: 10px;
+  background-color: #921f1fb5;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.5s ease;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.148);
+}
+
+.excluir-prova:hover{
+  cursor: pointer;
+  background-color: #7e0b0bb5;
+}
+
+.inserir-usuario-excluir-prova form div{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.inserir-usuario-excluir-prova input[type="text"]{
+  padding: 3px;
+  height: 20px;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 0px;
+}

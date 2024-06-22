@@ -124,6 +124,18 @@
         </div>
     </div>
 
+    <div id="PopUp_Excluir_prova" class="PopUp-sobreposicao">
+        <div class="conteudo-popup">
+            <h2>SUCESSO</h2>
+            <div class="check">
+                <div class="linha-checked-1"></div>
+                <div class="linha-checked-2"></div>
+            </div>
+            <p>Prova excluida com <br> sucesso!</p>
+            <button onclick="Fechar_PopUp('PopUp_Excluir_prova')" class="Fechar-Popup">FECHAR</button>
+        </div>
+    </div>
+
 
     <div id="PopUp_inserir_gabarito_professor" class="PopUp-sobreposicao">
         <div class="conteudo-popup">
