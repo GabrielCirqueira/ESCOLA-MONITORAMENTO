@@ -85,18 +85,11 @@
             </div>
 
         </div>
-
+        <div><br><br><br></div>
         <div class="area-descritores">
             <?php foreach ($data["descritores"] as $descritor => $value) { ?>
 
-                <div class="descritor-graficos">
-                    <div class="descritor-grafico-proeficiencia">
-                        <?= $value["proeficiencia"] ?>
-                    </div>
-                    <div class="descritor-grafico-porcentagem">
-                        <?= $value["porcentagem_grafico"] ?>
-                    </div>
-                </div>
+                <?= $value["proeficiencia"] ?>
 
             <?php } ?>
         </div>
@@ -158,42 +151,29 @@
 
                     $exibir = True;
             ?>
-
-                    <div class="descritor-graficos">
-                        <div class="descritor-grafico-proeficiencia">
-                            <?= $value["proeficiencia"] ?>
-                        </div>
-                        <div class="descritor-grafico-porcentagem">
-                            <?= $value["porcentagem_grafico"] ?>
-                        </div>
-                    </div>
-
-            <?php }else{
-                if($descritor == $data["descritor"]){
-                    $exibir = True;
-                     ?>
-                    <div class="descritor-graficos">
-                        <div class="descritor-grafico-proeficiencia">
-                            <?= $value["proeficiencia"] ?>
-                        </div>
-                        <div class="descritor-grafico-porcentagem">
-                            <?= $value["porcentagem_grafico"] ?>
-                        </div>
-                    </div>
-                <?php 
+                    <?= $value["proeficiencia"] ?>
+                    <?php } else {
+                    if ($descritor == $data["descritor"]) {
+                        $exibir = True;
+                    ?>
+                        <?= $value["proeficiencia"] ?>
+                <?php
+                    }
                 }
-            }
-            } if($exibir == false){ ?>
-
-                <h2>NÃO FORAM ENCOTRADOS RESULTADOS PARA SUA BUSCA!</h2>
-
-            <?php } ?>
+            } ?>
+ 
         </div>
-    <?php
-    } ?>
+    <?php }
+               if ($exibir == false) { ?>
 
-<div><br><br><br><br><br></div>
-<div><br><br><br><br><br></div>
-<div><br><br><br><br><br></div>
+                <div>
+                    <h2>NÃO FORAM ENCOTRADOS RESULTADOS PARA SUA BUSCA!</h2>
+                </div>
+            <?php } ?> 
+
+    <div><br><br><br><br><br></div>
+    <div><br><br><br><br><br></div>
+    <div><br><br><br><br><br></div>
+    <div><br><br><br><br><br></div>
 
 </main>

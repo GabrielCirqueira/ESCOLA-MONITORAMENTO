@@ -770,6 +770,17 @@ input:checked + .slider:before {
   gap: 30px;
 }
 
+.area-descritores{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.area-descritores svg{
+  margin-bottom: 50px;
+}
+
 .descritores-cor{
   display: flex;
   justify-content: center;

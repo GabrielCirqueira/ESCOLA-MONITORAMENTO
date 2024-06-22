@@ -119,6 +119,8 @@
             <a class="button-menu" href="gestor_home">DESEMPENHO ESCOLAR</a>
             <hr>
             <a class="button-menu" href="gestor_descritores">DESEMPENHO DESCRITORES</a>
+            <hr>
+            <a class="button-menu" href="gestor_provas">PROVAS</a>
           <?php } else if ($user == "PROFESSOR") { ?>
             <?php if($_SESSION["PAG_VOLTAR"] != False){ ?>
               <a class="button-menu-voltar" href="<?=$_SESSION["PAG_VOLTAR"]?>">VOLTAR</a>
