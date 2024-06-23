@@ -48,6 +48,28 @@ class GestorModel{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function GetProvasFiltrados($filtros){
+        $query = "SELECT * FROM gabarito_professores WHERE 1=1";
+        
+        if($filtros['disciplina']){
+            $query .= " AND disciplina = :disciplina";
+        }
+        if($filtros['professor']){
+            $query .= " AND nome_professor = :professor";
+        }
+        $stmt = Database::GetInstance()->prepare($query);
+
+        if($filtros['disciplina']){
+            $stmt->bindValue(':disciplina', $filtros['disciplina']);
+        }
+        if($filtros['professor']){
+            $stmt->bindValue(':professor', $filtros['professor']);
+        }
+    
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function GetFiltro($campo,$valor){
         $sql = "SELECT * FROM gabarito_alunos WHERE $campo = :valor ";
         $query = Database::GetInstance()->prepare($sql);

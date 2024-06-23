@@ -725,7 +725,7 @@ foreach ($percentual_descritores_turmas as $turma) {
 }
     
     
-private static function calcular_descritores_por_aluno($alunos_por_turma) {
+public static function calcular_descritores_por_aluno($alunos_por_turma) {
     $descritores_por_aluno = ["descritores" => [], "ALUNOS" => []];
     $alunos_para_processar = [];
 

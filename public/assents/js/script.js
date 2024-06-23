@@ -151,8 +151,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function resetForm() {
     const form = document.getElementById('filterForm');
     form.reset();
-
-    // Reseta manualmente os selects para o primeiro item
+ 
     document.getElementById('turma').selectedIndex = 0;
     document.getElementById('turno').selectedIndex = 0;
     document.getElementById('disciplina').selectedIndex = 0;
@@ -160,11 +159,15 @@ function resetForm() {
     document.getElementById('professor').selectedIndex = 0;
 }
 
+function resetFormProva() {
+    const form = document.getElementById('filterFormProva'); 
+    document.getElementById('disciplina').selectedIndex = 0; 
+    document.getElementById('professor').selectedIndex = 0;
+}
+
 function resetFormDesc() {
     const form = document.getElementById('filterFormDesc');
-    form.reset();
- 
-    // Reseta manualmente os selects para o primeiro item
+    form.reset(); 
     document.getElementById('turma').selectedIndex = 0;
     document.getElementById('turno').selectedIndex = 0;
     document.getElementById('disciplina').selectedIndex = 0;
