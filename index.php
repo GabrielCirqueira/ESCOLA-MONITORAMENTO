@@ -12,6 +12,11 @@ use app\controllers\monitoramento\ADMcontroller;
 
 use app\config\Backup;
 
+use Dotenv\Dotenv; 
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 Backup::runBackup();
 
 session_start();

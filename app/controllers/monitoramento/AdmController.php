@@ -9,7 +9,7 @@ class ADMcontroller{
 
     public static function login_adm_verifica(){  
         
-        if($_POST["campo_adm"] == "NSL"){
+        if($_POST["campo_adm"] == $_ENV["SENHA_GESTOR"]){
             $_SESSION["ADM"] = True;
             header("location:adm_home");
         }else{ 

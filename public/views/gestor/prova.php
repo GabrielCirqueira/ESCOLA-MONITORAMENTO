@@ -13,7 +13,7 @@ if($data["descritores_alunos"] != NULL){
 
     <h3 data-aos="fade-up">Classificar por:</h3>
     <div data-aos="fade-up" class="buttons-professor">
-        <form action="relatorio_prova" method="post">
+        <form action="" method="post">
             <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
             <button data-aos="fade-up" class="button-professor-turma" name="turma-filtros" value="geral" type="submit">Desempenho Geral</button>
             <select data-aos="fade-up" name="turma-filtros" id="">

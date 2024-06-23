@@ -12,7 +12,7 @@ class GestorController{
 
     public static function login_gestor_verifica(){ 
         
-        if($_POST["user-gestor"] == "NSL"){
+        if($_POST["user-gestor"] == $_ENV["SENHA_GESTOR"]){
             $_SESSION["GESTOR"] = True;
             header("location:gestor_home");
         }else{
@@ -50,7 +50,7 @@ class GestorController{
             $turnos = ["INTERMEDIÁRIO", "VESPERTINO"];
 
             $filtros = self::obterFiltros();
-            $resultados = GestorModel::GetResultadosFiltrados($filtros);
+            $resultados = GestorModel::GetResultadosFiltrados($filtros); 
             $descritores = self::DadosDescritores(self::Descritores($resultados));
 
             uasort($descritores, function ($a, $b) {

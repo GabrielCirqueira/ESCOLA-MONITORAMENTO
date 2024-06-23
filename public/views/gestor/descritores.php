@@ -55,23 +55,17 @@
             <input type="submit" name="filtro" value="Filtrar">
         </form>
     </div>
-
-    <?php if ($data["geral"]) { ?>
-
-        <h2> DESEMPENHO GERAL DESCRITORES</h2>
-
-        <div class="area-descritores-cores">
+    <br><br>
+    <div class="area-descritores-cores">
 
             <div class="descritores-cor">
                 <div style="background-color:#FF6B6B ;"></div>
-                <span>Abaixo do Básico
-                </span>
+                <span>Abaixo do Básico</span>
             </div>
 
             <div class="descritores-cor">
                 <div style="background-color:#FFA63D ;"></div>
-                <span>Básico
-                </span>
+                <span>Básico</span>
             </div>
 
             <div class="descritores-cor">
@@ -85,6 +79,14 @@
             </div>
 
         </div>
+
+    <?php
+    if($data["descritores"] != NULL){
+    if ($data["geral"]) { ?>
+
+        <h2> DESEMPENHO GERAL DESCRITORES</h2>
+
+        
         <div><br><br><br></div>
         <div class="area-descritores">
             <?php foreach ($data["descritores"] as $descritor => $value) { ?>
@@ -119,29 +121,7 @@
 
         </div>
 
-        <div class="area-descritores-cores">
-
-            <div class="descritores-cor">
-                <div style="background-color:#FF6B6B ;"></div>
-                <span>Abaixo do Básico</span>
-            </div>
-
-            <div class="descritores-cor">
-                <div style="background-color:#FFA63D ;"></div>
-                <span>Básico</span>
-            </div>
-
-            <div class="descritores-cor">
-                <div style="background-color:#D4FF3B ;"></div>
-                <span>Médio</span>
-            </div>
-
-            <div class="descritores-cor">
-                <div style="background-color:#44C548 ;"></div>
-                <span>Avançado</span>
-            </div>
-
-        </div>
+        
 
         <div class="area-descritores">
             <?php
@@ -163,17 +143,21 @@
             } ?>
  
         </div>
-    <?php }
-               if ($exibir == false) { ?>
+        <?php if ($exibir == false) { ?>
 
-                <div>
-                    <h2>NÃO FORAM ENCOTRADOS RESULTADOS PARA SUA BUSCA!</h2>
-                </div>
-            <?php } ?> 
+<div class="height">
+    <h2>NÃO FORAM ENCOTRADOS RESULTADOS PARA SUA BUSCA!</h2>
+</div>
+<?php } ?> 
+    <?php } ?> 
 
-    <div><br><br><br><br><br></div>
-    <div><br><br><br><br><br></div>
-    <div><br><br><br><br><br></div>
-    <div><br><br><br><br><br></div>
-
+ 
+<?php }else{ ?>
+        <div class="height">
+        <center>
+            <h1>SEM DADOS !</h1>
+            <h2>Nenhuma Prova Feita !</h2>
+        </center>
+        </div>
+        <?php } ?>
 </main>
