@@ -251,6 +251,7 @@ class ProfessorController{
                     ProfessorModel::ExcluirProvaProf($id_prova);
                     header("Location: ver_provas");
                     $_SESSION["PopUp_Excluir_prova"] = True;
+                    exit();
                 }else{
                     echo "<script> window.alert('Nome de usuario Incorreto!') </script>";
                 }

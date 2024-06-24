@@ -4,13 +4,12 @@
     background-image: url('../../../public/assents/img/FULL\ FRAME\ MOBILE.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
-    flex-direction: column;
+    background-repeat: no-repeat; 
     align-items: center;
     justify-content: center;
     min-height: 90vh;
 }
-
+ 
 .main-home {
     flex: 1 1 0;
     display: flex;
@@ -210,3 +209,4 @@
     font-family: Arial, Helvetica, sans-serif;
     box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.185);
 }
+

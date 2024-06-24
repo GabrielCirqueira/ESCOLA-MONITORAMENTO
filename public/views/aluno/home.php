@@ -52,6 +52,7 @@
 
                 <div style="display: none;" id="popup-prova-<?= $prova["id"] ?>" class="PopUp-sobreposicao">
                     <div class="conteudo-popup">
+                        <br>
                         <h2> <?= $prova["nome_prova"] ?> </h2>
                         <br>
                         <div style="text-align:left;">
@@ -67,7 +68,7 @@
                             <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="Fechar-Popup">ENVIAR
                                 GABARITO</button>
                         </form>
-                        <button onclick="Fechar_PopUp('popup-prova-<?= $prova['id'] ?>')" class="Fechar-Popup">FECHAR</button>
+                        <button onclick="Fechar_PopUp('popup-prova-<?= $prova['id'] ?>')" class="Fechar-Popup-icon">X</button>
                     </div>
                 </div>
 
@@ -107,6 +108,7 @@
 
                 <div style="display: none;" id="popup-prova-<?= $provaa["id"] ?>" class="PopUp-sobreposicao">
                     <div class="conteudo-popup">
+                        <br>
                         <h2> RECUPERAÇÃO </h2>
                         <h3> <?= $provaa["nome_prova"] ?> </h3>
                         <br>
@@ -122,7 +124,7 @@
                             <button type="submit" value="<?= $provaa['id'] ?>" name="id-prova" class="Fechar-Popup">ENVIAR
                                 GABARITO</button>
                         </form>
-                        <button onclick="Fechar_PopUp('popup-prova-<?= $provaa['id'] ?>')" class="Fechar-Popup">FECHAR</button>
+                        <button onclick="Fechar_PopUp('popup-prova-<?= $provaa['id'] ?>')" class="Fechar-Popup-icon">X</button>
                     </div>
                 </div>
 
@@ -181,7 +183,8 @@
 
             <div style="display: none;" id="popup-gabarito-<?= $prova["id"] ?>" class="PopUp-sobreposicao">
                 <div class="conteudo-popup">
-                    <h2> <?= $prova["nome_prova"] ?> </h2>
+                    <br>
+                    <h4> <?= $prova["nome_prova"] ?></h4>
 
 
 
@@ -253,13 +256,14 @@
                     <?php if ($liberado == null) {
                         echo "<h5>O PROFESSOR AINDA NÃO LIBEROU O ACESSO AS RESPOSTAS!</h5>";
                     } else { ?>
+                    <br>
                         <span><b>VALOR DA PROVA:</b> <?= $prova["pontos_prova"] ?></span>
                         <span><b>VALOR OBTIDO:</b> <?= $prova["pontos_aluno"] ?></span>
                         <span><b>STATUS:</b> <?= $prova["status"] ?></span>
                     <?php
                     } ?>
 
-                    <button onclick="Fechar_PopUp('popup-gabarito-<?= $prova['id'] ?>')" class="Fechar-Popup">FECHAR</button>
+                    <button onclick="Fechar_PopUp('popup-gabarito-<?= $prova['id'] ?>')" class="Fechar-Popup-icon">X</button>
                 </div>
             </div>
 

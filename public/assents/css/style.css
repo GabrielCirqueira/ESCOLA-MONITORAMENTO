@@ -180,7 +180,17 @@ td {
   margin: 0px;
 }
 
+.menu-lateral-main-footer{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
 
+.menu-lateral-main-footer a{
+  color: black;
+  font-weight: bold;
+}
 
 /*PROVASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS*/
 

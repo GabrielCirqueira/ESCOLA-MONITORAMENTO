@@ -54,6 +54,7 @@ $rotas = [
     "ADM"                           => MainController::class,
     "login_professor"               => MainController::class,
     "login_gestor"                  => MainController::class,
+    "index"                         => MainController::class,
     "login_adm"                     => MainController::class,
     "encerrar_sessao"               => MainController::class,
     "aluno_home"                    => AlunoController::class,
@@ -91,14 +92,23 @@ if($action == "home"){
     $action = "index";
 }
 
-if(array_key_exists($action, $rotas)) {
+if(strpos($action,"/") !== False){
+    $action = "index";
+    header("location: ../home");
+}
 
+// Verifica se a ação está vazia ou contém uma barra
+if (empty($action) || strpos($action, '/') !== false) {
+    $action = "index";
+}
+
+if(array_key_exists($action, $rotas)) {
     $controller = $rotas[$action];
     $method = $action;
     $controller::$method();
-} else{
+} else {
     MainController::index();
-} 
+}
 
 $popups = array(
     "PopUp_professor",

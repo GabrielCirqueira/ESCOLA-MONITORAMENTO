@@ -33,11 +33,20 @@ class Backup {
         $lastBackupTimestamp = strtotime($lastBackupTime);
         $currentTimestamp = time();
 
-        return ($currentTimestamp - $lastBackupTimestamp) >= 12 * 60 * 30;
+        self::loadEnv();
+
+        return ($currentTimestamp - $lastBackupTimestamp) >= $_ENV["HORAS_BACKUP"] * 60 * 60;
+
     }
 
     private static function logBackupTime() {
         file_put_contents(self::$logFile, date('Y-m-d H:i'));
+    }
+
+    private static function createIndexFile() {
+        $indexFilePath = self::$backupDir . '/index.php';
+        $indexFileContent = "<?php\n\nheader(\"location: ../../../\");";
+        file_put_contents($indexFilePath, $indexFileContent);
     }
 
     public static function runBackup() {
@@ -49,6 +58,7 @@ class Backup {
 
             if (!is_dir(self::$backupDir)) {
                 mkdir(self::$backupDir, 0755, true);
+                self::createIndexFile(); // Cria o index.php ao criar a pasta backups
             }
 
             $mysqldumpPath = 'C:/xampp/mysql/bin/mysqldump.exe';

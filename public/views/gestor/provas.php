@@ -90,7 +90,7 @@
                                 <?= $prova["data_prova"] ?>
                             </span> <br>
                             <span class="prova-nome-disciplina">
-                                <?= str_replace(",","  ",$prova["turmas"]) ?>
+                                <?= str_replace(","," - ",$prova["turmas"]) ?>
                             </span> <br>
                         </center>
                     </div>

@@ -160,7 +160,7 @@ class MainController{
             $y -= $altura_barra;
             $svg .= "<rect x='50' y='$y' width='$largura_barra' height='$altura_barra' fill='" . $cores[$proficiencia] . "' />";
             if ($quantidade > 0) {
-                $svg .= "<text x='" . (50 + $largura_barra + 10) . "' y='" . ($y + $altura_barra / 2 + 5) . "' text-anchor='start' font-size='14' fill='#666'>" . round(($quantidade / $total) * 100) . "%</text>";
+                $svg .= "<text x='" . (50 + $largura_barra + 10) . "' y='" . ($y + $altura_barra / 2 + 5) + 10 . "' text-anchor='start' font-size='17' fill='#666'>" . round(($quantidade / $total) * 100) . "%</text>";
             }
         }
     

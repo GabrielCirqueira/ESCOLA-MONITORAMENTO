@@ -1,24 +1,27 @@
 .btn-index {
   width: 300px;
-  height: 80px;
-  margin: 20px;
+  height: 190px;
+  margin: 15px;
+  text-shadow: 0px 0px 10px rgba(38, 38, 38, 0.487);
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 15px;
   text-decoration: none;
   border-radius: 13px;
-  background-color: #39caddaa;
-  border: 6px solid rgba(255, 255, 255, 0.651);
+  background-color: #d7d7d7b4;
+  border: 5px solid rgba(66, 66, 66, 0.651);
   font-family: "Oswald", 'Arial Narrow Bold', sans-serif;
-  font-size: 30px;
+  font-size: 35px;
   font-weight: bold;
-  color: white;
-  transition: 0.5s ease;
+  color: rgb(84, 84, 84);
+  transition: 0.7s ease;
 }
 
 .btn-index:hover {
-  border: 6px solid rgba(10, 247, 255, 0.795);
-  background-color: #0bd1eb3b;
+  background-color: #7f7f7f;
+  color: rgb(47, 47, 47);
+  border: 5px solid rgba(52, 52, 52, 0.651);
   cursor: pointer;
 }
 
@@ -133,11 +136,10 @@
   color: rgb(0, 0, 0);
   font-size: 18px;
   border-radius: 10px;
-  transition: 0.8s ease  ;
+  transition: 0.5s ease;
 }
 
-.btn-home-professor:hover {
-  font-size: 18.3px;
+.btn-home-professor:hover { 
   background-color: #1297a860; 
 }
 
