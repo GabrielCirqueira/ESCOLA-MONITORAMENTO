@@ -42,6 +42,20 @@
         </div>
     </div>
 
+    <div id="PopUp_PRF_Senha" class="PopUp-sobreposicao">
+        <div class="conteudo-popup">
+            <h2>SENHA INCORRETA!</h2>
+
+            <div class="uncheck">
+                <div class="linha-unchecked-1"></div>
+                <div class="linha-unchecked-2"></div>
+            </div>
+
+            <p>Você digitou a senha incorreta para este usuario <br>Tente Novamente.</p>
+            <button onclick="Fechar_PopUp('PopUp_PRF_Senha')" class="Fechar-Popup">FECHAR</button>
+        </div>
+    </div>
+
     <div id="popup_not_turmas" class="PopUp-sobreposicao">
         <div class="conteudo-popup">
             <h2>TURMAS NÃO SELECIONADAS!</h2>

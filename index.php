@@ -21,7 +21,7 @@ Backup::runBackup();
 
 session_start();
 
-if(!isset($_SESSION["PopUp_Excluir_prova"])){
+if(!isset($_SESSION["PopUp_PRF_Senha"])){
 
     $_SESSION["PopUp_professor"] = False;
     $_SESSION["popup_not_gestor"] = False;
@@ -35,6 +35,7 @@ if(!isset($_SESSION["PopUp_Excluir_prova"])){
     $_SESSION["PopUp_inserir_prova"] = False;
     $_SESSION["PAG_VOLTAR"] = False;
     $_SESSION["PopUp_Excluir_prova"] = False;
+    $_SESSION["PopUp_PRF_Senha"] = False;
     
     $_SESSION["GESTOR"] = False;
     $_SESSION["ALUNO"] = False;
@@ -126,6 +127,11 @@ $popups = array(
 if($_SESSION["PopUp_professor"] == True){
     echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";
     $_SESSION["PopUp_professor"] = False;
+}
+
+if($_SESSION["PopUp_PRF_Senha"] == True){
+    echo "<script> Mostrar_PopUp('PopUp_PRF_Senha')</script>";
+    $_SESSION["PopUp_PRF_Senha"] = False;
 }
 
 if($_SESSION["PopUp_RA_NaoENC"] == True){

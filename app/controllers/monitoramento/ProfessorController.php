@@ -13,12 +13,18 @@ class ProfessorController{
 
         $info = ProfessorModel::verificarLogin($_POST["user-prof"]);
         if ($info != False){
-            $_SESSION["PROFESSOR"] = True;
-            $_SESSION["nome_professor"] = $info["nome"];
-            $_SESSION["nome_usuario"]   = $info["usuario"];
-            $_SESSION["numero"]         = $info["numero"];
-            $_SESSION["disciplinas"]    = $info["disciplinas"];
-            header("location: professor_home");
+            if($info["senha"] == $_POST["senha-prof"]){
+                $_SESSION["PROFESSOR"] = True;
+                $_SESSION["nome_professor"] = $info["nome"];
+                $_SESSION["nome_usuario"]   = $info["usuario"];
+                $_SESSION["numero"]         = $info["numero"];
+                $_SESSION["disciplinas"]    = $info["disciplinas"];
+                header("location: professor_home");
+            }else{
+                $_SESSION["PopUp_PRF_Senha"] = True;
+                header("location: login_professor");
+                exit;
+            }
         } else {
             $_SESSION["PopUp_professor"] = True;
             header("location: login_professor");

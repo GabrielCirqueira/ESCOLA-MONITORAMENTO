@@ -41,6 +41,7 @@ use PDO;
             $professores = "CREATE TABLE IF NOT EXISTS professores(
                     id          int AUTO_INCREMENT primary key,
                     usuario     varchar(255),
+                    senha       varchar(255),
                     nome        varchar(255),
                     cpf         varchar(14),
                     numero      varchar(30),

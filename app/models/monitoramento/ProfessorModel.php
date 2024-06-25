@@ -18,7 +18,7 @@ class ProfessorModel{
         }else{
             return False;
         }
-    }
+    }   
 
     public static function GetTurmas(){
         $sql = "SELECT * FROM turmas";

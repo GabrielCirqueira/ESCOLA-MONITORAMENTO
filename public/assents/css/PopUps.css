@@ -8,6 +8,8 @@
       display: none;
     }
 
+    #PopUp_PRF_Senha{display: none;}
+
     #PopUp_Excluir_prova{
       display: none;
     }
