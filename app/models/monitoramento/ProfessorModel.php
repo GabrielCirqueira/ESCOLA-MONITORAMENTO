@@ -8,7 +8,7 @@ use PDO;
 class ProfessorModel{
     
     public static function verificarLogin($user){
-        $sql = "SELECT * FROM professores WHERE usuario = :dado";
+        $sql = "SELECT * FROM professores WHERE numero = :dado";
         $query = Database::GetInstance()->prepare($sql);
         $query->bindvalue(":dado",$user);
         $query->execute(); 

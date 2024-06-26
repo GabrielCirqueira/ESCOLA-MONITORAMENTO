@@ -4,9 +4,12 @@
         <h1>ALUNO</h1>
         <form action="login_aluno_entrar" method="post">
             
+            <br>
             <div class="campo-ra">
                 <input class="input-campo-aluno" name="ra" id="RA" type="text" placeholder="Digite Seu RA" required>
             </div>
+            <br>
+            <br>
             <input type="submit">
         </form>
 

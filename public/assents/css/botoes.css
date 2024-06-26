@@ -2,26 +2,26 @@
   width: 300px;
   height: 190px;
   margin: 15px;
-  text-shadow: 0px 0px 10px rgba(38, 38, 38, 0.487);
+  text-shadow: 0px 0px 5px rgba(128, 128, 128, 0.487);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 15px;
   text-decoration: none;
   border-radius: 13px;
-  background-color: #d7d7d7b4;
-  border: 5px solid rgba(66, 66, 66, 0.651);
+  background-color: #5dc0d7bf;
+  border: 5px solid rgba(255, 255, 255, 0.651);
   font-family: "Oswald", 'Arial Narrow Bold', sans-serif;
-  font-size: 35px;
+  font-size: 37px;
   font-weight: bold;
-  color: rgb(84, 84, 84);
+  color: rgb(255, 255, 255);
   transition: 0.7s ease;
 }
 
 .btn-index:hover {
-  background-color: #7f7f7f;
-  color: rgb(47, 47, 47);
-  border: 5px solid rgba(52, 52, 52, 0.651);
+  background-color: #0e7187;
+  color: rgb(255, 255, 255);
+  border: 5px solid rgba(255, 255, 255, 0.651);
   cursor: pointer;
 }
 
