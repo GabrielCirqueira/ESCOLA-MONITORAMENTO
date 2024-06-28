@@ -316,7 +316,7 @@ class ProfessorController{
                             "nome" => $aluno["nome"],
                             "turma" => $aluno["turma"],
                             "status" => "NÃO FEZ",
-                            "Pontos" => "NULL",
+                            "Pontos" => " ",
                         ];
                     }
                 }

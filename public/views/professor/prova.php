@@ -20,7 +20,11 @@
             </div> <br><br>
 
             <div class="alternar-liberar-gabarito">
-                <span>O aluno poderá ver e fazer a prova? <br> Se "Não", não poderá realizar a prova.</span><br><br>
+                <span>
+                O aluno que faltou tem permissão para realizar a prova?  
+
+
+</span><br><br>
 
                 <?php if ($data["liberar_prova"] == True) { ?>
 
@@ -75,15 +79,16 @@
         </table>
     </div>
 
+    <div class="area-professor-botoes-prova">
+
     <?php
     if ($data["provas_rec"] != NULL) { ?>
         <center>
             <div class="area_provas_rec_professor">
-                <h3>Essa prova tem <?= $data["provas_rec"]["quantidade"] ?> recuperação </h3>
                 <form action="prova_recuperacao" method="post">
                     <?php
                     for ($i = 0; $i < $data["provas_rec"]["quantidade"]; $i++) { ?>
-                        <button name="prova" value="<?= $data["provas_rec"]["provas"][$i]["id"] ?>"><?= $i + 1 ?>ª Recuperação</button>
+                        <button name="prova" value="<?= $data["provas_rec"]["provas"][$i]["id"] ?>"><?= $i + 1 ?>ª RECUPERAÇÃO</button>
                         <br>
                     <?php }
                     ?>
@@ -97,8 +102,9 @@
         <button type="submit" class="button-add-recp">ADICIONAR RECUPERAÇÃO</button>
     </form>
 
-    <button class="excluir-prova" onclick="Mostrar_PopUp('PopUp_excluir_prova')" >Excluir Prova</button>
+    <button class="excluir-prova" onclick="Mostrar_PopUp('PopUp_excluir_prova')" >EXCLUIR PROVA</button>
 
+    </div>
 
     <div id="PopUp_excluir_prova" class="PopUp-sobreposicao">
         <div class="conteudo-popup">

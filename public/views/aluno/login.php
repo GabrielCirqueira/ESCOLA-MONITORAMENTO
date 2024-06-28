@@ -6,10 +6,9 @@
             
             <br>
             <div class="campo-ra">
-                <input class="input-campo-aluno" name="ra" id="RA" type="text" placeholder="Digite Seu RA" required>
+                <input class="input-campo-aluno" name="ra" id="RA" type="text" placeholder="Digite seu RA" required>
             </div>
-            <br>
-            <br>
+            
             <input type="submit">
         </form>
 

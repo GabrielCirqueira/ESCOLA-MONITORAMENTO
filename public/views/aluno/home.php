@@ -61,7 +61,7 @@
                             <span><b>DISCIPLINA:</b> <?= $prova["disciplina"] ?></span><br>
                             <span><b>VALOR: </b> <?= $prova["valor"] ?></span><br>
                             <span><b>DATA: </b> <?= $prova["data_prova"] ?> </span><br>
-                            <span><b>PERGUNTAS: </b><?= $prova["QNT_perguntas"] ?> PERGUNTAS</span><br>
+                            <span><b>QUESTÕES: </b><?= $prova["QNT_perguntas"] ?> </span><br>
                         </div>
 
                         <form method="post" action="gabarito_aluno">
@@ -117,7 +117,7 @@
                             <span><b>PROFESSOR: </b><?= $provaa["nome_professor"] ?></span><br>
                             <span><b>DISCIPLINA:</b> <?= $provaa["disciplina"] ?></span><br>
                             <span><b>VALOR: </b> <?= $provaa["valor"] ?></span><br> 
-                            <span><b>PERGUNTAS: </b><?= $provaa["QNT_perguntas"] ?> PERGUNTAS</span><br>
+                            <span><b>QUESTÕES: </b><?= $provaa["QNT_perguntas"] ?> </span><br>
                         </div>
 
                         <form method="post" action="gabarito_aluno_rec">

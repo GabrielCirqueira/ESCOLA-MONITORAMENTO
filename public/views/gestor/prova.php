@@ -64,7 +64,7 @@ if($data["descritores_alunos"] != NULL){
         </div>
         <br><br>
 
-        <h3 data-aos="fade-up">Desempenho total das turmas</h3>
+        <h3 data-aos="fade-up">Desempenho Total das Turmas</h3>
         <div data-aos="fade-up" class="graficos-professor-rosca-turmas">
             <?php foreach ($data["dados_turma"] as $turma) { ?>
                 <div data-aos="fade-up">

@@ -848,10 +848,9 @@ input:checked + .slider:before {
 
 .button-add-recp{
   margin: 50px;
-  max-width: 450px;
-  min-width: 300px; 
-  height: 60px;
-  padding: 20px;
+  width: 270px;
+  height: 50px;
+  padding: 10px;
   background-color: #20842cb5;
   color: white;
   font-weight: bold;
@@ -903,11 +902,9 @@ input:checked + .slider:before {
   height: 20px;
 }
 
-.area_provas_rec_professor button{ 
-  margin: 5px;
-  width: 250px;
-  height: 40px;
-  padding: 3px;
+.area_provas_rec_professor button{  
+  width: 270px;
+  height: 50px; 
   background-color: #b19f17b5;
   color: white;
   font-weight: bold;
@@ -915,7 +912,7 @@ input:checked + .slider:before {
   transition: 0.5s ease;
   border: none;
   border-radius: 6px;
-  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.148);
+  box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.148);
 }
 
 .area_provas_rec_professor button:hover{
@@ -996,10 +993,9 @@ input:checked + .slider:before {
   background-color: rgba(47, 123, 123, 0.59);
 }
 
-.excluir-prova{ 
-  max-width: 450px;
-  min-width: 300px; 
-  height: 45px;
+.excluir-prova{
+  width: 270px;
+  height: 50px;
   padding: 10px;
   background-color: #921f1fb5;
   color: white;

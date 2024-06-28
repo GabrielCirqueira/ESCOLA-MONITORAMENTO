@@ -58,7 +58,7 @@ class Backup {
 
             if (!is_dir(self::$backupDir)) {
                 mkdir(self::$backupDir, 0755, true);
-                self::createIndexFile(); // Cria o index.php ao criar a pasta backups
+                self::createIndexFile();
             }
 
             $mysqldumpPath = 'C:/xampp/mysql/bin/mysqldump.exe';

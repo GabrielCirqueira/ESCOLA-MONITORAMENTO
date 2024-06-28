@@ -15,7 +15,7 @@
     <br>
     <h3>Valor: <?php echo $data["valor"] ?></h3>
     <br>
-    <h3>Perguntas: <?php echo $data["perguntas"] ?></h3>
+    <h3>Questões: <?php echo $data["perguntas"] ?></h3>
     </center>
     
 </div>
@@ -55,7 +55,7 @@
                 </table>
             <br><br><br>
             <center>
-                <input type="submit" value="Criar gabarito" class="botao-form-enviar">
+                <input type="submit" value="Criar Gabarito" class="botao-form-enviar">
             </center>
             </form>
         </div>

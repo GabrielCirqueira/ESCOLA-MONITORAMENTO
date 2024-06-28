@@ -110,7 +110,7 @@
                 <hr>
                 <div>
                     <?= $data["graficos_filtro"]["proeficiencia"] ?>
-                    <h3>PROEFICIÊNCIA</h3>
+                    <h3>PROFICIÊNCIA</h3>
                 </div>
             </div>
             <div><br><br><br><br></div>
@@ -127,7 +127,7 @@
             <hr>
             <div>
                 <?= $data["colunaGeral"] ?>
-                <h3>PROEFICIÊNCIA</h3>
+                <h3>PROFICIÊNCIA</h3>
             </div>
         </div>
 
@@ -148,7 +148,7 @@
                     <div class="turno_coluna">
                         <?= $value[1] ?>
                         <center>
-                            <h4>PROEFICIÊNCIA</h4>
+                            <h4>PROFICIÊNCIA</h4>
                         </center>
                     </div>
                 </div>

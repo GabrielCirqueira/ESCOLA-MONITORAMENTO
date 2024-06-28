@@ -57,7 +57,7 @@ if($data["descritores_alunos"] != NULL){
             } ?>
         </div>
 
-        <h3 data-aos="fade-up">Nível de Proficiência</h3>
+        <h3 data-aos="fade-up">Nível de proficiência</h3>
         <div data-aos="fade-up">
             <?= $data["grafico_colunas"] ?>
 

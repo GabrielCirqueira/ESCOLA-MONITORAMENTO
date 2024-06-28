@@ -44,7 +44,7 @@
             <?php foreach ($data["filtros"] as $filtro => $value) {
                 if ($value != NULL) { ?>
                     <div>
-                        <h4> <?= $filtro ?> </h4>
+                        <h4 style="text-transform: uppercase;" > <?= $filtro ?> </h4>
                         <span> <?= $value ?> </span>
                     </div>
                 <?php }
@@ -97,7 +97,7 @@
 
                     <?php if ($status == true) { ?>
                         <form method="post" action="gestor_prova">
-                            <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-ver-relatorio">Relatorio</button>
+                            <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-ver-relatorio">Relatório</button>
                         </form>
                     <?php } else { ?>
                         <button class="botao-ver-relatorio">Sem Dados</button>

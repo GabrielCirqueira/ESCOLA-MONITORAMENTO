@@ -53,7 +53,7 @@
                 <br>
             </div>
             <center>
-                <input type="submit" value="Enviar gabarito" class="botao-form-enviar">
+                <input type="submit" value="Enviar Gabarito" class="botao-form-enviar">
             </center>
 
         </form>

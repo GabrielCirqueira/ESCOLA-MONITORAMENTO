@@ -133,7 +133,7 @@
             <hr>
             <a class="button-menu" href="ver_provas">PROVAS</a>
             <hr>
-            <a class="button-menu" href="relatorio_professor">RELATORIOS</a>
+            <a class="button-menu" href="relatorio_professor">RELATÓRIOS</a>
 
           <?php }?>
         </div>
