@@ -58,6 +58,17 @@ class ProfessorModel{
         return $query;
     }
 
+    public static function alterar_liberadoRec($id,$state){
+        $sql = "UPDATE gabarito_professores_recuperacao SET liberado = :STATE WHERE id = :ID";
+    
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":STATE",$state); 
+        $query->bindValue(":ID", $id);
+        $query->execute();
+
+        return $query;
+    }
+
     public static function alterar_liberado_ver($id,$state){
         $sql = "UPDATE gabarito_professores SET liberar_prova = :STATE WHERE id = :ID";
     

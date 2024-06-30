@@ -211,9 +211,11 @@ class ProfessorController{
                 }
             }
     
-            foreach ($provas_alunos as $prova) {
-                if ($prova["id_prova"] == $id_prova) {
-                    $provas[] = $prova;
+            if($provas_alunos != NULL){
+                foreach ($provas_alunos as $prova) {
+                    if ($prova["id_prova"] == $id_prova) {
+                        $provas[] = $prova;
+                    }
                 }
             }
     
@@ -252,7 +254,7 @@ class ProfessorController{
             }
 
             if(isset($_POST["enviar-user"])){
-                if($_POST["user"] == $_SESSION["nome_usuario"]){
+                if($_POST["user"] == $_SESSION["numero"]){
                     ProfessorModel::ExcluirProvaAluno($id_prova);
                     ProfessorModel::ExcluirProvaProf($id_prova);
                     header("Location: ver_provas");
@@ -300,6 +302,7 @@ class ProfessorController{
             $id = $_POST["prova"];
             $prova = ProfessorModel::GetProvaRecbyID($id);
             $provas_rec = ProfessorModel::GetProvaRecAlunos();
+            $provas_rec_professor = ProfessorModel::GetProvaRec();
 
             $alunos_prova = [];
             if(strpos($prova["alunos"],";")){
@@ -326,7 +329,21 @@ class ProfessorController{
             // print_r($alunos);
             // echo "</pre>";
 
+            foreach ($provas_rec_professor as $prova) {
+                if ($prova["id"] == $id) {
+                    $liberado = $prova["liberado"] == "SIM" ? true : false;
+                }
+            }
             
+            if (isset($_POST["status"])) {
+                if($_POST["status"] == "sim") {
+                    ProfessorModel::alterar_liberadoRec($id,"SIM"); 
+                    header("Location: ver_provas");
+                }else{
+                    ProfessorModel::alterar_liberadoRec($id,null);  
+                    header("Location: ver_provas");
+                }
+            }
 
             foreach($provas_rec as $prova){
                 foreach($alunos as $ra => $aluno){
@@ -347,7 +364,9 @@ class ProfessorController{
             // echo "</pre>";'
 
             $dados = [
-                "alunos" => $alunos
+                "alunos" => $alunos,
+                "liberado" => $liberado,
+                "id"     => $id
             ];
 
             MainController::Templates("public/views/professor/dados_prova_rec.php", "PROFESSOR", $dados);

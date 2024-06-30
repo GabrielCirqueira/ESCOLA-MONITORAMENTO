@@ -50,7 +50,6 @@
                 </div>
 
 
-                <?php if ($status == true) { ?>
                     <div class="div_editar_ver_prova" >
                     <form method="post" action="editar_prova">
                         <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="botao-form-editar"><i class="fas fa-pencil-alt"></i></button>
@@ -60,9 +59,6 @@
                     </form>
                     </div>
 
-                <?php } else { ?>
-                    <button class="botao-ver-relatorio">Sem Dados</button>
-                <?php } ?>
             </div>
         </div><br>
 

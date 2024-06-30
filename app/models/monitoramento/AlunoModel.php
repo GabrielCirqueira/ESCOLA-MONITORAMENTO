@@ -171,7 +171,7 @@ class AlunoModel{
     }
 
     public static function SetRecAluno($id_prova,$ra) {
-        $sql = "UPDATE gabarito_alunos WHERE id_prova = :ID_PROVA AND ra = :RA";
+        $sql = "UPDATE gabarito_alunos SET recuperacao = 'FEZ RECUPERAÇÂO' WHERE id_prova = :ID_PROVA AND ra = :RA";
         $query = Database::GetInstance()->prepare($sql); 
         $query->bindValue(":RA", $ra);
         $query->bindValue(":ID_PROVA", $id_prova);

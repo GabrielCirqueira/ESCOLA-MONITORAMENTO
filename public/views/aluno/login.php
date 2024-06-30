@@ -1,6 +1,6 @@
 <main class="main">
 
-    <div id="campo-ra" class="login-aluno">
+    <div id="campo-ra" class="login-aluno peq">
         <h1>ALUNO</h1>
         <form action="login_aluno_entrar" method="post">
             

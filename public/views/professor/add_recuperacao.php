@@ -11,7 +11,8 @@
                 <h3><?= $turma ?></h3>
                 <?php foreach ($alunos as $ra => $aluno) { ?>
                     <div class="professor-rec-aluno-checkbox">
-                        <input type="checkbox" name="alunos[]" id="<?= $ra ?>" value="<?= $ra ?>"> <label for="<?= $ra ?>"><?= $aluno ?></label>
+                        <input type="checkbox" name="alunos[]" id="<?= $ra ?>" value="<?= $ra ?>">
+                        <label for="<?= $ra ?>"><?= $aluno ?></label>
                     </div>
                 <?php } ?>
             <?php } ?>

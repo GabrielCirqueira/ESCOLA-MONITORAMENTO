@@ -94,7 +94,7 @@ class AlunoController
             MainController::Templates("public/views/aluno/home.php", "ALUNO", [
                 "provas"            => $provas_aluno,
                 "provas_feitas"     => $provas_aluno_feitas,
-                "rec" => $provas_aluno_rec
+                "rec"               => $provas_aluno_rec
             ]);
         } else {
             header("location: home");
@@ -157,8 +157,22 @@ class AlunoController
             } 
 
             $contador = 0;
+ 
 
-            while($contador < $_SESSION["prova_gabarito"]["QNT_perguntas"]){ 
+            echo "<pre>";
+            print_r($gabarito_professor);
+            echo "</pre>";
+
+            while($contador < $_SESSION["prova_gabarito"]["QNT_perguntas"]){
+                // echo "<br>";
+                // echo $_SESSION["prova_gabarito"]["QNT_perguntas"];
+                // echo "<br>";
+                // echo $gabarito_aluno[$contador];
+                // echo "<br>";
+                // echo $gabarito_professor[$contador];
+                // echo "<br>";
+
+
                 if($gabarito_aluno[$contador] == $gabarito_professor[$contador]){
                     $descritores_corretos[] = $descritores_questoes[$contador];
                     $acertos_aluno++;
@@ -243,10 +257,12 @@ class AlunoController
             }
         }
 
+        echo $prova_rec["id_prova"];
         if($prova_feita == null){
             $status = "Fez só a recuperação";
             AlunoModel::Inserir_dados_prova_rec($prova_rec);
             AlunoModel::Inserir_dados_prova($prova_rec,$status);
+            AlunoModel::SetRecAluno($prova_rec["id_prova"],$prova_rec["ra"]);
             $_SESSION["PopUp_inserir_gabarito_professor"] = True;
             header("location: aluno_home");
             exit();
@@ -258,7 +274,7 @@ class AlunoController
                 $status = "Recuperação: mesma nota da 1º prova";
                 AlunoModel::Inserir_dados_prova_rec($prova_rec);
                 AlunoModel::UpdateStatusAluno($prova_rec["ra"],$prova_rec["id_prova"],$status);
-                AlunoModel::SetRecAluno($prova["id_prova"],$prova["ra"]);
+                AlunoModel::SetRecAluno($prova_feita["id_prova"],$prova["ra"]);
                 $_SESSION["PopUp_inserir_gabarito_professor"] = True;
                 header("location: aluno_home");
                 exit();

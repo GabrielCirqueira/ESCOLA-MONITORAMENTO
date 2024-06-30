@@ -10,7 +10,9 @@
             </div>
             <input type="submit" value="ENVIAR" >
         </form><br>
-        <a class="Botao-voltar-lobby" href="ADM">Voltar</a>
+        <a class="Botao-voltar-lobby" href="ADM"><i class="fas fa-arrow-left" ></i></a>
+
+ 
     </div>
 
 </main>

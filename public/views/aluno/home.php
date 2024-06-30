@@ -156,6 +156,8 @@
     <?php
     if ($data["provas_feitas"] != null) {
         foreach ($data["provas_feitas"] as $prova) { ?>
+
+
             <div class="prova-pendente">
                 <div class="linha-vertical-campo-prova " style="background-color:green"></div>
                 <div class="conteudo-prova">
@@ -195,15 +197,30 @@
                         $gabarito_professor = [];
                         $gabarito_aluno = [];
 
-                        foreach ($data["provas"] as $P) {
-                            if ($P["id"] == $prova["id_prova"]) {
-                                foreach (explode(";", $P["gabarito"]) as $gabarito) {
-                                    list($questao, $resposta) = explode(",", $gabarito);
-                                    $gabarito_professor[$questao] = $resposta;
-                                    $liberado = $P["liberado"];
+                        if($prova["status"] == "Fez só a recuperação" || $prova["status"] == "Recuperação: nota maior que a 1º prova"){
+                            foreach ($data["rec"] as $PP) {
+                                if ($PP["id_prova"] == $prova["id_prova"]) {
+                                    foreach (explode(";", $PP["gabarito"]) as $gabarito) {
+                                        list($questao, $resposta) = explode(",", $gabarito);
+                                        $gabarito_professor[$questao] = $resposta;
+                                        $liberado = $PP["liberado"];
+                                    }
+                                }
+                            }
+                        }else{
+                            foreach ($data["provas"] as $P) {
+                                if ($P["id"] == $prova["id_prova"]) {
+                                    foreach (explode(";", $P["gabarito"]) as $gabarito) {
+                                        list($questao, $resposta) = explode(",", $gabarito);
+                                        $gabarito_professor[$questao] = $resposta;
+                                        $liberado = $P["liberado"];
+                                    }
                                 }
                             }
                         }
+
+
+                        
 
                         foreach (explode(";", $prova["perguntas_respostas"]) as $resposta) {
                             list($questao, $resposta) = explode(",", $resposta);
