@@ -1022,7 +1022,6 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
             $_SESSION["GABARITO_REC"] = true;
             MainController::Templates("public/views/professor/criar_gabarito_rec_descritores.php","PROFESSOR",NULL);
         }
-
     }
 
     public static function processar_descritores_rec(){
