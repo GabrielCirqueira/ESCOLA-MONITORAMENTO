@@ -1025,3 +1025,22 @@ input:checked + .slider:before {
   border: 1px solid black;
   border-radius: 0px;
 }
+
+.area_descritores_rec{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.area_descritores_rec input[type="text"]{
+  width: 150px;
+  outline: none;
+  border: none;
+}
+
+.area_descritores_rec .campos-selecionar-descritores{
+  border: 1px solid gray;
+  padding: 10px;
+  margin: 1px;
+}

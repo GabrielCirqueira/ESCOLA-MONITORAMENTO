@@ -989,24 +989,58 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
     }
 
     public static function inserir_gabarito_rec(){
-        $alunos = implode(";",$_POST["alunos"]);
-        $perguntas = $_POST["qtn-perguntas"];
-        $descritores = $_POST["descritores"];
-        $id_prova = $_SESSION["dados_prova_rec"]["id"];
-        $_SESSION["dados_prova_rec"] = [
-            "id"   => $id_prova,
-            "alunos" => $alunos,
-            "perguntas" => $perguntas,
-            "descritores" => $descritores
-        ];
-        $_SESSION["GABARITO_REC"] = true;
+        
+        if($_POST["alunos"] == null){
+            $_SESSION["popup_not_alunos"] = True;
+            header("location: prova");
+            exit;
+        }
+        
+        $metodo = $_POST["metodo"];
 
-        header("location: criar_gabarito_rec");
-        // echo $alunos;
-        // echo "<pre>";
-        // print_r($_SESSION);
-        // echo "<pre>";
+        if($metodo == "Prova"){
+            $alunos = implode(";",$_POST["alunos"]);
+            $perguntas = $_POST["qtn-perguntas"];
+            $descritores = $_POST["descritores"];
+            $id_prova = $_SESSION["dados_prova_rec"]["id"];
+            $_SESSION["dados_prova_rec"] = [
+                "id"   => $id_prova,
+                "alunos" => $alunos,
+                "perguntas" => $perguntas,
+                "descritores" => $descritores
+            ];
+            $_SESSION["GABARITO_REC"] = true;
+    
+            header("location: criar_gabarito_rec"); 
+        }else{
+            $alunos = implode(";",$_POST["alunos"]);
+            $id_prova = $_SESSION["dados_prova_rec"]["id"];
+            $_SESSION["dados_prova_rec"] = [
+                "id"    => $id_prova,
+                "alunos" => $alunos
+            ];
+            $_SESSION["GABARITO_REC"] = true;
+            MainController::Templates("public/views/professor/criar_gabarito_rec_descritores.php","PROFESSOR",NULL);
+        }
+
     }
+
+    public static function processar_descritores_rec(){
+        $contador = 1;
+        $descritores = [];
+    
+        while(isset($_POST["DESCRITOR_" . $contador])){
+            if(!empty($_POST["DESCRITOR_" . $contador])){
+                $descritores[] = $_POST["DESCRITOR_" . $contador];
+            }
+            $contador++;
+        }
+    
+        echo "<pre>";
+        print_r($descritores);
+        echo "</pre>";
+    }
+    
 
     public static function criar_gabarito_rec(){
         MainController::Templates("public/views/professor/criar_gabarito_rec.php","PROFESSOR",NULL);

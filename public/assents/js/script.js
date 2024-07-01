@@ -219,3 +219,184 @@ function mostarTabela(tabela) {
 
     }
 }
+
+
+function MostrarCaixaProfessor(caixa) {
+    var area = document.getElementById("area_questoes_desc");
+    var inputs = area.querySelectorAll('input, select, textarea');
+    if (caixa == "questao") {
+        area.style.display = 'block';
+        inputs.forEach(input => input.disabled = false);
+    } else {
+        area.style.display = 'none';
+        inputs.forEach(input => input.disabled = true);
+    }
+}
+
+function addNewInput(input) {
+    // Verifica se o campo atual tem algum valor
+    if (input.value.trim() !== "") {
+        // Obtém o índice atual
+        let currentIndex = parseInt(input.parentElement.getAttribute('data-index'));
+        // Obtém o próximo índice
+        let nextIndex = currentIndex + 1;
+        // Verifica se já existe uma caixa de entrada para o próximo índice
+        if (!document.querySelector(`.area_descritores_rec .campos-selecionar-descritores[data-index="${nextIndex}"]`)) {
+            // Cria um novo contêiner de descritores
+            let newContainer = document.createElement('div');
+            newContainer.classList.add('campos-selecionar-descritores');
+            newContainer.setAttribute('data-index', nextIndex);
+
+            // Cria um novo campo de entrada
+            let newInput = document.createElement('input');
+            newInput.type = 'text';
+            newInput.className = 'searchInput';
+            newInput.name = `DESCRITOR_${nextIndex}`;
+            newInput.placeholder = 'DESCRITOR';
+            newInput.setAttribute('oninput', 'addNewInput(this)');
+
+            // Cria um novo container para os descritores
+            let newDescritoresContainer = document.createElement('div');
+            newDescritoresContainer.className = 'descritoresContainer';
+            newDescritoresContainer.setAttribute('data-index', nextIndex);
+
+            // Adiciona o novo campo de entrada e o container ao novo contêiner
+            newContainer.appendChild(newInput);
+            newContainer.appendChild(newDescritoresContainer);
+
+            // Adiciona o novo contêiner à área de descritores recomendados
+            document.querySelector('.area_descritores_rec').appendChild(newContainer);
+
+            // Adiciona o event listener para o novo campo de entrada
+            newInput.addEventListener('input', function() {
+                const inputText = this.value.trim();
+                const index = this.parentElement.getAttribute('data-index');
+                const descritoresContainer = document.querySelector(`.descritoresContainer[data-index="${index}"]`);
+
+                if (inputText.length === 0) {
+                    descritoresContainer.innerHTML = '';
+                    return;
+                }
+
+                fetch('app/config/GetDescritores.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const filteredDescritores = data.filter(descritor => {
+                            return descritor.descritor.toLowerCase().includes(inputText.toLowerCase());
+                        });
+
+                        renderDescritores(filteredDescritores, descritoresContainer);
+                    })
+                    .catch(error => console.error('Erro ao obter descritores:', error));
+            });
+        }
+    }
+}
+
+function renderDescritores(descritores, container) {
+    container.innerHTML = '';
+
+    descritores.forEach(descritor => {
+        const div = document.createElement('div');
+        div.textContent = descritor.descritor;
+        div.classList.add('descritor');
+        div.addEventListener('click', function() {
+            container.previousElementSibling.value = descritor.descritor;
+            container.innerHTML = ''; // Oculta a lista de descritores após a seleção
+        });
+        container.appendChild(div);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInputs = document.querySelectorAll('.searchInput');
+
+    searchInputs.forEach(searchInput => {
+        searchInput.addEventListener('input', function() {
+            const inputText = this.value.trim();
+            const index = this.parentElement.getAttribute('data-index');
+            const descritoresContainer = document.querySelector(`.descritoresContainer[data-index="${index}"]`);
+
+            if (inputText.length === 0) {
+                descritoresContainer.innerHTML = '';
+                return;
+            }
+
+            fetch('app/config/GetDescritores.php')
+                .then(response => response.json())
+                .then(data => {
+                    const filteredDescritores = data.filter(descritor => {
+                        return descritor.descritor.toLowerCase().includes(inputText.toLowerCase());
+                    });
+
+                    renderDescritores(filteredDescritores, descritoresContainer);
+                })
+                .catch(error => console.error('Erro ao obter descritores:', error));
+        });
+    });
+
+    document.addEventListener('click', function(event) {
+        const clickedElement = event.target;
+
+        if (!clickedElement.classList.contains('searchInput') && !clickedElement.classList.contains('descritor')) {
+            const allDescritoresContainers = document.querySelectorAll('.descritoresContainer');
+            allDescritoresContainers.forEach(container => {
+                container.innerHTML = ''; // Oculta todas as listas de descritores
+            });
+        }
+    });
+});
+
+function renderDescritores(descritores, container) {
+    container.innerHTML = '';
+
+    descritores.forEach(descritor => {
+        const div = document.createElement('div');
+        div.textContent = descritor.descritor;
+        div.classList.add('descritor');
+        div.addEventListener('click', function() {
+            container.previousElementSibling.value = descritor.descritor;
+            container.innerHTML = ''; // Oculta a lista de descritores após a seleção
+        });
+        container.appendChild(div);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInputs = document.querySelectorAll('.searchInput');
+
+    searchInputs.forEach(searchInput => {
+        searchInput.addEventListener('input', function() {
+            const inputText = this.value.trim();
+            const index = this.parentElement.getAttribute('data-index');
+            const descritoresContainer = document.querySelector(`.descritoresContainer[data-index="${index}"]`);
+
+            if (inputText.length === 0) {
+                descritoresContainer.innerHTML = '';
+                return;
+            }
+
+            fetch('app/config/GetDescritores.php')
+                .then(response => response.json())
+                .then(data => {
+                    const filteredDescritores = data.filter(descritor => {
+                        return descritor.descritor.toLowerCase().includes(inputText.toLowerCase());
+                    });
+
+                    renderDescritores(filteredDescritores, descritoresContainer);
+                })
+                .catch(error => console.error('Erro ao obter descritores:', error));
+        });
+    });
+
+    document.addEventListener('click', function(event) {
+        const clickedElement = event.target;
+
+        if (!clickedElement.classList.contains('searchInput') && !clickedElement.classList.contains('descritor')) {
+            const allDescritoresContainers = document.querySelectorAll('.descritoresContainer');
+            allDescritoresContainers.forEach(container => {
+                container.innerHTML = ''; // Oculta todas as listas de descritores
+            });
+        }
+    });
+});

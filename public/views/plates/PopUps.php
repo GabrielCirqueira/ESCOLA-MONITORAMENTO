@@ -70,6 +70,20 @@
         </div>
     </div>
 
+    <div id="popup_not_alunos" class="PopUp-sobreposicao">
+        <div class="conteudo-popup">
+            <h2> NENHUM ALUNO SELECIONADO!</h2>
+
+            <div class="uncheck">
+                <div class="linha-unchecked-1"></div>
+                <div class="linha-unchecked-2"></div>
+            </div>
+
+            <p>Por favor, insira pelo menos um <br> aluno para proseeguir.</p>
+            <button onclick="Fechar_PopUp('popup_not_alunos')" class="Fechar-Popup">FECHAR</button>
+        </div>
+    </div>
+
     <div id="PopUp_add_professor_true" class="PopUp-sobreposicao">
         <div class="conteudo-popup">
             <h2>SUCESSO</h2>

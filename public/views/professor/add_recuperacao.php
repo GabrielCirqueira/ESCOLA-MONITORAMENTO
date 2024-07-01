@@ -22,6 +22,17 @@
 
         <div class="professor-descritores">
                 
+                <H3>MODO DE RECUPERAÇÃO:</H3>
+
+                <div class="professor-descritores-marcar" >
+                    <div><input type="radio" required name="metodo" onclick="MostrarCaixaProfessor('questao')" value="Prova" checked ><span>Prova</span></div>
+                    <div><input type="radio" required name="metodo" onclick="MostrarCaixaProfessor('trabalho')"  value="pesquisa"><span>Trabalho/pesquisa</span></div>
+                </div>
+            </div>
+
+            <div id="area_questoes_desc">
+            <div class="professor-descritores">
+                
                 <H3>DESCRITORES:</H3>
 
                 <div class="professor-descritores-marcar" >
@@ -35,13 +46,16 @@
                     <label for="quantidade-perguntas">Quantidade de Questões:</label>
                     <input name="qtn-perguntas" required  id="quantidade-perguntas" type="number">
                 </div>
-
+            </div>
             </div>
 
 
+ 
 
 
 
+
+<div><br><br><br></div>
             <center>
                 <input type="submit" value="Criar Gabarito de Recuperação" class="botao-form-enviar">
             </center>

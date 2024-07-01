@@ -21,7 +21,7 @@ Backup::runBackup();
 
 session_start();
 
-if(!isset($_SESSION["PopUp_PRF_Senha"])){
+if(!isset($_SESSION["popup_not_alunos"])){
 
     $_SESSION["PopUp_professor"] = False;
     $_SESSION["popup_not_gestor"] = False;
@@ -36,6 +36,7 @@ if(!isset($_SESSION["PopUp_PRF_Senha"])){
     $_SESSION["PAG_VOLTAR"] = False;
     $_SESSION["PopUp_Excluir_prova"] = False;
     $_SESSION["PopUp_PRF_Senha"] = False;
+    $_SESSION["popup_not_alunos"] = False;
     
     $_SESSION["GESTOR"] = False;
     $_SESSION["ALUNO"] = False;
@@ -84,6 +85,7 @@ $rotas = [
     "inserir_gabarito_rec"          => ProfessorController::class,
     "criar_gabarito_rec"            => ProfessorController::class,
     "criar_gabarito_rec_resp"       => ProfessorController::class,
+    "processar_descritores_rec"     => ProfessorController::class,
     "prova_recuperacao"             => ProfessorController::class
 ];
 
@@ -187,4 +189,9 @@ if($_SESSION["PopUp_inserir_prova"] == True){
 if($_SESSION["PopUp_Excluir_prova"] == True){
     echo "<script> Mostrar_PopUp('PopUp_Excluir_prova')</script>";
     $_SESSION["PopUp_Excluir_prova"] = False;
+}
+
+if($_SESSION["popup_not_alunos"] == True){
+    echo "<script> Mostrar_PopUp('popup_not_alunos')</script>";
+    $_SESSION["popup_not_alunos"] = False;
 }
