@@ -79,6 +79,7 @@
         if ($data["rec"] != null) {
             foreach ($data["rec"] as $provaa) {  
                 if(!isset($provaa["statuss"])){
+                    if($provaa["metodo"] != "PESQUISA"){
                 ?>
 
 
@@ -129,7 +130,7 @@
                 </div>
 
         <?php
-            }}
+            }}}
         }
     }
 

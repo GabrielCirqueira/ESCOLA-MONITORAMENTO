@@ -185,8 +185,28 @@ class ProfessorModel{
     
         return $query;
     }
-    
 
+    public static function inserir_gabarito_recuperacao_pesquisa($dados){
+        $sql = "INSERT INTO gabarito_professores_recuperacao
+        (id_prova, alunos, nome_professor, disciplina, nome_prova, valor, QNT_perguntas, descritores, data_prova_rec, metodo)
+        VALUES (:id_prova, :alunos, :nome_professor, :disciplina, :nome_prova, :valor, :QNT_perguntas, :descritores, :data_prova_rec, :metodo)";
+        
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":id_prova", $dados["id_prova"]);
+        $query->bindValue(":alunos", $dados["alunos"]);
+        $query->bindValue(":nome_professor", $dados["nome_professor"]);
+        $query->bindValue(":disciplina", $dados["disciplina"]);
+        $query->bindValue(":nome_prova", $dados["nome_prova"]);
+        $query->bindValue(":valor", $dados["valor"]);
+        $query->bindValue(":QNT_perguntas", $dados["QNT_perguntas"]);
+        $query->bindValue(":descritores", $dados["descritores"]);
+        $query->bindValue(":data_prova_rec", $dados["data_prova_rec"]);
+        $query->bindValue(":metodo", $dados["metodo"]);
+        $query->execute();
+    
+        return $query;
+    }
+    
     public static function ExcluirProvaAluno($id){
         $sql = "DELETE FROM gabarito_alunos WHERE id_prova = :id";
 

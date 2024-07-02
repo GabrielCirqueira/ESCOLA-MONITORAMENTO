@@ -200,6 +200,12 @@ class ProfessorController{
             foreach ($provas_professores as $prova) {
                 if ($prova["id"] == $id_prova) {
                     $provaa = $prova;
+                    $_SESSION["DadosProvaRecuperacao"] = [
+                        "disciplina" => $prova["disciplina"],
+                        "nome_prova" => $prova["nome_prova"],
+                        "valor" => $prova["valor"],
+
+                    ];
                     $turmas = $prova["turmas"];
                     $nome_prova = $prova["nome_prova"];
                     $liberado = $prova["liberado"] == "SIM" ? true : false;
@@ -1027,6 +1033,8 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
     public static function processar_descritores_rec(){
         $contador = 1;
         $descritores = [];
+        $dataAtual = new DateTime();
+        $dataFormatada = $dataAtual->format('Y-m-d');
     
         while(isset($_POST["DESCRITOR_" . $contador])){
             if(!empty($_POST["DESCRITOR_" . $contador])){
@@ -1034,10 +1042,36 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
             }
             $contador++;
         }
-    
-        echo "<pre>";
-        print_r($descritores);
-        echo "</pre>";
+
+        $DescritoresFormat = [];
+        
+        foreach($descritores as $indice => $descritor){
+            $DescritoresFormat[] = $indice + 1 . "," . $descritor;
+        }
+
+        $dados = [
+            "id_prova" => $_SESSION["dados_prova_rec"]["id"],
+            "alunos" => $_SESSION["dados_prova_rec"]["alunos"],
+            "nome_professor"  => $_SESSION["nome_professor"], 
+            "disciplina"   => $_SESSION["DadosProvaRecuperacao"]["disciplina"],
+            "nome_prova"   => $_SESSION["DadosProvaRecuperacao"]["nome_prova"],
+            "valor"   => $_SESSION["DadosProvaRecuperacao"]["valor"],
+            "QNT_perguntas" => $indice + 1,
+            "descritores"  => implode(";",$DescritoresFormat),
+            "data_prova_rec" => $dataFormatada,
+            "metodo"    => "PESQUISA"
+
+        ];
+ 
+        $consulta = ProfessorModel::inserir_gabarito_recuperacao_pesquisa($dados);
+
+
+        if($consulta){
+            $_SESSION["PopUp_inserir_prova"] = True;
+            header("location: ver_provas");
+            exit();
+        }
+
     }
     
 
