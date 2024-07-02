@@ -78,7 +78,7 @@
 
         if ($data["rec"] != null) {
             foreach ($data["rec"] as $provaa) {  
-                if(!isset($provaa["statuss"])){
+                if(!isset($provaa["statuss"])){ 
                 ?>
 
 
@@ -159,9 +159,9 @@
 
 
             <div class="prova-pendente">
-                <div class="linha-vertical-campo-prova " style="background-color:green"></div>
+                <div class="linha-vertical-campo-prova " style="background-color:#39C000"></div>
                 <div class="conteudo-prova">
-                    <i class="fas fa-check fa-4x" style="color:green"></i>
+                    <i class="fas fa-check fa-4x" style="color:#39C000"></i>
 
                     <div class="prova-detalhes">
                         <center>

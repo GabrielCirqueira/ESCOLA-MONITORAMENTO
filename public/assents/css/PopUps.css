@@ -82,15 +82,17 @@
     }
 
     .Fechar-Popup {
-      background-color: rgb(25, 205, 215);
+      background-color: rgb(17, 179, 187);
       width: 70%;
       height: 45px;
       border: none;
+      border-radius: 4px;
       margin: 20px auto;
+      transition: 0.5s ease-in-out;
     }
 
     .Fechar-Popup:hover {
-      background-color: rgb(21, 175, 183);
+      background-color: rgb(20, 154, 161);
       cursor: pointer;
     }
 

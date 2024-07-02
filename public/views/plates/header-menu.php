@@ -94,7 +94,7 @@
       </div>
 
       <div class="menu-lateral-main-footer">
-      <a href="http://wa.me/+5527996121313" target="_blank" >Gabriel Cirqueira</a>
+      <a href="https://linktr.ee/GabrielCirqueira" target="_blank" >Gabriel Cirqueira</a>
       <i class="fas fa-laptop-code"></i>
       </div>
     </div>
