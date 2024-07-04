@@ -10,7 +10,7 @@
 
     <div class="img-tile">
 
-      <img src="public/assents/img/imagem3.png" alt="">
+      <img src="https://telegra.ph/file/daa4ccd71a49aae9a7cc9.png" alt="">
       <h1 class="header__title">ESCOLA NSL</h1>
       </a>
 
@@ -44,7 +44,7 @@
       <div class="menu-lateral-main-header">
 
         <div>
-          <img src="public/assents/img/imagem3.png" alt="BRAZÃO NSL">
+          <img src="https://telegra.ph/file/daa4ccd71a49aae9a7cc9.png" alt="BRAZÃO NSL">
         </div>
 
         <h2>Perfil</h2>
@@ -107,7 +107,7 @@
       <div class="menu-lateral-main-header">
 
         <div>
-          <img src="public/assents/img/imagem3.png" alt="BRAZÃO NSL">
+          <img src="https://telegra.ph/file/daa4ccd71a49aae9a7cc9.png" alt="BRAZÃO NSL">
         </div>
 
         <h2>MENU</h2>

@@ -4,8 +4,6 @@ namespace app\config;
 
 use PDO;
 
- 
-
     class Database{
 
         private $host;
@@ -16,9 +14,9 @@ use PDO;
     
         private function __construct() {
             $this->host = $_ENV["DB_HOST"];
-            $this->db =   $_ENV['DB_DATABASE'];
+            $this->db   = $_ENV['DB_DATABASE'];
             $this->user = $_ENV['DB_USER'];
-            $this->pass = $_ENV['DB_PASSWORD'];
+            $this->pass = $_ENV['DB_PASSWORD']; 
             $this->port = $_ENV['DB_PORT'];
         }
 

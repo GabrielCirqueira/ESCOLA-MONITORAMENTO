@@ -22,7 +22,7 @@ class GestorController{
         }
     }
     public static function gestor_home() {
-        if (isset($_SESSION["GESTOR"])) {
+        if ($_SESSION["GESTOR"]) {
 
             $btnGeral = isset($_POST["geral"]) || !isset($_POST["filtro"]);
             $dados = null;
