@@ -135,6 +135,12 @@
             <hr>
             <a class="button-menu" href="relatorio_professor">RELATÓRIOS</a>
 
+          <?php }else if($user == "ADM"){?>
+          
+            <a class="button-menu" href="adm_home">TELA INICIAL</a>
+            <hr>
+            <a class="button-menu" href="backups">BACKUPS</a>
+
           <?php }?>
         </div>
 

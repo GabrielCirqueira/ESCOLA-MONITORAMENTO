@@ -46,6 +46,7 @@ if(!isset($_SESSION["PopUp_PRF_Senha"])){
 $rotas = [ 
     "login_adm_verifica"            => ADMcontroller::class,
     "adm_home"                      => ADMcontroller::class,
+    "backups"                       => ADMcontroller::class,
     "adicionar_professor"           => ADMcontroller::class,
     "adm_info"                      => ADMcontroller::class,
     "adicionar_materia"             => ADMcontroller::class,

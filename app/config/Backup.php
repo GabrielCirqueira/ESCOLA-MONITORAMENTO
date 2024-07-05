@@ -8,6 +8,7 @@ class Backup {
 
     private static $backupDir = __DIR__ . '/backups';
     private static $logFile = __DIR__ . '/backup_log.txt';
+    private static $errorLogFile = __DIR__ . '/backup_error_log.txt';
 
     public static function loadEnv() {
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
@@ -20,7 +21,8 @@ class Backup {
             'db'   =>   $_ENV['DB_DATABASE'],
             'user' =>   $_ENV['DB_USER'],
             'pass' =>   $_ENV['DB_PASSWORD'],
-            'port' =>   $_ENV['DB_PORT']
+            'port' =>   $_ENV['DB_PORT'],
+            'socket' => $_ENV['DB_SOCKET']
         ];
     }
 
@@ -43,6 +45,10 @@ class Backup {
         file_put_contents(self::$logFile, date('Y-m-d H:i'));
     }
 
+    private static function logError($message) {
+        file_put_contents(self::$errorLogFile, date('Y-m-d H:i') . " - $message\n", FILE_APPEND);
+    }
+
     private static function createIndexFile() {
         $indexFilePath = self::$backupDir . '/index.php';
         $indexFileContent = "<?php\n\nheader(\"location: ../../../\");";
@@ -60,9 +66,16 @@ class Backup {
                 mkdir(self::$backupDir, 0755, true);
                 self::createIndexFile();
             }
+            
 
-            $mysqldumpPath = 'C:/xampp/mysql/bin/mysqldump.exe';
-            $command = "$mysqldumpPath --host={$env['host']} --port={$env['port']} --user={$env['user']} --password={$env['pass']} {$env['db']} > $backupFile";
+            if($env['socket'] == "C:/xampp/mysql/bin/mysqldump.exe"){
+                $mysqldumpPath = 'C:/xampp/mysql/bin/mysqldump.exe';
+                $command = "$mysqldumpPath --host={$env['host']} --port={$env['port']} --user={$env['user']} --password={$env['pass']} {$env['db']} > $backupFile";       
+
+            }else{
+                $mysqldumpPath = 'mysqldump';
+                $command = "$mysqldumpPath --host={$env['host']} --port={$env['port']} --user={$env['user']} --password={$env['pass']} --socket={$env['socket']} {$env['db']} > $backupFile";
+            }
 
             exec($command . ' 2>&1', $output, $returnVar);
 
@@ -72,7 +85,10 @@ class Backup {
                 if (file_exists($backupFile)) {
                     unlink($backupFile);
                 }
+                self::logError("Backup failed. Command: $command. Output: " . implode("\n", $output));
             }
         } 
     }
 }
+
+?>

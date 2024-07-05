@@ -9,7 +9,7 @@ class ADMcontroller{
 
     public static function login_adm_verifica(){  
         
-        if($_POST["campo_adm"] == $_ENV["SENHA_GESTOR"]){
+        if($_POST["campo_adm"] == $_ENV["SENHA_ADM"]){
             $_SESSION["ADM"] = True;
             header("location:adm_home");
         }else{ 
@@ -18,9 +18,66 @@ class ADMcontroller{
             exit;
         }
     }
+
+    public static function backups(){
+        if($_SESSION["ADM"]){
+            $diretorio = 'app/config/backups/';
+            $arquivos = scandir($diretorio);
+            $dados = [];
+    
+            foreach ($arquivos as $arquivo) {
+                if ($arquivo != "index.php" && preg_match('/(\d{4}-\d{2}-\d{2})__(\d{2})-(\d{2})/', $arquivo, $matches)) {
+                    $data = isset($matches[1]) ? $matches[1] : 'Data não disponível';
+                    $hora = isset($matches[2]) ? $matches[2] : 'Hora não disponível';
+                    $minuto = isset($matches[3]) ? $matches[3] : 'Minuto não disponível';
+    
+                    // Formatação da data no formato brasileiro
+                    $data_formatada = date('d/m/Y', strtotime($data));
+    
+                    // Caminho completo para o arquivo
+                    $caminho_arquivo = $diretorio . $arquivo;
+    
+                    // Obtém o timestamp da data e hora para ordenação
+                    $timestamp = strtotime("$data $hora:$minuto:00");
+    
+                    // Obtém o tamanho do arquivo em bytes
+                    $tamanho_arquivo_bytes = filesize($caminho_arquivo);
+    
+                    // Função interna para formatar o tamanho do arquivo
+                    $tamanho_formatado = '';
+                    $unidades = array('B', 'KB', 'MB', 'GB', 'TB');
+                    for ($i = 0; $tamanho_arquivo_bytes >= 1024 && $i < 4; $i++) {
+                        $tamanho_arquivo_bytes /= 1024;
+                    }
+                    $tamanho_formatado = round($tamanho_arquivo_bytes, 2) . ' ' . $unidades[$i];
+    
+                    $dados[] = [
+                        'data' => $data_formatada,
+                        'hora' => $hora,
+                        'minuto' => $minuto,
+                        'tamanho' => $tamanho_formatado,
+                        'arquivo' => $arquivo,
+                        'timestamp' => $timestamp, // Adiciona o timestamp aos dados
+                    ];
+                }
+            }
+    
+            // Ordena os dados pela chave 'timestamp' de forma decrescente
+            usort($dados, function($a, $b) {
+                return $b['timestamp'] - $a['timestamp'];
+            });
+    
+            // Passa os dados ordenados para a view
+            MainController::Templates("public/views/adm/backups.php", "ADM", $dados);
+        } else {
+            header("location: ADM");
+        }
+    }
+    
+
     public static function adm_home(){
         if(MainController::Verificar_sessao("ADM")){
-            MainController::Templates("public/views/adm/home.php");
+            MainController::Templates("public/views/adm/home.php","ADM",null);
         }else{
             header("location: home");
         }

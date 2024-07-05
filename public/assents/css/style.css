@@ -1025,3 +1025,54 @@ input:checked + .slider:before {
   border: 1px solid black;
   border-radius: 0px;
 }
+
+
+/* Centraliza a área de administração de backups */
+.area-adm-backups {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.area-adm-backups table {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1em;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.area-adm-backups table thead tr {
+  background-color: #0f828e;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.area-adm-backups table th,
+.area-adm-backups table td {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.area-adm-backups table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.area-adm-backups table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.area-adm-backups table a {
+  color: #0f828e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.area-adm-backups table a:hover {
+  text-decoration: underline;
+}
