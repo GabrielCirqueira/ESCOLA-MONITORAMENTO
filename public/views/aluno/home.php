@@ -195,7 +195,7 @@
                     <table>
                         <?php
                         $contador = 1;
-                        $alternativas = ["A", "B", "C", "D", "E"];
+                        $alternativas = ["A", "B", "C", "D", ];
                         $gabarito_professor = [];
                         $gabarito_aluno = [];
 
@@ -235,15 +235,25 @@
                                 <?php
                                 $contador2 = 0;
                                 $resposta_correta = $gabarito_professor[$contador];
+
                                 $resposta_aluno = $gabarito_aluno[$contador];
 
                                 if ($liberado != null) {
-                                    while ($contador2 < 5) {
+                                    while ($contador2 < 4) {
                                         $alternativa_atual = $alternativas[$contador2];
                                         $classe = "";
+                                            // echo $resposta_aluno;
+                                            // echo "<br>"; 
+                                        if ($resposta_aluno == $alternativa_atual){
+ 
+                                            
+                                            if($resposta_aluno == $resposta_correta || $resposta_correta == "null"){
+                                                $classe = "alternativa-marcada-true";
 
-                                        if ($resposta_aluno == $alternativa_atual) {
-                                            $classe = ($resposta_aluno == $resposta_correta) ? "alternativa-marcada-true" : "alternativa-marcada-false";
+                                            }else{
+                                                $classe = "alternativa-marcada-false";
+
+                                            } 
                                         } elseif ($resposta_correta == $alternativa_atual && $resposta_aluno != $resposta_correta) {
                                             $classe = "alternativa-marcada-true-gray";
                                         }

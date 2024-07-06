@@ -117,7 +117,7 @@ if($data["descritores_alunos"] != NULL){
     </div>
     
     <?php if($data["descritores_alunos_rec"] != NULL){ ?>
-        <div id="botoes-alternar-prova" class=" hidden" >
+    <div id="botoes-alternar-prova" class=" hidden" >
         <button onclick="mostarTabela('DESCRITORES')" >1º PROVA</button>
         <button onclick="mostarTabela('REC')" >RECUPERAÇÃO</button>
     </div>
@@ -195,6 +195,12 @@ if($data["descritores_alunos"] != NULL){
         } ?>
         </tbody>
     </table>
+    <?php }else{ ?>
+        <div class="area_button_tabelas">
+        <button onclick="mostarTabela('RESPOSTAS')" >RESPOSTAS</button>
+        <button onclick="mostarTabela('NOTAS')" >NOTAS ALUNOS</button>
+    </div>
+
     <?php } ?>
 
     <table id="table-notas" data-aos="fade-up" class="tabela-prova-aluno">

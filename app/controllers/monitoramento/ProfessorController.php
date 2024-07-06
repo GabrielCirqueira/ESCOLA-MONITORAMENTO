@@ -419,8 +419,8 @@ class ProfessorController{
             if($professor["id"] == $id_prova){
                 $turmas = explode(",", $professor["turmas"]); 
                 $nome_prova = $professor["nome_prova"];
-                $descritores = explode(";",$professor["descritores"]);
                 if($professor["descritores"] != NULL){
+                $descritores = explode(";",$professor["descritores"]);
                     $status_desc = True;
                 }else{
                     $status_desc = False;
@@ -861,8 +861,7 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
             $id_prova = $_SESSION["ID_PROVA_EDITAR"];
             $numero_perguntas = $_POST['numero_perguntas'];
             $descritor_flag = $_POST['descritor'];
-    
-            // Recuperar descritores e gabarito do formulário
+
             $gabarito_prova = [];
             $descritores_prova = [];
             
@@ -887,11 +886,9 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
 
             ProfessorModel::atualizar_gabarito_professor($novo_gabarito_professor);
       
-                // Recuperar todas as provas feitas por alunos
                 $provas_alunos = ProfessorModel::GetProvasFeitasbyID($id_prova);
     
                 foreach ($provas_alunos as $prova_aluno) {
-                    // Recalcular os resultados para cada aluno
                     $gabarito_professor = explode(";", $novo_gabarito_professor["gabarito"]);
                     $gabarito_aluno = explode(";", $prova_aluno["perguntas_respostas"]);
                     $descritores_questoes = explode(";", $prova_aluno["descritores"]);
@@ -903,7 +900,8 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
                     $descritores_errados = [];
     
                     foreach ($gabarito_professor as $index => $resposta_correta) {
-                        if ($gabarito_aluno[$index] == $resposta_correta) {
+                        
+                         if ($gabarito_aluno[$index] == $resposta_correta || strpos($resposta_correta,"null") !== FALSE) {
                             $acertos_aluno++;
                             $perguntas_certas[] = $gabarito_aluno[$index];
                             $descritores_corretos[] = $descritores_questoes[$index];
@@ -917,6 +915,7 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
                     $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
     
                     $dados_atualizacao = [
+                        "ra" => $prova_aluno["ra"],
                         "ID" => $prova_aluno["id"],
                         "ID_prova" => $id_prova,
                         "acertos" => $acertos_aluno,
@@ -928,8 +927,9 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
                         "descritores_errados" => implode(";", $descritores_errados),
                         "pontos_prova" => $_POST['valor_prova']
                     ];
-  
+ 
                     ProfessorModel::atualizar_gabarito_aluno($dados_atualizacao);
+                    ProfessorModel::atualizar_gabarito_aluno_primeira($dados_atualizacao);
                 }
     
                 $_SESSION["PopUp_inserir_prova"] = True;
@@ -1078,3 +1078,4 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
 
 
 }
+

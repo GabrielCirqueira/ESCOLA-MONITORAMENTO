@@ -1076,3 +1076,10 @@ input:checked + .slider:before {
 .area-adm-backups table a:hover {
   text-decoration: underline;
 }
+
+.professor-editar-gabarito table td div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}

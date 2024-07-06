@@ -1,4 +1,5 @@
 <main class="main-home-professor"> 
+            <center>
     <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
     <h1>EDITAR GABARITO</h1>
     <h2><?= $data["nome"] ?></h2>
@@ -42,18 +43,27 @@
                         </td>
                         <?php } ?>
 
-                        <td><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},A" ?>" <?php echo $resposta == 'A' ? 'checked' : ''; ?>><span>A</span></td>
-                        <td><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},B" ?>" <?php echo $resposta == 'B' ? 'checked' : ''; ?>><span>B</span></td>
-                        <td><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},C" ?>" <?php echo $resposta == 'C' ? 'checked' : ''; ?>><span>C</span></td>
-                        <td><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},D" ?>" <?php echo $resposta == 'D' ? 'checked' : ''; ?>><span>D</span></td>
-                        <td><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},E" ?>" <?php echo $resposta == 'E' ? 'checked' : ''; ?>><span>E</span></td>
+                        <td><div><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},A" ?>" <?php echo $resposta == 'A' ? 'checked' : ''; ?>><span>A</span></div></td>
+                        <td><div><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},B" ?>" <?php echo $resposta == 'B' ? 'checked' : ''; ?>><span>B</span></div></td>
+                        <td><div><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},C" ?>" <?php echo $resposta == 'C' ? 'checked' : ''; ?>><span>C</span></div></td>
+                        <td><div><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},D" ?>" <?php echo $resposta == 'D' ? 'checked' : ''; ?>><span>D</span></div></td>
+                        <!-- <td><div><input type="radio" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},E" ?>" <?php echo $resposta == 'E' ? 'checked' : ''; ?>><span>E</span></div></td> -->
+                        
+                        <td style="padding: 13px;border-top: solid 1px white; border-bottom:  solid 1px white;"></td>
+
+                        <td><div><span>anular questão</span><input type="radio" <?php echo $resposta == 'null' ? 'checked' : ''; ?> name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},null" ?>">
+
+                        </di></td>
                     </tr>
                 <?php 
                 $contador++;
                 } ?>
             </table>
+            <br>
+
+            <h3>Ao selecionar a opção “anular questão” ,  a questão<br> será anulada e todos os alunos  que escolheram <br>qualquer alternativa  para essa questão receberão pontuação.</h3>
+       
             <br><br><br>
-            <center>
                 <input type="submit" value="Atualizar gabarito" class="botao-form-enviar">
             </center>
         </form>

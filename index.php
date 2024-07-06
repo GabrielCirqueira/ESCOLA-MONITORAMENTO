@@ -1,5 +1,10 @@
 <?php
 
+ob_start();
+
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 require_once "vendor/autoload.php";
 
 date_default_timezone_set('America/Sao_Paulo'); 
@@ -189,3 +194,5 @@ if($_SESSION["PopUp_Excluir_prova"] == True){
     echo "<script> Mostrar_PopUp('PopUp_Excluir_prova')</script>";
     $_SESSION["PopUp_Excluir_prova"] = False;
 }
+
+ob_end_flush();
