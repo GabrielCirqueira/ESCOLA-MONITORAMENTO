@@ -12,7 +12,7 @@ class ADMcontroller{
         if($_POST["campo_adm"] == $_ENV["SENHA_ADM"]){
             $_SESSION["ADM"] = True;
             header("location:adm_home");
-        }else{ 
+        }else{
             $_SESSION["popup_not_gestor"] = True;
             header("location: login_adm");
             exit;
@@ -31,19 +31,14 @@ class ADMcontroller{
                     $hora = isset($matches[2]) ? $matches[2] : 'Hora não disponível';
                     $minuto = isset($matches[3]) ? $matches[3] : 'Minuto não disponível';
     
-                    // Formatação da data no formato brasileiro
                     $data_formatada = date('d/m/Y', strtotime($data));
     
-                    // Caminho completo para o arquivo
                     $caminho_arquivo = $diretorio . $arquivo;
     
-                    // Obtém o timestamp da data e hora para ordenação
                     $timestamp = strtotime("$data $hora:$minuto:00");
     
-                    // Obtém o tamanho do arquivo em bytes
                     $tamanho_arquivo_bytes = filesize($caminho_arquivo);
     
-                    // Função interna para formatar o tamanho do arquivo
                     $tamanho_formatado = '';
                     $unidades = array('B', 'KB', 'MB', 'GB', 'TB');
                     for ($i = 0; $tamanho_arquivo_bytes >= 1024 && $i < 4; $i++) {
@@ -57,17 +52,15 @@ class ADMcontroller{
                         'minuto' => $minuto,
                         'tamanho' => $tamanho_formatado,
                         'arquivo' => $arquivo,
-                        'timestamp' => $timestamp, // Adiciona o timestamp aos dados
+                        'timestamp' => $timestamp,
                     ];
                 }
             }
-    
-            // Ordena os dados pela chave 'timestamp' de forma decrescente
+
             usort($dados, function($a, $b) {
                 return $b['timestamp'] - $a['timestamp'];
             });
     
-            // Passa os dados ordenados para a view
             MainController::Templates("public/views/adm/backups.php", "ADM", $dados);
         } else {
             header("location: ADM");

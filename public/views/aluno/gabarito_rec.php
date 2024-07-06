@@ -22,7 +22,7 @@
                         <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},B" ?>"><span>B</span></div></td>
                         <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},C" ?>"><span>C</span></div></td>
                         <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},D" ?>"><span>D</span></div></td>
-                        <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},E" ?>"><span>E</span></div></td>
+                        <!-- <td><div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},E" ?>"><span>E</span></div></td> -->
      
 
                     </tr>

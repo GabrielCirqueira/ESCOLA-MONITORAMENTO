@@ -29,7 +29,7 @@
 
                             <td><div class="Ds" ><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},D"?>"><span>D</span></div></td>
                             
-                            <td><div class="Ds" ><input type="radio" name="<?php echo "{$contador}"?>" required value="<?php echo "{$contador},E"?>"><span>E</span></div></td>
+ 
                         </tr>
                     <?php $contador++;
                     } ?>

@@ -1,5 +1,7 @@
 <main class="main-home-aluno">
     <br><br>
+    <h3><?=$_SESSION["nome_aluno"]?></h3>
+    <br>
     <h2>Provas Pendentes:</h2>
 
     <?php

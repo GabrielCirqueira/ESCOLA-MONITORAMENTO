@@ -34,10 +34,10 @@
                         <div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
                                 value="<?php echo "{$contador},D" ?>"><span>D</span></div>
                     </td>
-                    <td>
+                    <!-- <td>
                         <div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
                                 value="<?php echo "{$contador},E" ?>"><span>E</span></div>
-                    </td>
+                    </td> -->
 
 
                 </tr>
