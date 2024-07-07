@@ -19,6 +19,12 @@
     </center>
     
 </div>
+
+<?php if($data["descritores"] == "sim"){  ?>
+    <center><h3>Nos descritores, Não esqueça de colocar a "_" e o <br> prefixo da materia, Exemplo : "D027_M" </h3></center>
+    <center><h4>Não coloque o descritor sem o prefixo </h4></center>
+<?php }?>
+
         <div class="professor-inserir-gabarito">
             <form action="criar_gabarito_respostas" method="post">
                 <input type="hidden" name="numero_perguntas" value="<?php echo $data['perguntas']; ?>">

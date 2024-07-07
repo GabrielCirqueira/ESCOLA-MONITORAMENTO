@@ -172,21 +172,21 @@ if($data["descritores_alunos"] != NULL){
             <tr>
                 <th>ALUNO</th>
                 <?php foreach ($data["descritores_alunos"]["descritores"] as $indice => $value) {
-                    echo "<th><center>{$indice} {$value}</center></th>";
+                    echo "<th style='font-size: 13px;'><center>{$indice} {$value}</center></th>";
                 } ?>
             </tr>
         </thead>
         <tbody>
         <?php foreach ($data["descritores_alunos"]["ALUNOS"] as $aluno => $perguntas ) { ?>
             <tr>
-                <td style="background-color: #B4F1E7;" > <?= $aluno ?> </td>
+                <td  style="background-color: #B4F1E7;font-size: 13px;" > <?= $aluno ?> </td>
                 <?php 
                 foreach($perguntas as $pergunta => $value){?>
                         <?php 
                 if($value == "ACERTOU"){
-                    echo "<td class='alternativa-marcada-true' >$value</td>";
+                    echo "<td style='font-size: 13px;' class='alternativa-marcada-true' >$value</td>";
                 }else{
-                    echo "<td class='alternativa-marcada-false' >$value</td>";
+                    echo "<td style='font-size: 13px;' class='alternativa-marcada-false' >$value</td>";
                 }
                 ?> 
                 <?php }?>
@@ -195,12 +195,45 @@ if($data["descritores_alunos"] != NULL){
         } ?>
         </tbody>
     </table>
-    <?php }else{ ?>
+    <?php } else { ?>
         <div class="area_button_tabelas">
-        <button onclick="mostarTabela('RESPOSTAS')" >RESPOSTAS</button>
-        <button onclick="mostarTabela('NOTAS')" >NOTAS ALUNOS</button>
-    </div>
+            <button onclick="mostarTabela('RESPOSTAS')">RESPOSTAS</button>
+            <button onclick="mostarTabela('NOTAS')">NOTAS ALUNOS</button>
+        </div>
 
+        <table id="table-respostas" class="tabela-prova-aluno hidden">
+            <thead>
+                <tr>
+                    <th>ALUNO</th>
+                    <?php
+                    if (!empty($data["respostas_alunos"])) {
+                        $questoes = array_keys(current($data["respostas_alunos"]));
+                        foreach ($questoes as $questao) {
+                            echo "<th><center>{$questao}</center></th>";
+                        }
+                    }
+                    ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if (!empty($data["respostas_alunos"])) {
+                    foreach ($data["respostas_alunos"] as $aluno => $respostas) {
+                        echo "<tr>";
+                        echo "<td style='background-color: #B4F1E7;'>{$aluno}</td>";
+                        foreach ($respostas as $resposta) {
+                            if ($resposta == "ACERTOU") {
+                                echo "<td class='alternativa-marcada-true'>{$resposta}</td>";
+                            } else {
+                                echo "<td class='alternativa-marcada-false'>{$resposta}</td>";
+                            }
+                        }
+                        echo "</tr>";
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
     <?php } ?>
 
     <table id="table-notas" data-aos="fade-up" class="tabela-prova-aluno">

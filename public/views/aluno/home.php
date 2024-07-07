@@ -287,7 +287,7 @@
                     } else { ?>
                     <br>
                         <span><b>VALOR DA PROVA:</b> <?= $prova["pontos_prova"] ?></span>
-                        <span><b>VALOR OBTIDO:</b> <?= $prova["pontos_aluno"] ?></span>
+                        <span><b>VALOR OBTIDO:</b> <?= number_format($prova["pontos_aluno"],1) ?></span>
                         <span><b>STATUS:</b> <?= $prova["status"] ?></span>
                     <?php
                     } ?>

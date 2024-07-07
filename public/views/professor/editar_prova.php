@@ -15,6 +15,11 @@
                 <?php print_r($data["descritores"])?>
             </pre> -->
 
+            <?php if($data["descritores"] != null){  ?>
+<center><h3>Nos descritores, Não esqueça de colocar a "_" e o <br> prefixo da materia, Exemplo : "D027_M" </h3></center>
+<center><h4>Não coloque o descritor sem o prefixo </h4></center>
+<?php }?>
+
             <input type="hidden" name="numero_perguntas" value="<?php echo $data['perguntas']; ?>">
             <input type="hidden" name="descritor" value="<?php echo isset($data['descritores']) ? 'sim' : 'não'; ?>">
 

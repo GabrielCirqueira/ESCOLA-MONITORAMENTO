@@ -199,23 +199,32 @@ function mostarTabela(tabela) {
     var descritores = document.getElementById("table-descritores-primeira");
     var descritores_rec = document.getElementById("table-descritores-rec");
     var botoes_descritores = document.getElementById("botoes-alternar-prova");
+    var respostas = document.getElementById("table-respostas");
     var notas = document.getElementById("table-notas");
 
-    if (tabela == "DESCRITORES") {
-        descritores.classList.remove("hidden");
-        notas.classList.add("hidden");
-        descritores_rec.classList.add("hidden");
-        botoes_descritores.classList.remove("hidden");
-    } else if(tabela == "NOTAS"){ 
-        notas.classList.remove("hidden");
-        descritores.classList.add("hidden");
-        descritores_rec.classList.add("hidden");
-        botoes_descritores.classList.add("hidden");
-
-    }else{
-        descritores_rec.classList.remove("hidden");
-        notas.classList.add("hidden");
-        descritores.classList.add("hidden");
-
+    if (tabela == "RESPOSTAS") {
+        if (notas) notas.classList.add("hidden");
+        if (respostas) respostas.classList.remove("hidden");
+        if (descritores) descritores.classList.add("hidden");
+        if (descritores_rec) descritores_rec.classList.add("hidden");
+        if (botoes_descritores) botoes_descritores.classList.add("hidden");
+    } else if (tabela == "DESCRITORES") {
+        if (descritores) descritores.classList.remove("hidden");
+        if (notas) notas.classList.add("hidden");
+        if (respostas) respostas.classList.add("hidden");
+        if (descritores_rec) descritores_rec.classList.add("hidden");
+        if (botoes_descritores) botoes_descritores.classList.remove("hidden");
+    } else if (tabela == "NOTAS") {
+        if (notas) notas.classList.remove("hidden");
+        if (descritores) descritores.classList.add("hidden");
+        if (respostas) respostas.classList.add("hidden");
+        if (descritores_rec) descritores_rec.classList.add("hidden");
+        if (botoes_descritores) botoes_descritores.classList.add("hidden");
+    } else {
+        if (descritores_rec) descritores_rec.classList.remove("hidden");
+        if (notas) notas.classList.add("hidden");
+        if (descritores) descritores.classList.add("hidden");
     }
+
+
 }

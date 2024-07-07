@@ -515,76 +515,96 @@ class ProfessorController{
         
 
 
-        $acertos_por_descritor = [];
- 
-        foreach ($alunos_por_turma as $turma => $alunos) {
-            $acertos_por_descritor[$turma] = [];
-        
-            foreach ($alunos as $aluno) {
-                $descritores_certos = explode(';', $aluno['descritores_certos']);
-        
-                foreach ($descritores_certos as $descritor) {
-                    if (!isset($acertos_por_descritor[$turma][$descritor])) {
-                        $acertos_por_descritor[$turma][$descritor] = 1;
-                    } else {
-                        $acertos_por_descritor[$turma][$descritor]++;
+        $media_descritores_geral = [];
+
+        if($status_desc == True){
+            $acertos_por_descritor = [];
+
+            foreach ($alunos_por_turma as $turma => $alunos) {
+                $acertos_por_descritor[$turma] = [];
+            
+                foreach ($alunos as $aluno) {
+                    $descritores_prova = explode(';', $aluno['descritores']);
+                    $descritores_certos = explode(';', $aluno['descritores_certos']);
+            
+                    foreach ($descritores_prova as $descritor) {
+                        if (!isset($acertos_por_descritor[$turma][$descritor])) {
+                            $acertos_por_descritor[$turma][$descritor] = 0;
+                        }
+                    }
+            
+                    foreach ($descritores_certos as $descritor) {
+                        if (!empty($descritor)) {
+                            $acertos_por_descritor[$turma][$descritor]++;
+                        }
                     }
                 }
             }
-        }
-        
-        $percentual_por_descritor = [];
-        
-        foreach ($acertos_por_descritor as $turma => $acertos) {
-            $total_alunos = count($alunos_por_turma[$turma]);
-        
-            foreach ($acertos as $descritor => $quantidade_acertos) {
-                $percentual = ($quantidade_acertos / $total_alunos) * 100;
-                $percentual_por_descritor[$turma][$descritor] = $percentual;
+            
+            $percentual_por_descritor = [];
+            
+            foreach ($acertos_por_descritor as $turma => $acertos) {
+                $total_alunos = count($alunos_por_turma[$turma]);
+            
+                foreach ($acertos as $descritor => $quantidade_acertos) {
+                    $percentual = ($quantidade_acertos / $total_alunos) * 100;
+                    $percentual_por_descritor[$turma][$descritor] = $percentual;
+                }
+            }
+            
+            $percentual_descritores_turmas = [];
+            
+            foreach ($percentual_por_descritor as $turma => $descritores) {
+                $descritores_modificados = [];
+                $percentuais_sem_questao = [];
+            
+                foreach ($descritores as $descritor => $percentual) {
+                    if (!empty($descritor)) {
+                        $nome_descritor = explode(',', $descritor)[1];
+            
+                        if (!isset($percentuais_sem_questao[$nome_descritor])) {
+                            $percentuais_sem_questao[$nome_descritor] = [$percentual];
+                        } else {
+                            $percentuais_sem_questao[$nome_descritor][] = $percentual;
+                        }
+                    }
+                }
+            
+                foreach ($percentuais_sem_questao as $nome_descritor => $percentuais) {
+                    $media_percentual = array_sum($percentuais) / count($percentuais);
+                    $descritores_modificados[$nome_descritor] = $media_percentual;
+                }
+            
+                $percentual_descritores_turmas[$turma] = $descritores_modificados;
+            }
+            
+            
+            foreach ($percentual_descritores_turmas as $turma) {
+                foreach ($turma as $descritor => $percentual) {
+                    if (!isset($media_descritores_geral[$descritor])) {
+                        $media_descritores_geral[$descritor] = 0;
+                    }
+                    $media_descritores_geral[$descritor] += $percentual / count($percentual_descritores_turmas);
+                }
+            }
+            
+            foreach ($media_descritores_geral as $descritor => $percentual) {
+                $media_descritores_geral[$descritor] = MainController::gerarGraficoRosca(number_format($percentual, 1));
             }
         }
+        
+         
+        // print_r($acertos_por_descritor);
+        // print_r($percentual_por_descritor);
+        // print_r($percentual_descritores_turmas);
+        // print_r($media_descritores_geral);
 
-        $percentual_descritores_turmas = [];
 
-foreach ($percentual_por_descritor as $turma => $descritores) {
-    $descritores_modificados = [];
 
-    $percentuais_sem_questao = [];
-
-    foreach ($descritores as $descritor => $percentual) {
-        if (!empty($descritor)) {
-            $nome_descritor = explode(',', $descritor)[1];
-
-            if (!isset($percentuais_sem_questao[$nome_descritor])) {
-                $percentuais_sem_questao[$nome_descritor] = [$percentual];
-            } else {
-                $percentuais_sem_questao[$nome_descritor][] = $percentual;
-            }
-        }
-    }
-
-    foreach ($percentuais_sem_questao as $nome_descritor => $percentuais) {
-        $media_percentual = array_sum($percentuais) / count($percentuais);
-        $descritores_modificados[$nome_descritor] = $media_percentual;
-    }
-
-    $percentual_descritores_turmas[$turma] = $descritores_modificados;
-}
-
-$media_descritores_geral = array();
-
-foreach ($percentual_descritores_turmas as $turma) {
-    foreach ($turma as $descritor => $percentual) {
-        if (!isset($media_descritores_geral[$descritor])) {
-            $media_descritores_geral[$descritor] = 0;
-        }
-        $media_descritores_geral[$descritor] += $percentual / count($percentual_descritores_turmas);
-    }
-}
-
-        foreach($media_descritores_geral as $descritor => $percentual) {
-            $media_descritores_geral[$descritor] = MainController::gerarGraficoRosca(number_format($percentual, 1));
-        }
+        // MainController::pre($acertos_por_descritor);
+        // MainController::pre($percentual_por_descritor);
+        // MainController::pre($percentual_descritores_turmas);
+        // MainController::pre($media_descritores_geral);
         
         $contador_alunos = 0;
 
@@ -707,27 +727,45 @@ foreach ($percentual_descritores_turmas as $turma) {
             return $result;
         });
 
-        if(isset($_POST["filtrar"])){
+        $respostas_por_aluno = [];
+
+        if (isset($_POST["filtrar"])) {
             $turma = $_POST["turma-filtros"];
-            if($turma != "geral"){
-            $provas_filtro = [];
-            foreach($provas_tudo as $prova){
-                    if($prova["turma"] == $turma){
-                        $provas_filtro[] = $prova;
-                    }
-                }
-                
+            if ($turma != "geral") {
+                $provas_filtro = array_filter($provas_tudo, function($prova) use ($turma) {
+                    return $prova["turma"] == $turma;
+                });
                 $provas_tudo = $provas_filtro;
-            }           
+            }
         }
+
+        foreach ($provas_tudo as $prova) {
+            if ($prova["id_prova"] == $id_prova) {
+                $aluno = $prova["aluno"];
+                if (!isset($respostas_por_aluno[$aluno])) {
+                    $respostas_por_aluno[$aluno] = [];
+                }
+
+                $perguntas_respostas = explode(';', $prova["perguntas_respostas"]);
+                foreach ($perguntas_respostas as $pergunta_resposta) {
+                    list($questao, $resposta) = explode(',', $pergunta_resposta);
+                    $respostas_por_aluno[$aluno][$questao] = in_array($pergunta_resposta, explode(';', $prova["perguntas_certas"])) ? "ACERTOU" : "ERROU";
+                }
+            }
+        }
+
+    ksort($respostas_por_aluno);
         
         $descritores_por_aluno_primeira = $status_desc ? self::calcular_descritores_por_aluno($alunos_por_turma_primeira) : null;
         $descritores_por_aluno_rec = $status_desc ? self::calcular_descritores_por_aluno($alunos_por_turma_rec) : null;
 
-        // echo "<br>";
-        // echo "<pre>";
-        // print_r($alunos_por_turma_primeira);
-        // echo "</pre>"; 
+ 
+
+            // echo "<pre>";
+            // print_r($respostas_por_aluno);
+            // echo "</pre>"; 
+            // echo "<br>";
+
 
         $dados = [
             "dados_turma"                   => $dados_turmas,
@@ -738,6 +776,7 @@ foreach ($percentual_descritores_turmas as $turma) {
             "percentual_descritores"        => $media_descritores_geral,
             "grafico_colunas"               => MainController::gerarGraficoColunas($porcentagem_alunos),
             "dados_turma_grafico"           => $dados_turma,
+            "respostas_alunos"              => $respostas_por_aluno,
             "filtro"                        => $filtro_turmas,
             "provas_turma"                  => $provas_tudo,
             "descritores_alunos"            => $descritores_por_aluno_primeira,
@@ -749,7 +788,6 @@ foreach ($percentual_descritores_turmas as $turma) {
         header("location: ADM");
     }
 }
-    
     
 public static function calcular_descritores_por_aluno($alunos_por_turma) {
     $descritores_por_aluno = ["descritores" => [], "ALUNOS" => []];
@@ -773,26 +811,21 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
     foreach ($alunos_para_processar as $aluno) {
         $descritores_aluno = [];
         $descritores_raw = explode(';', $aluno['descritores']);
-        $descritor_index = 1;
-
-        foreach ($descritores_raw as $descritor_raw) {
+        
+        foreach ($descritores_raw as $index => $descritor_raw) {
             $partes_descritor = explode(',', $descritor_raw);
             $descritor = $partes_descritor[1];
-            $descritores_aluno[$descritor_index] = "ERROU";
-            $descritores_por_aluno["descritores"][$descritor_index] = $descritor;
-            $descritor_index++;
+            $descritores_aluno[$index + 1] = "ERROU";
+            $descritores_por_aluno["descritores"][$index + 1] = $descritor;
         }
 
         $descritores_certos = explode(';', $aluno['descritores_certos']);
         foreach ($descritores_certos as $descritor_certos) {
             $partes_certos = explode(',', $descritor_certos);
             if (count($partes_certos) >= 2) {
-                $descritor_certos = $partes_certos[1];
-
-                foreach ($descritores_aluno as $index => $status) {
-                    if ($descritores_por_aluno["descritores"][$index] == $descritor_certos) {
-                        $descritores_aluno[$index] = "ACERTOU";
-                    }
+                $index_certo = array_search($descritor_certos, $descritores_raw) + 1;
+                if ($index_certo !== false) {
+                    $descritores_aluno[$index_certo] = "ACERTOU";
                 }
             }
         }
@@ -801,12 +834,14 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
 
     ksort($descritores_por_aluno["descritores"]);
 
-    if($descritores_por_aluno["ALUNOS"] == NULL){
+    if (empty($descritores_por_aluno["ALUNOS"])) {
         $descritores_por_aluno = NULL;
     }
 
     return $descritores_por_aluno;
 }
+
+
 
 
     public static function calcularPorcentagem($total, $parte){

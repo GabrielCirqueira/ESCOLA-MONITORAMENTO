@@ -58,6 +58,12 @@ class MainController{
         self::Templates("public/views/adm/login.php");
     }
 
+    public static function pre($dados){
+        echo "<pre>";
+        print_r($dados);
+        echo "</pre>";
+    }
+
     public static function gerarGraficoRosca($porcentagem, $corPersonalizada = null) {
         if ($corPersonalizada === null) {
             if ($porcentagem < 10) {

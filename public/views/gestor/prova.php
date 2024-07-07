@@ -170,23 +170,23 @@ if($data["descritores_alunos"] != NULL){
                 </th>
             </tr>
             <tr>
-                <th>ALUNO</th>
+                <th style='font-size: 13px;'>ALUNO</th>
                 <?php foreach ($data["descritores_alunos"]["descritores"] as $indice => $value) {
-                    echo "<th><center>{$indice} {$value}</center></th>";
+                    echo "<th style='font-size: 13px;'><center>{$indice} {$value}</center></th>";
                 } ?>
             </tr>
         </thead>
         <tbody>
         <?php foreach ($data["descritores_alunos"]["ALUNOS"] as $aluno => $perguntas ) { ?>
             <tr>
-                <td style="background-color: #B4F1E7;" > <?= $aluno ?> </td>
+                <td  style="background-color: #B4F1E7;font-size: 13px;" > <?= $aluno ?> </td>
                 <?php 
                 foreach($perguntas as $pergunta => $value){?>
                         <?php 
                 if($value == "ACERTOU"){
-                    echo "<td class='alternativa-marcada-true' >$value</td>";
+                    echo "<td style='font-size: 13px;' class='alternativa-marcada-true' >$value</td>";
                 }else{
-                    echo "<td class='alternativa-marcada-false' >$value</td>";
+                    echo "<td style='font-size: 13px;' class='alternativa-marcada-false' >$value</td>";
                 }
                 ?> 
                 <?php }?>
@@ -195,6 +195,45 @@ if($data["descritores_alunos"] != NULL){
         } ?>
         </tbody>
     </table>
+    <?php } else { ?>
+        <div class="area_button_tabelas">
+            <button onclick="mostarTabela('RESPOSTAS')">RESPOSTAS</button>
+            <button onclick="mostarTabela('NOTAS')">NOTAS ALUNOS</button>
+        </div>
+
+        <table id="table-respostas" class="tabela-prova-aluno hidden">
+            <thead>
+                <tr>
+                    <th>ALUNO</th>
+                    <?php
+                    if (!empty($data["respostas_alunos"])) {
+                        $questoes = array_keys(current($data["respostas_alunos"]));
+                        foreach ($questoes as $questao) {
+                            echo "<th><center>{$questao}</center></th>";
+                        }
+                    }
+                    ?>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if (!empty($data["respostas_alunos"])) {
+                    foreach ($data["respostas_alunos"] as $aluno => $respostas) {
+                        echo "<tr>";
+                        echo "<td style='background-color: #B4F1E7;'>{$aluno}</td>";
+                        foreach ($respostas as $resposta) {
+                            if ($resposta == "ACERTOU") {
+                                echo "<td class='alternativa-marcada-true'>{$resposta}</td>";
+                            } else {
+                                echo "<td class='alternativa-marcada-false'>{$resposta}</td>";
+                            }
+                        }
+                        echo "</tr>";
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
     <?php } ?>
 
     <table id="table-notas" data-aos="fade-up" class="tabela-prova-aluno">
@@ -209,10 +248,10 @@ if($data["descritores_alunos"] != NULL){
             <tr>
                 <th>ALUNO</th>
                 <th>TURMA</th>
+                <th>P. ACERTOS</th> 
                 <th>PONTOS</th>
                 <th>PONTOS REC</th>
-                <!-- <th>ACERTOS</th>
-                <th>P. ACERTOS</th> -->
+                <!-- <th>ACERTOS</th>-->
                 <th>STATUS</th>
             </tr>
         </thead>
@@ -221,9 +260,9 @@ if($data["descritores_alunos"] != NULL){
                 <tr>
                     <td><?= $prova["aluno"] ?></td>
                     <td><?= $prova["turma"] ?></td>
+                    <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 1) ?>%</td> 
                     <td><?= $prova["NotaP"] ?></td>
-                    <!-- <td><?= $prova["acertos"] ?></td>
-                    <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 1) ?>%</td> -->
+                    <!-- <td><?= $prova["acertos"] ?></td>-->
                     <td><?= $prova["notaRec"] ?></td>
                     <td><?= $prova["status"] ?></td>
                 </tr>
