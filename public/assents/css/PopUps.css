@@ -8,6 +8,10 @@
       display: none;
     }
 
+    #Popup_aguardar_gabarito{
+      display: none;
+    }
+
     #PopUp_PRF_Senha{display: none;}
 
     #PopUp_Excluir_prova{
@@ -51,6 +55,10 @@
     }
 
     #PopUp_inserir_gabarito_professor {
+      display: none;
+    }
+
+    #PopUp_Prova_Feita {
       display: none;
     }
 

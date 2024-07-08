@@ -26,7 +26,7 @@ Backup::runBackup();
 
 session_start();
 
-if(!isset($_SESSION["PopUp_PRF_Senha"])){
+if(!isset($_SESSION["Gabarito_aluno"])){
 
     $_SESSION["PopUp_professor"] = False;
     $_SESSION["popup_not_gestor"] = False;
@@ -41,7 +41,11 @@ if(!isset($_SESSION["PopUp_PRF_Senha"])){
     $_SESSION["PAG_VOLTAR"] = False;
     $_SESSION["PopUp_Excluir_prova"] = False;
     $_SESSION["PopUp_PRF_Senha"] = False;
+    $_SESSION["PopUp_Prova_Feita"] = False;
+    $_SESSION["Popup_aguardar_gabarito"] = False;
     
+    $_SESSION["Gabarito_aluno"] = False;
+
     $_SESSION["GESTOR"] = False;
     $_SESSION["ALUNO"] = False;
     $_SESSION["ADM"] = False;
@@ -104,7 +108,6 @@ if(strpos($action,"/") !== False){
     header("location: ../home");
 }
 
-// Verifica se a ação está vazia ou contém uma barra
 if (empty($action) || strpos($action, '/') !== false) {
     $action = "index";
 }
@@ -117,82 +120,29 @@ if(array_key_exists($action, $rotas)) {
     MainController::index();
 }
 
-$popups = array(
-    "PopUp_professor",
-    "PopUp_RA_NaoENC",
-    "popup_not_turmas",
-    "popup_not_gestor",
-    "PopUp_add_professor_true",
-    "PopUp_add_materia_true",
-    "PopUp_excluir_materia_true",
-    "PopUp_inserir_turma",
-    "PopUp_inserir_gabarito_professor",
-    "PopUp_inserir_prova"
-);
 
-if($_SESSION["PopUp_professor"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";
-    $_SESSION["PopUp_professor"] = False;
-}
+$popups = [
+    "PopUp_professor" => "PopUp_PRF_NaoENC",
+    "PopUp_PRF_Senha" => "PopUp_PRF_Senha",
+    "PopUp_RA_NaoENC" => "PopUp_RA_NaoENC",
+    "popup_not_turmas" => "popup_not_turmas",
+    "popup_not_gestor" => "PopUp_PRF_NaoENC",
+    "PopUp_add_professor_true" => "PopUp_add_professor_true",
+    "PopUp_add_materia_true" => "PopUp_add_materia_true",
+    "PopUp_excluir_materia_true" => "PopUp_excluir_materia_true",
+    "PopUp_inserir_turma" => "PopUp_inserir_turma",
+    "PopUp_inserir_gabarito_professor" => "PopUp_inserir_gabarito_professor", 
+    "PopUp_inserir_prova" => "PopUp_inserir_prova",
+    "PopUp_Excluir_prova" => "PopUp_Excluir_prova",
+    "PopUp_Prova_Feita" => "PopUp_Prova_Feita",
+    "Popup_aguardar_gabarito" => "Popup_aguardar_gabarito"
+];
 
-if($_SESSION["PopUp_PRF_Senha"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_PRF_Senha')</script>";
-    $_SESSION["PopUp_PRF_Senha"] = False;
-}
-
-if($_SESSION["PopUp_RA_NaoENC"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_RA_NaoENC')</script>";
-    $_SESSION["PopUp_RA_NaoENC"] = False;
-}
-
-if($_SESSION["popup_not_turmas"] == True){
-    echo "<script> Mostrar_PopUp('popup_not_turmas')</script>";
-    $_SESSION["popup_not_turmas"] = False;
-}
-
-if($_SESSION["popup_not_gestor"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_PRF_NaoENC')</script>";
-    $_SESSION["popup_not_gestor"] = False;
-}
-
-if($_SESSION["PopUp_add_professor_true"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_add_professor_true')</script>";
-    $_SESSION["PopUp_add_professor_true"] = False;
-}
-
-if($_SESSION["PopUp_add_materia_true"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_add_materia_true')</script>";
-    $_SESSION["PopUp_add_materia_true"] = False;
-}
- 
-if($_SESSION["PopUp_excluir_materia_true"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_excluir_materia_true')</script>";
-    $_SESSION["PopUp_excluir_materia_true"] = False;
-}
- 
-if($_SESSION["PopUp_inserir_turma"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_inserir_turma')</script>";
-    $_SESSION["PopUp_inserir_turma"] = False;
-}
-
-if($_SESSION["PopUp_inserir_gabarito_professor"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_inserir_gabarito_professor')</script>";
-    $_SESSION["PopUp_inserir_gabarito_professor"] = False;
-}
-
-if($_SESSION["PopUp_RA_NaoENC"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_RA_NaoENC')</script>";
-    $_SESSION["PopUp_RA_NaoENC"] = False;
-}
-
-if($_SESSION["PopUp_inserir_prova"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_inserir_prova')</script>";
-    $_SESSION["PopUp_inserir_prova"] = False;
-}
-
-if($_SESSION["PopUp_Excluir_prova"] == True){
-    echo "<script> Mostrar_PopUp('PopUp_Excluir_prova')</script>";
-    $_SESSION["PopUp_Excluir_prova"] = False;
+foreach ($popups as $session_var => $popup_name) {
+    if ($_SESSION[$session_var] == True) {
+        echo "<script> Mostrar_PopUp('$popup_name')</script>";
+        $_SESSION[$session_var] = False;
+    }
 }
 
 ob_end_flush();

@@ -108,7 +108,7 @@ td {
 }
 
 .menu-lateral-main-main{
-  height: 80vh;
+  height: 70vh;
   padding: 5px; 
 }
 
@@ -180,11 +180,20 @@ td {
   margin: 0px;
 }
 
-.menu-lateral-main-footer{
+.menu-lateral-main-footer div{
   display: flex;
   gap: 10px;
   align-items: center;
   justify-content: center;
+}
+
+.menu-lateral-main-footer {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
 }
 
 .menu-lateral-main-footer a{
@@ -1083,3 +1092,88 @@ input:checked + .slider:before {
   align-items: center;
   gap: 2px;
 }
+ 
+  
+
+  
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 120px;
+  height: 50px;
+  box-sizing: border-box;
+  background:
+    conic-gradient(from 135deg at top,#0000, #000 1deg 90deg,#0000 91deg) right -20px bottom 8px/18px 9px,
+    linear-gradient(#000 0 0) bottom/100% 8px,
+    #fff;
+  background-repeat: no-repeat;
+  border-bottom: 8px solid #000;
+  position: relative;
+  animation: l7-0 2s infinite linear;
+}
+.loader::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 14px;
+  background: rgb(5, 192, 55);
+  left: 10px;
+  animation: l7-1 2s infinite cubic-bezier(0,200,1,200);
+}
+@keyframes l7-0{
+  100% { background-position: left -20px bottom 8px,bottom}
+}
+@keyframes l7-1{
+  0%,50%   {bottom: 8px}
+  90%,100% {bottom: 8.1px}
+}
+
+
+
+/* HTML: <div class="loader"></div> */
+.loader2 {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid #0000;
+  border-radius: 50%;
+  border-color: #ccc #0000;
+  animation: l16 1s infinite linear;
+}
+.loader2::before,
+.loader2::after {    
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+}
+.loader2::before {
+  border-color: #16b0c1 #0000;
+  animation: inherit; 
+  animation-duration: .5s;
+  animation-direction: reverse;
+}
+.loader2::after {
+  margin: 8px;
+}
+@keyframes l16 { 
+  100%{transform: rotate(1turn)}
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader3 {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 18px;
+  color:#0000;
+  background:linear-gradient(90deg,#000 calc(50% - 0.5ch),#16b0c1 0 calc(50% + 0.5ch),#000 0) right/calc(200% + 1ch) 100%;
+  -webkit-background-clip:text;
+          background-clip:text;
+  animation: l8 2s infinite steps(11);
+}
+.loader3:before {
+  content:"Enviando..."
+}
+@keyframes l8 {to{background-position: left}}

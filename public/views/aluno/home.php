@@ -2,6 +2,8 @@
     <br><br>
     <h3><?=$_SESSION["nome_aluno"]?></h3>
     <br>
+
+    
     <h2>Provas Pendentes:</h2>
 
     <?php
@@ -35,14 +37,17 @@
                         <i class="fas fa-exclamation-triangle fa-4x" style="color: #EFCC00;"></i>
 
                         <div class="prova-detalhes">
-                            <center>
-                                <span class="prova-nome-disciplina">
-                                    <?= $prova["disciplina"] ?>
-                                </span> <br>
-                                <span class="prova-nome-professor">
-                                    <?= $prova["nome_professor"] ?>
-                                </span>
-                            </center>
+                        <center>
+                            <span class="prova-nome-disciplina">
+                                <?= $prova["disciplina"] ?>
+                            </span> <br>
+                            <span class="prova-nome-professor">
+                                <?= $prova["nome_prova"] ?>
+                            </span> <br>
+                            <span class="prova-nome-professor">
+                                <?= $prova["nome_professor"] ?>
+                            </span>
+                        </center>
                         </div>
 
                         <div class="button-ver-prova">
@@ -57,7 +62,9 @@
                         <br>
                         <h2> <?= $prova["nome_prova"] ?> </h2>
                         <br>
-                        <div style="text-align:left;">
+                        <center>
+
+                        <div style="text-align:left;margin-left:20px;">
 
                             <span><b>PROFESSOR: </b><?= $prova["nome_professor"] ?></span><br>
                             <span><b>DISCIPLINA:</b> <?= $prova["disciplina"] ?></span><br>
@@ -65,6 +72,7 @@
                             <span><b>DATA: </b> <?= $prova["data_prova"] ?> </span><br>
                             <span><b>QUESTÕES: </b><?= $prova["QNT_perguntas"] ?> </span><br>
                         </div>
+                        </center>
 
                         <form method="post" action="gabarito_aluno">
                             <button type="submit" value="<?= $prova['id'] ?>" name="id-prova" class="Fechar-Popup">ENVIAR
@@ -263,7 +271,7 @@
                                         $contador2++;
                                     }
                                 } else {
-                                    while ($contador2 < 5) {
+                                    while ($contador2 < 4) {
                                         $alternativa_atual = $alternativas[$contador2];
                                         $classe = "";
 

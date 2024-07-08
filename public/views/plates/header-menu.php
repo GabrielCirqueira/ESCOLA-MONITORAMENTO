@@ -94,12 +94,16 @@
       </div>
 
       <div class="menu-lateral-main-footer">
-      <a href="https://linktr.ee/GabrielCirqueira" target="_blank" >Gabriel Cirqueira</a>
-      <i class="fas fa-laptop-code"></i>
+          <div>
+            <a href="https://linktr.ee/GabrielCirqueira" target="_blank" >Gabriel Cirqueira</a>
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <span  class="loader"></span>
+
       </div>
     </div>
+    </div>
 
-  </div>
 
   <div id="menu-lateral-esquerdo-icone-conteudo" class="menu-lateral-esquerdo-main">
     <div class="conteudo-menu-lateral-erquerdo">
@@ -135,8 +139,8 @@
             <hr>
             <a class="button-menu" href="relatorio_professor">RELATÓRIOS</a>
 
-          <?php }else if($user == "ADM"){?>
-          
+          <?php } else if ($user == "ADM") {?>
+
             <a class="button-menu" href="adm_home">TELA INICIAL</a>
             <hr>
             <a class="button-menu" href="backups">BACKUPS</a>

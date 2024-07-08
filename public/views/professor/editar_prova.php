@@ -35,7 +35,7 @@
                         </td>
                         <?php if ($data["descritores"] != null) { ?>
                         <td>
-                            <div class="campos-selecionar-descritores">
+                            <div style="display: block;" class="campos-selecionar-descritores">
                                 <input type="text" class="searchInput" required data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}" ?>" value="<?php if($contador < 10){
                                     echo substr($data['descritores'][$contador - 1], 2);
                                 }else if($contador >= 10 && $contador < 100){
@@ -43,7 +43,7 @@
                                 }else{
                                     echo substr($data['descritores'][$contador - 1], 4);
                                 } ?>" placeholder="DESCRITOR">
-                                <div class="descritoresContainer" data-index="<?php echo $contador ?>"></div>
+                                <div style="display: block;" class="descritoresContainer" data-index="<?php echo $contador ?>"></div>
                             </div>
                         </td>
                         <?php } ?>

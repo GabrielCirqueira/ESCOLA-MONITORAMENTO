@@ -225,6 +225,29 @@ function mostarTabela(tabela) {
         if (notas) notas.classList.add("hidden");
         if (descritores) descritores.classList.add("hidden");
     }
+}
 
+function MostrarCarregamento() {
+    var form = document.querySelector('form');
+    var radiosValidos = true;
 
+    form.querySelectorAll('input[type=radio]').forEach(function(radio) {
+        var name = radio.getAttribute('name');
+        var radioGroup = form.querySelectorAll('input[type=radio][name="' + name + '"]');
+        var checked = Array.from(radioGroup).some(radio => radio.checked);
+
+        if (!checked) {
+            radiosValidos = false;
+        }
+    });
+
+    if (radiosValidos) {
+        var carregar = document.getElementById("div_carregamento");
+        var button_gab = document.getElementById("button_enviar_gabarito");
+
+        carregar.classList.remove("hidden");
+        button_gab.classList.add("hidden");
+    } else {
+        return false;
+    }
 }

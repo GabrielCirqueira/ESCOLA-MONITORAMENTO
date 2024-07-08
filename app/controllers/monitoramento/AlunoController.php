@@ -118,22 +118,7 @@ class AlunoController
 
     }
 
-    public static function gabarito_aluno(){
-        if($_SESSION["ALUNO"]){
-            $id = $_POST["id-prova"];
-            $dados = AlunoModel::GetProvas();
-            
-            foreach($dados as $prova){
-                if($prova["id"] == $id){
-                    $_SESSION["prova_gabarito"] = $prova;
-                    MainController::Templates("public/views/aluno/gabarito.php", "ALUNO", $prova);
-                }
-            }
-        }else{
-            header("location: home");
-        }
 
-    }
 
     public static function cadastrar_gabarito_aluno_rec(){
         if($_SESSION["ALUNO"]){
@@ -320,8 +305,51 @@ class AlunoController
         } 
     }
 
+    public static function gabarito_aluno(){
+        if($_SESSION["ALUNO"]){
+            
+            $dados = AlunoModel::GetProvas();
+
+            if(isset($_POST["id-prova"])){
+                $id = $_POST["id-prova"];
+                $_SESSION["id_prova_professor"] = $_POST["id-prova"]; 
+            }else{
+                $id = $_SESSION["id_prova_professor"]; 
+            }
+            
+            foreach($dados as $prova){
+                if($prova["id"] == $id){
+                    $_SESSION["prova_gabarito"] = $prova;
+                    MainController::Templates("public/views/aluno/gabarito.php", "ALUNO", $prova);
+                }
+            }
+
+            if(isset($_POST["enviar_gabarito_aluno"])){ 
+                sleep(3);
+                self::cadastrar_gabarito_aluno();
+            }
+
+        }else{
+            header("location: home");
+        }
+
+    }
+
     public static function cadastrar_gabarito_aluno(){
         if($_SESSION["ALUNO"]){
+
+            $provas_alunos_verificar = AlunoModel::GetProvasFinalizadas();
+            
+            foreach($provas_alunos_verificar as $prov){
+                if($prov["id_prova"] == $_SESSION["prova_gabarito"]["id"] && $_SESSION["ra"] == $prov["ra"]){
+                    $_SESSION["PopUp_Prova_Feita"] = True;
+                    MainController::pre($_SESSION["prova_gabarito"]);
+                    header("location:aluno_home");
+                    exit();
+                }
+            }
+
+
             $gabarito_professor = explode(";",$_SESSION["prova_gabarito"]["gabarito"]); 
             $gabarito_aluno = [];
             $perguntas_certas = [];

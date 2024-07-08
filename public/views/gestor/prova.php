@@ -260,7 +260,7 @@ if($data["descritores_alunos"] != NULL){
                 <tr>
                     <td><?= $prova["aluno"] ?></td>
                     <td><?= $prova["turma"] ?></td>
-                    <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 1) ?>%</td> 
+                    <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 0) ?>%</td> 
                     <td><?= $prova["NotaP"] ?></td>
                     <!-- <td><?= $prova["acertos"] ?></td>-->
                     <td><?= $prova["notaRec"] ?></td>
