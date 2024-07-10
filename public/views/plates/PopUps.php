@@ -41,9 +41,10 @@
             <button onclick="Fechar_PopUp('PopUp_PRF_NaoENC')" class="Fechar-Popup">FECHAR</button>
         </div>
     </div>
+
  
 
-    <div id="PopUp_Prova_Feita" class="PopUp-sobreposicao">
+    <div id="PopUp_Prova_Feita" style="display:none" class="PopUp-sobreposicao">
         <div class="conteudo-popup">
             <h2>PROVA JÁ FEITA!</h2>
 

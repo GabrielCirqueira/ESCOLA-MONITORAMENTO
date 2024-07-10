@@ -22,7 +22,23 @@
             </div> <br><br>
 
              
+            <div class="alternar-liberar-gabarito">
+                <span>
+                    O aluno que faltou tem permissão para realizar a prova?
+                </span><br><br>
 
+                <?php if ($data["liberar_prova"] == true) {?>
+
+                <button type="submit" name="status-liberado" value="sim" class="button-prova-liberado"
+                    style="background-color: #0394b9;">SIM</button>
+                <button type="submit" name="status-liberado" value="não" class="button-prova-liberado">NÃO</button>
+                <?php } else {?>
+                <button type="submit" name="status-liberado" value="sim" class="button-prova-liberado">SIM</button>
+                <button type="submit" name="status-liberado" value="não" class="button-prova-liberado"
+                    style="background-color: #0394b9;">NÃO</button>
+
+                <?php }?>
+            </div> <br><br>
  
 
                    <b><span>*As Alterações acima seram aplicadas para todas as turmas*</p></b>
@@ -52,6 +68,39 @@
                 <?php }?>
             </tbody>
         </table>
+
+        <br><br><br>
+
+        <form method="post" action="editar_gabarito_recuperacao">
+            <input type="hidden" value="<?=$data["id_prova"]?>" name="id_prova_origin">
+            <button type="submit" name="id-prova" value="<?=$data["id"]?>" class="botao-form-enviar">Editar Gabarito</button>
+        </form>
+        <br><br><br>
+        <button class="excluir-prova" onclick="Mostrar_PopUp('PopUp_excluir_prova')">Excluir Recuperação</button>
+
+        <div id="PopUp_excluir_prova" class="PopUp-sobreposicao">
+        <div class="conteudo-popup">
+            <h2>CUIDADO!</h2>
+            <p>Excluir a prova de recuperação resultará na perda de todos os dados registrados, incluindo os dos alunos que fizeram essa prova!</p>
+
+            <b>
+                <p>Deseja excluir?</p>
+            </b>
+
+            <div class="inserir-usuario-excluir-prova">
+                <form method="post" action="">
+                    <div>
+                        <label for="user">Insira seu Usuario:</label>
+                        <input required id="user" name="user" type="text">
+                    </div>
+                    <br><br>
+                    <button type="submit" name="enviar-user" value="e" class="botao-form-enviar">Excluir Recuperação</button>
+                </form>
+            </div>
+
+            <button onclick="Fechar_PopUp('PopUp_excluir_prova')" class="Fechar-Popup-icon">X</button>
+        </div>
+    </div>
 
         <div>
         <br><br><br><br><br>

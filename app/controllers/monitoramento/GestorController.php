@@ -778,8 +778,10 @@ class GestorController{
                     $filtro_turmas = True;
     
                     $grafico_descritores_turma = [];
-                    foreach($percentual_descritores_turmas[$turma] as $descritor => $percentual){
-                        $grafico_descritores_turma[$descritor] = MainController::gerarGraficoRosca(number_format($percentual,1));
+                        if($status_desc){
+                        foreach($percentual_descritores_turmas[$turma] as $descritor => $percentual){
+                            $grafico_descritores_turma[$descritor] = MainController::gerarGraficoRosca(number_format($percentual,1));
+                        }
                     }
         
                     $dados_turma = [

@@ -87,12 +87,12 @@ if ($data["provas_rec"] != null) {?>
             <div class="area_provas_rec_professor">
                 <form action="prova_recuperacao" method="post">
                     <?php
-for ($i = 0; $i < $data["provas_rec"]["quantidade"]; $i++) {?>
-                    <button name="prova" value="<?=$data["provas_rec"]["provas"][$i]["id"]?>"><?=$i + 1?>ª
-                        RECUPERAÇÃO</button>
-                    <br>
+                        for ($i = 0; $i < $data["provas_rec"]["quantidade"]; $i++) {?>
+                            <button name="prova" value="<?=$data["provas_rec"]["provas"][$i]["id"]?>"><?=$i + 1?>ª
+                                RECUPERAÇÃO</button>
+                            <br>
                     <?php }
-    ?>
+                    ?>
                 </form>
             </div>
         </center>

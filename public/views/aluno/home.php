@@ -88,7 +88,7 @@
 
         if ($data["rec"] != null) {
             foreach ($data["rec"] as $provaa) {  
-                if(!isset($provaa["statuss"])){ 
+                if( (!isset($provaa["statuss"]) && $provaa["liberar_prova"] == NULL)){ 
                 ?>
 
 
@@ -307,7 +307,8 @@
         <?php }
     } else { ?>
 
-        <h4>Voê não realizou nenhuma prova!</h4>
+          <h4>Você não realizou nenhuma prova!</h4>
+
 
     <?php
     } ?>

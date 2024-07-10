@@ -183,7 +183,8 @@ use PDO;
                 QNT_perguntas   int,
                 data_prova_rec  datetime,
                 gabarito        varchar(255),
-                liberado        varchar(255)
+                liberado        varchar(255),
+                liberar_prova   varchar(255)
                 );";
 
         self::GetInstance()->query($professores);

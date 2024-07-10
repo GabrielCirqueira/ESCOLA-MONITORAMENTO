@@ -257,11 +257,11 @@ if($data["descritores_alunos"] != NULL){
         </thead>
         <tbody>
             <?php foreach ($data["provas_turma"] as $prova) { ?>
-                <tr>
+                <tr style="background-color:<?php echo $prova['porcentagem'] >= 60 ? '#4BCC8B' : '#DF7474' ?>" >
                     <td><?= $prova["aluno"] ?></td>
                     <td><?= $prova["turma"] ?></td>
                     <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 0) ?>%</td> 
-                    <td><?= $prova["NotaP"] ?></td>
+                    <td><?= number_format($prova["NotaP"],1)  ?></td>
                     <!-- <td><?= $prova["acertos"] ?></td>-->
                     <td><?= $prova["notaRec"] ?></td>
                     <td><?= $prova["status"] ?></td>
