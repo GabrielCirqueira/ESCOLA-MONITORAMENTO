@@ -280,9 +280,16 @@ class GestorController{
 
         // self::DadosDescritores(self::Descritores($resultados)); 
 
+        if(!$btnGeral){
+            $dados["resultadosTurmas"] = self::DadosGeralTurmas($resultados);
+            $dados["alunosFiltro60"]  = MainController::gerarGrafico60(self::calcularPorcentagemAcima60($resultados));
+        }else{
+            $dados["resultadosTurmas"] = null;
+        }
+ 
 
         // echo "<pre>";
-        // print_r($resultados);
+        // print_r($resultadosTurmas);
         // echo "</pre>";
         
         if (count($resultados) > 0) {
@@ -297,6 +304,25 @@ class GestorController{
     }else{
         return False;
     }
+}
+
+public static function calcularPorcentagemAcima60($provas) {
+    $total_alunos = count($provas);
+    $alunos_acima_60 = 0;
+
+    foreach ($provas as $prova) {
+        $porcentagem_aluno = ($prova["acertos"] / $prova["QNT_perguntas"]) * 100;
+        if ($porcentagem_aluno >= 60) {
+            $alunos_acima_60++;
+        }
+    }
+
+    if ($total_alunos === 0) {
+        return 0;
+    }
+
+    $porcentagem_acima_60 = ($alunos_acima_60 / $total_alunos) * 100;
+    return number_format($porcentagem_acima_60, 0);
 }
     
     public static function GetGraficosFiltros($provas) {
@@ -451,7 +477,7 @@ class GestorController{
 
         $arrayOrdenado = $turmasIntermediario + $turmasVespertino;
 
-                return $arrayOrdenado;
+        return $arrayOrdenado;
     }
  
 

@@ -113,6 +113,20 @@
                     <h3>PROFICIÊNCIA</h3>
                 </div>
             </div>
+            <br><br>
+            <?= $data["alunosFiltro60"] ?>
+            <br><br>
+
+            <h1>DESEMPENHO TURMAS</h1>
+            <div class="gestor_area_turmas_geral">
+                <?php foreach ($data["resultadosTurmas"] as $turma => $value) { ?>
+                    <div>
+                        <?= $value ?>
+                        <span><?= $turma ?></span>
+                    </div>
+                <?php } ?>
+            </div>
+
             <div><br><br><br><br></div>
 
         <?php   } ?>

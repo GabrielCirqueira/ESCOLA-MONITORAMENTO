@@ -99,7 +99,7 @@
             <i class="fas fa-laptop-code"></i>
           </div>
           <span  class="loader"></span>
-
+          <p>É O TECNICOO 😜 </p>
       </div>
     </div>
     </div>

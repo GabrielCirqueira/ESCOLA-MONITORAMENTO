@@ -42,7 +42,7 @@
 
             <input type="hidden" name="id-prova" value="<?=$_SESSION["id_prova_professor"]?>">
 
-                   <b><span>*As Alterações acima seram aplicadas para todas as turmas*</p></b>
+                   <b><span>*As Alterações acima serão aplicadas para todas as turmas*</p></b>
         </center>
     </form>
 <div><br><br></div>

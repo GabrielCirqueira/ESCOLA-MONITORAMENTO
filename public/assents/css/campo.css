@@ -134,8 +134,8 @@
 .aluno_inserir_gabarito tr,
 .professor-inserir-gabarito td,
 .professor-inserir-gabarito tr {
-  border: 1px solid black;
-  padding: 5px;
+  border: 2px solid rgb(151, 151, 151);
+  padding: 7px;
 } 
 
 .professor-inserir-gabarito td .Ds {
@@ -146,8 +146,7 @@
 }
 
 .professor-editar-gabarito input[type="radio"],
-.professor-descritores input[type="radio"],
-.aluno_inserir_gabarito input[type="radio"],
+.professor-descritores input[type="radio"], 
 .professor-area-disciplinas input[type="radio"],
 .professor-inserir-gabarito input[type="radio"] {
   appearance: none;
@@ -169,6 +168,25 @@
 .professor-inserir-gabarito input[type="text"]:focus {
   outline: none;
 }
+
+.aluno_inserir_gabarito input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 25px; /* largura desejada da caixa */
+  height: 25px; /* altura desejada da caixa */
+  border: 1px solid #333; /* cor e espessura da borda */
+  border-radius: 3px; /* arredondamento dos cantos da caixa */
+  outline: none; /* remova a borda ao focar */
+  cursor: pointer; /* cursor ao passar por cima */
+  margin-right: 5px; /* espaçamento opcional à direita */
+}
+
+/* Estilo para quando o input radio estiver marcado */
+.aluno_inserir_gabarito input[type="radio"]:checked {
+  background-color: #333; /* cor de fundo quando marcado */
+}
+
 
 .professor-editar-gabarito input[type="radio"]:checked,
 .professor-descritores input[type="radio"]:checked,

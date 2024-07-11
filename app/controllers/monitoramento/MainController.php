@@ -143,16 +143,16 @@ class MainController{
     }
 
     public static function gerarGraficoHorizontal($dados, $descritor) {
-        $largura_barra = 100; // Largura da barra
-        $largura_svg = 200; // Largura total do SVG
-        $altura_svg = 400; // Altura total do SVG
-        $margem_inferior = 50; // Margem inferior para os descritores
+        $largura_barra = 100;   
+        $largura_svg = 200;     
+        $altura_svg = 400;      
+        $margem_inferior = 50;  
     
         $cores = array(
-            "Abaixo do Básico" => "#FF6B6B", // Vermelho
-            "Básico" => "#FFA63D", // Laranja
-            "Médio" => "#D4FF3B", // Amarelo claro
-            "Avançado" => "#44C548" // Verde
+            "Abaixo do Básico" => "#FF6B6B",     
+            "Básico" => "#FFA63D",               
+            "Médio" => "#D4FF3B",                
+            "Avançado" => "#44C548"              
         );
     
         $total = array_sum($dados);
@@ -169,8 +169,7 @@ class MainController{
                 $svg .= "<text x='" . (50 + $largura_barra + 10) . "' y='" . ($y + $altura_barra / 2 + 5) + 10 . "' text-anchor='start' font-size='17' fill='#666'>" . round(($quantidade / $total) * 100) . "%</text>";
             }
         }
-    
-        // Adicionar a borda cinza ao redor do gráfico
+     
         $svg .= "<rect x='50' y='" . ($altura_svg - $margem_inferior - ($altura_svg - $margem_inferior)) . "' width='$largura_barra' height='" . ($altura_svg - $margem_inferior) . "' fill='none' stroke='#ccc' stroke-width='2' />";
     
         $svg .= "<text x='" . ($largura_svg / 2) . "' y='" . ($altura_svg - 10) . "' text-anchor='middle' font-size='22' fill='#666' font-weight='bold'>$descritor</text>";
@@ -178,5 +177,36 @@ class MainController{
     
         return $svg;
     }
+
+    public static function gerarGrafico60($porcentagem) {
+        $altura_barra = 70;  
+        $largura_svg = 800;  
+        $altura_svg = 180;   
+        $margem = 30;
+    
+        $largura_barra_preenchida = ($porcentagem / 100) * ($largura_svg - 2 * $margem);
+    
+        $svg = "<svg width='$largura_svg' height='$altura_svg' viewBox='0 0 $largura_svg $altura_svg' xmlns='http://www.w3.org/2000/svg'>"; 
+        $svg .= "<text x='" . ($largura_svg / 2) . "' y='" . ($margem + 10) . "' text-anchor='middle' font-size='18' fill='#000' font-weight='bold'>ALUNOS ACIMA DE 60%</text>";
+    
+        $svg .= "<rect x='$margem' y='" . ($margem + 20) . "' width='" . ($largura_svg - 2 * $margem) . "' height='" . ($altura_barra + 20) . "' fill='none' stroke='#cdcdcd' />";
+    
+        $svg .= "<rect x='" . ($margem + 10) . "' y='" . ($margem + 30) . "' width='" . ($largura_svg - 2 * $margem - 20) . "' height='$altura_barra' fill='#ccc' />";
+    
+        $svg .= "<rect x='" . ($margem + 10) . "' y='" . ($margem + 30) . "' width='0' height='$altura_barra' fill='#44C548'>";
+        $svg .= "<animate attributeName='width' from='0' to='$largura_barra_preenchida' dur='1.5s' fill='freeze' attributeType='XML' begin='0s' additive='sum' repeatCount='1' calcMode='paced' />";
+        $svg .= "</rect>";
+     
+        $textX = $margem + 10 + $largura_barra_preenchida / 2;
+        $textY = $margem + 75; 
+        $svg .= "<text x='$textX' y='$textY' text-anchor='middle' font-size='24' fill='#666' font-weight='bold'>$porcentagem%</text>";
+    
+        $svg .= "</svg>";
+        return $svg;
+    }
+    
+    
+    
+    
     
 }
