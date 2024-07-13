@@ -185,14 +185,15 @@ function resetFormDesc() {
 //     });
 // });
  
-function exportToExcel(nome) {
+function exportToExcel(nome, tableId) {
+    var table = document.getElementById(tableId); 
 
-    var table = XLSX.utils.table_to_sheet(document.querySelector('table'));
+    var sheet = XLSX.utils.table_to_sheet(table);
 
     var wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, table, 'Dados');
+    XLSX.utils.book_append_sheet(wb, sheet, 'Dados');
 
-    XLSX.writeFile(wb, nome+'.xlsx');
+    XLSX.writeFile(wb, nome + '.xlsx');
 }
 
 function mostarTabela(tabela) {
@@ -202,19 +203,32 @@ function mostarTabela(tabela) {
     var respostas = document.getElementById("table-respostas");
     var notas = document.getElementById("table-notas");
 
+    var tableNotas = document.getElementById("export-notas");
+    var tableDesc = document.getElementById("export-descritores");
+    var tableResp = document.getElementById("export-respostas");
+
     if (tabela == "RESPOSTAS") {
+        if(tableNotas) tableNotas.classList.add("hidden");
+        if(tableDesc) tableDesc.classList.add("hidden");
+        if(tableResp) tableResp.classList.remove("hidden");
         if (notas) notas.classList.add("hidden");
         if (respostas) respostas.classList.remove("hidden");
         if (descritores) descritores.classList.add("hidden");
         if (descritores_rec) descritores_rec.classList.add("hidden");
         if (botoes_descritores) botoes_descritores.classList.add("hidden");
     } else if (tabela == "DESCRITORES") {
+        if(tableNotas) tableNotas.classList.add("hidden");
+        if(tableDesc) tableDesc.classList.remove("hidden");
+        if(tableResp) tableResp.classList.add("hidden");
         if (descritores) descritores.classList.remove("hidden");
         if (notas) notas.classList.add("hidden");
         if (respostas) respostas.classList.add("hidden");
         if (descritores_rec) descritores_rec.classList.add("hidden");
         if (botoes_descritores) botoes_descritores.classList.remove("hidden");
     } else if (tabela == "NOTAS") {
+        if(tableNotas) tableNotas.classList.remove("hidden");
+        if(tableDesc) tableDesc.classList.add("hidden");
+        if(tableResp) tableResp.classList.add("hidden");
         if (notas) notas.classList.remove("hidden");
         if (descritores) descritores.classList.add("hidden");
         if (respostas) respostas.classList.add("hidden");
