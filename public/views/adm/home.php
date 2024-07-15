@@ -6,6 +6,8 @@
                 <summary class="sumary-menu-gestor">Alunos</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('alunos')">Alunos</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('provas')">Provas</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('AddAluno')">Adicionar
+                    Aluno</button>
             </details>
 
             <details class="details-menu-gestor">
@@ -38,6 +40,45 @@
                     <h1>PAINEL GESTOR</h1>
                 </div>
 
+                <div id="AddAluno" class="conteudo-item">
+                    <form action="adicionar_aluno" method="post" class="form-adicionar-aluno">
+                        <h1>Adicionar Aluno</h1>
+                        <div class="input-group-adicionar-aluno">
+                            <h3>RA</h3>
+                            <input type="text" name="ra" id="adicionarRA" placeholder="RA" required>
+                        </div>
+                        <div class="input-group-adicionar-aluno">
+                            <h3>NOME DO ALUNO</h3>
+                            <input type="text" name="nome" id="adicionarNome" placeholder="Nome" required>
+                        </div>
+                        <div class="input-group-adicionar-aluno">
+                            <h3>DATA DE NASCIMENTO</h3>
+                            <input type="date" name="data_nasc" id="adicionarDataNasc" placeholder="Data de Nascimento"
+                               >
+                        </div>
+                        <h3>TURMA:</h3>
+                        <div class="radio-group">
+                            <?php foreach ($data["turmas"]["turmas"] as $turma) {?>
+                            <input type="radio" id="turma_add_<?=$turma["nome"]?>" name="turma_adicionar" required value="<?=$turma["nome"]?>">
+                            <label for="turma_add_<?=$turma["nome"]?>"><?=$turma["nome"]?></label>
+                            <?php }?>
+                        </div>
+                        <h3>TURNO:</h3>
+                        <div class="radio-group">
+                            <?php foreach ($data["turnos"] as $turnos) {?>
+                            <input type="radio" id="turno_add_<?=$turnos?>" name="turno_adicionar" required value="<?=$turnos?>">
+                            <label for="turno_add_<?=$turnos?>"><?=$turnos?></label>
+                            <?php }?>
+                        </div>
+                        <br><br>
+                        <center>
+                        <button type="submit" class="btn-salvar-adicionar-aluno">Salvar</button> 
+                        </center>
+                        <br><br><br><br><br><br><br><br><br>
+                        </form>
+                </div>
+
+
                 <div id="alunos" class="conteudo-item">
                     <div id="filtro-container" class="filtro-container">
                         <input type="text" id="filtroRA" class="filtro-ra" placeholder="Filtrar por RA"
@@ -62,7 +103,7 @@
                                 <td><?=$aluno["nome"]?></td>
                                 <td><?=$aluno["turma"]?></td>
                                 <td><button class="btn-editar"
-                                        onclick="editarAluno('<?= $aluno["ra"] ?>', '<?= $aluno["nome"] ?>', '<?= $aluno["turma"] ?>', '<?= $aluno["turno"] ?>', '<?= $aluno["data_nasc"] ?>')">EDITAR</button>
+                                        onclick="editarAluno('<?=$aluno["ra"]?>', '<?=$aluno["nome"]?>', '<?=$aluno["turma"]?>', '<?=$aluno["turno"]?>', '<?=$aluno["data_nasc"]?>')">EDITAR</button>
                                 </td>
                                 <td> <button class="btn-excluir">EXCLUIR</button> </td>
                             </tr>
@@ -87,21 +128,22 @@
                             </div>
                             <h3>TURMA:</h3>
                             <div class="radio-group">
-                                <?php foreach($data["turmas"]["turmas"] as $turma) { ?>
-                                <input type="radio" id="turma_<?= $turma["nome"] ?>" name="turma"
-                                    value="<?= $turma["nome"] ?>">
-                                <label for="turma_<?= $turma["nome"] ?>"><?= $turma["nome"] ?></label>
-                                <?php } ?>
+                                <?php foreach ($data["turmas"]["turmas"] as $turma) {?>
+                                <input type="radio" id="turma_<?=$turma["nome"]?>" name="turma"
+                                    value="<?=$turma["nome"]?>">
+                                <label for="turma_<?=$turma["nome"]?>"><?=$turma["nome"]?></label>
+                                <?php }?>
                             </div>
                             <h3>TURNO:</h3>
                             <div class="radio-group">
-                                <?php foreach($data["turnos"] as $turnos) { ?>
-                                <input type="radio" id="turno_<?= $turnos ?>" name="turno" value="<?= $turnos ?>">
-                                <label for="turno_<?= $turnos ?>"><?= $turnos ?></label>
-                                <?php } ?>
+                                <?php foreach ($data["turnos"] as $turnos) {?>
+                                <input type="radio" id="turno_<?=$turnos?>" name="turno" value="<?=$turnos?>">
+                                <label for="turno_<?=$turnos?>"><?=$turnos?></label>
+                                <?php }?>
                             </div>
                             <button type="submit" class="btn-editar">Salvar</button>
                             <button type="button" class="btn-excluir" onclick="cancelarEdicao()">Cancelar</button>
+                            <br><br><br><br><br><br><br><br><br>
                         </form>
                     </div>
                 </div>

@@ -15,9 +15,22 @@ function Mostrar_campo_ra() {
     container.style.height = "400px"
 }
 
-function Fechar_PopUp(popup){ 
-    document.getElementById(popup).style.display = 'none';
-}
+function Fechar_PopUp(popup) {
+    var popupElement = document.getElementById(popup);
+    var conteudo = popupElement.querySelector('.conteudo-popup');
+     
+    conteudo.classList.add('fechar');
+     
+    setTimeout(function() {
+      popupElement.style.opacity = '0';
+    }, 700); 
+   
+    setTimeout(function() {
+      popupElement.style.display = 'none';
+    }, 700);  
+  }
+  
+  
 
 function Mostrar_PopUp(popup){
     document.getElementById(popup).style.display = 'block';

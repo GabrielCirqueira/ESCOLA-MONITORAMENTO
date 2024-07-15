@@ -428,7 +428,7 @@ class AlunoController
 
             if(AlunoModel::Inserir_dados_prova_1_prova($dados)){
                 AlunoModel::Inserir_dados_prova($dados,"Fez a 1º Prova");
-                $_SESSION["PopUp_inserir_prova"] = True;
+                $_SESSION["PopUp_inserir_gabarito_professor"] = True;
                 header("location:aluno_home");
                 exit();
             }

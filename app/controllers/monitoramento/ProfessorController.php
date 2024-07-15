@@ -26,7 +26,7 @@ class ProfessorController{
                 exit;
             }
         } else {
-            $_SESSION["PopUp_professor"] = True;
+            $_SESSION["PopUp_PRF_NaoENC"] = True;
             header("location: login_professor");
             exit;
         }

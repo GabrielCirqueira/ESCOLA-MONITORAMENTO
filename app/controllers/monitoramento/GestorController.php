@@ -16,9 +16,9 @@ class GestorController{
             $_SESSION["GESTOR"] = True;
             header("location:gestor_home");
         }else{
-            $_SESSION["popup_not_gestor"] = True;
+            $_SESSION["PopUp_PRF_NaoENC"] = True;
             header("location: login_gestor");
-            exit;
+            exit();
         }
     }
     public static function gestor_home() {

@@ -14,7 +14,7 @@ class ADMcontroller{
             $_SESSION["ADM"] = True;
             header("location:adm_home");
         }else{
-            $_SESSION["popup_not_gestor"] = True;
+            $_SESSION["PopUp_PRF_NaoENC"] = True;
             header("location: login_adm");
             exit;
         }

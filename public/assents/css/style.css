@@ -1416,3 +1416,104 @@ input:checked + .slider:before {
   color: white;
   border-color: #238b60c3;
 }
+
+/* Container do formulário */
+.form-adicionar-aluno {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Título do formulário */
+.form-adicionar-aluno h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+/* Grupos de entrada */
+.input-group-adicionar-aluno {
+  margin-bottom: 15px;
+}
+
+/* Títulos dos inputs */
+.input-group-adicionar-aluno h3 {
+  margin-bottom: 5px;
+  font-family: 'Arial', sans-serif;
+  color: #555;
+}
+
+/* Inputs de texto e data */
+.input-group-adicionar-aluno input[type="text"],
+.input-group-adicionar-aluno input[type="date"] {
+  width: calc(100% - 10px);
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+/* Grupos de botões de rádio */
+.radio-group-adicionar-aluno {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* Labels dos botões de rádio */
+.radio-group-adicionar-aluno label {
+  font-family: 'Arial', sans-serif;
+  color: #555;
+}
+
+/* Botões de rádio personalizados */
+.radio-group-adicionar-aluno input[type="radio"] {
+  display: none;
+}
+
+.radio-group-adicionar-aluno input[type="radio"] + label::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 5px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  background-color: #fff;
+  vertical-align: middle;
+}
+
+.radio-group-adicionar-aluno input[type="radio"]:checked + label::before {
+  border-color: #007bff;
+  background-color: #007bff;
+}
+
+/* Botões de ação */
+.btn-salvar-adicionar-aluno,
+.btn-cancelar-adicionar-aluno {
+  display: inline-block;
+  width: calc(50% - 10px);
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 5px;
+  box-sizing: border-box;
+}
+
+.btn-salvar-adicionar-aluno {
+  background-color: #80bf82;
+  transition: 0.5s ease-in-out;
+  color: white;
+}

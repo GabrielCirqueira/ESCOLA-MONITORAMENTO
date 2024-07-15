@@ -68,7 +68,7 @@ foreach ($popups as $popup_id => $popup_data) {
         echo "<div class='conteudo-popup'>";
         echo "<h2>{$popup_data['title']}</h2>";
         
-        if ($popup_data['status_class'] == "check") {
+        if ($popup_data['status_class'] == 'check') {
             echo "<div class='check'>";
             echo "<div class='linha-checked-1'></div>";
             echo "<div class='linha-checked-2'></div>";
@@ -79,11 +79,12 @@ foreach ($popups as $popup_id => $popup_data) {
             echo "<div class='linha-unchecked-2'></div>";
             echo "</div>";
         }
-
+        
         echo "<p>{$popup_data['message']}</p>";
         echo "<button onclick=\"Fechar_PopUp('$popup_id')\" class='Fechar-Popup'>FECHAR</button>";
         echo "</div>";
         echo "</div>";
+        
         
         $_SESSION[$popup_id] = false;
     }
