@@ -6,29 +6,20 @@ use app\config\Database;
 use PDO;
 
 class ADModel{
+
+    public static function EditarAluno($dados){
+        $sql = "UPDATE alunos SET nome = :nome, turno = :turno, data_nasc = :data_nasc, turma = :turma WHERE ra = :ra";
+        
+            $query = Database::GetInstance()->prepare($sql);
+            $query->bindParam(':ra', $dados['ra']);
+            $query->bindParam(':nome', $dados['nome']);
+            $query->bindParam(':turno', $dados['turno']);
+            $query->bindParam(':data_nasc', $dados['data_nasc']);
+            $query->bindParam(':turma', $dados['turma']);
+            $query->execute();
+            return $query;
+        }
     
-    public static function Adicionar_professor($nome,$user,$cpf,$numero,$disciplinas){
-        $sql = "INSERT INTO professores(usuario,nome,cpf,numero,disciplinas) VALUES(:user,:nome,:cpf,:numero,:disciplinas)";
-        $query = Database::GetInstance()->prepare($sql);
-        $query->bindValue(":user",$user);
-        $query->bindValue(":nome",$nome);
-        $query->bindValue(":cpf",$cpf);
-        $query->bindValue(":numero",$numero);
-        $query->bindValue(":disciplinas",$disciplinas);
-        $query->execute();
-        return $query;
-    }
-
-    public static function adicionar_materia($nome,$curso,$turnos){
-        $sql = "INSERT INTO disciplinas(nome,curso,turno) VALUES(:nome,:curso,:turno)";
-        $query = Database::GetInstance()->prepare($sql);
-        $query->bindValue(":nome",$nome);
-        $query->bindValue(":curso",$curso);
-        $query->bindValue(":turno",$turnos);
-        $query->execute();
-        return $query;
-    }
-
     public static function GetMaterias(){
         $sql = "SELECT * FROM disciplinas";
         $query = Database::GetInstance()->prepare($sql);
@@ -44,26 +35,6 @@ class ADModel{
         $query->execute();
         
         return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public static function excluir_disciplina($nome){
-        $sql = "DELETE FROM disciplinas WHERE nome = :nome";
-        $query = Database::GetInstance()->prepare($sql);
-        $query->bindvalue(":nome",$nome);
-        $query->execute();
-
-        return $query;
-    }
-
-    public static function adicionar_turma($nome,$serie,$turno,$curso){
-        $sql = "INSERT INTO turmas(nome,serie,turno,curso) VALUES(:nome,:serie,:turno,:curso)";
-        $query = Database::GetInstance()->prepare($sql);
-        $query->bindValue(":nome",$nome);
-        $query->bindValue(":serie",$serie);
-        $query->bindValue(":turno",$turno);
-        $query->bindValue(":curso",$curso);
-        $query->execute();
-        return $query;
     }
 
     public static function GetTurmas(){

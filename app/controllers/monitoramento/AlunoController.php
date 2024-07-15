@@ -11,24 +11,25 @@ use DateTime;
 class AlunoController
 {
 
-    public static function login_aluno_entrar(){
+    public static function login_aluno_entrar() {
         $ra = $_POST["ra"];
         $ra = preg_replace('/\D/', '', $ra);
-
+    
         $query = AlunoModel::verificarLogin($ra);
-
-        if (!$query === False) {
+    
+        if ($query !== false) {
             $_SESSION["ra"] = $ra;
             $_SESSION["nome_aluno"] = $query["nome"];
             $_SESSION["turno"] = $query["turno"];
             $_SESSION["turma"] = $query["turma"];
             $_SESSION["data_nasc"] = $query["data_nasc"];
-            $_SESSION["ALUNO"] = True;
+            $_SESSION["ALUNO"] = true; 
             header("location: aluno_home");
+            exit();
         } else {
-            $_SESSION["PopUp_RA_NaoENC"] = True;
+            $_SESSION["PopUp_RA_NaoENC"] = True; 
             header("location: home");
-            exit;
+            exit();
         }
     }
 

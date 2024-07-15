@@ -28,13 +28,9 @@ class GestorController{
             $dados = null;
             $dados = self::processarFiltros($btnGeral);
 
-            
-
-                
             // echo "<pre>";
             // print_r($btnGeral);
             // echo "</pre>";
-
 
             MainController::Templates("public/views/gestor/graficos.php", "GESTOR", $dados);
             // MainController::Templates("public/views/gestor/descritores.php", "GESTOR", $dados);

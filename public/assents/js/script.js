@@ -34,14 +34,13 @@ function Mostrar_PopUp(popup){
 
 // }
 
-function carregarConteudo(arquivo) {
-    $.ajax({
-      url: arquivo, 
-      success: function(response) {
-        $('#conteudo').html(response);
-      }
+function mostrarConteudo(id) {
+    var conteudos = document.querySelectorAll('.conteudo-item');
+    conteudos.forEach(function(conteudo) {
+        conteudo.classList.remove('active');
     });
-  }
+    document.getElementById(id).classList.add('active');
+}
 
   document.addEventListener('DOMContentLoaded', function() {
     const searchInputs = document.querySelectorAll('.searchInput');
@@ -264,4 +263,92 @@ function MostrarCarregamento() {
     } else {
         return false;
     }
+}
+
+
+
+function filtrarAlunos() {
+    var inputRA, inputNome, filterRA, filterNome, table, tr, tdRA, tdNome, i;
+    inputRA = document.getElementById("filtroRA");
+    inputNome = document.getElementById("filtroNome");
+    filterRA = inputRA.value.toUpperCase();
+    filterNome = inputNome.value.toUpperCase();
+    table = document.getElementById("tabelaAlunos");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        tdRA = tr[i].getElementsByTagName("td")[0]; // Coluna do RA
+        tdNome = tr[i].getElementsByTagName("td")[1]; // Coluna do Nome
+
+        if (tdRA && tdNome) {
+            var raValue = tdRA.textContent || tdRA.innerText;
+            var nomeValue = tdNome.textContent || tdNome.innerText;
+
+            if (raValue.toUpperCase().indexOf(filterRA) > -1 && nomeValue.toUpperCase().indexOf(filterNome) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function filtrarAlunos() {
+    var inputRA, inputNome, filterRA, filterNome, table, tr, tdRA, tdNome, i;
+    inputRA = document.getElementById("filtroRA");
+    inputNome = document.getElementById("filtroNome");
+    filterRA = inputRA.value.toUpperCase();
+    filterNome = inputNome.value.toUpperCase();
+    table = document.getElementById("tabelaAlunos");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+        tdRA = tr[i].getElementsByTagName("td")[0]; // Coluna do RA
+        tdNome = tr[i].getElementsByTagName("td")[1]; // Coluna do Nome
+
+        if (tdRA && tdNome) {
+            var raValue = tdRA.textContent || tdRA.innerText;
+            var nomeValue = tdNome.textContent || tdNome.innerText;
+
+            if (raValue.toUpperCase().indexOf(filterRA) > -1 && nomeValue.toUpperCase().indexOf(filterNome) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function editarAluno(ra, nome, turma, turno, dataNasc) {
+    document.getElementById('tabelaAlunos').style.display = 'none';
+    document.getElementById('filtro-container').style.display = 'none';
+    document.getElementById('formEditar').classList.add('active');
+    document.getElementById('editarRA').value = ra;
+    document.getElementById('editarNome').value = nome;
+    document.getElementById('data').value = dataNasc;
+
+    // Seleciona a turma correspondente
+    var turmas = document.getElementsByName('turma');
+    for (var i = 0; i < turmas.length; i++) {
+        if (turmas[i].value === turma) {
+            turmas[i].checked = true;
+            break;
+        }
+    }
+
+    // Seleciona o turno correspondente
+    var turnos = document.getElementsByName('turno');
+    for (var i = 0; i < turnos.length; i++) {
+        if (turnos[i].value === turno) {
+            turnos[i].checked = true;
+            break;
+        }
+    }
+}
+ 
+
+function cancelarEdicao() {
+    document.getElementById('filtro-container').style.display = 'block';
+    document.getElementById('formEditar').classList.remove('active');
+    document.getElementById('tabelaAlunos').style.display = 'table';
 }

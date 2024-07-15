@@ -4,6 +4,7 @@ namespace app\controllers\monitoramento;
  
 use app\controllers\monitoramento\MainController;
 use app\models\monitoramento\ADModel;
+use app\models\monitoramento\AlunoModel;
 
 class ADMcontroller{
 
@@ -24,7 +25,7 @@ class ADMcontroller{
             $diretorio = 'app/config/backups/';
             $arquivos = scandir($diretorio);
             $dados = [];
-    
+       
             foreach ($arquivos as $arquivo) {
                 if ($arquivo != "index.php" && preg_match('/(\d{4}-\d{2}-\d{2})__(\d{2})-(\d{2})/', $arquivo, $matches)) {
                     $data = isset($matches[1]) ? $matches[1] : 'Data não disponível';
@@ -56,7 +57,7 @@ class ADMcontroller{
                     ];
                 }
             }
-
+      
             usort($dados, function($a, $b) {
                 return $b['timestamp'] - $a['timestamp'];
             });
@@ -70,54 +71,49 @@ class ADMcontroller{
 
     public static function adm_home(){
         if(MainController::Verificar_sessao("ADM")){
-            MainController::Templates("public/views/adm/home.php","ADM",null);
+
+            
+        $dados = [
+            "alunos" => [
+                "provas_feitas" => AlunoModel::GetProvasFinalizadas(),
+                "alunos"    => AlunoModel::GetAlunos()
+            ],
+            "turmas" => [
+                "turmas" => ADModel::GetTurmas()
+            ],
+            "turnos" => explode(",",$_ENV["TURNOS"])
+            ];
+
+            MainController::Templates("public/views/adm/home.php","ADM",$dados);
         }else{
             header("location: home");
         }
     } 
 
-    public static function adicionar_professor(){
-        $materias = implode(";", $_POST["materias-professor"]); 
-        $info = ADModel::Adicionar_professor($_POST["nome"],$_POST["user"],$_POST["cpf"],$_POST["telefone"],$materias);
+    public static function editar_dados_aluno(){
+        if($_SESSION["ADM"]){
 
-        if($info){
-            $_SESSION["PopUp_add_professor_true"] = True;
-            header("location: adm_home");
-            exit;
+            $dados = [
+             "ra"       => $_POST["ra"],
+             "nome"     => $_POST["nome"],
+             "turno"    => $_POST["turno"],
+             "data_nasc"     => $_POST["data"],
+             "turma"    => $_POST["turma"]
+            ];
+
+            $Edit = ADModel::EditarAluno($dados);
+
+            if($Edit){
+                $_SESSION["PopUp_editar_aluno_true"] = True;
+                header("location: adm_home");
+                exit();
+            }
+
+        }else{
+            header("location: ADM");
         }
     }
-
-
-    public static function GetMaterias(){
-        $materias = ADModel::GetMaterias();
-        return $materias;
-    }
-
-    public static function GetProfessores(){
-        $materias = ADModel::GetProfessores();
-        return $materias;
-    }
-
-    public static function adicionar_materia(){
-        $turnos = implode(',', $_POST['turno-materia']);
-        $insert = ADModel::adicionar_materia($_POST["nome-materia"],$_POST["materia-curso"],$turnos);
-
-        if($insert){
-            $_SESSION["PopUp_add_materia_true"] = True;
-            header("location: adm_home");
-            exit;
-        }
-    }
-
-    public static function excluir_disciplina(){
-        $query = ADModel::excluir_disciplina($_POST["button-excluir-disciplina"]);
-        if($query){
-            $_SESSION["PopUp_excluir_materia_true"] = True;
-            header("location: adm_home");
-            exit;
-        }
-    }
-
+     
     public static function adicionar_turma(){
         $serie = $_POST["serie-turma"];
         $turno = $_POST["turno-turma"];
@@ -144,11 +140,11 @@ class ADMcontroller{
             $nome_turma = "{$serie}ºN0{$numero}-EM-{$curso}";
         }
         
-        if(ADModel::adicionar_turma($nome_turma,$serie,$turno,$curso)){
-            $_SESSION["PopUp_inserir_turma"] = True;
-            header("location: adm_home");
-            exit;
-        }
+        // if(ADModel::adicionar_turma($nome_turma,$serie,$turno,$curso)){
+        //     $_SESSION["PopUp_inserir_turma"] = True;
+        //     header("location: adm_home");
+        //     exit;
+        // }
     }
 
     public static function GetTurmas(){

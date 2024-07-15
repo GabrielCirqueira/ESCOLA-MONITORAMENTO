@@ -26,7 +26,7 @@ Backup::runBackup();
 
 session_start();
 
-if(!isset($_SESSION["Gabarito_aluno"])){
+if(!isset($_SESSION["PopUp_PRF_NaoENC"])){
 
     $_SESSION["PopUp_professor"] = False;
     $_SESSION["popup_not_gestor"] = False;
@@ -43,6 +43,8 @@ if(!isset($_SESSION["Gabarito_aluno"])){
     $_SESSION["PopUp_PRF_Senha"] = False;
     $_SESSION["PopUp_Prova_Feita"] = False;
     $_SESSION["Popup_aguardar_gabarito"] = False;
+    $_SESSION["PopUp_editar_aluno_true"] = False;
+    $_SESSION["PopUp_PRF_NaoENC"] = False;
     
     $_SESSION["Gabarito_aluno"] = False;
 
@@ -57,6 +59,7 @@ $rotas = [
     "adm_home"                      => ADMcontroller::class,
     "backups"                       => ADMcontroller::class,
     "adicionar_professor"           => ADMcontroller::class,
+    "editar_dados_aluno"            => ADMcontroller::class,
     "adm_info"                      => ADMcontroller::class,
     "adicionar_materia"             => ADMcontroller::class,
     "excluir_disciplina"            => ADMcontroller::class,
@@ -120,31 +123,6 @@ if(array_key_exists($action, $rotas)) {
     $controller::$method();
 } else {
     MainController::index();
-}
-
-
-$popups = [
-    "PopUp_professor" => "PopUp_PRF_NaoENC",
-    "PopUp_PRF_Senha" => "PopUp_PRF_Senha",
-    "PopUp_RA_NaoENC" => "PopUp_RA_NaoENC",
-    "popup_not_turmas" => "popup_not_turmas",
-    "popup_not_gestor" => "PopUp_PRF_NaoENC",
-    "PopUp_add_professor_true" => "PopUp_add_professor_true",
-    "PopUp_add_materia_true" => "PopUp_add_materia_true",
-    "PopUp_excluir_materia_true" => "PopUp_excluir_materia_true",
-    "PopUp_inserir_turma" => "PopUp_inserir_turma",
-    "PopUp_inserir_gabarito_professor" => "PopUp_inserir_gabarito_professor", 
-    "PopUp_inserir_prova" => "PopUp_inserir_prova",
-    "PopUp_Excluir_prova" => "PopUp_Excluir_prova",
-    "PopUp_Prova_Feita" => "PopUp_Prova_Feita",
-    "Popup_aguardar_gabarito" => "Popup_aguardar_gabarito"
-];
-
-foreach ($popups as $session_var => $popup_name) {
-    if ($_SESSION[$session_var] == True) {
-        echo "<script> Mostrar_PopUp('$popup_name')</script>";
-        $_SESSION[$session_var] = False;
-    }
 }
 
 ob_end_flush();
