@@ -19,6 +19,21 @@ class ADModel{
             $query->execute();
             return $query;
         }
+
+        public static function AdicionarAluno($dados) {
+            $sql = "INSERT INTO alunos (ra, nome, turno, data_nasc, turma) 
+                    VALUES (:ra, :nome, :turno, :data_nasc, :turma)";
+            
+            $query = Database::GetInstance()->prepare($sql);
+            $query->bindParam(':ra', $dados['ra']);
+            $query->bindParam(':nome', $dados['nome']);
+            $query->bindParam(':turno', $dados['turno']);
+            $query->bindParam(':data_nasc', $dados['data_nasc']);
+            $query->bindParam(':turma', $dados['turma']);
+            $query->execute();
+            return $query;
+        }
+        
     
     public static function GetMaterias(){
         $sql = "SELECT * FROM disciplinas";

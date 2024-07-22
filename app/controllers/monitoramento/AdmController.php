@@ -114,6 +114,25 @@ class ADMcontroller{
         }
     }
      
+    public static function adicionar_aluno(){
+        $dados = [
+            "ra"       => $_POST["ra"],
+            "nome"     => $_POST["nome"],
+            "turno"    => $_POST["turno"],
+            "data_nasc"     => $_POST["data_nasc"] ?? null,
+            "turma"    => $_POST["turma_adicionar"]
+        ];
+
+        $query = ADModel::AdicionarAluno($dados);
+
+        if($query){
+            $_SESSION["PopUp_add_aluno"] = True;
+            header("location: adm_home");
+            exit();
+        }
+        
+    }
+
     public static function adicionar_turma(){
         $serie = $_POST["serie-turma"];
         $turno = $_POST["turno-turma"];

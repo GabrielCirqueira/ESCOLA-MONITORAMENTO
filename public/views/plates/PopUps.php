@@ -5,6 +5,12 @@ $popups = [
         "title" => "RA NÃO ENCONTRADO",
         "message" => "Infelizmente não encontramos o <br> RA em nosso banco de dados."
     ],
+
+    "PopUp_add_aluno" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "Aluno inserido com sucesso!"
+    ],
     "PopUp_editar_aluno_true" => [
         "status_class" => "check",
         "title" => "SUCESSO!",
