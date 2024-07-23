@@ -57,7 +57,6 @@ if(!isset($_SESSION["PopUp_PRF_NaoENC"])){
 $rotas = [ 
     "login_adm_verifica"            => ADMcontroller::class,
     "adm_home"                      => ADMcontroller::class,
-    "backups"                       => ADMcontroller::class,
     "adicionar_aluno"               => ADMcontroller::class,
     "adicionar_professor"           => ADMcontroller::class,
     "editar_dados_aluno"            => ADMcontroller::class,

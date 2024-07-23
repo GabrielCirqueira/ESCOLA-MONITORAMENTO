@@ -2,7 +2,7 @@
   <header class="header">
 
     <div class="menu">
-      <?php if ($user != "ALUNO" && $user != "home") {?>
+      <?php if ($user != "ALUNO" && $user != "home" && $user != "ADM") {?>
         <i class="fas fa-bars fa-2x" id="icone-menu-esquerdo-lateral" style="color:gray;width:20px"></i>
 
       <?php }?>

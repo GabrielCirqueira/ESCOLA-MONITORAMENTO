@@ -332,6 +332,7 @@ function editarAluno(ra, nome, turma, turno, dataNasc) {
     document.getElementById('filtro-container-alunos').style.display = 'none';
     document.getElementById('formEditar').classList.add('active');
     document.getElementById('editarRA').value = ra;
+    document.querySelector('#alunos h1').style.display = 'none';
     document.getElementById('editarNome').value = nome;
     document.getElementById('data').value = dataNasc;
 
@@ -356,7 +357,8 @@ function editarAluno(ra, nome, turma, turno, dataNasc) {
  
 
 function cancelarEdicao() {
-    document.getElementById('filtro-container').style.display = 'block';
+    document.getElementById('filtro-container-alunos').style.display = 'block';
     document.getElementById('formEditar').classList.remove('active');
+    document.querySelector('#alunos h1').style.display = 'block';
     document.getElementById('tabelaAlunos').style.display = 'table';
 }

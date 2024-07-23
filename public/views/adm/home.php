@@ -1,7 +1,6 @@
 <main class="main-home">
     <section class="gestor-main">
         <div class="menu-lateral-gestor">
-
             <details class="details-menu-gestor">
                 <summary class="sumary-menu-gestor">Alunos</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('alunos')">Alunos</button>
@@ -31,6 +30,11 @@
                     Turma</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('verTurmas')">Ver Turmas</button>
             </details>
+
+            <details class="details-menu-gestor">
+                <summary class="sumary-menu-gestor">Banco de Dados</summary>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('database')">Backups</button>
+            </details>
         </div>
 
         <div class="info-gestor">
@@ -53,40 +57,43 @@
                         </div>
                         <div class="input-group-adicionar-aluno">
                             <h3>DATA DE NASCIMENTO</h3>
-                            <input type="date" name="data_nasc" id="adicionarDataNasc" placeholder="Data de Nascimento"
-                               >
+                            <input type="date" name="data_nasc" id="adicionarDataNasc" placeholder="Data de Nascimento">
                         </div>
                         <h3>TURMA:</h3>
                         <div class="radio-group">
                             <?php foreach ($data["turmas"]["turmas"] as $turma) {?>
-                            <input type="radio" id="turma_add_<?=$turma["nome"]?>" name="turma_adicionar" required value="<?=$turma["nome"]?>">
+                            <input type="radio" id="turma_add_<?=$turma["nome"]?>" name="turma_adicionar" required
+                                value="<?=$turma["nome"]?>">
                             <label for="turma_add_<?=$turma["nome"]?>"><?=$turma["nome"]?></label>
                             <?php }?>
                         </div>
                         <h3>TURNO:</h3>
                         <div class="radio-group">
                             <?php foreach ($data["turnos"] as $turnos) {?>
-                            <input type="radio" id="turno_add_<?=$turnos?>" name="turno_adicionar" required value="<?=$turnos?>">
+                            <input type="radio" id="turno_add_<?=$turnos?>" name="turno_adicionar" required
+                                value="<?=$turnos?>">
                             <label for="turno_add_<?=$turnos?>"><?=$turnos?></label>
                             <?php }?>
                         </div>
                         <br><br>
                         <center>
-                        <button type="submit" class="btn-salvar-adicionar-aluno">Salvar</button>
+                            <button type="submit" class="btn-salvar-adicionar-aluno">Salvar</button>
                         </center>
                         <br><br><br><br><br><br><br><br><br>
-                        </form>
+                    </form>
                 </div>
 
 
                 <div id="alunos" class="conteudo-item">
-                <center>
-                    <h1>ALUNOS</h1>
-                </center>
-                <div id="filtro-container-alunos" class="filtro-container">
-                <input type="text" id="filtroRAAlunos" class="filtro-ra" placeholder="Filtrar por RA" oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
-                <input type="text" id="filtroNomeAlunos" class="filtro-nome" placeholder="Filtrar por Nome" oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
-    </div>
+                    <center>
+                        <h1>ALUNOS</h1>
+                    <div id="filtro-container-alunos" class="filtro-container">
+                        <input type="text" id="filtroRAAlunos" class="filtro-ra" placeholder="Filtrar por RA"
+                            oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
+                        <input type="text" id="filtroNomeAlunos" class="filtro-nome" placeholder="Filtrar por Nome"
+                            oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
+                    </div>
+                    </center>
                     <table id="tabelaAlunos" class="tabela_alunos_adm">
 
                         <thead>
@@ -152,18 +159,21 @@
 
                 <div id="provas" class="conteudo-item">
                     <center>
-                    <h1>PROVAS FEITAS</h1>
+                        <h1>PROVAS FEITAS</h1>
                     </center>
                     <div id="filtro-container-provas" class="filtro-container">
-        <input type="text" id="filtroRAProvas" class="filtro-ra" placeholder="Filtrar por RA" oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
-        <input type="text" id="filtroNomeProvas" class="filtro-nome" placeholder="Filtrar por Nome" oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
-    </div>
+                        <input type="text" id="filtroRAProvas" class="filtro-ra" placeholder="Filtrar por RA"
+                            oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
+                        <input type="text" id="filtroNomeProvas" class="filtro-nome" placeholder="Filtrar por Nome"
+                            oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
+                    </div>
                     <table id="tabelaProvas" class="tabela_alunos_adm">
                         <thead>
                             <tr>
                                 <th>RA</th>
                                 <th>ALUNO</th>
                                 <th>TURMA</th>
+                                <th>DATA</th>
                                 <th>DISCIPLINA</th>
                                 <th>PONTOS</th>
                                 <th>EDITAR</th>
@@ -175,6 +185,7 @@
                                 <td><?=$aluno["ra"]?></td>
                                 <td><?=$aluno["aluno"]?></td>
                                 <td><?=$aluno["turma"]?></td>
+                                <td><?=$aluno["data_aluno"]?></td>
                                 <td><?=$aluno["disciplina"]?></td>
                                 <td><?=$aluno["pontos_aluno"]?></td>
                                 <td><button class="btn-editar">EDITAR</button>
@@ -183,6 +194,36 @@
                             <?php }?>
                         </tbody>
                     </table>
+                </div>
+
+                <div id="database" class="conteudo-item">
+                    <center>
+                        <h1>BACKUPS BANCO DE DADOS</h1>
+                    </center>
+                    <div class="area-adm-backups">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Hora</th>
+                                    <th>Minuto</th>
+                                    <th>Tamanho</th>
+                                    <th>Download</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($data["backups"] as $arquivo): ?>
+                                <tr>
+                                    <td><?=$arquivo['data']?></td>
+                                    <td><?=$arquivo['hora']?></td>
+                                    <td><?=$arquivo['minuto']?></td>
+                                    <td><?=$arquivo['tamanho']?></td>
+                                    <td><a href='app/config/backups/<?=$arquivo['arquivo']?>' download>Download</a></td>
+                                </tr>
+                                <?php endforeach;?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
     </section>
