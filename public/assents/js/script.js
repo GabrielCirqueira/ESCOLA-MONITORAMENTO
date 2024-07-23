@@ -306,24 +306,18 @@ function filtrarAlunos() {
     }
 }
 
-function filtrarAlunos() {
-    var inputRA, inputNome, filterRA, filterNome, table, tr, tdRA, tdNome, i;
-    inputRA = document.getElementById("filtroRA");
-    inputNome = document.getElementById("filtroNome");
-    filterRA = inputRA.value.toUpperCase();
-    filterNome = inputNome.value.toUpperCase();
-    table = document.getElementById("tabelaAlunos");
-    tr = table.getElementsByTagName("tr");
+function filtrarTabela(tabelaId, filtroRAId, filtroNomeId) {
+    var tabela, tr, td, i, ra, nome, filtroRA, filtroNome;
+    tabela = document.getElementById(tabelaId);
+    tr = tabela.getElementsByTagName("tr");
+    filtroRA = document.getElementById(filtroRAId).value.toUpperCase();
+    filtroNome = document.getElementById(filtroNomeId).value.toUpperCase();
 
-    for (i = 0; i < tr.length; i++) {
-        tdRA = tr[i].getElementsByTagName("td")[0]; // Coluna do RA
-        tdNome = tr[i].getElementsByTagName("td")[1]; // Coluna do Nome
-
-        if (tdRA && tdNome) {
-            var raValue = tdRA.textContent || tdRA.innerText;
-            var nomeValue = tdNome.textContent || tdNome.innerText;
-
-            if (raValue.toUpperCase().indexOf(filterRA) > -1 && nomeValue.toUpperCase().indexOf(filterNome) > -1) {
+    for (i = 1; i < tr.length; i++) {
+        ra = tr[i].getElementsByTagName("td")[0];
+        nome = tr[i].getElementsByTagName("td")[1];
+        if (ra || nome) {
+            if (ra.innerHTML.toUpperCase().indexOf(filtroRA) > -1 && nome.innerHTML.toUpperCase().indexOf(filtroNome) > -1) {
                 tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
@@ -332,9 +326,10 @@ function filtrarAlunos() {
     }
 }
 
+
 function editarAluno(ra, nome, turma, turno, dataNasc) {
     document.getElementById('tabelaAlunos').style.display = 'none';
-    document.getElementById('filtro-container').style.display = 'none';
+    document.getElementById('filtro-container-alunos').style.display = 'none';
     document.getElementById('formEditar').classList.add('active');
     document.getElementById('editarRA').value = ra;
     document.getElementById('editarNome').value = nome;

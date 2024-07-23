@@ -72,7 +72,7 @@
                         </div>
                         <br><br>
                         <center>
-                        <button type="submit" class="btn-salvar-adicionar-aluno">Salvar</button> 
+                        <button type="submit" class="btn-salvar-adicionar-aluno">Salvar</button>
                         </center>
                         <br><br><br><br><br><br><br><br><br>
                         </form>
@@ -80,13 +80,15 @@
 
 
                 <div id="alunos" class="conteudo-item">
-                    <div id="filtro-container" class="filtro-container">
-                        <input type="text" id="filtroRA" class="filtro-ra" placeholder="Filtrar por RA"
-                            oninput="filtrarAlunos()">
-                        <input type="text" id="filtroNome" class="filtro-nome" placeholder="Filtrar por Nome"
-                            oninput="filtrarAlunos()">
-                    </div>
+                <center>
+                    <h1>ALUNOS</h1>
+                </center>
+                <div id="filtro-container-alunos" class="filtro-container">
+                <input type="text" id="filtroRAAlunos" class="filtro-ra" placeholder="Filtrar por RA" oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
+                <input type="text" id="filtroNomeAlunos" class="filtro-nome" placeholder="Filtrar por Nome" oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
+    </div>
                     <table id="tabelaAlunos" class="tabela_alunos_adm">
+
                         <thead>
                             <tr>
                                 <th>RA</th>
@@ -148,8 +150,40 @@
                     </div>
                 </div>
 
-
-
+                <div id="provas" class="conteudo-item">
+                    <center>
+                    <h1>PROVAS FEITAS</h1>
+                    </center>
+                    <div id="filtro-container-provas" class="filtro-container">
+        <input type="text" id="filtroRAProvas" class="filtro-ra" placeholder="Filtrar por RA" oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
+        <input type="text" id="filtroNomeProvas" class="filtro-nome" placeholder="Filtrar por Nome" oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
+    </div>
+                    <table id="tabelaProvas" class="tabela_alunos_adm">
+                        <thead>
+                            <tr>
+                                <th>RA</th>
+                                <th>ALUNO</th>
+                                <th>TURMA</th>
+                                <th>DISCIPLINA</th>
+                                <th>PONTOS</th>
+                                <th>EDITAR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data["alunos"]["provas_feitas"] as $aluno) {?>
+                            <tr>
+                                <td><?=$aluno["ra"]?></td>
+                                <td><?=$aluno["aluno"]?></td>
+                                <td><?=$aluno["turma"]?></td>
+                                <td><?=$aluno["disciplina"]?></td>
+                                <td><?=$aluno["pontos_aluno"]?></td>
+                                <td><button class="btn-editar">EDITAR</button>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
     </section>
 </main>
