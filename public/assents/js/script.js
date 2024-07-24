@@ -325,6 +325,41 @@ function filtrarTabela(tabelaId, filtroRAId, filtroNomeId) {
         }
     }
 }
+function filtrarTabelaMaterias() {
+    var tabela, tr, td, i, nome, filtroNome;
+    tabela = document.getElementById("tabelaMaterias");
+    tr = tabela.getElementsByTagName("tr");
+    filtroNome = document.getElementById("filtroNomeMaterias").value.toUpperCase();
+
+    for (i = 1; i < tr.length; i++) {
+        nome = tr[i].getElementsByTagName("td")[1];
+        if (nome) {
+            if (nome.innerHTML.toUpperCase().indexOf(filtroNome) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+function filtrarTabelaProfessores() {
+    var tabela, tr, td, i, nome, filtroNome;
+    tabela = document.getElementById("tabelaProfessores");
+    tr = tabela.getElementsByTagName("tr");
+    filtroNome = document.getElementById("filtroNomeProfessores").value.toUpperCase();
+
+    for (i = 1; i < tr.length; i++) {
+        nome = tr[i].getElementsByTagName("td")[0];
+        if (nome) {
+            if (nome.innerHTML.toUpperCase().indexOf(filtroNome) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
 
 
 function editarAluno(ra, nome, turma, turno, dataNasc) {

@@ -1368,7 +1368,6 @@ input:checked + .slider:before {
   margin-bottom: 15px;
 }
 
- 
 .form-editar label {
   display: block;
   margin-bottom: 5px;
@@ -1515,4 +1514,56 @@ input:checked + .slider:before {
   background-color: #80bf82;
   transition: 0.5s ease-in-out;
   color: white;
+}
+
+
+.form_add_materia_adm {
+  background-color: #ffffff00;
+  padding: 20px; 
+  margin: 40px auto; 
+  height: 80%;
+  width: 80%;
+}
+
+.form_add_materia_adm form{
+  width: 100%;
+  text-align: center;
+}
+
+.form-title-add-materia {
+  text-align: center;
+  margin-bottom: 20px;   
+  color: #333;
+}
+
+.form-group-add-materia {
+  margin-bottom: 15px;
+}
+ 
+
+.form-group-add-materia input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  height: 50px;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.submit-button-add-materia {
+  background-color: #81b483;
+  width: 80%;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 1px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button-add-materia:hover {
+  background-color: #4b734c;
 }

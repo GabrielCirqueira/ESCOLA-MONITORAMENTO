@@ -78,9 +78,29 @@ class ADMcontroller
                 "turmas" => [
                     "turmas" => ADModel::GetTurmas(),
                 ],
+                "disciplinas" => ADModel::GetDisciplinas(),
                 "turnos" => explode(",", $_ENV["TURNOS"]),
                 "backups" => self::backups(),
+                "professores" => ADModel::GetProfessores(),
             ];
+
+            if (isset($_POST["Enviar-materia"])) {
+                if (ADModel::AdicionarDisciplina($_POST["nomeMateria"])) {
+
+                    $_SESSION["PopUp_add_materia_true"] = true;
+                    header("location: adm_home");
+                    exit();
+                }
+            }
+
+            if (isset($_POST["excluir-materia"])) {
+                if (ADModel::ExcluirDisciplina($_POST["excluir-materia"])) {
+
+                    $_SESSION["PopUp_excluir_materia_true"] = true;
+                    header("location: adm_home");
+                    exit();
+                }
+            }
 
             MainController::Templates("public/views/adm/home.php", "ADM", $dados);
         } else {

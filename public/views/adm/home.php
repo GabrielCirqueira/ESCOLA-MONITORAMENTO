@@ -11,7 +11,7 @@
 
             <details class="details-menu-gestor">
                 <summary class="sumary-menu-gestor">Materias</summary>
-                <button class="button-details-menu-gestor" onclick="mostrarConteudo('materia')">Materia</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('materias')">Materia</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('adicionarMateria')">Adicionar
                     Materia</button>
             </details>
@@ -39,9 +39,99 @@
 
         <div class="info-gestor">
             <div id="conteudo">
-                <div class="painel-frontal-gestor conteudo-item active">
-                    <img src="https://telegra.ph/file/14ab586a79f8002b24880.png" alt="IMAGEM BRAZÃO">
-                    <h1>PAINEL GESTOR</h1>
+
+                <div id="verProfessores" class="conteudo-item">
+                    <center>
+                        <h2>PROFESSORES CADASTRADOS</h2>
+                    </center>
+                    <div id="filtro-container-materias" class="filtro-container">
+                        <input type="text" id="filtroNomeProfessores" class="filtro-nome" placeholder="Filtrar por Nome"
+                            oninput="filtrarTabelaProfessores()">
+                    </div>
+                    <table id="tabelaProfessores" class="tabela_alunos_adm">
+                        <thead>
+                            <tr>
+                                <th>NOME</th>
+                                <th>DISCIPLINA</th>
+                                <th>USUARIO</th>
+                                <th>SENHA</th>
+                                <th>EDITAR</th>
+                                <th>EXCLUIR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data["professores"] as $professor) {?>
+                            <tr>
+                                <td><?=$professor["nome"]?></td>
+                                <td>
+                                    <?php
+$disciplinas = explode(";", $professor["disciplinas"]);
+    echo count($disciplinas) . " DISCIPLINA(S)";
+    ?>
+                                </td>
+                                <td><?=$professor["numero"]?></td>
+                                <td><?=$professor["senha"]?></td>
+                                <td><button class="btn-editar">EDITAR</button></td>
+                                <td>
+                                    <form action="" method="post">
+                                        <button type="submit" name="" value="<?=$disciplina['id']?>"
+                                            class="btn-excluir">EXCLUIR</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="materias" class="conteudo-item">
+                    <center>
+                        <h2>MATERIAS CADASTRADAS</h2>
+                    </center>
+                    <div id="filtro-container-materias" class="filtro-container">
+                        <input type="text" id="filtroNomeMaterias" class="filtro-nome" placeholder="Filtrar por Nome"
+                            oninput="filtrarTabelaMaterias()">
+                    </div>
+                    <table id="tabelaMaterias" class="tabela_alunos_adm">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOME</th>
+                                <th>EXCLUIR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data["disciplinas"] as $disciplina) {?>
+                            <tr>
+                                <td><?=$disciplina["id"]?></td>
+                                <td><?=$disciplina["nome"]?></td>
+                                <td>
+                                    <form action="" class="form-excluir-materia" method="post">
+                                        <button type="submit" name="excluir-materia" value="<?=$disciplina['id']?>"
+                                            class="btn-excluir">EXCLUIR</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="adicionarMateria" class="conteudo-item">
+                    <div class="form_add_materia_adm">
+                        <form id="formAddMateria" action="" method="post">
+                            <h1 class="form-title-add-materia">Adicionar Nova Matéria</h1>
+                            <br>
+                            <div class="form-group-add-materia">
+                                <input type="text" id="nomeMateria" name="nomeMateria"
+                                    placeholder="Digite o nome da matéria" required>
+                            </div>
+                            <br>
+                            <button type="submit" name="Enviar-materia" class="submit-button-add-materia">Adicionar
+                                Matéria</button>
+                        </form>
+                    </div>
+
                 </div>
 
                 <div id="AddAluno" class="conteudo-item">
@@ -83,16 +173,15 @@
                     </form>
                 </div>
 
-
                 <div id="alunos" class="conteudo-item">
                     <center>
                         <h1>ALUNOS</h1>
-                    <div id="filtro-container-alunos" class="filtro-container">
-                        <input type="text" id="filtroRAAlunos" class="filtro-ra" placeholder="Filtrar por RA"
-                            oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
-                        <input type="text" id="filtroNomeAlunos" class="filtro-nome" placeholder="Filtrar por Nome"
-                            oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
-                    </div>
+                        <div id="filtro-container-alunos" class="filtro-container">
+                            <input type="text" id="filtroRAAlunos" class="filtro-ra" placeholder="Filtrar por RA"
+                                oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
+                            <input type="text" id="filtroNomeAlunos" class="filtro-nome" placeholder="Filtrar por Nome"
+                                oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
+                        </div>
                     </center>
                     <table id="tabelaAlunos" class="tabela_alunos_adm">
 
@@ -225,6 +314,13 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="painel-frontal-gestor conteudo-item active">
+                    <img src="https://telegra.ph/file/14ab586a79f8002b24880.png" alt="IMAGEM BRAZÃO">
+                    <h1>PAINEL GESTOR</h1>
+                </div>
+
+
             </div>
     </section>
 </main>
