@@ -22,6 +22,21 @@ class ADModel
         return $query;
     }
 
+    public static function AdicionarProfessor($dados)
+    {
+        $sql = "INSERT INTO professores (nome, usuario, senha, numero, disciplinas)
+                VALUES (:nome, :usuario, :senha, :numero, :disciplinas)";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':nome', $dados['nome']);
+        $query->bindParam(':usuario', $dados['usuario']);
+        $query->bindParam(':senha', $dados['senha']);
+        $query->bindParam(':numero', $dados['numero']);
+        $query->bindParam(':disciplinas', $dados['disciplinas']);
+        $query->execute();
+        return $query;
+    }
+
     public static function AdicionarAluno($dados)
     {
         $sql = "INSERT INTO alunos (ra, nome, turno, data_nasc, turma)
@@ -43,6 +58,16 @@ class ADModel
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindParam(':nome', $nomeDisciplina);
+        $query->execute();
+        return $query;
+    }
+
+    public static function ExcluirProfessor($id)
+    {
+        $sql = "DELETE FROM professores WHERE id = :id";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':id', $id);
         $query->execute();
         return $query;
     }

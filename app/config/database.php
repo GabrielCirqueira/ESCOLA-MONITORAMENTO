@@ -185,6 +185,22 @@ class Database
                 liberar_prova   varchar(255)
                 );";
 
+        $logsADM = "CREATE TABLE IF NOT EXISTS logs_adm(
+            id          int AUTO_INCREMENT primary key,
+            autor       varchar(255),
+            data        DATETIME,
+            descricao   TEXT
+        );";
+
+        $logsPROFESSOR = "CREATE TABLE IF NOT EXISTS logs_professor(
+            id          int AUTO_INCREMENT primary key,
+            autor       varchar(255),
+            data        DATETIME,
+            descricao   TEXT
+        );";
+
+        self::GetInstance()->query($logsADM);
+        self::GetInstance()->query($logsPROFESSOR);
         self::GetInstance()->query($professores);
         self::GetInstance()->query($disciplinas);
         self::GetInstance()->query($turmas);

@@ -70,6 +70,8 @@ class ADMcontroller
     {
         if (MainController::Verificar_sessao("ADM")) {
 
+            self::Get_forms();
+
             $dados = [
                 "alunos" => [
                     "provas_feitas" => AlunoModel::GetProvasFinalizadas(),
@@ -84,27 +86,64 @@ class ADMcontroller
                 "professores" => ADModel::GetProfessores(),
             ];
 
-            if (isset($_POST["Enviar-materia"])) {
-                if (ADModel::AdicionarDisciplina($_POST["nomeMateria"])) {
-
-                    $_SESSION["PopUp_add_materia_true"] = true;
-                    header("location: adm_home");
-                    exit();
-                }
-            }
-
-            if (isset($_POST["excluir-materia"])) {
-                if (ADModel::ExcluirDisciplina($_POST["excluir-materia"])) {
-
-                    $_SESSION["PopUp_excluir_materia_true"] = true;
-                    header("location: adm_home");
-                    exit();
-                }
-            }
-
             MainController::Templates("public/views/adm/home.php", "ADM", $dados);
         } else {
             header("location: home");
+        }
+    }
+
+    public static function Get_forms()
+    {
+
+        if (isset($_POST["excluir_professor"])) {
+            if (ADModel::ExcluirProfessor($_POST["excluir_professor"])) {
+
+                $_SESSION["PopUp_excluir_professor"] = true;
+                header("location: adm_home");
+                exit();
+            }
+        }
+
+        if (isset($_POST["Enviar-professor"])) {
+
+            if ($_POST["disciplina_professor"] == null) {
+                $_SESSION["PopUp_not_Materia"] = true;
+                header("location: adm_home");
+                exit();
+            }
+
+            $dados_inserir_professor = [
+                "nome" => $_POST["nome_professor"],
+                "usuario" => explode(" ", $_POST["nome_professor"])[0],
+                "senha" => $_POST["senha_acesso"],
+                "numero" => $_POST["usuario_acesso"],
+                "disciplinas" => implode(";", $_POST["disciplina_professor"]),
+            ];
+
+            if (ADModel::AdicionarProfessor($dados_inserir_professor)) {
+
+                $_SESSION["PopUp_add_professor_true"] = true;
+                header("location: adm_home");
+                exit();
+            }
+        }
+
+        if (isset($_POST["Enviar-materia"])) {
+            if (ADModel::AdicionarDisciplina($_POST["nomeMateria"])) {
+
+                $_SESSION["PopUp_add_materia_true"] = true;
+                header("location: adm_home");
+                exit();
+            }
+        }
+
+        if (isset($_POST["excluir-materia"])) {
+            if (ADModel::ExcluirDisciplina($_POST["excluir-materia"])) {
+
+                $_SESSION["PopUp_excluir_materia_true"] = true;
+                header("location: adm_home");
+                exit();
+            }
         }
     }
 

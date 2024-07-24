@@ -1567,3 +1567,87 @@ input:checked + .slider:before {
 .submit-button-add-materia:hover {
   background-color: #4b734c;
 }
+
+
+
+ 
+
+.form-adicionar-professor h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-adicionar-professor label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333333;
+}
+
+
+.disciplina-box label div {
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  height: 85px;
+}
+
+.form-adicionar-professor form{
+  text-align: center;
+}
+
+.form-adicionar-professor input[type="text"],.form-adicionar-professor input[type="password"] {
+  width: 70%;
+  padding: 5px 12px;
+  height: 40px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  outline: none;
+  font-size: 17px;
+}
+
+.form-adicionar-professor h3 {
+  font-size: 20px;
+  color: #2e2e2e;
+  margin-bottom: 10px;
+}
+
+.checkbox-group-disciplinas {
+  width: 70%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.disciplina-box {
+  position: relative;
+}
+
+.form-adicionar-professor input[type="checkbox"] {
+  display: none;
+}
+
+.form-adicionar-professor label[for^="disciplina_professor"] {
+  display: block;
+  padding: 10px;
+  background-color: #d3d3d3;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.form-adicionar-professor input[type="checkbox"]:checked + label {
+  background-color: #77ae77;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .checkbox-group-disciplinas {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  }
+}

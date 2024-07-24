@@ -40,6 +40,63 @@
         <div class="info-gestor">
             <div id="conteudo">
 
+
+                <div id="adicionarProfessor" class="conteudo-item">
+                    <div class="form-adicionar-professor">
+                        <center>
+                            <h1>Adicionar Professor</h1>
+                        </center>
+                        <form action="" method="post">
+                            <input type="text" name="nome_professor" placeholder="Nome do professor" required
+                                id="nome_professor_add">
+
+                            <input type="text" name="usuario_acesso" placeholder="Usuario de Acesso" required
+                                id="usuario_acesso">
+
+                            <input type="text" name="senha_acesso" placeholder="Senha de Acesso" required
+                                id="senha_acesso">
+
+                            <h2>Disciplinas</h2>
+                            <center>
+
+                            <div class="checkbox-group-disciplinas">
+                                <?php
+$materias = $data["disciplinas"];
+
+usort($materias, function ($a, $b) {
+    return strcmp($a['nome'], $b['nome']);
+});
+foreach ($materias as $disciplina) {?>
+                                <div class="disciplina-box">
+                                    <input type="checkbox" id="disciplina_professor_<?=$disciplina["nome"]?>"
+                                        name="disciplina_professor[]" value="<?=$disciplina["nome"]?>">
+                                    <label for="disciplina_professor_<?=$disciplina["nome"]?>">
+                                        <div><span><?=$disciplina["nome"]?></span></div>
+                                    </label>
+                                </div>
+                                <?php }?>
+                            </div>
+                            </center>
+                            <br><br>
+                            <br><br>
+                            <button type="submit" name="Enviar-professor" class="submit-button-add-materia">Adicionar
+                                Professor</button>
+                        </form>
+                        <div>
+                            <br><br>
+                            <br><br>
+                            <br><br>
+                            <br><br>
+                            <br><br>
+                            <br><br>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
                 <div id="verProfessores" class="conteudo-item">
                     <center>
                         <h2>PROFESSORES CADASTRADOS</h2>
@@ -74,7 +131,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><button class="btn-editar">EDITAR</button></td>
                                 <td>
                                     <form action="" method="post">
-                                        <button type="submit" name="" value="<?=$disciplina['id']?>"
+                                        <button type="submit" name="excluir_professor" value="<?=$professor['id']?>"
                                             class="btn-excluir">EXCLUIR</button>
                                     </form>
                                 </td>
@@ -157,6 +214,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                             <label for="turma_add_<?=$turma["nome"]?>"><?=$turma["nome"]?></label>
                             <?php }?>
                         </div>
+
                         <h3>TURNO:</h3>
                         <div class="radio-group">
                             <?php foreach ($data["turnos"] as $turnos) {?>
