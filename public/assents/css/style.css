@@ -1216,11 +1216,13 @@ input:checked + .slider:before {
   background-color: #f9f9f9;
 }
 
+.form-editar-professor .btn-editar,
 .tabela_alunos_adm .btn-editar {
   background-color: #80bf82;
   color: white;
 }
 
+.form-editar-professor .btn-excluir,
 .tabela_alunos_adm .btn-excluir {
   background-color: #bf6e68;
   color: white;
@@ -1229,6 +1231,7 @@ input:checked + .slider:before {
 
 
 
+.form-editar-professor button,
 .tabela_alunos_adm button {
   border: none;
   padding: 8px 11px;
@@ -1238,6 +1241,7 @@ input:checked + .slider:before {
   transition: background-color 0.3s ease;
 }
 
+.form-editar-professor button:hover,
 .tabela_alunos_adm button:hover {
   opacity: 0.8;
 }
@@ -1269,10 +1273,6 @@ input:checked + .slider:before {
 .filtro-container input::placeholder {
   color: #999;
 }
-
-
-
-
 
  
 .container {
@@ -1572,12 +1572,14 @@ input:checked + .slider:before {
 
  
 
+.form-editar-professor h1,
 .form-adicionar-professor h1 {
   font-size: 24px;
   color: #333;
   margin-bottom: 20px;
 }
 
+.form-editar-professor label ,
 .form-adicionar-professor label {
   display: block;
   margin-bottom: 8px;
@@ -1598,6 +1600,7 @@ input:checked + .slider:before {
   text-align: center;
 }
 
+.form-editar-professor input[type="text"],.form-editar-professor input[type="password"],
 .form-adicionar-professor input[type="text"],.form-adicionar-professor input[type="password"] {
   width: 70%;
   padding: 5px 12px;
@@ -1626,10 +1629,12 @@ input:checked + .slider:before {
   position: relative;
 }
 
+.form-editar-professor input[type="checkbox"],
 .form-adicionar-professor input[type="checkbox"] {
   display: none;
 }
 
+.form-editar-professor label[for^="disciplina_professor"],
 .form-adicionar-professor label[for^="disciplina_professor"] {
   display: block;
   padding: 10px;
@@ -1641,6 +1646,8 @@ input:checked + .slider:before {
   transition: background-color 0.3s ease;
 }
 
+
+.form-editar-professor input[type="checkbox"]:checked + label,
 .form-adicionar-professor input[type="checkbox"]:checked + label {
   background-color: #77ae77;
   color: #fff;
@@ -1650,4 +1657,19 @@ input:checked + .slider:before {
   .checkbox-group-disciplinas {
       grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   }
+}
+
+
+.buttons-editar{
+  display: flex;
+  width: 70%;
+}
+
+.item {
+  flex: 1;
+  border: 1px solid #ccc;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

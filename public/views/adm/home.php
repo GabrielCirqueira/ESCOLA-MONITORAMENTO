@@ -1,3 +1,12 @@
+<?php
+
+$materias = $data["disciplinas"];
+
+usort($materias, function ($a, $b) {
+    return strcmp($a['nome'], $b['nome']);
+});
+
+?>
 <main class="main-home">
     <section class="gestor-main">
         <div class="menu-lateral-gestor">
@@ -60,13 +69,7 @@
                             <center>
 
                             <div class="checkbox-group-disciplinas">
-                                <?php
-$materias = $data["disciplinas"];
-
-usort($materias, function ($a, $b) {
-    return strcmp($a['nome'], $b['nome']);
-});
-foreach ($materias as $disciplina) {?>
+                                <?php foreach ($materias as $disciplina) {?>
                                 <div class="disciplina-box">
                                     <input type="checkbox" id="disciplina_professor_<?=$disciplina["nome"]?>"
                                         name="disciplina_professor[]" value="<?=$disciplina["nome"]?>">
@@ -95,51 +98,84 @@ foreach ($materias as $disciplina) {?>
                 </div>
 
 
-
-
                 <div id="verProfessores" class="conteudo-item">
-                    <center>
-                        <h2>PROFESSORES CADASTRADOS</h2>
-                    </center>
-                    <div id="filtro-container-materias" class="filtro-container">
-                        <input type="text" id="filtroNomeProfessores" class="filtro-nome" placeholder="Filtrar por Nome"
-                            oninput="filtrarTabelaProfessores()">
-                    </div>
-                    <table id="tabelaProfessores" class="tabela_alunos_adm">
-                        <thead>
-                            <tr>
-                                <th>NOME</th>
-                                <th>DISCIPLINA</th>
-                                <th>USUARIO</th>
-                                <th>SENHA</th>
-                                <th>EDITAR</th>
-                                <th>EXCLUIR</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($data["professores"] as $professor) {?>
-                            <tr>
-                                <td><?=$professor["nome"]?></td>
-                                <td>
-                                    <?php
+
+    <center>
+        <h2 id="titulo-professor" >PROFESSORES CADASTRADOS</h2>
+    </center>
+    <div id="filtro-professor" class="filtro-container">
+        <input type="text" id="filtroNomeProfessores" class="filtro-nome" placeholder="Filtrar por Nome" oninput="filtrarTabelaProfessores()">
+    </div>
+    <table id="tabelaProfessores" class="tabela_alunos_adm">
+        <thead>
+            <tr>
+                <th>NOME</th>
+                <th>DISCIPLINA</th>
+                <th>USUARIO</th>
+                <th>SENHA</th>
+                <th>EDITAR</th>
+                <th>EXCLUIR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($data["professores"] as $professor) {?>
+            <tr>
+                <td><?=$professor["nome"]?></td>
+                <td>
+                    <?php
 $disciplinas = explode(";", $professor["disciplinas"]);
     echo count($disciplinas) . " DISCIPLINA(S)";
     ?>
-                                </td>
-                                <td><?=$professor["numero"]?></td>
-                                <td><?=$professor["senha"]?></td>
-                                <td><button class="btn-editar">EDITAR</button></td>
-                                <td>
-                                    <form action="" method="post">
-                                        <button type="submit" name="excluir_professor" value="<?=$professor['id']?>"
-                                            class="btn-excluir">EXCLUIR</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php }?>
-                        </tbody>
-                    </table>
+                </td>
+                <td><?=$professor["numero"]?></td>
+                <td><?=$professor["senha"]?></td>
+                <td><button onclick="ColocarDadosProf('<?=$professor['id']?>','<?=$professor['nome']?>','<?=$professor['numero']?>','<?=$professor['senha']?>','<?=$professor['disciplinas']?>')" class="btn-editar">EDITAR</button></td>
+                <td>
+                    <form action="" method="post">
+                        <button type="submit" name="excluir_professor" value="<?=$professor['id']?>" class="btn-excluir">EXCLUIR</button>
+                    </form>
+                </td>
+            </tr>
+            <?php }?>
+        </tbody>
+    </table>
+    <div id="brs" ><br><br><br><br><br><br><br><br><br><br><br><br></div>
+    <div id="form-editar-professor" class="form-editar-professor hidden">
+        <center>
+            <h1>Editar Professor</h1>
+            <form action="" method="post">
+                <input type="hidden" id="id-professor-editar" name="id" value="">
+                <input type="text" name="nome_professor" placeholder="Nome do professor" required id="nome_professor_editar_add">
+                <input type="text" name="usuario_acesso" placeholder="Usuario de Acesso" required id="usuario_acesso_editar">
+                <input type="text" name="senha_acesso" placeholder="Senha de Acesso" required id="senha_acesso_editar">
+
+                <h2>Disciplinas</h2>
+                <div class="checkbox-group-disciplinas">
+                    <?php foreach ($materias as $disciplina) {?>
+                    <div class="disciplina-box">
+                        <input type="checkbox" id="disciplina_professor_editar_<?=$disciplina["nome"]?>" name="disciplina_professor_editar[]" value="<?=$disciplina["nome"]?>">
+                        <label for="disciplina_professor_editar_<?=$disciplina["nome"]?>">
+                            <div><span><?=$disciplina["nome"]?></span></div>
+                        </label>
+                    </div>
+                    <?php }?>
                 </div>
+            </center>
+            <br><br><br><br>
+            <center>
+                <div class="buttons-editar">
+                    <button type="submit" name="Enviar-edit-professor" class="btn-editar item">Salvar</button>
+                    <button type="button" class="btn-excluir item" onclick="cancelarEdicao()">Cancelar</button>
+                </div>
+            </center>
+            </form>
+            <div>
+                <br><br><br><br><br><br><br><br><br><br><br><br>
+            </div>
+        </div>
+    </div>
+</div>
+
 
                 <div id="materias" class="conteudo-item">
                     <center>

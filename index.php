@@ -24,7 +24,7 @@ Backup::runBackup();
 
 session_start();
 
-if (!isset($_SESSION["PopUp_excluir_professor"])) {
+if (!isset($_SESSION["PopUp_editar_professor"])) {
 
     $_SESSION["PopUp_professor"] = false;
     $_SESSION["popup_not_gestor"] = false;
@@ -45,6 +45,7 @@ if (!isset($_SESSION["PopUp_excluir_professor"])) {
     $_SESSION["PopUp_PRF_NaoENC"] = false;
     $_SESSION["PopUp_not_Materia"] = false;
     $_SESSION["PopUp_excluir_professor"] = false;
+    $_SESSION["PopUp_editar_professor"] = false;
 
     $_SESSION["Gabarito_aluno"] = false;
 

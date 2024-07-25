@@ -22,6 +22,21 @@ class ADModel
         return $query;
     }
 
+    public static function EditarProfessor($dados)
+    {
+        $sql = "UPDATE professores SET nome = :nome, usuario = :usuario, senha = :senha, numero = :numero, disciplinas = :disciplinas WHERE id = :id";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':id', $dados['id']);
+        $query->bindParam(':nome', $dados['nome']);
+        $query->bindParam(':usuario', $dados['usuario']);
+        $query->bindParam(':senha', $dados['senha']);
+        $query->bindParam(':numero', $dados['numero']);
+        $query->bindParam(':disciplinas', $dados['disciplinas']);
+        $query->execute();
+        return $query;
+    }
+
     public static function AdicionarProfessor($dados)
     {
         $sql = "INSERT INTO professores (nome, usuario, senha, numero, disciplinas)

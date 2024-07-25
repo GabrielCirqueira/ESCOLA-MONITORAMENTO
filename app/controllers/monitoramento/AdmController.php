@@ -104,6 +104,31 @@ class ADMcontroller
             }
         }
 
+        if (isset($_POST["Enviar-edit-professor"])) {
+
+            if ($_POST["disciplina_professor_editar"] == null) {
+                $_SESSION["PopUp_not_Materia"] = true;
+                header("location: adm_home");
+                exit();
+            }
+
+            $dados_editar_professor = [
+                "id" => $_POST["id"],
+                "nome" => $_POST["nome_professor"],
+                "usuario" => explode(" ", $_POST["nome_professor"])[0],
+                "senha" => $_POST["senha_acesso"],
+                "numero" => $_POST["usuario_acesso"],
+                "disciplinas" => implode(";", $_POST["disciplina_professor_editar"]),
+            ];
+
+            if (ADModel::EditarProfessor($dados_editar_professor)) {
+
+                $_SESSION["PopUp_editar_professor"] = true;
+                header("location: adm_home");
+                exit();
+            }
+        }
+
         if (isset($_POST["Enviar-professor"])) {
 
             if ($_POST["disciplina_professor"] == null) {

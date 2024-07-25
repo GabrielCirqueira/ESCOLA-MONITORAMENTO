@@ -53,6 +53,13 @@ $popups = [
         "title" => "SUCESSO",
         "message" => "Professor excluido com <br> sucesso!",
     ],
+
+    "PopUp_editar_professor" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "Professor editado com <br> sucesso!",
+    ],
+
     "PopUp_add_materia_true" => [
         "status_class" => "check",
         "title" => "SUCESSO",

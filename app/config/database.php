@@ -45,7 +45,7 @@ class Database
                     usuario     varchar(255),
                     senha       varchar(255),
                     numero      varchar(30),
-                    disciplinas varchar(255)
+                    disciplinas TEXT(255)
                 );";
 
         $disciplinas = "CREATE TABLE IF NOT EXISTS disciplinas(

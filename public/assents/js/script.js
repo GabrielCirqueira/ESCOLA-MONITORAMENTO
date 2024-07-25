@@ -389,6 +389,38 @@ function editarAluno(ra, nome, turma, turno, dataNasc) {
         }
     }
 }
+
+function ColocarDadosProf(id, nome, usuario, senha, disciplinas) {
+    // Ocultar a tabela e mostrar o formulário de edição
+    document.getElementById('tabelaProfessores').style.display = 'none';
+    document.getElementById('filtro-professor').style.display = 'none';
+    document.getElementById('titulo-professor').style.display = 'none';
+    document.getElementById('brs').style.display = 'none';
+    document.getElementById('form-editar-professor').classList.remove('hidden');
+
+    // Preencher os campos do formulário com os dados do professor
+    document.getElementById('nome_professor_editar_add').value = nome;
+    document.getElementById('usuario_acesso_editar').value = usuario;
+    document.getElementById('id-professor-editar').value = id;
+    document.getElementById('senha_acesso_editar').value = senha;
+
+    // Dividir as disciplinas e marcar as checkboxes correspondentes
+    let disciplinasArray = disciplinas.split(';');
+    let checkboxes = document.querySelectorAll('input[name="disciplina_professor_editar_[]"]');
+
+    // Desmarcar todas as checkboxes
+    checkboxes.forEach((checkbox) => {
+        checkbox.checked = false;
+    });
+
+    // Marcar as disciplinas do professor
+    disciplinasArray.forEach((disciplina) => {
+        let checkbox = document.getElementById(`disciplina_professor_editar_${disciplina}`);
+        if (checkbox) {
+            checkbox.checked = true;
+        }
+    });
+}
  
 
 function cancelarEdicao() {
@@ -396,4 +428,10 @@ function cancelarEdicao() {
     document.getElementById('formEditar').classList.remove('active');
     document.querySelector('#alunos h1').style.display = 'block';
     document.getElementById('tabelaAlunos').style.display = 'table';
+
+    document.getElementById('tabelaProfessores').style.display = 'block';
+    document.getElementById('filtro-professor').style.display = 'block';
+    document.getElementById('brs').style.display = 'block';
+    document.getElementById('titulo-professor').style.display = 'block';
+    document.getElementById('form-editar-professor').classList.add('hidden');
 }
