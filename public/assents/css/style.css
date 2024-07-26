@@ -1,12 +1,12 @@
-@import url(header.css);
-@import url(global.css);
-@import url(footer.css);
-@import url(containers.css);
-@import url(resposivo.css);
-@import url(text.css);
-@import url(botoes.css);
-@import url(campo.css);
-@import url(PopUps.css);
+@import url(componentes/header.css);
+@import url(componentes/global.css);
+@import url(componentes/footer.css);
+@import url(componentes/containers.css);
+@import url(componentes/resposivo.css);
+@import url(componentes/text.css);
+@import url(componentes/botoes.css);
+@import url(componentes/campo.css);
+@import url(componentes/PopUps.css);
 
 #campo-email {
   height: 470px;
@@ -1673,3 +1673,32 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
 }
+
+.buttons-turmas-escolher{
+  margin: 10px auto;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.buttons-turmas-escolher button{
+  width: 50%;
+  height: 40px;
+  border-radius: 3px;
+  border: none;
+  outline: none;
+  transition: 0.6s ease;
+}
+ 
+.buttons-turmas-escolher button{
+  background-color: rgba(70, 179, 84, 0.694);
+}
+ 
+
+.buttons-turmas-escolher button:hover{
+  background-color: rgba(45, 132, 57, 0.694);
+  cursor: pointer;
+}
+  

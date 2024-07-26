@@ -43,12 +43,90 @@ usort($materias, function ($a, $b) {
             <details class="details-menu-gestor">
                 <summary class="sumary-menu-gestor">Banco de Dados</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('database')">Backups</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('logsADM')">Logs ADM</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('logsProfessor')">Logs
+                    Professor</button>
             </details>
         </div>
 
         <div class="info-gestor">
             <div id="conteudo">
 
+                <div id="adicionarTurma" class="conteudo-item">
+
+                    <div id="buttons-turmas-escolher" class="buttons-turmas-escolher">
+                    <button onclick="AlterarModoAddTurma('inserir-turma-automaticamente','inserir-turma-manualmente')" >Inserir Automaticamente</button>
+                    <button onclick="AlterarModoAddTurma('inserir-turma-manualmente','inserir-turma-automaticamente')" >Inserir Manualmente</button>
+                    </div>
+
+                    <div id="inserir-turma-automaticamente">
+
+                        <form action="adicionar_turma" method="post" class="form-adicionar-aluno">
+                            <h1>Inserção de Turmas</h1><br><br>
+
+                            <h3>SÉRIE DA TURMA:</h3>
+                            <div class="radio-group">
+
+                                <input type="radio" id="1Serie" name="serie_turma" required value="1">
+                                <label for="1Serie">1º SÉRIE</label>
+                                <input type="radio" id="2Serie" name="serie_turma" required value="2">
+                                <label for="2Serie">2º SÉRIE</label>
+                                <input type="radio" id="3Serie" name="serie_turma" required value="3">
+                                <label for="3Serie">3º SÉRIE</label>
+                                <input type="radio" id="4Serie" name="serie_turma" required value="4">
+                                <label for="4Serie">4º SÉRIE</label>
+                            </div>
+
+                            <h3>TURNO DA TURMA:</h3>
+                            <div class="radio-group">
+                                <?php foreach ($data["turnos"] as $turnos) {?>
+                                <input type="radio" id="turno_<?=$turnos?>" name="turno_adicionar" required
+                                    value="<?=$turnos?>">
+                                <label for="turno_<?=$turnos?>"><?=$turnos?></label>
+                                <?php }?>
+                            </div>
+
+                            <h3>CURSO DA TURMA:</h3>
+                            <div class="radio-group">
+                                <?php foreach ($data["cursos"] as $curso) {?>
+                                <input type="radio" id="curso_<?=$curso?>" name="curso_turma" required
+                                    value="<?=$curso?>">
+                                <label for="curso_<?=$curso?>"><?=$curso?></label>
+                                <?php }?>
+                            </div>
+
+                            <h3>NUMERO DA TURMA:</h3>
+                            <div class="radio-group">
+                                <?php foreach ($data["NTurmas"] as $num) {?>
+                                <input type="radio" id="NTurma_<?=$num?>" name="numero_turma" required
+                                    value="<?=$num?>">
+                                <label for="NTurma_<?=$num?>"><?=$num?>º TURMA</label>
+                                <?php }?>
+                            </div>
+                            <br><br><br>
+                            <div class="campo-formulario-add">
+                                <button type="submit" class="submit-button-add-materia">Inserir Turma</button>
+                            </div>
+                            <br><br><br><br><br><br>
+                        </form>
+                    </div>
+
+                    <div id="inserir-turma-manualmente" class="hidden">
+                    <div class="form_add_materia_adm">
+                        <form id="formAddTurma" action="" method="post">
+                            <h1 class="form-title-add-materia">Adicionar Nova Turma</h1>
+                            <br>
+                            <div class="form-group-add-materia">
+                                <input type="text" id="nomeMateria" name="nomeMateria"
+                                    placeholder="Digite o nome da matéria" required>
+                            </div>
+                            <br>
+                            <button type="submit" name="Enviar-materia" class="submit-button-add-materia">Adicionar
+                                Turma</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
 
                 <div id="adicionarProfessor" class="conteudo-item">
                     <div class="form-adicionar-professor">
@@ -68,17 +146,17 @@ usort($materias, function ($a, $b) {
                             <h2>Disciplinas</h2>
                             <center>
 
-                            <div class="checkbox-group-disciplinas">
-                                <?php foreach ($materias as $disciplina) {?>
-                                <div class="disciplina-box">
-                                    <input type="checkbox" id="disciplina_professor_<?=$disciplina["nome"]?>"
-                                        name="disciplina_professor[]" value="<?=$disciplina["nome"]?>">
-                                    <label for="disciplina_professor_<?=$disciplina["nome"]?>">
-                                        <div><span><?=$disciplina["nome"]?></span></div>
-                                    </label>
+                                <div class="checkbox-group-disciplinas">
+                                    <?php foreach ($materias as $disciplina) {?>
+                                    <div class="disciplina-box">
+                                        <input type="checkbox" id="disciplina_professor_<?=$disciplina["nome"]?>"
+                                            name="disciplina_professor[]" value="<?=$disciplina["nome"]?>">
+                                        <label for="disciplina_professor_<?=$disciplina["nome"]?>">
+                                            <div><span><?=$disciplina["nome"]?></span></div>
+                                        </label>
+                                    </div>
+                                    <?php }?>
                                 </div>
-                                <?php }?>
-                            </div>
                             </center>
                             <br><br>
                             <br><br>
@@ -97,87 +175,96 @@ usort($materias, function ($a, $b) {
                     </div>
                 </div>
 
-
                 <div id="verProfessores" class="conteudo-item">
 
-    <center>
-        <h2 id="titulo-professor" >PROFESSORES CADASTRADOS</h2>
-    </center>
-    <div id="filtro-professor" class="filtro-container">
-        <input type="text" id="filtroNomeProfessores" class="filtro-nome" placeholder="Filtrar por Nome" oninput="filtrarTabelaProfessores()">
-    </div>
-    <table id="tabelaProfessores" class="tabela_alunos_adm">
-        <thead>
-            <tr>
-                <th>NOME</th>
-                <th>DISCIPLINA</th>
-                <th>USUARIO</th>
-                <th>SENHA</th>
-                <th>EDITAR</th>
-                <th>EXCLUIR</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($data["professores"] as $professor) {?>
-            <tr>
-                <td><?=$professor["nome"]?></td>
-                <td>
-                    <?php
+                    <center>
+                        <h2 id="titulo-professor">PROFESSORES CADASTRADOS</h2>
+                    </center>
+                    <div id="filtro-professor" class="filtro-container">
+                        <input type="text" id="filtroNomeProfessores" class="filtro-nome" placeholder="Filtrar por Nome"
+                            oninput="filtrarTabelaProfessores()">
+                    </div>
+                    <table id="tabelaProfessores" class="tabela_alunos_adm">
+                        <thead>
+                            <tr>
+                                <th>NOME</th>
+                                <th>DISCIPLINA</th>
+                                <th>USUARIO</th>
+                                <th>SENHA</th>
+                                <th>EDITAR</th>
+                                <th>EXCLUIR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data["professores"] as $professor) {?>
+                            <tr>
+                                <td><?=$professor["nome"]?></td>
+                                <td>
+                                    <?php
 $disciplinas = explode(";", $professor["disciplinas"]);
     echo count($disciplinas) . " DISCIPLINA(S)";
     ?>
-                </td>
-                <td><?=$professor["numero"]?></td>
-                <td><?=$professor["senha"]?></td>
-                <td><button onclick="ColocarDadosProf('<?=$professor['id']?>','<?=$professor['nome']?>','<?=$professor['numero']?>','<?=$professor['senha']?>','<?=$professor['disciplinas']?>')" class="btn-editar">EDITAR</button></td>
-                <td>
-                    <form action="" method="post">
-                        <button type="submit" name="excluir_professor" value="<?=$professor['id']?>" class="btn-excluir">EXCLUIR</button>
-                    </form>
-                </td>
-            </tr>
-            <?php }?>
-        </tbody>
-    </table>
-    <div id="brs" ><br><br><br><br><br><br><br><br><br><br><br><br></div>
-    <div id="form-editar-professor" class="form-editar-professor hidden">
-        <center>
-            <h1>Editar Professor</h1>
-            <form action="" method="post">
-                <input type="hidden" id="id-professor-editar" name="id" value="">
-                <input type="text" name="nome_professor" placeholder="Nome do professor" required id="nome_professor_editar_add">
-                <input type="text" name="usuario_acesso" placeholder="Usuario de Acesso" required id="usuario_acesso_editar">
-                <input type="text" name="senha_acesso" placeholder="Senha de Acesso" required id="senha_acesso_editar">
+                                </td>
+                                <td><?=$professor["numero"]?></td>
+                                <td><?=$professor["senha"]?></td>
+                                <td><button
+                                        onclick="ColocarDadosProf('<?=$professor['id']?>','<?=$professor['nome']?>','<?=$professor['numero']?>','<?=$professor['senha']?>','<?=$professor['disciplinas']?>')"
+                                        class="btn-editar">EDITAR</button></td>
+                                <td>
+                                    <form action="" method="post">
+                                        <button type="submit" name="excluir_professor" value="<?=$professor['id']?>"
+                                            class="btn-excluir">EXCLUIR</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                    <div id="brs"><br><br><br><br><br><br><br><br><br><br><br><br></div>
+                    <div id="form-editar-professor" class="form-editar-professor hidden">
+                        <center>
+                            <h1>Editar Professor</h1>
+                            <form action="" method="post">
+                                <input type="hidden" id="id-professor-editar" name="id" value="">
+                                <input type="text" name="nome_professor" placeholder="Nome do professor" required
+                                    id="nome_professor_editar_add">
+                                <input type="text" name="usuario_acesso" placeholder="Usuario de Acesso" required
+                                    id="usuario_acesso_editar">
+                                <input type="text" name="senha_acesso" placeholder="Senha de Acesso" required
+                                    id="senha_acesso_editar">
 
-                <h2>Disciplinas</h2>
-                <div class="checkbox-group-disciplinas">
-                    <?php foreach ($materias as $disciplina) {?>
-                    <div class="disciplina-box">
-                        <input type="checkbox" id="disciplina_professor_editar_<?=$disciplina["nome"]?>" name="disciplina_professor_editar[]" value="<?=$disciplina["nome"]?>">
-                        <label for="disciplina_professor_editar_<?=$disciplina["nome"]?>">
-                            <div><span><?=$disciplina["nome"]?></span></div>
-                        </label>
+                                <h2>Disciplinas</h2>
+                                <div class="checkbox-group-disciplinas">
+                                    <?php foreach ($materias as $disciplina) {?>
+                                    <div class="disciplina-box">
+                                        <input type="checkbox" id="disciplina_professor_editar_<?=$disciplina["nome"]?>"
+                                            name="disciplina_professor_editar[]" value="<?=$disciplina["nome"]?>">
+                                        <label for="disciplina_professor_editar_<?=$disciplina["nome"]?>">
+                                            <div><span><?=$disciplina["nome"]?></span></div>
+                                        </label>
+                                    </div>
+                                    <?php }?>
+                                </div>
+                        </center>
+                        <br><br><br><br>
+                        <center>
+                            <div class="buttons-editar">
+                                <button type="submit" name="Enviar-edit-professor"
+                                    class="btn-editar item">Salvar</button>
+                                <button type="button" class="btn-excluir item"
+                                    onclick="cancelarEdicao()">Cancelar</button>
+                            </div>
+                        </center>
+                        </form>
+                        <div>
+                            <br><br><br><br><br><br><br><br><br><br><br><br>
+                        </div>
                     </div>
-                    <?php }?>
                 </div>
-            </center>
-            <br><br><br><br>
-            <center>
-                <div class="buttons-editar">
-                    <button type="submit" name="Enviar-edit-professor" class="btn-editar item">Salvar</button>
-                    <button type="button" class="btn-excluir item" onclick="cancelarEdicao()">Cancelar</button>
-                </div>
-            </center>
-            </form>
-            <div>
-                <br><br><br><br><br><br><br><br><br><br><br><br>
-            </div>
-        </div>
-    </div>
-</div>
 
 
                 <div id="materias" class="conteudo-item">
+
                     <center>
                         <h2>MATERIAS CADASTRADAS</h2>
                     </center>

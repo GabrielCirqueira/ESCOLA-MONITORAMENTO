@@ -435,3 +435,8 @@ function cancelarEdicao() {
     document.getElementById('titulo-professor').style.display = 'block';
     document.getElementById('form-editar-professor').classList.add('hidden');
 }
+
+function AlterarModoAddTurma(mostrar,ocultar){
+    document.getElementById(mostrar).classList.remove("hidden");
+    document.getElementById(ocultar).classList.add("hidden");
+}

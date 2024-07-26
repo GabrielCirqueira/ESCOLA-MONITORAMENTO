@@ -82,6 +82,8 @@ class ADMcontroller
                 ],
                 "disciplinas" => ADModel::GetDisciplinas(),
                 "turnos" => explode(",", $_ENV["TURNOS"]),
+                "cursos" => explode(",", $_ENV["CURSOS"]),
+                "NTurmas" => explode(",", $_ENV["NUMERO_TURMAS"]),
                 "backups" => self::backups(),
                 "professores" => ADModel::GetProfessores(),
             ];
