@@ -9,7 +9,7 @@
     .main {
         flex: 1 1 0;
         display: flex;
-        background-image: url('../../../public/assents/img/FULL\ FRAME\ MOBILE\ 3.jpg');
+        background-image: url('../../../../public/assents/img/FULL\ FRAME\ MOBILE\ 3.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

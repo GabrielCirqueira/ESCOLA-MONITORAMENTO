@@ -52,37 +52,110 @@ usort($materias, function ($a, $b) {
         <div class="info-gestor">
             <div id="conteudo">
 
+            <div id="logsADM" class="conteudo-item">
+            <center>
+                        <h1>LOGS ADM</h1>
+                    </center>
+
+                    <table class="tabela_alunos_adm">
+
+                        <thead>
+                            <tr>
+                                <th>AUTOR</th>
+                                <th>DESCRIÇÃO</th>
+                                <th>DATA</th>
+                                <th>HORA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data["logsADM"] as $logs) {?>
+                            <tr>
+                                <td><?=$logs["autor"]?></td>
+                                <td><?=$logs["descricao"]?></td>
+
+                                <td> <?=explode(" ", $logs["data"])[0]?> </td>
+                                <td> <?=explode(":", explode(" ", $logs["data"])[1])[0] . ":" . explode(":", explode(" ", $logs["data"])[1])[1]?> </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                    <div><br><br><br><br><br><br><br><br><br></div>
+            </div>
+
+                <div id="verTurmas" class="conteudo-item">
+                    <center>
+                        <h1>TURMAS CADASTRADAS</h1>
+                    </center>
+
+                    <table class="tabela_alunos_adm">
+
+                        <thead>
+                            <tr>
+                                <th>NOME</th>
+                                <th>TURNO</th>
+                                <th>SERIE</th>
+                                <th>CURSO</th>
+                                <th>EXCLUIR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data["turmas"]["turmas"] as $turma) {?>
+                            <tr>
+                                <td><?=$turma["nome"]?></td>
+                                <td><?=$turma["turno"]?></td>
+                                <td><?=$turma["serie"]?>º SÉRIE</td>
+                                <td><?=$turma["curso"]?></td>
+                                <td>
+                                    <form action="" method="post"> <button type="submit" name="excluir-turma"
+                                            value="<?=$turma['id']?>;<?=$turma["nome"]?>" class="btn-excluir">EXCLUIR</button></form>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                    <div><br><br><br><br><br><br><br><br><br></div>
+
+                </div>
+
                 <div id="adicionarTurma" class="conteudo-item">
 
                     <div id="buttons-turmas-escolher" class="buttons-turmas-escolher">
-                    <button onclick="AlterarModoAddTurma('inserir-turma-automaticamente','inserir-turma-manualmente')" >Inserir Automaticamente</button>
-                    <button onclick="AlterarModoAddTurma('inserir-turma-manualmente','inserir-turma-automaticamente')" >Inserir Manualmente</button>
+                        <button onclick="AlterarModoAddTurma('inserir-turma-manualmente','ocultar')">Formar Nome
+                            Automaticamente</button>
+                        <button onclick="AlterarModoAddTurma('inserir-turma-manualmente','mostrar')">Digitar Nome
+                            Manualmente</button>
                     </div>
 
                     <div id="inserir-turma-automaticamente">
 
-                        <form action="adicionar_turma" method="post" class="form-adicionar-aluno">
+                        <form action="" method="post" class="form-adicionar-aluno">
                             <h1>Inserção de Turmas</h1><br><br>
+
+                            <center>
+
+                                <div id="inserir-turma-manualmente" class="hidden">
+                                    <div class="form-group-add-materia">
+                                        <input type="text" id="nomeTurma" name="nomeTurma"
+                                            placeholder="Digite o nome da Turma">
+                                    </div>
+                                </div>
+                            </center>
 
                             <h3>SÉRIE DA TURMA:</h3>
                             <div class="radio-group">
-
-                                <input type="radio" id="1Serie" name="serie_turma" required value="1">
-                                <label for="1Serie">1º SÉRIE</label>
-                                <input type="radio" id="2Serie" name="serie_turma" required value="2">
-                                <label for="2Serie">2º SÉRIE</label>
-                                <input type="radio" id="3Serie" name="serie_turma" required value="3">
-                                <label for="3Serie">3º SÉRIE</label>
-                                <input type="radio" id="4Serie" name="serie_turma" required value="4">
-                                <label for="4Serie">4º SÉRIE</label>
+                                <?php foreach ($data["Nseries"] as $serie) {?>
+                                <input type="radio" id="<?=$serie?>Serie" name="serie_turma" required
+                                    value="<?=$serie?>">
+                                <label for="<?=$serie?>Serie"><?=$serie?>º SÉRIE</label>
+                                <?php }?>
                             </div>
 
                             <h3>TURNO DA TURMA:</h3>
                             <div class="radio-group">
-                                <?php foreach ($data["turnos"] as $turnos) {?>
-                                <input type="radio" id="turno_<?=$turnos?>" name="turno_adicionar" required
-                                    value="<?=$turnos?>">
-                                <label for="turno_<?=$turnos?>"><?=$turnos?></label>
+                                <?php foreach ($data["turnos"] as $turno) {?>
+                                <input type="radio" id="turno_<?=$turno?>" name="turno_adicionar" required
+                                    value="<?=$turno?>">
+                                <label for="turno_<?=$turno?>"><?=$turno?></label>
                                 <?php }?>
                             </div>
 
@@ -105,27 +178,14 @@ usort($materias, function ($a, $b) {
                             </div>
                             <br><br><br>
                             <div class="campo-formulario-add">
-                                <button type="submit" class="submit-button-add-materia">Inserir Turma</button>
+                                <button type="submit" name="enviar-turma-add" class="submit-button-add-materia">Inserir
+                                    Turma</button>
                             </div>
                             <br><br><br><br><br><br>
                         </form>
                     </div>
 
-                    <div id="inserir-turma-manualmente" class="hidden">
-                    <div class="form_add_materia_adm">
-                        <form id="formAddTurma" action="" method="post">
-                            <h1 class="form-title-add-materia">Adicionar Nova Turma</h1>
-                            <br>
-                            <div class="form-group-add-materia">
-                                <input type="text" id="nomeMateria" name="nomeMateria"
-                                    placeholder="Digite o nome da matéria" required>
-                            </div>
-                            <br>
-                            <button type="submit" name="Enviar-materia" class="submit-button-add-materia">Adicionar
-                                Turma</button>
-                        </form>
-                    </div>
-                    </div>
+
                 </div>
 
                 <div id="adicionarProfessor" class="conteudo-item">
@@ -212,7 +272,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                         class="btn-editar">EDITAR</button></td>
                                 <td>
                                     <form action="" method="post">
-                                        <button type="submit" name="excluir_professor" value="<?=$professor['id']?>"
+                                        <button type="submit" name="excluir_professor" value="<?=$professor['id']?>;<?=$professor["nome"]?>"
                                             class="btn-excluir">EXCLUIR</button>
                                     </form>
                                 </td>
@@ -262,7 +322,6 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                     </div>
                 </div>
 
-
                 <div id="materias" class="conteudo-item">
 
                     <center>
@@ -287,7 +346,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><?=$disciplina["nome"]?></td>
                                 <td>
                                     <form action="" class="form-excluir-materia" method="post">
-                                        <button type="submit" name="excluir-materia" value="<?=$disciplina['id']?>"
+                                        <button type="submit" name="excluir-materia" value="<?=$disciplina['id']?>;<?=$disciplina["nome"]?>"
                                             class="btn-excluir">EXCLUIR</button>
                                     </form>
                                 </td>

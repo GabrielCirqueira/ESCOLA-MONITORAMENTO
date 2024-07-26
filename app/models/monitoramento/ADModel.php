@@ -67,6 +67,33 @@ class ADModel
         return $query;
     }
 
+    public static function AdicionarTurma($dados_turma)
+    {
+        $sql = "INSERT INTO turmas (serie, turno, curso, nome) VALUES (:serie, :turno, :curso, :nome)";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':serie', $dados_turma['serie']);
+        $query->bindParam(':turno', $dados_turma['turno']);
+        $query->bindParam(':curso', $dados_turma['curso']);
+        $query->bindParam(':nome', $dados_turma['nome']);
+        $query->execute();
+
+        return $query;
+    }
+
+    public static function adicionarLogsADM($dados)
+    {
+        $sql = "INSERT INTO logs_adm (autor,data,descricao) VALUES (:autor, :data, :descricao)";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':autor', $dados['autor']);
+        $query->bindParam(':data', $dados['data']);
+        $query->bindParam(':descricao', $dados['descricao']);
+        $query->execute();
+
+        return $query;
+    }
+
     public static function AdicionarDisciplina($nomeDisciplina)
     {
         $sql = "INSERT INTO disciplinas (nome) VALUES (:nome)";
@@ -80,6 +107,16 @@ class ADModel
     public static function ExcluirProfessor($id)
     {
         $sql = "DELETE FROM professores WHERE id = :id";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query;
+    }
+
+    public static function ExcluirTurma($id)
+    {
+        $sql = "DELETE FROM turmas WHERE id = :id";
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindParam(':id', $id);
@@ -109,6 +146,15 @@ class ADModel
     public static function GetProfessores()
     {
         $sql = "SELECT * FROM professores ORDER BY nome ASC ";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function GetLogsADM()
+    {
+        $sql = "SELECT * FROM logs_adm ORDER BY id DESC ";
         $query = Database::GetInstance()->prepare($sql);
         $query->execute();
 

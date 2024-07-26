@@ -24,7 +24,7 @@ Backup::runBackup();
 
 session_start();
 
-if (!isset($_SESSION["PopUp_editar_professor"])) {
+if (!isset($_SESSION["PopUp_Excluir_turma"])) {
 
     $_SESSION["PopUp_professor"] = false;
     $_SESSION["popup_not_gestor"] = false;
@@ -46,6 +46,7 @@ if (!isset($_SESSION["PopUp_editar_professor"])) {
     $_SESSION["PopUp_not_Materia"] = false;
     $_SESSION["PopUp_excluir_professor"] = false;
     $_SESSION["PopUp_editar_professor"] = false;
+    $_SESSION["PopUp_Excluir_turma"] = false;
 
     $_SESSION["Gabarito_aluno"] = false;
 
@@ -59,12 +60,8 @@ $rotas = [
     "login_adm_verifica" => ADMcontroller::class,
     "adm_home" => ADMcontroller::class,
     "adicionar_aluno" => ADMcontroller::class,
-    "adicionar_professor" => ADMcontroller::class,
     "editar_dados_aluno" => ADMcontroller::class,
     "adm_info" => ADMcontroller::class,
-    "adicionar_materia" => ADMcontroller::class,
-    "excluir_disciplina" => ADMcontroller::class,
-    "adicionar_turma" => ADMcontroller::class,
     "home" => MainController::class,
     "ADM" => MainController::class,
     "login_professor" => MainController::class,

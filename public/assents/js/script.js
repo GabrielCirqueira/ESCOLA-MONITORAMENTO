@@ -436,7 +436,13 @@ function cancelarEdicao() {
     document.getElementById('form-editar-professor').classList.add('hidden');
 }
 
-function AlterarModoAddTurma(mostrar,ocultar){
-    document.getElementById(mostrar).classList.remove("hidden");
-    document.getElementById(ocultar).classList.add("hidden");
+function AlterarModoAddTurma(container,status){
+
+    if(status == "mostrar"){
+        document.getElementById(container).classList.remove("hidden");
+        input = document.getElementById("nomeTurma").setAttribute("required","true");
+    }else{
+        document.getElementById(container).classList.add("hidden");
+        input = document.getElementById("nomeTurma").removeAttribute("required");
+    }
 }
