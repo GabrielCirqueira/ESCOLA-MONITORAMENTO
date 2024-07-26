@@ -86,6 +86,7 @@ usort($materias, function ($a, $b) {
                     <center>
                         <h1>TURMAS CADASTRADAS</h1>
                     </center>
+                    <?php if ($data["turmas"]["turmas"] != null) {?>
 
                     <table class="tabela_alunos_adm">
 
@@ -113,6 +114,12 @@ usort($materias, function ($a, $b) {
                             <?php }?>
                         </tbody>
                     </table>
+
+                    <?php } else {?>
+                        <center>
+                            <h2 class="back-red" >NENHUMA TURMA CADASTRADA!</h2>
+                        </center>
+                        <?php }?>
                     <div><br><br><br><br><br><br><br><br><br></div>
 
                 </div>
@@ -153,9 +160,9 @@ usort($materias, function ($a, $b) {
                             <h3>TURNO DA TURMA:</h3>
                             <div class="radio-group">
                                 <?php foreach ($data["turnos"] as $turno) {?>
-                                <input type="radio" id="turno_<?=$turno?>" name="turno_adicionar" required
+                                <input type="radio" id="turno_turma_<?=$turno?>" name="turno_adicionar" required
                                     value="<?=$turno?>">
-                                <label for="turno_<?=$turno?>"><?=$turno?></label>
+                                <label for="turno_turma_<?=$turno?>"><?=$turno?></label>
                                 <?php }?>
                             </div>
 
@@ -194,6 +201,7 @@ usort($materias, function ($a, $b) {
                             <h1>Adicionar Professor</h1>
                         </center>
                         <form action="" method="post">
+                            <div class="labels-styles">
                             <input type="text" name="nome_professor" placeholder="Nome do professor" required
                                 id="nome_professor_add">
 
@@ -202,8 +210,11 @@ usort($materias, function ($a, $b) {
 
                             <input type="text" name="senha_acesso" placeholder="Senha de Acesso" required
                                 id="senha_acesso">
+                            </div>
 
-                            <h2>Disciplinas</h2>
+                            <h2>Matérias</h2>
+                            <?php if ($data["disciplinas"] != null) {?>
+
                             <center>
 
                                 <div class="checkbox-group-disciplinas">
@@ -222,6 +233,12 @@ usort($materias, function ($a, $b) {
                             <br><br>
                             <button type="submit" name="Enviar-professor" class="submit-button-add-materia">Adicionar
                                 Professor</button>
+
+                    <?php } else {?>
+                        <center>
+                            <h3 class="back-red" style="width: 70%;color:black;" >CADASTRE PELO MENOS UMA MATÉRIA ANTES DE INSERIR O PROFESSOR!</h3>
+                        </center>
+                        <?php }?>
                         </form>
                         <div>
                             <br><br>
@@ -244,6 +261,8 @@ usort($materias, function ($a, $b) {
                         <input type="text" id="filtroNomeProfessores" class="filtro-nome" placeholder="Filtrar por Nome"
                             oninput="filtrarTabelaProfessores()">
                     </div>
+                    <?php if ($data["professores"] != null) {?>
+
                     <table id="tabelaProfessores" class="tabela_alunos_adm">
                         <thead>
                             <tr>
@@ -279,7 +298,14 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                             </tr>
                             <?php }?>
                         </tbody>
+
                     </table>
+
+                    <?php } else {?>
+                        <center>
+                            <h2  class="back-red"  >NENHUM PROFESSOR CADASTRADO!</h2>
+                        </center>
+                        <?php }?>
                     <div id="brs"><br><br><br><br><br><br><br><br><br><br><br><br></div>
                     <div id="form-editar-professor" class="form-editar-professor hidden">
                         <center>
@@ -331,6 +357,8 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                         <input type="text" id="filtroNomeMaterias" class="filtro-nome" placeholder="Filtrar por Nome"
                             oninput="filtrarTabelaMaterias()">
                     </div>
+                    <?php if ($data["disciplinas"] != null) {?>
+
                     <table id="tabelaMaterias" class="tabela_alunos_adm">
                         <thead>
                             <tr>
@@ -354,6 +382,11 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                             <?php }?>
                         </tbody>
                     </table>
+                    <?php } else {?>
+                        <center>
+                            <h2 class="back-red" >NENHUMA MATERIA CADASTRADA!</h2>
+                        </center>
+                        <?php }?>
                 </div>
 
                 <div id="adicionarMateria" class="conteudo-item">
@@ -389,6 +422,8 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                             <input type="date" name="data_nasc" id="adicionarDataNasc" placeholder="Data de Nascimento">
                         </div>
                         <h3>TURMA:</h3>
+                        <?php if ($data["turmas"]["turmas"] != null) {?>
+
                         <div class="radio-group">
                             <?php foreach ($data["turmas"]["turmas"] as $turma) {?>
                             <input type="radio" id="turma_add_<?=$turma["nome"]?>" name="turma_adicionar" required
@@ -396,7 +431,11 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                             <label for="turma_add_<?=$turma["nome"]?>"><?=$turma["nome"]?></label>
                             <?php }?>
                         </div>
-
+                        <?php } else {?>
+                        <center>
+                            <h3 class="back-red" >CADASTRE PELO MENOS UMA TURMA ANTES DE CONTINUAR A CADASTRAR O ALUNO!</h3>
+                        </center>
+                        <?php }?>
                         <h3>TURNO:</h3>
                         <div class="radio-group">
                             <?php foreach ($data["turnos"] as $turnos) {?>
@@ -406,9 +445,15 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                             <?php }?>
                         </div>
                         <br><br>
-                        <center>
+
+                        <?php if ($data["turmas"]["turmas"] != null) {?>
+
+                            <center>
                             <button type="submit" class="btn-salvar-adicionar-aluno">Salvar</button>
                         </center>
+
+                    <?php } else {?>
+                        <?php }?>
                         <br><br><br><br><br><br><br><br><br>
                     </form>
                 </div>
@@ -423,6 +468,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
                         </div>
                     </center>
+                    <?php if ($data["alunos"]["alunos"] != null) {?>
                     <table id="tabelaAlunos" class="tabela_alunos_adm">
 
                         <thead>
@@ -443,11 +489,16 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><button class="btn-editar"
                                         onclick="editarAluno('<?=$aluno["ra"]?>', '<?=$aluno["nome"]?>', '<?=$aluno["turma"]?>', '<?=$aluno["turno"]?>', '<?=$aluno["data_nasc"]?>')">EDITAR</button>
                                 </td>
-                                <td> <button class="btn-excluir">EXCLUIR</button> </td>
+                                <td> <form action="" method="post"><button type="submit" value="<?=$aluno["ra"]?>;<?=$aluno["nome"]?>" name="excluir-aluno" class="btn-excluir">EXCLUIR</button></form> </td>
                             </tr>
                             <?php }?>
                         </tbody>
                     </table>
+                    <?php } else {?>
+                        <center>
+                            <h2 class="back-red" >NENHUM ALUNO CADASTRADO!</h2>
+                        </center>
+                        <?php }?>
                     <div id="formEditar" class="form-editar">
                         <form action="editar_dados_aluno" method="post">
                             <h1>EDITAR DADOS DO ALUNO</h1>
@@ -496,6 +547,8 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                         <input type="text" id="filtroNomeProvas" class="filtro-nome" placeholder="Filtrar por Nome"
                             oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
                     </div>
+                    <?php if ($data["alunos"]["provas_feitas"] != null) {?>
+
                     <table id="tabelaProvas" class="tabela_alunos_adm">
                         <thead>
                             <tr>
@@ -523,6 +576,11 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                             <?php }?>
                         </tbody>
                     </table>
+                    <?php } else {?>
+                        <center>
+                            <h2 class="back-red" >NENHUMA PROVA CADASTRADA!</h2>
+                        </center>
+                        <?php }?>
                 </div>
 
                 <div id="database" class="conteudo-item">

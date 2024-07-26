@@ -24,6 +24,12 @@ $popups = [
         "message" => "Turma excluída com sucesso!",
     ],
 
+    "PopUp_Excluir_aluno" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "Aluno excluído com sucesso!",
+    ],
+
     "PopUp_editar_aluno_true" => [
         "status_class" => "check",
         "title" => "SUCESSO!",

@@ -1,12 +1,12 @@
  .header {
    background-color: #16b0c1;
-   height: 60px;
+   height: 50px;
    padding: 20px 0;
  }
 
  .header__title {
    margin: 0;
-   font-size: 40px;
+   font-size: 33px;
    color: #ffffff;
  }
 
@@ -24,7 +24,7 @@
  }
 
  .img-tile img {
-   width: 40px;
+   width: 35px;
    margin-right: 20px;
  }
 
@@ -37,7 +37,7 @@
  .header i {
    position: absolute;
    right: 40px;
-   top: 45px;
+   top: 35px;
  }
 
  .header i {
@@ -47,5 +47,5 @@
  .menu i {
    position: absolute;
    left: 50px;
-   top: 45px;
+   top: 35px;
  }

@@ -145,6 +145,18 @@ class ADMcontroller
             }
         }
 
+        if (isset($_POST["excluir-aluno"])) {
+            $aluno = explode(";", $_POST["excluir-aluno"]);
+            if (ADModel::ExcluirAluno($aluno[0])) {
+
+                self::inserirLogsADM("O aluno {$aluno[1]} foi excluído.");
+
+                $_SESSION["PopUp_Excluir_aluno"] = true;
+                header("location: adm_home");
+                exit();
+            }
+        }
+
         if (isset($_POST["Enviar-edit-professor"])) {
 
             if ($_POST["disciplina_professor_editar"] == null) {
@@ -264,7 +276,7 @@ class ADMcontroller
         $dados = [
             "ra" => $_POST["ra"],
             "nome" => $_POST["nome"],
-            "turno" => $_POST["turno"],
+            "turno" => $_POST["turno_adicionar"],
             "data_nasc" => $_POST["data_nasc"] ?? null,
             "turma" => $_POST["turma_adicionar"],
         ];

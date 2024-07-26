@@ -1701,4 +1701,8 @@ input:checked + .slider:before {
   background-color: rgba(45, 132, 57, 0.694);
   cursor: pointer;
 }
-  
+
+.back-red{
+  background-color: rgb(186, 68, 68);
+  padding: 10px;
+}

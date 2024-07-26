@@ -39,6 +39,14 @@ class Database
     public static function CreateTable()
     {
 
+        // Eu configurei o sistema para criar as tabelas do banco de dados automaticamente
+        // na primeira vez que ele é iniciado. Isso é útil porque é um sistema para minha
+        // escola, e eles gostaram muito. Se outras escolas quiserem usar o sistema, pode
+        // ser que não tenha ninguém lá que saiba criar as tabelas no banco de dados. Então,
+        // quando a pessoa hospedar o sistema, ele já vai funcionar com todas as tabelas criadas,
+        // facilitando a vida de todo mundo e garantindo que tudo funcione direitinho sem
+        // precisar de conhecimento técnico.
+
         $professores = "CREATE TABLE IF NOT EXISTS professores(
                     id          int AUTO_INCREMENT primary key,
                     nome        varchar(255),

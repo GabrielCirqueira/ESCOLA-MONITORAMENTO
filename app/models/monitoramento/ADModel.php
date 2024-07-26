@@ -104,6 +104,16 @@ class ADModel
         return $query;
     }
 
+    public static function ExcluirAluno($ra)
+    {
+        $sql = "DELETE FROM alunos WHERE ra = :ra";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':ra', $ra);
+        $query->execute();
+        return $query;
+    }
+
     public static function ExcluirProfessor($id)
     {
         $sql = "DELETE FROM professores WHERE id = :id";
