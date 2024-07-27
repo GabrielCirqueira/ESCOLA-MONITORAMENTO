@@ -10,8 +10,8 @@
         <form id="gabaritoForm" action="" method="post">
             <table>
                 <?php
-                $contador = 1;
-                while ($contador <= $data["QNT_perguntas"]) {?>
+$contador = 1;
+while ($contador <= $data["QNT_perguntas"]) {?>
                 <tr>
                     <td>
                         <span><?php echo $contador ?></span>
@@ -33,16 +33,10 @@
                         <div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
                                 value="<?php echo "{$contador},D" ?>"><span>D</span></div>
                     </td>
-                    <!-- <td>
-                        <div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
-                                value="<?php echo "{$contador},E" ?>"><span>E</span></div>
-                    </td> -->
-
-
                 </tr>
                 <?php
-                    $contador++;}
-                ?>
+$contador++;}
+?>
             </table>
             <br><br><br>
             <div>

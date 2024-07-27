@@ -1215,15 +1215,12 @@ input:checked + .slider:before {
 .tabela_alunos_adm tbody tr:hover {
   background-color: #f9f9f9;
 }
-
-.form-editar-professor .btn-editar,
-.tabela_alunos_adm .btn-editar {
+.btn-editar {
   background-color: #80bf82;
   color: white;
 }
 
-.form-editar-professor .btn-excluir,
-.tabela_alunos_adm .btn-excluir {
+.btn-excluir {
   background-color: #bf6e68;
   color: white;
 }
@@ -1231,8 +1228,7 @@ input:checked + .slider:before {
 
 
 
-.form-editar-professor button,
-.tabela_alunos_adm button {
+.btn-excluir,.btn-editar{
   border: none;
   padding: 8px 11px;
   cursor: pointer;
@@ -1241,8 +1237,8 @@ input:checked + .slider:before {
   transition: background-color 0.3s ease;
 }
 
-.form-editar-professor button:hover,
-.tabela_alunos_adm button:hover {
+.btn-excluir:hover,
+.btn-editar:hover {
   opacity: 0.8;
 }
 
@@ -1687,18 +1683,20 @@ input:checked + .slider:before {
   width: 50%;
   height: 40px;
   border-radius: 3px;
+  font-weight: bold;
   border: none;
   outline: none;
+  color: #000;
+  background-color: rgba(103, 103, 103, 0.694);
   transition: 0.6s ease;
 }
  
-.buttons-turmas-escolher button{
-  background-color: rgba(70, 179, 84, 0.694);
-}
- 
+
+
 
 .buttons-turmas-escolher button:hover{
-  background-color: rgba(45, 132, 57, 0.694);
+  color: #ffff;
+  background-color: rgba(52, 52, 52, 0.694);
   cursor: pointer;
 }
 
@@ -1706,3 +1704,10 @@ input:checked + .slider:before {
   background-color: rgb(186, 68, 68);
   padding: 10px;
 }
+
+.radio-group div{
+  display: flex;
+  gap: 10px;
+}
+
+ 

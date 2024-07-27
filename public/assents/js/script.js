@@ -434,6 +434,11 @@ function cancelarEdicao() {
     document.getElementById('brs').style.display = 'block';
     document.getElementById('titulo-professor').style.display = 'block';
     document.getElementById('form-editar-professor').classList.add('hidden');
+
+    document.getElementById('tabelaProvas').style.display = 'block';
+    document.getElementById('titulo-provas-feitas').style.display = 'block';
+    document.getElementById('filtro-container-provas').style.display = 'block';
+    document.getElementById('editar-prova-aluno').style.display = 'none';
 }
 
 function AlterarModoAddTurma(container,status){
@@ -446,3 +451,36 @@ function AlterarModoAddTurma(container,status){
         input = document.getElementById("nomeTurma").removeAttribute("required");
     }
 }
+
+function editarProvaAluno(ra, gabarito, nome,IdProva) {
+    document.getElementById('tabelaProvas').style.display = 'none';
+    document.getElementById('titulo-provas-feitas').style.display = 'none';
+    document.getElementById('filtro-container-provas').style.display = 'none';
+    document.getElementById('editar-prova-aluno').style.display = 'block';
+
+    document.getElementById('nome-aluno-editar').innerText = nome;
+
+    let respostas = gabarito.split(';');
+    let tabela = '<table class="aluno_inserir_gabarito">';
+
+    respostas.forEach(function(resposta) {
+        let [questao, alternativa] = resposta.split(',');
+
+        tabela += `
+            <tr>
+                <td><span>${questao}</span></td>
+                <td><div><input type="radio" name="gabarito_questao_${questao}" value="${questao},A" ${alternativa === 'A' ? 'checked' : ''}><span>A</span></div></td>
+                <td><div><input type="radio" name="gabarito_questao_${questao}" value="${questao},B" ${alternativa === 'B' ? 'checked' : ''}><span>B</span></div></td>
+                <td><div><input type="radio" name="gabarito_questao_${questao}" value="${questao},C" ${alternativa === 'C' ? 'checked' : ''}><span>C</span></div></td>
+                <td><div><input type="radio" name="gabarito_questao_${questao}" value="${questao},D" ${alternativa === 'D' ? 'checked' : ''}><span>D</span></div></td>
+            </tr>
+        `;
+    });
+
+    tabela += "</table>";
+
+    
+    document.getElementById('tabela-alternativar-editar').innerHTML = tabela;
+}
+
+

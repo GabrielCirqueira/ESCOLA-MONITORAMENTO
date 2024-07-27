@@ -24,7 +24,7 @@ Backup::runBackup();
 
 session_start();
 
-if (!isset($_SESSION["PopUp_Excluir_aluno"])) {
+if (!isset($_SESSION["Turmas"])) {
 
     $_SESSION["PopUp_professor"] = false;
     $_SESSION["popup_not_gestor"] = false;
@@ -46,6 +46,7 @@ if (!isset($_SESSION["PopUp_Excluir_aluno"])) {
     $_SESSION["PopUp_not_Materia"] = false;
     $_SESSION["PopUp_excluir_professor"] = false;
     $_SESSION["PopUp_editar_professor"] = false;
+    $_SESSION["PopUp_add_aluno"] = false;
     $_SESSION["PopUp_Excluir_turma"] = false;
     $_SESSION["PopUp_Excluir_aluno"] = false;
 
@@ -55,6 +56,7 @@ if (!isset($_SESSION["PopUp_Excluir_aluno"])) {
     $_SESSION["ALUNO"] = false;
     $_SESSION["ADM"] = false;
     $_SESSION["PROFESSOR"] = false;
+
 }
 
 $rotas = [

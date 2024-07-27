@@ -14,53 +14,66 @@
         <div class="professor-descritores" data-aos="fade-up">
             <h3>DESCRITORES:</h3>
 
-            <div class="professor-descritores-marcar">
-                <div><input type="radio" required name="descritores" value="sim"><span>SIM</span></div>
-                <div><input type="radio" required name="descritores" value="não"><span>NÃO</span></div>
+            <div class="radio-group">
+                    <div>
+
+                        <input type="radio" required id="descritores_sim" name="descritores" value="sim">
+                        <label style="width: 150px;" for="descritores_sim">SIM</label>
+
+                        <input type="radio" required name="descritores" id="descritores_nao" value="não">
+                        <label style="width: 150px;" for="descritores_nao">NÃO</label>
+                    </div>
             </div>
         </div>
 
         <div class="turmas-container" data-aos="fade-up">
             <h3 class="professor-titulo-turno">TURMAS INTERMEDIÁRIO</h3>
+
             <div class="professor-area-turmas">
-                <?php foreach ($data as $turma) {
-                    if ($turma["turno"] == "INTERMEDIÁRIO") { ?>
-                        <div>
-                            <input name="gabarito-turmas[]" id="<?= $turma["nome"]?>" type="checkbox" value="<?php echo $turma["nome"] ?>">
-                            <label for="<?= $turma["nome"]?>" ><?php echo $turma["nome"] ?></label>
-                        </div>
-                    <?php }
-                } ?>
+                <?php foreach ($data as $turma) {if ($turma["turno"] == "INTERMEDIÁRIO") {?>
+                <div>
+                    <input name="gabarito-turmas[]" id="<?=$turma["nome"]?>" type="checkbox"
+                        value="<?=$turma["nome"]?>">
+                    <label for="<?=$turma["nome"]?>"><?=$turma["nome"]?></label>
+                </div>
+                <?php }}?>
             </div>
 
             <h3 class="professor-titulo-turno">TURMAS VESPERTINO</h3>
             <div class="professor-area-turmas">
-                <?php foreach ($data as $turma) {
-                    if ($turma["turno"] == "VESPERTINO") { ?>
-                        <div>
-                            <input name="gabarito-turmas[]" id="<?= $turma["nome"]?>" type="checkbox" value="<?php echo $turma["nome"] ?>">
-                            <label for="<?= $turma["nome"]?>" ><?php echo $turma["nome"] ?></label>
-                        </div>
-                    <?php }
-                } ?>
+                <?php foreach ($data as $turma) {if ($turma["turno"] == "VESPERTINO") {?>
+                <div>
+                    <input name="gabarito-turmas[]" id="<?=$turma["nome"]?>" type="checkbox"
+                        value="<?=$turma["nome"]?>">
+                    <label for="<?=$turma["nome"]?>"><?=$turma["nome"]?></label>
+                </div>
+                <?php }}?>
             </div>
         </div>
 
         <div class="disciplinas-gabarito-professor" data-aos="fade-up">
             <h3>SELECIONE A DISCIPLINA CORRESPONDENTE:</h3>
-            <div class="professor-area-disciplinas">
-                <?php 
-                if(strpos($_SESSION["disciplinas"],";")){
-                    $materias = explode(";",$_SESSION["disciplinas"]);
-                    foreach ($materias as $materia) { ?>
-                        <div>
-                            <input type="radio" name="Materias-professor-gabarito" required value="<?php echo $materia?>"><span><?php echo $materia?></span>
-                        </div>
-                    <?php }
-                }else{ ?>
-                    <div>
-                        <input type="radio" name="Materias-professor-gabarito" required value="<?php echo $_SESSION["disciplinas"]?>"><span><?php echo $_SESSION["disciplinas"]?></span>
-                    </div>
+            <div class="radio-group">
+                <?php
+if (strpos($_SESSION["disciplinas"], ";")) {?>
+
+                <div>
+                    <?php $materias = explode(";", $_SESSION["disciplinas"]);
+    foreach ($materias as $materia) {?>
+                    <input type="radio" name="Materias-professor-gabarito" id="<?=$materia?>" required
+                        value="<?=$materia?>">
+                    <label for="<?=$materia?>"><?=$materia?></label>
+
+                    <?php }?>
+                </div>
+
+                <?php } else {?>
+                <div>
+                    <input type="radio" name="Materias-professor-gabarito" id="<?=$_SESSION["disciplinas"]?>" required
+                        value="<?=$_SESSION["disciplinas"]?>">
+                    <label for="<?=$_SESSION["disciplinas"]?>"><?=$_SESSION["disciplinas"]?></label>
+
+                </div>
                 <?php }?>
             </div>
         </div>
@@ -81,9 +94,9 @@
         </center>
     </form>
     <div>
-    <br><br><br>
-    <br><br><br>
-    <br><br><br>
+        <br><br><br>
+        <br><br><br>
+        <br><br><br>
     </div>
- 
+
 </main>

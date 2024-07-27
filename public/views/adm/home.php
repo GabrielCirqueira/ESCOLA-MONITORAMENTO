@@ -1,31 +1,24 @@
-<?php
-
-$materias = $data["disciplinas"];
-
-usort($materias, function ($a, $b) {
-    return strcmp($a['nome'], $b['nome']);
-});
-
-?>
+<?php $materias = $data["disciplinas"];
+usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
 <main class="main-home">
     <section class="gestor-main">
         <div class="menu-lateral-gestor">
-            <details class="details-menu-gestor">
-                <summary class="sumary-menu-gestor">Alunos</summary>
+            <details class="details-menu-gestor" open>
+                <summary class="sumary-menu-gestor"  >Alunos</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('alunos')">Alunos</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('provas')">Provas</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('AddAluno')">Adicionar
                     Aluno</button>
             </details>
 
-            <details class="details-menu-gestor">
+            <details class="details-menu-gestor" open>
                 <summary class="sumary-menu-gestor">Materias</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('materias')">Materia</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('adicionarMateria')">Adicionar
                     Materia</button>
             </details>
 
-            <details class="details-menu-gestor">
+            <details class="details-menu-gestor" open>
                 <summary class="sumary-menu-gestor">Professor</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('adicionarProfessor')">Adicionar
                     Professor</button>
@@ -33,14 +26,15 @@ usort($materias, function ($a, $b) {
                     Professores</button>
             </details>
 
-            <details class="details-menu-gestor">
+            <details class="details-menu-gestor" open>
                 <summary class="sumary-menu-gestor">Turmas</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('adicionarTurma')">Adicionar
                     Turma</button>
-                <button class="button-details-menu-gestor" onclick="mostrarConteudo('verTurmas')">Ver Turmas</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('verTurmas')">Ver
+                    Turmas</button>
             </details>
 
-            <details class="details-menu-gestor">
+            <details class="details-menu-gestor" open>
                 <summary class="sumary-menu-gestor">Banco de Dados</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('database')">Backups</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('logsADM')">Logs ADM</button>
@@ -52,8 +46,8 @@ usort($materias, function ($a, $b) {
         <div class="info-gestor">
             <div id="conteudo">
 
-            <div id="logsADM" class="conteudo-item">
-            <center>
+                <div id="logsADM" class="conteudo-item">
+                    <center>
                         <h1>LOGS ADM</h1>
                     </center>
 
@@ -74,13 +68,14 @@ usort($materias, function ($a, $b) {
                                 <td><?=$logs["descricao"]?></td>
 
                                 <td> <?=explode(" ", $logs["data"])[0]?> </td>
-                                <td> <?=explode(":", explode(" ", $logs["data"])[1])[0] . ":" . explode(":", explode(" ", $logs["data"])[1])[1]?> </td>
+                                <td> <?=explode(":", explode(" ", $logs["data"])[1])[0] . ":" . explode(":", explode(" ", $logs["data"])[1])[1]?>
+                                </td>
                             </tr>
                             <?php }?>
                         </tbody>
                     </table>
                     <div><br><br><br><br><br><br><br><br><br></div>
-            </div>
+                </div>
 
                 <div id="verTurmas" class="conteudo-item">
                     <center>
@@ -108,7 +103,8 @@ usort($materias, function ($a, $b) {
                                 <td><?=$turma["curso"]?></td>
                                 <td>
                                     <form action="" method="post"> <button type="submit" name="excluir-turma"
-                                            value="<?=$turma['id']?>;<?=$turma["nome"]?>" class="btn-excluir">EXCLUIR</button></form>
+                                            value="<?=$turma['id']?>;<?=$turma["nome"]?>"
+                                            class="btn-excluir">EXCLUIR</button></form>
                                 </td>
                             </tr>
                             <?php }?>
@@ -116,10 +112,10 @@ usort($materias, function ($a, $b) {
                     </table>
 
                     <?php } else {?>
-                        <center>
-                            <h2 class="back-red" >NENHUMA TURMA CADASTRADA!</h2>
-                        </center>
-                        <?php }?>
+                    <center>
+                        <h2 class="back-red">NENHUMA TURMA CADASTRADA!</h2>
+                    </center>
+                    <?php }?>
                     <div><br><br><br><br><br><br><br><br><br></div>
 
                 </div>
@@ -202,14 +198,14 @@ usort($materias, function ($a, $b) {
                         </center>
                         <form action="" method="post">
                             <div class="labels-styles">
-                            <input type="text" name="nome_professor" placeholder="Nome do professor" required
-                                id="nome_professor_add">
+                                <input type="text" name="nome_professor" placeholder="Nome do professor" required
+                                    id="nome_professor_add">
 
-                            <input type="text" name="usuario_acesso" placeholder="Usuario de Acesso" required
-                                id="usuario_acesso">
+                                <input type="text" name="usuario_acesso" placeholder="Usuario de Acesso" required
+                                    id="usuario_acesso">
 
-                            <input type="text" name="senha_acesso" placeholder="Senha de Acesso" required
-                                id="senha_acesso">
+                                <input type="text" name="senha_acesso" placeholder="Senha de Acesso" required
+                                    id="senha_acesso">
                             </div>
 
                             <h2>Matérias</h2>
@@ -234,11 +230,12 @@ usort($materias, function ($a, $b) {
                             <button type="submit" name="Enviar-professor" class="submit-button-add-materia">Adicionar
                                 Professor</button>
 
-                    <?php } else {?>
-                        <center>
-                            <h3 class="back-red" style="width: 70%;color:black;" >CADASTRE PELO MENOS UMA MATÉRIA ANTES DE INSERIR O PROFESSOR!</h3>
-                        </center>
-                        <?php }?>
+                            <?php } else {?>
+                            <center>
+                                <h3 class="back-red" style="width: 70%;color:black;">CADASTRE PELO MENOS UMA MATÉRIA
+                                    ANTES DE INSERIR O PROFESSOR!</h3>
+                            </center>
+                            <?php }?>
                         </form>
                         <div>
                             <br><br>
@@ -291,7 +288,8 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                         class="btn-editar">EDITAR</button></td>
                                 <td>
                                     <form action="" method="post">
-                                        <button type="submit" name="excluir_professor" value="<?=$professor['id']?>;<?=$professor["nome"]?>"
+                                        <button type="submit" name="excluir_professor"
+                                            value="<?=$professor['id']?>;<?=$professor["nome"]?>"
                                             class="btn-excluir">EXCLUIR</button>
                                     </form>
                                 </td>
@@ -302,10 +300,10 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                     </table>
 
                     <?php } else {?>
-                        <center>
-                            <h2  class="back-red"  >NENHUM PROFESSOR CADASTRADO!</h2>
-                        </center>
-                        <?php }?>
+                    <center>
+                        <h2 class="back-red">NENHUM PROFESSOR CADASTRADO!</h2>
+                    </center>
+                    <?php }?>
                     <div id="brs"><br><br><br><br><br><br><br><br><br><br><br><br></div>
                     <div id="form-editar-professor" class="form-editar-professor hidden">
                         <center>
@@ -374,7 +372,8 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><?=$disciplina["nome"]?></td>
                                 <td>
                                     <form action="" class="form-excluir-materia" method="post">
-                                        <button type="submit" name="excluir-materia" value="<?=$disciplina['id']?>;<?=$disciplina["nome"]?>"
+                                        <button type="submit" name="excluir-materia"
+                                            value="<?=$disciplina['id']?>;<?=$disciplina["nome"]?>"
                                             class="btn-excluir">EXCLUIR</button>
                                     </form>
                                 </td>
@@ -383,10 +382,10 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                         </tbody>
                     </table>
                     <?php } else {?>
-                        <center>
-                            <h2 class="back-red" >NENHUMA MATERIA CADASTRADA!</h2>
-                        </center>
-                        <?php }?>
+                    <center>
+                        <h2 class="back-red">NENHUMA MATERIA CADASTRADA!</h2>
+                    </center>
+                    <?php }?>
                 </div>
 
                 <div id="adicionarMateria" class="conteudo-item">
@@ -433,7 +432,8 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                         </div>
                         <?php } else {?>
                         <center>
-                            <h3 class="back-red" >CADASTRE PELO MENOS UMA TURMA ANTES DE CONTINUAR A CADASTRAR O ALUNO!</h3>
+                            <h3 class="back-red">CADASTRE PELO MENOS UMA TURMA ANTES DE CONTINUAR A CADASTRAR O
+                                ALUNO!</h3>
                         </center>
                         <?php }?>
                         <h3>TURNO:</h3>
@@ -448,11 +448,11 @@ $disciplinas = explode(";", $professor["disciplinas"]);
 
                         <?php if ($data["turmas"]["turmas"] != null) {?>
 
-                            <center>
+                        <center>
                             <button type="submit" class="btn-salvar-adicionar-aluno">Salvar</button>
                         </center>
 
-                    <?php } else {?>
+                        <?php } else {?>
                         <?php }?>
                         <br><br><br><br><br><br><br><br><br>
                     </form>
@@ -489,16 +489,20 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><button class="btn-editar"
                                         onclick="editarAluno('<?=$aluno["ra"]?>', '<?=$aluno["nome"]?>', '<?=$aluno["turma"]?>', '<?=$aluno["turno"]?>', '<?=$aluno["data_nasc"]?>')">EDITAR</button>
                                 </td>
-                                <td> <form action="" method="post"><button type="submit" value="<?=$aluno["ra"]?>;<?=$aluno["nome"]?>" name="excluir-aluno" class="btn-excluir">EXCLUIR</button></form> </td>
+                                <td>
+                                    <form action="" method="post"><button type="submit"
+                                            value="<?=$aluno["ra"]?>;<?=$aluno["nome"]?>" name="excluir-aluno"
+                                            class="btn-excluir">EXCLUIR</button></form>
+                                </td>
                             </tr>
                             <?php }?>
                         </tbody>
                     </table>
                     <?php } else {?>
-                        <center>
-                            <h2 class="back-red" >NENHUM ALUNO CADASTRADO!</h2>
-                        </center>
-                        <?php }?>
+                    <center>
+                        <h2 class="back-red">NENHUM ALUNO CADASTRADO!</h2>
+                    </center>
+                    <?php }?>
                     <div id="formEditar" class="form-editar">
                         <form action="editar_dados_aluno" method="post">
                             <h1>EDITAR DADOS DO ALUNO</h1>
@@ -539,7 +543,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
 
                 <div id="provas" class="conteudo-item">
                     <center>
-                        <h1>PROVAS FEITAS</h1>
+                        <h1 id="titulo-provas-feitas">PROVAS FEITAS</h1>
                     </center>
                     <div id="filtro-container-provas" class="filtro-container">
                         <input type="text" id="filtroRAProvas" class="filtro-ra" placeholder="Filtrar por RA"
@@ -559,6 +563,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <th>DISCIPLINA</th>
                                 <th>PONTOS</th>
                                 <th>EDITAR</th>
+                                <th>EXCLUIR</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -570,17 +575,43 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><?=$aluno["data_aluno"]?></td>
                                 <td><?=$aluno["disciplina"]?></td>
                                 <td><?=$aluno["pontos_aluno"]?></td>
-                                <td><button class="btn-editar">EDITAR</button>
+                                <td><button class="btn-editar"
+                                        onclick="editarProvaAluno('<?=$aluno['ra']?>', '<?=$aluno['perguntas_respostas']?>', '<?=$aluno['aluno']?>','<?=$aluno['id_prova']?>')">EDITAR</button>
+                                </td>
+
+
+                                <td><button class="btn-excluir">EXCLUIR</button>
                                 </td>
                             </tr>
                             <?php }?>
                         </tbody>
                     </table>
                     <?php } else {?>
+                    <center>
+                        <h2 class="back-red">NENHUMA PROVA CADASTRADA!</h2>
+                    </center>
+                    <?php }?>
+
+                    <div id="editar-prova-aluno" class="hidden">
                         <center>
-                            <h2 class="back-red" >NENHUMA PROVA CADASTRADA!</h2>
+                            <h1>EDITAR PROVA</h1>
+                            <h3 id="nome-aluno-editar"></h3>
+                            <form method="post" action="">
+                                <div id="tabela-alternativar-editar">
+
+                                </div>
+                                <br><br>
+                                <div class="buttons-editar">
+                                    <button type="submit" class="btn-editar item">Salvar</button>
+                                    <button type="button" class="btn-excluir item" name="enviar-prova-editada"
+                                        onclick="cancelarEdicao()">Cancelar</button>
+                                </div>
                         </center>
-                        <?php }?>
+                        </form>
+                        <div>
+                            <br><br><br><br><br><br>
+                        </div>
+                    </div>
                 </div>
 
                 <div id="database" class="conteudo-item">
@@ -605,7 +636,8 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                     <td><?=$arquivo['hora']?></td>
                                     <td><?=$arquivo['minuto']?></td>
                                     <td><?=$arquivo['tamanho']?></td>
-                                    <td><a href='app/config/backups/<?=$arquivo['arquivo']?>' download>Download</a></td>
+                                    <td><a href='app/config/backups/<?=$arquivo['arquivo']?>' download>Download</a>
+                                    </td>
                                 </tr>
                                 <?php endforeach;?>
                             </tbody>
