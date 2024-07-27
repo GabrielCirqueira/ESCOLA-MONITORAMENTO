@@ -134,6 +134,22 @@ class ADModel
         return $query;
     }
 
+    public static function ExcluirProva($id_prova, $ra)
+    {
+        $sql1 = "DELETE FROM gabarito_alunos WHERE id_prova = :id AND ra = :ra";
+        $query1 = Database::GetInstance()->prepare($sql1);
+        $query1->bindParam(':id', $id_prova);
+        $query1->bindParam(':ra', $ra);
+        $query1->execute();
+
+        $sql2 = "DELETE FROM gabarito_alunos_primeira_prova WHERE id_prova = :id AND ra = :ra";
+        $query2 = Database::GetInstance()->prepare($sql2);
+        $query2->bindParam(':id', $id_prova);
+        $query2->bindParam(':ra', $ra);
+        $query2->execute();
+
+        return $query2;
+    }
     public static function ExcluirDisciplina($idDisciplina)
     {
         $sql = "DELETE FROM disciplinas WHERE id = :id";

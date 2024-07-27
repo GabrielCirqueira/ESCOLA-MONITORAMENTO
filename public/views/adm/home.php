@@ -580,7 +580,10 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 </td>
 
 
-                                <td><button class="btn-excluir">EXCLUIR</button>
+                                <td>
+                                    <form action="" method="post"><button type="submit"
+                                            value="<?=$aluno["ra"]?>;<?=$aluno["id_prova"]?>;<?=$aluno["aluno"]?>;<?=$aluno["disciplina"]?>" name="excluir-prova-aluno"
+                                            class="btn-excluir">EXCLUIR</button></form>
                                 </td>
                             </tr>
                             <?php }?>

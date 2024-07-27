@@ -159,6 +159,17 @@ class ADMcontroller
             }
         }
 
+        if (isset($_POST["excluir-prova-aluno"])) {
+            $prova = explode(";", $_POST["excluir-prova-aluno"]);
+            if (ADModel::ExcluirProva($prova[1], $prova[0])) {
+
+                self::inserirLogsADM("A Prova do aluno(a) {$prova[2]} da materia {$prova[3]} Foi Excluída.");
+                $_SESSION["PopUp_excluir_prova"] = true;
+                header("location: adm_home");
+                exit();
+            }
+        }
+
         if (isset($_POST["excluir_professor"])) {
             $professor = explode(";", $_POST["excluir_professor"]);
             if (ADModel::ExcluirProfessor($professor[0])) {
@@ -175,7 +186,7 @@ class ADMcontroller
             $aluno = explode(";", $_POST["excluir-aluno"]);
             if (ADModel::ExcluirAluno($aluno[0])) {
 
-                self::inserirLogsADM("O aluno {$aluno[1]} foi excluído.");
+                self::inserirLogsADM("O aluno(a) {$aluno[1]} foi excluído.");
 
                 $_SESSION["PopUp_Excluir_aluno"] = true;
                 header("location: adm_home");
@@ -319,7 +330,7 @@ class ADMcontroller
         ];
 
         if (ProfessorModel::atualizar_gabarito_aluno($dados_atualizacao) && ProfessorModel::atualizar_gabarito_aluno_primeira($dados_atualizacao)) {
-            self::inserirLogsADM("A Prova do aluno {$dados["nome"]} da materia {$prova["disciplina"]} Foi Editada.");
+            self::inserirLogsADM("A Prova do aluno(a) {$dados["nome"]} da materia {$prova["disciplina"]} Foi Editada.");
             $_SESSION["PopUp_ditar_prova"] = true;
             header("location: adm_home");
             exit();
@@ -355,7 +366,7 @@ class ADMcontroller
             $Edit = ADModel::EditarAluno($dados);
 
             if ($Edit) {
-                self::inserirLogsADM("O aluno {$dados["nome"]} foi editado.");
+                self::inserirLogsADM("O aluno(a) {$dados["nome"]} foi editado.");
                 $_SESSION["PopUp_editar_aluno_true"] = true;
                 header("location: adm_home");
                 exit();
@@ -379,7 +390,7 @@ class ADMcontroller
         $query = ADModel::AdicionarAluno($dados);
 
         if ($query) {
-            self::inserirLogsADM("O aluno {$dados["nome"]} foi adicionado.");
+            self::inserirLogsADM("O aluno(a) {$dados["nome"]} foi adicionado.");
             $_SESSION["PopUp_add_aluno"] = true;
             header("location: adm_home");
             exit();
