@@ -452,13 +452,21 @@ function AlterarModoAddTurma(container,status){
     }
 }
 
-function editarProvaAluno(ra, gabarito, nome,IdProva) {
+function editarProvaAluno(ra, gabarito, nome,IdProva,id,disciplina,data) {
     document.getElementById('tabelaProvas').style.display = 'none';
     document.getElementById('titulo-provas-feitas').style.display = 'none';
     document.getElementById('filtro-container-provas').style.display = 'none';
     document.getElementById('editar-prova-aluno').style.display = 'block';
 
     document.getElementById('nome-aluno-editar').innerText = nome;
+    document.getElementById('disciplina_prova').innerText = disciplina;
+    document.getElementById('data_aluno').innerText = data;
+
+    document.getElementById('ra_prova').value = ra;
+    document.getElementById('nome_aluno_prova').value = nome;
+    document.getElementById('id_prova').value = IdProva;
+    document.getElementById('id_aluno_prova').value = id; 
+
 
     let respostas = gabarito.split(';');
     let tabela = '<table class="aluno_inserir_gabarito">';

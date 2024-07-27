@@ -5,6 +5,7 @@ namespace app\controllers\monitoramento;
 use app\controllers\monitoramento\MainController;
 use app\models\monitoramento\ADModel;
 use app\models\monitoramento\AlunoModel;
+use app\models\monitoramento\ProfessorModel;
 
 class ADMcontroller
 {
@@ -98,6 +99,31 @@ class ADMcontroller
 
     public static function Get_forms()
     {
+
+        if (isset($_POST["enviar-prova-editada"])) {
+
+            $contador = 1;
+            $perguntas = [];
+            while (true) {
+                if (isset($_POST["gabarito_questao_" . $contador])) {
+                    $perguntas[] = $_POST["gabarito_questao_" . $contador];
+                    $contador++;
+                } else {
+                    break;
+                }
+            }
+
+            $dadosProva = [
+                "gabarito" => implode(";", $perguntas),
+                "id_prova" => $_POST["id_prova"],
+                "ra" => $_POST["ra"],
+                "nome" => $_POST["nome_aluno_prova"],
+                "id" => $_POST["id_aluno_prova"],
+            ];
+
+            self::alterarProvaAluno($dadosProva);
+        }
+
         if (isset($_POST["enviar-turma-add"])) {
 
             $dados_turma = [
@@ -230,6 +256,75 @@ class ADMcontroller
                 exit();
             }
         }
+    }
+
+    public static function alterarProvaAluno($dados)
+    {
+        // MainController::pre($dados);
+        $prova = ProfessorModel::GetProvabyID($dados["id_prova"]);
+
+        $gabarito_professor = explode(";", $prova["gabarito"]);
+        $gabarito_aluno = explode(";", $dados["gabarito"]);
+        $perguntas_certas = [];
+        $perguntas_erradas = [];
+        $perguntas_respostas = [];
+        $descritores_corretos = [];
+        $descritores_errados = [];
+        $acertos_aluno = 0;
+        $valor_cada_pergunta = $prova["valor"] / $prova["QNT_perguntas"];
+        $descritores_questoes = $prova["descritores"] != null ? explode(";", $prova["descritores"]) : null;
+
+        $contador = 0;
+
+        while ($contador < $prova["QNT_perguntas"]) {
+            if ($gabarito_aluno[$contador] == $gabarito_professor[$contador]) {
+                $descritores_corretos[] = $descritores_questoes != null ? $descritores_questoes[$contador] : null;
+                $acertos_aluno++;
+                $perguntas_certas[] = $gabarito_aluno[$contador];
+                $perguntas_respostas[] = $gabarito_aluno[$contador];
+            } else {
+                $descritores_errados[] = $descritores_questoes != null ? $descritores_questoes[$contador] : null;
+                $perguntas_respostas[] = $gabarito_aluno[$contador];
+                $perguntas_erradas[] = $gabarito_aluno[$contador];
+            }
+
+            $contador++;
+        }
+
+        if ($prova["id"] == null) {
+            $descritores_corretos = null;
+            $descritores_errados = null;
+        } else {
+            $descritores_corretos = implode(";", $descritores_corretos);
+            $descritores_errados = implode(";", $descritores_errados);
+        }
+
+        $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
+        if (is_float($pontos_aluno)) {
+            $pontos_aluno = number_format($pontos_aluno, 1);
+        }
+
+        $dados_atualizacao = [
+            "ra" => $dados["ra"],
+            "ID" => $dados["id"],
+            "ID_prova" => $dados["id_prova"],
+            "acertos" => $acertos_aluno,
+            "porcentagem" => ($acertos_aluno / count($gabarito_professor)) * 100,
+            "pontos_aluno" => $pontos_aluno,
+            "perguntas_certas" => implode(";", $perguntas_certas),
+            "perguntas_erradas" => implode(";", $perguntas_erradas),
+            "descritores_certos" => $descritores_questoes != null ? implode(";", $descritores_corretos) : null,
+            "descritores_errados" => $descritores_questoes != null ? implode(";", $descritores_errados) : null,
+            "pontos_prova" => $prova["valor"],
+        ];
+
+        if (ProfessorModel::atualizar_gabarito_aluno($dados_atualizacao) && ProfessorModel::atualizar_gabarito_aluno_primeira($dados_atualizacao)) {
+            self::inserirLogsADM("A Prova do aluno {$dados["nome"]} da materia {$prova["disciplina"]} Foi Editada.");
+            $_SESSION["PopUp_ditar_prova"] = true;
+            header("location: adm_home");
+            exit();
+        }
+
     }
 
     public static function inserirLogsADM($string)

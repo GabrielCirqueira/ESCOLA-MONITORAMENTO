@@ -13,7 +13,7 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
 
             <details class="details-menu-gestor" open>
                 <summary class="sumary-menu-gestor">Materias</summary>
-                <button class="button-details-menu-gestor" onclick="mostrarConteudo('materias')">Materia</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('materias')">Materias</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('adicionarMateria')">Adicionar
                     Materia</button>
             </details>
@@ -576,7 +576,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><?=$aluno["disciplina"]?></td>
                                 <td><?=$aluno["pontos_aluno"]?></td>
                                 <td><button class="btn-editar"
-                                        onclick="editarProvaAluno('<?=$aluno['ra']?>', '<?=$aluno['perguntas_respostas']?>', '<?=$aluno['aluno']?>','<?=$aluno['id_prova']?>')">EDITAR</button>
+                                        onclick="editarProvaAluno('<?=$aluno['ra']?>', '<?=$aluno['perguntas_respostas']?>', '<?=$aluno['aluno']?>','<?=$aluno['id_prova']?>',<?=$aluno['id']?>,'<?=$aluno['disciplina']?>',<?=$aluno['data_aluno']?>)">EDITAR</button>
                                 </td>
 
 
@@ -596,13 +596,19 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                         <center>
                             <h1>EDITAR PROVA</h1>
                             <h3 id="nome-aluno-editar"></h3>
+                            <h4 id="disciplina_prova"></h4>
+                            <h4 id="data_aluno"></h4>
                             <form method="post" action="">
+                                <input type="hidden" name="ra" id="ra_prova" value="" >
+                                <input type="hidden" name="id_prova" id="id_prova" value="" >
+                                <input type="hidden" name="nome_aluno_prova" id="nome_aluno_prova" value="" >
+                                <input type="hidden" name="id_aluno_prova" id="id_aluno_prova" value="" >
                                 <div id="tabela-alternativar-editar">
 
                                 </div>
                                 <br><br>
                                 <div class="buttons-editar">
-                                    <button type="submit" class="btn-editar item">Salvar</button>
+                                    <button type="submit" class="btn-editar item" name="enviar-prova-editada" >Salvar</button>
                                     <button type="button" class="btn-excluir item" name="enviar-prova-editada"
                                         onclick="cancelarEdicao()">Cancelar</button>
                                 </div>

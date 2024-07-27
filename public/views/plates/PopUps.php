@@ -78,6 +78,13 @@ $popups = [
         "title" => "SUCESSO",
         "message" => "Matéria inserida com <br> sucesso!",
     ],
+
+    "PopUp_ditar_prova" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "Prova Editada com sucesso!",
+    ],
+
     "PopUp_excluir_materia_true" => [
         "status_class" => "check",
         "title" => "SUCESSO",
