@@ -3,6 +3,7 @@
 namespace app\controllers\monitoramento;
 
 use app\controllers\monitoramento\MainController;
+use app\models\monitoramento\ADModel;
 use app\models\monitoramento\AlunoModel;
 use app\models\monitoramento\ProfessorModel;
 use DateTime;
@@ -154,6 +155,7 @@ class ProfessorController
                 "materia" => $_POST["materia_prova"],
             ];
             if (ProfessorModel::inserir_gabarito($dados)) {
+                self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} cadastrou a prova {$dados["nome_prova"]} ");
                 $_SESSION["PopUp_inserir_gabarito_professor"] = true;
                 header("location: inserir_gabarito");
                 exit;
@@ -240,8 +242,10 @@ class ProfessorController
             if (isset($_POST["status"])) {
                 if ($_POST["status"] == "sim") {
                     ProfessorModel::alterar_liberado($id_prova, "SIM");
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} liberou os acesso as respostas da prova {$nome_prova}. ");
                     header("Location: prova");
                 } else {
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} bloqueou os acesso as respostas da prova {$nome_prova}. ");
                     ProfessorModel::alterar_liberado($id_prova, null);
                     header("Location: prova");
                 }
@@ -250,9 +254,11 @@ class ProfessorController
             if (isset($_POST["status-liberado"])) {
                 if ($_POST["status-liberado"] == "sim") {
                     ProfessorModel::alterar_liberado_ver($id_prova, null);
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} permitiu os alunos de fazerem a prova {$nome_prova} ");
                     header("Location: prova");
                 } else {
                     ProfessorModel::alterar_liberado_ver($id_prova, "NÃO");
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} bloqueou os alunos de fazerem a prova {$nome_prova} ");
                     header("Location: prova");
                 }
             }
@@ -272,6 +278,7 @@ class ProfessorController
                 if ($_POST["user"] == $_SESSION["numero"]) {
                     ProfessorModel::ExcluirProvaAluno($id_prova);
                     ProfessorModel::ExcluirProvaProf($id_prova);
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} excluiu a prova {$nome_prova}. ");
                     header("Location: ver_provas");
                     $_SESSION["PopUp_Excluir_prova"] = true;
                     exit();
@@ -325,6 +332,7 @@ class ProfessorController
             $provas_rec = ProfessorModel::GetProvaRecAlunos();
             $provas_rec_professor = ProfessorModel::GetProvaRec();
             $id_prova_origin = $prova["id_prova"];
+            $nome_prova = $prova["nome_prova"];
 
             $alunos_prova = [];
             if (strpos($prova["alunos"], ";")) {
@@ -360,9 +368,11 @@ class ProfessorController
             if (isset($_POST["status"])) {
                 if ($_POST["status"] == "sim") {
                     ProfessorModel::alterar_liberadoRec($id, "SIM");
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} liberou os acesso as respostas da prova de recuperação {$nome_prova}. ");
                     header("Location: prova_recuperacao");
                 } else {
                     ProfessorModel::alterar_liberadoRec($id, null);
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} bloqueou os acesso as respostas da prova de recuperação {$nome_prova}. ");
                     header("Location: prova_recuperacao");
                 }
             }
@@ -381,9 +391,11 @@ class ProfessorController
             if (isset($_POST["status-liberado"])) {
                 if ($_POST["status-liberado"] == "sim") {
                     ProfessorModel::alterar_liberado_verRec($id, null);
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} liberou a da prova de recuperação {$nome_prova}. ");
                     header("Location: prova_recuperacao");
                 } else {
                     ProfessorModel::alterar_liberado_verRec($id, "NÃO");
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} bloqueou a da prova de recuperação {$nome_prova}. ");
                     header("Location: prova_recuperacao");
                 }
             }
@@ -392,6 +404,7 @@ class ProfessorController
                 if ($_POST["user"] == $_SESSION["numero"]) {
                     ProfessorModel::ExcluirProvaRecAluno($id_prova_origin);
                     ProfessorModel::ExcluirProvaRecProf($id_prova_origin);
+                    self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} excluiu a da prova de recuperação {$nome_prova}. ");
                     header("Location: ver_provas");
                     $_SESSION["PopUp_Excluir_prova"] = true;
                     exit();
@@ -477,6 +490,8 @@ class ProfessorController
     {
         if ($_SESSION["PROFESSOR"]) {
             $id_prova = $_POST['id_prova_origin'];
+            $provaRec = ProfessorModel::GetProvaRecbyID($id_prova);
+            $nome_prova = $provaRec["nome_prova"];
             $numero_perguntas = $_POST['numero_perguntas'];
             $descritor_flag = $_POST['descritor'];
 
@@ -503,7 +518,6 @@ class ProfessorController
             ];
 
             ProfessorModel::atualizar_gabarito_professorRec($novo_gabarito_professor);
-            echo $id_prova;
             $provas_alunos = ProfessorModel::GetProvasRecFeitasbyID($id_prova);
 
             foreach ($provas_alunos as $prova_aluno) {
@@ -549,6 +563,7 @@ class ProfessorController
                 ProfessorModel::atualizar_gabarito_aluno_rec($dados_atualizacao);
             }
 
+            self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} editou a prova de recuperação {$nome_prova}. ");
             $_SESSION["PopUp_inserir_prova"] = true;
             header("location: professor_home");
             exit();
@@ -1063,6 +1078,8 @@ class ProfessorController
     {
         if ($_SESSION["PROFESSOR"]) {
             $id_prova = $_SESSION["ID_PROVA_EDITAR"];
+            $provaEdit = ProfessorModel::GetProvabyID($id_prova);
+            $nome_prova = $provaEdit["nome_prova"];
             $numero_perguntas = $_POST['numero_perguntas'];
             $descritor_flag = $_POST['descritor'];
 
@@ -1136,8 +1153,9 @@ class ProfessorController
                 ProfessorModel::atualizar_gabarito_aluno_primeira($dados_atualizacao);
             }
 
-            $_SESSION["PopUp_inserir_prova"] = true;
+            self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} editou a prova {$nome_prova}. ");
             header("location: professor_home");
+            $_SESSION["PopUp_prova_editada"] = true;
             exit();
 
         } else {
@@ -1148,6 +1166,7 @@ class ProfessorController
     public static function add_recuperacao()
     {
         $id = $_SESSION["id_prova_professor"];
+
         $provas_professores = AlunoModel::GetProvas();
         $_SESSION["dados_prova_rec"]["id"] = $_POST["id-prova"];
         $alunos = AlunoModel::GetAlunos();
@@ -1270,6 +1289,7 @@ class ProfessorController
         $consulta = ProfessorModel::inserir_gabarito_recuperacao($dados);
 
         if ($consulta) {
+            self::inserirLogsProfessor("O professor {$_SESSION["nome_professor"]} adicionou de recuperação para a prova {$nome_prova}. ");
             $_SESSION["PopUp_inserir_gabarito_professor"] = true;
             header("location: ver_provas");
             exit();
@@ -1279,6 +1299,19 @@ class ProfessorController
         // print_r($dados);
         // echo "</pre>";
 
+    }
+
+    public static function inserirLogsProfessor($string)
+    {
+        $dados_logs = [
+            "data" => date('Y-m-d H:i:s'),
+            "autor" => "PROFESSOR",
+            "descricao" => $string,
+        ];
+
+        $query = ADModel::adicionarLogsProfessor($dados_logs);
+
+        return $query;
     }
 
 }

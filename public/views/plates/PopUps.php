@@ -81,8 +81,14 @@ $popups = [
 
     "PopUp_not_QntP" => [
         "status_class" => "uncheck",
-        "title" => "SUCESSO",
+        "title" => "ERRO",
         "message" => "Selecione o numero de questões <br> para criar o gabarito da prova!",
+    ],
+
+    "PopUp_prova_editada" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "Prova editada com <br> sucesso!",
     ],
 
     "PopUp_not_valor" => [

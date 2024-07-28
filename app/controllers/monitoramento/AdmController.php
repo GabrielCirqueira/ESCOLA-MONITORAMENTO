@@ -87,6 +87,7 @@ class ADMcontroller
                 "NTurmas" => explode(",", $_ENV["NUMERO_TURMAS"]),
                 "Nseries" => explode(",", $_ENV["NUMEROS_SERIES"]),
                 "logsADM" => ADModel::GetLogsADM(),
+                "logsPROF" => ADModel::GetLogsProfessor(),
                 "backups" => self::backups(),
                 "professores" => ADModel::GetProfessores(),
             ];

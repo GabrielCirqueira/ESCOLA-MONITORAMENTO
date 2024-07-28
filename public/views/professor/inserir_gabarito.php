@@ -67,14 +67,14 @@ if (strpos($_SESSION["disciplinas"], ";")) {?>
                     <?php $materias = explode(";", $_SESSION["disciplinas"]);
     foreach ($materias as $materia) {?>
                     <div>
-                        <input type="radio" required name="Materias-professor-gabarito[]" id="<?=$materia?>"
+                        <input type="radio" required name="Materias-professor-gabarito" id="<?=$materia?>"
                             value="<?=$materia?>" class="custom-disciplinas-radio">
                         <label for="<?=$materia?>"><?=$materia?></label>
                     </div>
                     <?php }?>
                     <?php } else {?>
                     <div>
-                        <input type="radio" required name="Materias-professor-gabarito[]" id="<?=$_SESSION["disciplinas"]?>"
+                        <input type="radio" required name="Materias-professor-gabarito" id="<?=$_SESSION["disciplinas"]?>"
                             value="<?=$_SESSION["disciplinas"]?>" class="custom-disciplinas-radio">
                         <label for="<?=$_SESSION["disciplinas"]?>"><?=$_SESSION["disciplinas"]?></label>
                     </div>

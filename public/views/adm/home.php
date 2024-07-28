@@ -3,22 +3,26 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
 <main class="main-home">
     <section class="gestor-main">
         <div class="menu-lateral-gestor">
-            <details class="details-menu-gestor" open>
-                <summary class="sumary-menu-gestor"  >Alunos</summary>
+        <details class="details-menu-gestor"  >
+                <summary class="sumary-menu-gestor">Tela Inicial</summary>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('painel-frontal-gestor')">Painel</button>
+            </details>
+            <details class="details-menu-gestor"  >
+                <summary class="sumary-menu-gestor">Alunos</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('alunos')">Alunos</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('provas')">Provas</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('AddAluno')">Adicionar
                     Aluno</button>
             </details>
 
-            <details class="details-menu-gestor" open>
+            <details class="details-menu-gestor"  >
                 <summary class="sumary-menu-gestor">Materias</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('materias')">Materias</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('adicionarMateria')">Adicionar
                     Materia</button>
             </details>
 
-            <details class="details-menu-gestor" open>
+            <details class="details-menu-gestor"  >
                 <summary class="sumary-menu-gestor">Professor</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('adicionarProfessor')">Adicionar
                     Professor</button>
@@ -26,7 +30,7 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                     Professores</button>
             </details>
 
-            <details class="details-menu-gestor" open>
+            <details class="details-menu-gestor"  >
                 <summary class="sumary-menu-gestor">Turmas</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('adicionarTurma')">Adicionar
                     Turma</button>
@@ -34,7 +38,7 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                     Turmas</button>
             </details>
 
-            <details class="details-menu-gestor" open>
+            <details class="details-menu-gestor"  >
                 <summary class="sumary-menu-gestor">Banco de Dados</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('database')">Backups</button>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('logsADM')">Logs ADM</button>
@@ -63,6 +67,37 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                         </thead>
                         <tbody>
                             <?php foreach ($data["logsADM"] as $logs) {?>
+                            <tr>
+                                <td><?=$logs["autor"]?></td>
+                                <td><?=$logs["descricao"]?></td>
+
+                                <td> <?=explode(" ", $logs["data"])[0]?> </td>
+                                <td> <?=explode(":", explode(" ", $logs["data"])[1])[0] . ":" . explode(":", explode(" ", $logs["data"])[1])[1]?>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                    <div><br><br><br><br><br><br><br><br><br></div>
+                </div>
+
+                <div id="logsProfessor" class="conteudo-item">
+                    <center>
+                        <h1>LOGS ADM</h1>
+                    </center>
+
+                    <table class="tabela_alunos_adm">
+
+                        <thead>
+                            <tr>
+                                <th>AUTOR</th>
+                                <th>DESCRIÇÃO</th>
+                                <th>DATA</th>
+                                <th>HORA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data["logsPROF"] as $logs) {?>
                             <tr>
                                 <td><?=$logs["autor"]?></td>
                                 <td><?=$logs["descricao"]?></td>
@@ -582,8 +617,8 @@ $disciplinas = explode(";", $professor["disciplinas"]);
 
                                 <td>
                                     <form action="" method="post"><button type="submit"
-                                            value="<?=$aluno["ra"]?>;<?=$aluno["id_prova"]?>;<?=$aluno["aluno"]?>;<?=$aluno["disciplina"]?>" name="excluir-prova-aluno"
-                                            class="btn-excluir">EXCLUIR</button></form>
+                                            value="<?=$aluno["ra"]?>;<?=$aluno["id_prova"]?>;<?=$aluno["aluno"]?>;<?=$aluno["disciplina"]?>"
+                                            name="excluir-prova-aluno" class="btn-excluir">EXCLUIR</button></form>
                                 </td>
                             </tr>
                             <?php }?>
@@ -602,16 +637,17 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                             <h4 id="disciplina_prova"></h4>
                             <h4 id="data_aluno"></h4>
                             <form method="post" action="">
-                                <input type="hidden" name="ra" id="ra_prova" value="" >
-                                <input type="hidden" name="id_prova" id="id_prova" value="" >
-                                <input type="hidden" name="nome_aluno_prova" id="nome_aluno_prova" value="" >
-                                <input type="hidden" name="id_aluno_prova" id="id_aluno_prova" value="" >
+                                <input type="hidden" name="ra" id="ra_prova" value="">
+                                <input type="hidden" name="id_prova" id="id_prova" value="">
+                                <input type="hidden" name="nome_aluno_prova" id="nome_aluno_prova" value="">
+                                <input type="hidden" name="id_aluno_prova" id="id_aluno_prova" value="">
                                 <div id="tabela-alternativar-editar">
 
                                 </div>
                                 <br><br>
                                 <div class="buttons-editar">
-                                    <button type="submit" class="btn-editar item" name="enviar-prova-editada" >Salvar</button>
+                                    <button type="submit" class="btn-editar item"
+                                        name="enviar-prova-editada">Salvar</button>
                                     <button type="button" class="btn-excluir item" name="enviar-prova-editada"
                                         onclick="cancelarEdicao()">Cancelar</button>
                                 </div>
@@ -654,10 +690,30 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                     </div>
                 </div>
 
-                <div class="painel-frontal-gestor conteudo-item active">
-                    <img src="https://telegra.ph/file/14ab586a79f8002b24880.png" alt="IMAGEM BRAZÃO">
-                    <h1>PAINEL GESTOR</h1>
-                </div>
+                <div id="painel-frontal-gestor" class="painel-frontal-gestor conteudo-item active">
+    <img src="https://telegra.ph/file/14ab586a79f8002b24880.png" alt="IMAGEM BRAZÃO">
+    <h1>PAINEL ADMINISTRATIVO</h1>
+    <div class="painel-buttons">
+        <button class="painel-button" onclick="mostrarConteudo('alunos')">Alunos</button>
+        <button class="painel-button" onclick="mostrarConteudo('provas')">Provas</button>
+        <button class="painel-button" onclick="mostrarConteudo('AddAluno')">Adicionar Aluno</button>
+        <button class="painel-button" onclick="mostrarConteudo('materias')">Materias</button>
+        <button class="painel-button" onclick="mostrarConteudo('adicionarMateria')">Adicionar Materia</button>
+        <button class="painel-button" onclick="mostrarConteudo('adicionarProfessor')">Adicionar Professor</button>
+        <button class="painel-button" onclick="mostrarConteudo('verProfessores')">Ver Professores</button>
+        <button class="painel-button" onclick="mostrarConteudo('adicionarTurma')">Adicionar Turma</button>
+        <button class="painel-button" onclick="mostrarConteudo('verTurmas')">Ver Turmas</button>
+        <button class="painel-button" onclick="mostrarConteudo('database')">Backups</button>
+        <button class="painel-button" onclick="mostrarConteudo('logsADM')">Logs ADM</button>
+        <button class="painel-button" onclick="mostrarConteudo('logsProfessor')">Logs Professor</button>
+        <br><br><br>
+        <br><br><br>
+    </div>
+        <br><br><br>
+        <br><br><br>
+    </div>
+
+
 
 
             </div>

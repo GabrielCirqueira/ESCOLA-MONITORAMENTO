@@ -94,6 +94,19 @@ class ADModel
         return $query;
     }
 
+    public static function adicionarLogsProfessor($dados)
+    {
+        $sql = "INSERT INTO logs_professor (autor,data,descricao) VALUES (:autor, :data, :descricao)";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':autor', $dados['autor']);
+        $query->bindParam(':data', $dados['data']);
+        $query->bindParam(':descricao', $dados['descricao']);
+        $query->execute();
+
+        return $query;
+    }
+
     public static function AdicionarDisciplina($nomeDisciplina)
     {
         $sql = "INSERT INTO disciplinas (nome) VALUES (:nome)";
@@ -181,6 +194,15 @@ class ADModel
     public static function GetLogsADM()
     {
         $sql = "SELECT * FROM logs_adm ORDER BY id DESC ";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function GetLogsProfessor()
+    {
+        $sql = "SELECT * FROM logs_professor ORDER BY id DESC ";
         $query = Database::GetInstance()->prepare($sql);
         $query->execute();
 
