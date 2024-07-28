@@ -93,8 +93,8 @@
 
 .descritoresContainer {
     position: absolute;
-    background-color: #8f8f8f;
-    width: 100px;
+    background-color: #a8a8a8;
+    width: 120px;
     max-height: 200px;
     overflow-y: auto;
 }
@@ -220,6 +220,7 @@
 }
 
 .area-professor-botoes-prova{
+    margin-top: 60px;
     display: flex;
     justify-content: center;
     align-items: center;

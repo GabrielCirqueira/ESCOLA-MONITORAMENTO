@@ -62,9 +62,9 @@
                 <th style="text-align: center;" colspan="2">TURMAS</th>
             </tr>
             <?php
-                $turmas = explode(",", $data["prova"]["turmas"]);
-                $turmaCount = count($turmas);
-                for ($i = 0; $i < $turmaCount; $i += 2) {?>
+$turmas = explode(",", $data["prova"]["turmas"]);
+$turmaCount = count($turmas);
+for ($i = 0; $i < $turmaCount; $i += 2) {?>
             <tr>
                 <td style="background-color: #E9E9E9;">
                     <?=$turmas[$i]?>
@@ -87,27 +87,31 @@ if ($data["provas_rec"] != null) {?>
             <div class="area_provas_rec_professor">
                 <form action="prova_recuperacao" method="post">
                     <?php
-                        for ($i = 0; $i < $data["provas_rec"]["quantidade"]; $i++) {?>
+for ($i = 0; $i < $data["provas_rec"]["quantidade"]; $i++) {?>
                             <button name="prova" value="<?=$data["provas_rec"]["provas"][$i]["id"]?>"><?=$i + 1?>ª
                                 RECUPERAÇÃO</button>
                             <br>
                     <?php }
-                    ?>
+    ?>
                 </form>
             </div>
         </center>
         <?php }?>
 
-        <form action="add_recuperacao" method="post">
+<?php if (2 == 3) {?>
+    <form action="add_recuperacao" method="post">
             <input type="hidden" name="id-prova" value="<?=$_SESSION["id_prova_professor"]?>">
             <button type="submit" class="button-add-recp">ADICIONAR RECUPERAÇÃO</button>
         </form>
+<?php }?>
+
+<br><br><br>
 
         <button class="excluir-prova" onclick="Mostrar_PopUp('PopUp_excluir_prova')">EXCLUIR PROVA</button>
 
     </div>
 
-    <div id="PopUp_excluir_prova" class="PopUp-sobreposicao">
+    <div style="display: none;" id="PopUp_excluir_prova" class="PopUp-sobreposicao">
         <div class="conteudo-popup">
             <h2>CUIDADO!</h2>
             <p>Excluir a prova resultará na perda de todos os dados registrados, incluindo os dos alunos que fizeram

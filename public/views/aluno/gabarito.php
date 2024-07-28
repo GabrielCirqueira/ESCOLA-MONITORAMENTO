@@ -6,32 +6,32 @@
     <span><b>PROFESSOR: </b><?=$data["nome_professor"]?></span><br><br>
     <span><b>VALOR: </b> <?=$data["valor"]?></span><br>
     <br><br><br>
-    <div class="aluno_inserir_gabarito">
+    <div >
         <form id="gabaritoForm" action="" method="post">
-            <table>
+            <table  class="tabela-alternativas-escolher">
                 <?php
 $contador = 1;
 while ($contador <= $data["QNT_perguntas"]) {?>
                 <tr>
-                    <td>
+                    <td >
                         <span><?php echo $contador ?></span>
                     </td>
 
                     <td>
-                        <div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
-                                value="<?php echo "{$contador},A" ?>"><span>A</span></div>
+                        <div class="Ds"><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
+                            id="<?php echo "{$contador},A" ?>"    value="<?php echo "{$contador},A" ?>"><label for="<?php echo "{$contador},A" ?>">A</label></div>
                     </td>
                     <td>
-                        <div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
-                                value="<?php echo "{$contador},B" ?>"><span>B</span></div>
+                        <div class="Ds"><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
+                        id="<?php echo "{$contador},B" ?>"    value="<?php echo "{$contador},B" ?>"><label for="<?php echo "{$contador},B" ?>">B</label></div>
                     </td>
                     <td>
-                        <div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
-                                value="<?php echo "{$contador},C" ?>"><span>C</span></div>
+                        <div class="Ds"><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
+                        id="<?php echo "{$contador},C" ?>"    value="<?php echo "{$contador},C" ?>"><label for="<?php echo "{$contador},C" ?>">C</label></div>
                     </td>
                     <td>
-                        <div><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
-                                value="<?php echo "{$contador},D" ?>"><span>D</span></div>
+                        <div class="Ds"><input type="radio" name="gabarito_questao_<?php echo "{$contador}" ?>" required
+                        id="<?php echo "{$contador},D" ?>"    value="<?php echo "{$contador},D" ?>"><label for="<?php echo "{$contador},D" ?>">D</label></div>
                     </td>
                 </tr>
                 <?php
