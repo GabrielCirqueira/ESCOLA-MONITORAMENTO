@@ -17,17 +17,7 @@ function Mostrar_campo_ra() {
 
 function Fechar_PopUp(popup) {
     var popupElement = document.getElementById(popup);
-    var conteudo = popupElement.querySelector('.conteudo-popup');
-     
-    conteudo.classList.add('fechar');
-     
-    setTimeout(function() {
-      popupElement.style.opacity = '0';
-    }, 700); 
-   
-    setTimeout(function() {
-      popupElement.style.display = 'none';
-    }, 700);  
+    popupElement.style.display = 'none';
   }
   
   
@@ -492,3 +482,18 @@ function editarProvaAluno(ra, gabarito, nome,IdProva,id,disciplina,data) {
 }
 
 
+
+
+// JavaScript to handle the number selection
+document.querySelectorAll('.professor-selectable-numbers .number-box').forEach(box => {
+    box.addEventListener('click', function() {
+        const parentDiv = this.parentElement;
+        const hiddenInput = parentDiv.nextElementSibling;
+
+        parentDiv.querySelectorAll('.number-box').forEach(box => box.classList.remove('selected'));
+        this.classList.add('selected');
+        hiddenInput.value = this.getAttribute('data-value');
+    });
+});
+
+ ;
