@@ -297,24 +297,79 @@ function filtrarAlunos() {
 }
 
 function filtrarTabela(tabelaId, filtroRAId, filtroNomeId) {
-    var tabela, tr, td, i, ra, nome, filtroRA, filtroNome;
-    tabela = document.getElementById(tabelaId);
-    tr = tabela.getElementsByTagName("tr");
-    filtroRA = document.getElementById(filtroRAId).value.toUpperCase();
-    filtroNome = document.getElementById(filtroNomeId).value.toUpperCase();
+    var filtroRA = document.getElementById(filtroRAId).value.toUpperCase();
+    var filtroNome = document.getElementById(filtroNomeId).value.toUpperCase();
 
-    for (i = 1; i < tr.length; i++) {
-        ra = tr[i].getElementsByTagName("td")[0];
-        nome = tr[i].getElementsByTagName("td")[1];
-        if (ra || nome) {
-            if (ra.innerHTML.toUpperCase().indexOf(filtroRA) > -1 && nome.innerHTML.toUpperCase().indexOf(filtroNome) > -1) {
-                tr[i].style.display = "";
-            } else {
-                tr[i].style.display = "none";
-            }
+    $.ajax({
+        url: 'app/config/GetProvas.php',
+        method: 'GET',
+        success: function(data) {
+            var dados = JSON.parse(data);
+            var tabela = document.getElementById(tabelaId);
+            var tbody = tabela.getElementsByTagName('tbody')[0];
+            tbody.innerHTML = '';
+
+            dados.forEach(function(aluno) {
+                if (aluno.ra.toUpperCase().indexOf(filtroRA) > -1 && aluno.aluno.toUpperCase().indexOf(filtroNome) > -1) {
+                    var tr = document.createElement('tr');
+
+                    var tdRA = document.createElement('td');
+                    tdRA.textContent = aluno.ra;
+                    tr.appendChild(tdRA);
+
+                    var tdNome = document.createElement('td');
+                    tdNome.textContent = aluno.aluno;
+                    tr.appendChild(tdNome);
+
+                    var tdTurma = document.createElement('td');
+                    tdTurma.textContent = aluno.turma;
+                    tr.appendChild(tdTurma);
+
+                    var tdData = document.createElement('td');
+                    tdData.textContent = aluno.data_aluno;
+                    tr.appendChild(tdData);
+
+                    var tdDisciplina = document.createElement('td');
+                    tdDisciplina.textContent = aluno.disciplina;
+                    tr.appendChild(tdDisciplina);
+
+                    var tdPontos = document.createElement('td');
+                    tdPontos.textContent = aluno.pontos_aluno;
+                    tr.appendChild(tdPontos);
+
+                    var tdEditar = document.createElement('td');
+                    var btnEditar = document.createElement('button');
+                    btnEditar.className = 'btn-editar';
+                    btnEditar.textContent = 'EDITAR';
+                    btnEditar.onclick = function() {
+                        editarProvaAluno(aluno.ra, aluno.perguntas_respostas, aluno.aluno, aluno.id_prova, aluno.id, aluno.disciplina, aluno.data_aluno);
+                    };
+                    tdEditar.appendChild(btnEditar);
+                    tr.appendChild(tdEditar);
+
+                    var tdExcluir = document.createElement('td');
+                    var formExcluir = document.createElement('form');
+                    formExcluir.method = 'post';
+                    var btnExcluir = document.createElement('button');
+                    btnExcluir.type = 'submit';
+                    btnExcluir.className = 'btn-excluir';
+                    btnExcluir.textContent = 'EXCLUIR';
+                    btnExcluir.value = aluno.ra + ';' + aluno.id_prova + ';' + aluno.aluno + ';' + aluno.disciplina;
+                    btnExcluir.name = 'excluir-prova-aluno';
+                    formExcluir.appendChild(btnExcluir);
+                    tdExcluir.appendChild(formExcluir);
+                    tr.appendChild(tdExcluir);
+
+                    tbody.appendChild(tr);
+                }
+            });
         }
-    }
+    });
 }
+
+
+
+
 function filtrarTabelaMaterias() {
     var tabela, tr, td, i, nome, filtroNome;
     tabela = document.getElementById("tabelaMaterias");

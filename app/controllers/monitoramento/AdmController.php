@@ -75,7 +75,7 @@ class ADMcontroller
 
             $dados = [
                 "alunos" => [
-                    "provas_feitas" => AlunoModel::GetProvasFinalizadas(),
+                    "provas_feitas" => ADModel::GetProvas(),
                     "alunos" => AlunoModel::GetAlunos(),
                 ],
                 "turmas" => [

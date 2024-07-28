@@ -173,6 +173,18 @@ class ADModel
         return $query;
     }
 
+    public static function GetProvas()
+    {
+        $sql = "SELECT * FROM gabarito_alunos ORDER BY data_aluno DESC LIMIT 100 ";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+        if ($query->rowCount() > 0) {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
     public static function GetMaterias()
     {
         $sql = "SELECT * FROM disciplinas";

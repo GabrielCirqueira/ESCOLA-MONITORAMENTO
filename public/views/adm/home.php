@@ -581,11 +581,11 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                         <h1 id="titulo-provas-feitas">PROVAS FEITAS</h1>
                     </center>
                     <div id="filtro-container-provas" class="filtro-container">
-                        <input type="text" id="filtroRAProvas" class="filtro-ra" placeholder="Filtrar por RA"
-                            oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
-                        <input type="text" id="filtroNomeProvas" class="filtro-nome" placeholder="Filtrar por Nome"
-                            oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
-                    </div>
+    <input type="text" id="filtroRAProvas" class="filtro-ra" placeholder="Filtrar por RA"
+        oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
+    <input type="text" id="filtroNomeProvas" class="filtro-nome" placeholder="Filtrar por Nome"
+        oninput="filtrarTabela('tabelaProvas', 'filtroRAProvas', 'filtroNomeProvas')">
+</div>
                     <?php if ($data["alunos"]["provas_feitas"] != null) {?>
 
                     <table id="tabelaProvas" class="tabela_alunos_adm">
