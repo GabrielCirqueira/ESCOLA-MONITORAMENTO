@@ -79,6 +79,18 @@ $popups = [
         "message" => "Matéria inserida com <br> sucesso!",
     ],
 
+    "PopUp_not_QntP" => [
+        "status_class" => "uncheck",
+        "title" => "SUCESSO",
+        "message" => "Selecione o numero de questões <br> para criar o gabarito da prova!",
+    ],
+
+    "PopUp_not_valor" => [
+        "status_class" => "uncheck",
+        "title" => "SUCESSO",
+        "message" => "Selecione o valor da prova <br> para criar o gabarito!",
+    ],
+
     "PopUp_excluir_prova" => [
         "status_class" => "check",
         "title" => "SUCESSO",

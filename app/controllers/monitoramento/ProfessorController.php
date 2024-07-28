@@ -2,242 +2,257 @@
 
 namespace app\controllers\monitoramento;
 
-use app\models\monitoramento\ProfessorModel;
-use app\models\monitoramento\AlunoModel;
 use app\controllers\monitoramento\MainController;
+use app\models\monitoramento\AlunoModel;
+use app\models\monitoramento\ProfessorModel;
 use DateTime;
 
-class ProfessorController{
+class ProfessorController
+{
 
-    public static function home_professor(){
+    public static function home_professor()
+    {
 
         $info = ProfessorModel::verificarLogin($_POST["user-prof"]);
-        if ($info != False){
-            if($info["senha"] == $_POST["senha-prof"]){
-                $_SESSION["PROFESSOR"] = True;
+        if ($info != false) {
+            if ($info["senha"] == $_POST["senha-prof"]) {
+                $_SESSION["PROFESSOR"] = true;
                 $_SESSION["nome_professor"] = $info["nome"];
-                $_SESSION["nome_usuario"]   = $info["usuario"];
-                $_SESSION["numero"]         = $info["numero"];
-                $_SESSION["disciplinas"]    = $info["disciplinas"];
+                $_SESSION["nome_usuario"] = $info["usuario"];
+                $_SESSION["numero"] = $info["numero"];
+                $_SESSION["disciplinas"] = $info["disciplinas"];
                 header("location: professor_home");
-            }else{
-                $_SESSION["PopUp_PRF_Senha"] = True;
+            } else {
+                $_SESSION["PopUp_PRF_Senha"] = true;
                 header("location: login_professor");
                 exit;
             }
         } else {
-            $_SESSION["PopUp_PRF_NaoENC"] = True;
+            $_SESSION["PopUp_PRF_NaoENC"] = true;
             header("location: login_professor");
             exit;
         }
     }
-    public static function professor_home(){
-        if($_SESSION["PROFESSOR"]){
+    public static function professor_home()
+    {
+        if ($_SESSION["PROFESSOR"]) {
 
-            MainController::Templates("public/views/professor/home.php","PROFESSOR", [
-                'nome'          => $_SESSION["nome_professor"],
-                'nome_usuario'  => $_SESSION["nome_usuario"], 
-                'numero'        => $_SESSION["numero"],
-                'disciplinas'   => $_SESSION["disciplinas"]
+            MainController::Templates("public/views/professor/home.php", "PROFESSOR", [
+                'nome' => $_SESSION["nome_professor"],
+                'nome_usuario' => $_SESSION["nome_usuario"],
+                'numero' => $_SESSION["numero"],
+                'disciplinas' => $_SESSION["disciplinas"],
             ]);
 
-        }else{
+        } else {
             header("location: ADM");
         }
     }
 
-    public static function inserir_gabarito(){
-        
-        if($_SESSION["PROFESSOR"]){
-            $turmas = ProfessorModel::GetTurmas();        
+    public static function inserir_gabarito()
+    {
+
+        if ($_SESSION["PROFESSOR"]) {
+            $turmas = ProfessorModel::GetTurmas();
             $_SESSION["PAG_VOLTAR"] = "professor_home";
 
-            MainController::Templates("public/views/professor/inserir_gabarito.php","PROFESSOR",$turmas);
-        }
-            else{
+            MainController::Templates("public/views/professor/inserir_gabarito.php", "PROFESSOR", $turmas);
+        } else {
             header("location: ADM");
         }
     }
 
-    public static function criar_gabarito(){
+    public static function criar_gabarito()
+    {
 
-        if($_SESSION["PROFESSOR"]){
+        if ($_SESSION["PROFESSOR"]) {
 
-        if($_POST["gabarito-turmas"] == null){
-            $_SESSION["popup_not_turmas"] = True;
-            header("location: inserir_gabarito");
-            exit;
-        }
+            if ($_POST["gabarito-turmas"] == null) {
+                $_SESSION["popup_not_turmas"] = true;
+                header("location: inserir_gabarito");
+                exit;
+            }
 
+            if ($_POST["qtn-perguntas"] == null) {
+                $_SESSION["PopUp_not_QntP"] = true;
+                header("location: inserir_gabarito");
+                exit;
+            }
 
-        $_SESSION["PAG_VOLTAR"] = "inserir_gabarito";
-    
-        $turmas = $_POST["gabarito-turmas"];
-        $perguntas = $_POST["qtn-perguntas"];
-        $valor = $_POST["valor-prova"];
-        $nome = $_POST["nome-prova"];
-        $materia = $_POST["Materias-professor-gabarito"];
-        $descritores = $_POST["descritores"]; 
+            if ($_POST["valor-prova"] == null) {
+                $_SESSION["PopUp_not_valor"] = true;
+                header("location: inserir_gabarito");
+                exit;
+            }
 
-        if($_SESSION["PROFESSOR"]){
+            $_SESSION["PAG_VOLTAR"] = "inserir_gabarito";
+
             $turmas = $_POST["gabarito-turmas"];
             $perguntas = $_POST["qtn-perguntas"];
             $valor = $_POST["valor-prova"];
+            $nome = $_POST["nome-prova"];
+            $materia = $_POST["Materias-professor-gabarito"];
+            $descritores = $_POST["descritores"];
 
-            $dados = [
-                "turmas"        => $turmas,
-                "perguntas"     => $perguntas,
-                "valor"         => $valor,
-                "nome_prova"    => $nome,
-                "materia"       => $materia,
-                "descritores"   => $descritores
-            ];
-            
-            MainController::Templates("public/views/professor/criar_gabarito.php","PROFESSOR",$dados);
+            if ($_SESSION["PROFESSOR"]) {
+                $turmas = $_POST["gabarito-turmas"];
+                $perguntas = $_POST["qtn-perguntas"];
+                $valor = $_POST["valor-prova"];
+
+                $dados = [
+                    "turmas" => $turmas,
+                    "perguntas" => $perguntas,
+                    "valor" => $valor,
+                    "nome_prova" => $nome,
+                    "materia" => $materia,
+                    "descritores" => $descritores,
+                ];
+
+                MainController::Templates("public/views/professor/criar_gabarito.php", "PROFESSOR", $dados);
+            } else {
+                header("location: home");
+            }
+        } else {
+            header("location: ADM");
         }
-            else{
-            header("location: home");
-        }
-    }else{
-        header("location: ADM");
     }
-}
 
-    public static function criar_gabarito_respostas(){
-        if($_SESSION["PROFESSOR"]){
+    public static function criar_gabarito_respostas()
+    {
+        if ($_SESSION["PROFESSOR"]) {
             $gabarito_prova = [];
             $descritores_prova = [];
             $dataAtual = new DateTime();
             $dataFormatada = $dataAtual->format('Y-m-d');
-    
+
             $contador = 1;
-            
-            while($contador <= $_POST["numero_perguntas"]){ 
-                    $descritores_prova[$contador] = $contador .",". $_POST["DESCRITOR_".$contador];
-                    $gabarito_prova[$contador] = $_POST[$contador];
-    
-                    $contador++;
-            }
-            
-            $descritores = implode(";",$descritores_prova);
 
-            if($_POST["descritor"] == "não"){
-                $descritores = NULL;
+            while ($contador <= $_POST["numero_perguntas"]) {
+                $descritores_prova[$contador] = $contador . "," . $_POST["DESCRITOR_" . $contador];
+                $gabarito_prova[$contador] = $_POST[$contador];
+
+                $contador++;
             }
 
-            $gabarito = implode(";",$gabarito_prova);
-    
+            $descritores = implode(";", $descritores_prova);
+
+            if ($_POST["descritor"] == "não") {
+                $descritores = null;
+            }
+
+            $gabarito = implode(";", $gabarito_prova);
+
             $dados = [
-                "turmas"        => $_POST["turmas_gabarito"],
-                "perguntas"     => $_POST["numero_perguntas"],
-                "valor"         => $_POST["valor_prova"],
-                "data"          => $dataFormatada,
-                "nome_prova"    => $_POST["nome_prova"],
-                "descritores"   =>  $descritores,
-                "gabarito"      =>  $gabarito,
-                "nome_prof"     =>  $_SESSION["nome_professor"],
-                "materia"       =>  $_POST["materia_prova"]
+                "turmas" => $_POST["turmas_gabarito"],
+                "perguntas" => $_POST["numero_perguntas"],
+                "valor" => $_POST["valor_prova"],
+                "data" => $dataFormatada,
+                "nome_prova" => $_POST["nome_prova"],
+                "descritores" => $descritores,
+                "gabarito" => $gabarito,
+                "nome_prof" => $_SESSION["nome_professor"],
+                "materia" => $_POST["materia_prova"],
             ];
-            if(ProfessorModel::inserir_gabarito($dados)){
-                $_SESSION["PopUp_inserir_gabarito_professor"] = True;
+            if (ProfessorModel::inserir_gabarito($dados)) {
+                $_SESSION["PopUp_inserir_gabarito_professor"] = true;
                 header("location: inserir_gabarito");
                 exit;
             }
-        }
-        else{
+        } else {
             header("location: home");
         }
     }
 
-    public static function ver_provas(){
+    public static function ver_provas()
+    {
 
-        if($_SESSION["PROFESSOR"]){
+        if ($_SESSION["PROFESSOR"]) {
             $provas_professores = AlunoModel::GetProvas();
             $provas_alunos = AlunoModel::GetProvasFinalizadas();
-            $provas = [];     
+            $provas = [];
             $_SESSION["PAG_VOLTAR"] = "professor_home";
-            
 
-            if($provas_professores != NULL){
-                foreach($provas_professores as $professor){
-                    if($professor["nome_professor"] == $_SESSION["nome_professor"]){
-                        $provas[] = $professor; 
+            if ($provas_professores != null) {
+                foreach ($provas_professores as $professor) {
+                    if ($professor["nome_professor"] == $_SESSION["nome_professor"]) {
+                        $provas[] = $professor;
                     }
                 }
-                $dados = [ 
-                    "provas"        => $provas,
-                    "provas_alunos" => $provas_alunos
+                $dados = [
+                    "provas" => $provas,
+                    "provas_alunos" => $provas_alunos,
                 ];
             }
 
-            if($provas == NULL || $provas_professores == NULL){
-                $dados = NULL;
+            if ($provas == null || $provas_professores == null) {
+                $dados = null;
             }
-            
-            MainController::Templates("public/views/professor/provas.php","PROFESSOR",$dados);
 
-        }else{
+            MainController::Templates("public/views/professor/provas.php", "PROFESSOR", $dados);
+
+        } else {
             header("location: ADM");
         }
     }
-    public static function prova() {
+    public static function prova()
+    {
         if ($_SESSION["PROFESSOR"]) {
             $provas_professores = AlunoModel::GetProvas();
-            $provas_alunos = AlunoModel::GetProvasFinalizadas();   
+            $provas_alunos = AlunoModel::GetProvasFinalizadas();
             $_SESSION["PAG_VOLTAR"] = "ver_provas";
 
-            if(isset($_POST["id-prova"])){
+            if (isset($_POST["id-prova"])) {
                 $id_prova = $_POST["id-prova"];
-                $_SESSION["id_prova_professor"] = $_POST["id-prova"]; 
-            }else{
-                $id_prova = $_SESSION["id_prova_professor"]; 
+                $_SESSION["id_prova_professor"] = $_POST["id-prova"];
+            } else {
+                $id_prova = $_SESSION["id_prova_professor"];
             }
 
             $provas = [];
             $provas_turma = [];
             $liberado = false;
-    
+
             foreach ($provas_professores as $prova) {
                 if ($prova["id"] == $id_prova) {
                     $provaa = $prova;
                     $turmas = $prova["turmas"];
                     $nome_prova = $prova["nome_prova"];
                     $liberado = $prova["liberado"] == "SIM" ? true : false;
-                    if($prova["liberar_prova"] == NULL){
-                        $liberar_prova = True;
-                    }else{
-                        $liberar_prova = False;
+                    if ($prova["liberar_prova"] == null) {
+                        $liberar_prova = true;
+                    } else {
+                        $liberar_prova = false;
                     }
                 }
             }
-    
-            if($provas_alunos != NULL){
+
+            if ($provas_alunos != null) {
                 foreach ($provas_alunos as $prova) {
                     if ($prova["id_prova"] == $id_prova) {
                         $provas[] = $prova;
                     }
                 }
             }
-    
+
             $turma = explode(",", $turmas);
             $turma = $turma[0];
-    
+
             if (isset($_POST["status"])) {
-                if($_POST["status"] == "sim") {
-                    ProfessorModel::alterar_liberado($id_prova,"SIM"); 
+                if ($_POST["status"] == "sim") {
+                    ProfessorModel::alterar_liberado($id_prova, "SIM");
                     header("Location: prova");
-                }else{
-                    ProfessorModel::alterar_liberado($id_prova,null);  
+                } else {
+                    ProfessorModel::alterar_liberado($id_prova, null);
                     header("Location: prova");
                 }
             }
 
             if (isset($_POST["status-liberado"])) {
-                if($_POST["status-liberado"] == "sim") {
-                    ProfessorModel::alterar_liberado_ver($id_prova,null); 
+                if ($_POST["status-liberado"] == "sim") {
+                    ProfessorModel::alterar_liberado_ver($id_prova, null);
                     header("Location: prova");
-                }else{
-                    ProfessorModel::alterar_liberado_ver($id_prova,"NÃO");  
+                } else {
+                    ProfessorModel::alterar_liberado_ver($id_prova, "NÃO");
                     header("Location: prova");
                 }
             }
@@ -253,14 +268,14 @@ class ProfessorController{
                 }
             }
 
-            if(isset($_POST["enviar-user"])){
-                if($_POST["user"] == $_SESSION["numero"]){
+            if (isset($_POST["enviar-user"])) {
+                if ($_POST["user"] == $_SESSION["numero"]) {
                     ProfessorModel::ExcluirProvaAluno($id_prova);
                     ProfessorModel::ExcluirProvaProf($id_prova);
                     header("Location: ver_provas");
-                    $_SESSION["PopUp_Excluir_prova"] = True;
+                    $_SESSION["PopUp_Excluir_prova"] = true;
                     exit();
-                }else{
+                } else {
                     echo "<script> window.alert('Nome de usuario Incorreto!') </script>";
                 }
             }
@@ -272,38 +287,39 @@ class ProfessorController{
                 "provas_turma" => $provas_turma,
                 "liberado" => $liberado,
                 "liberar_prova" => $liberar_prova,
-                "prova" =>  $provaa,
-                "nome_prova" => $nome_prova
+                "prova" => $provaa,
+                "nome_prova" => $nome_prova,
             ];
 
             $provas_rec = ProfessorModel::GetProvaRecbyIDprova($id_prova);
-            if(count($provas_rec) > 0){
+            if (count($provas_rec) > 0) {
                 $dados["provas_rec"] = [
                     "quantidade" => count($provas_rec),
-                    "provas"    => $provas_rec
+                    "provas" => $provas_rec,
                 ];
-            }else{
-                $dados["provas_rec"] = NULL;
+            } else {
+                $dados["provas_rec"] = null;
             }
 
             // echo "<pre>";
             // print_r($dados);
             // echo "</pre>";
-    
+
             MainController::Templates("public/views/professor/prova.php", "PROFESSOR", $dados);
-        }else{
+        } else {
             header("location: ADM");
         }
     }
 
-    public static function prova_recuperacao(){
-        if($_SESSION["PROFESSOR"]){ 
+    public static function prova_recuperacao()
+    {
+        if ($_SESSION["PROFESSOR"]) {
 
-            if(isset($_POST["prova"])){
+            if (isset($_POST["prova"])) {
                 $id = $_POST["prova"];
-                $_SESSION["id_prova_professorRec"] = $_POST["prova"]; 
-            }else{
-                $id = $_SESSION["id_prova_professorRec"]; 
+                $_SESSION["id_prova_professorRec"] = $_POST["prova"];
+            } else {
+                $id = $_SESSION["id_prova_professorRec"];
             }
             $prova = ProfessorModel::GetProvaRecbyID($id);
             $provas_rec = ProfessorModel::GetProvaRecAlunos();
@@ -311,16 +327,16 @@ class ProfessorController{
             $id_prova_origin = $prova["id_prova"];
 
             $alunos_prova = [];
-            if(strpos($prova["alunos"],";")){
-                $alunos_prova = explode(";",$prova["alunos"]);
-            }else{
+            if (strpos($prova["alunos"], ";")) {
+                $alunos_prova = explode(";", $prova["alunos"]);
+            } else {
                 $alunos_prova[] = $prova["alunos"];
             }
 
             $alunos = [];
-            foreach(AlunoModel::GetAlunos() as $aluno){
-                foreach($alunos_prova as $aln_prova){
-                    if($aln_prova == $aluno["ra"]){
+            foreach (AlunoModel::GetAlunos() as $aluno) {
+                foreach ($alunos_prova as $aln_prova) {
+                    if ($aln_prova == $aluno["ra"]) {
                         $alunos[$aln_prova] = [
                             "nome" => $aluno["nome"],
                             "turma" => $aluno["turma"],
@@ -340,13 +356,13 @@ class ProfessorController{
                     $liberado = $prova["liberado"] == "SIM" ? true : false;
                 }
             }
-            
+
             if (isset($_POST["status"])) {
-                if($_POST["status"] == "sim") {
-                    ProfessorModel::alterar_liberadoRec($id,"SIM"); 
+                if ($_POST["status"] == "sim") {
+                    ProfessorModel::alterar_liberadoRec($id, "SIM");
                     header("Location: prova_recuperacao");
-                }else{
-                    ProfessorModel::alterar_liberadoRec($id,null);  
+                } else {
+                    ProfessorModel::alterar_liberadoRec($id, null);
                     header("Location: prova_recuperacao");
                 }
             }
@@ -354,47 +370,47 @@ class ProfessorController{
 
             foreach ($provas_rec_professor as $prova) {
                 if ($prova["id"] == $id) {
-                    if($prova["liberar_prova"] == NULL){
-                        $liberar_prova = True;
-                    }else{
-                        $liberar_prova = False;
+                    if ($prova["liberar_prova"] == null) {
+                        $liberar_prova = true;
+                    } else {
+                        $liberar_prova = false;
                     }
                 }
             }
 
             if (isset($_POST["status-liberado"])) {
-                if($_POST["status-liberado"] == "sim") {
-                    ProfessorModel::alterar_liberado_verRec($id,null); 
+                if ($_POST["status-liberado"] == "sim") {
+                    ProfessorModel::alterar_liberado_verRec($id, null);
                     header("Location: prova_recuperacao");
-                }else{
-                    ProfessorModel::alterar_liberado_verRec($id,"NÃO");  
+                } else {
+                    ProfessorModel::alterar_liberado_verRec($id, "NÃO");
                     header("Location: prova_recuperacao");
                 }
             }
 
-            if(isset($_POST["enviar-user"])){
-                if($_POST["user"] == $_SESSION["numero"]){
+            if (isset($_POST["enviar-user"])) {
+                if ($_POST["user"] == $_SESSION["numero"]) {
                     ProfessorModel::ExcluirProvaRecAluno($id_prova_origin);
                     ProfessorModel::ExcluirProvaRecProf($id_prova_origin);
                     header("Location: ver_provas");
-                    $_SESSION["PopUp_Excluir_prova"] = True;
+                    $_SESSION["PopUp_Excluir_prova"] = true;
                     exit();
-                }else{
+                } else {
                     echo "<script> window.alert('Nome de usuario Incorreto!') </script>";
                 }
             }
 
-            foreach($provas_rec as $prova){
-                foreach($alunos as $ra => $aluno){
-    
-                    if($ra == $prova["ra"] && $prova["id_prova_rec"] == $id){
+            foreach ($provas_rec as $prova) {
+                foreach ($alunos as $ra => $aluno) {
+
+                    if ($ra == $prova["ra"] && $prova["id_prova_rec"] == $id) {
                         $alunos[$ra]["status"] = "FEZ";
                         $alunos[$ra]["Pontos"] = $prova["pontos_aluno"];
-                    } 
+                    }
                 }
             }
 
-            uasort($alunos, function($a, $b) {
+            uasort($alunos, function ($a, $b) {
                 return strcmp($a['turma'], $b['turma']);
             });
 
@@ -405,60 +421,60 @@ class ProfessorController{
             $dados = [
                 "alunos" => $alunos,
                 "liberado" => $liberado,
-                "id"     => $id,
+                "id" => $id,
                 "liberar_prova" => $liberar_prova,
-                "id_prova"  => $id_prova_origin
+                "id_prova" => $id_prova_origin,
             ];
 
             MainController::Templates("public/views/professor/dados_prova_rec.php", "PROFESSOR", $dados);
-    
-        }else{
+
+        } else {
             header("location: ADM");
-        }   
+        }
     }
 
-    public static function editar_gabarito_recuperacao(){
-        if($_SESSION["PROFESSOR"]){
+    public static function editar_gabarito_recuperacao()
+    {
+        if ($_SESSION["PROFESSOR"]) {
             $_SESSION["PAG_VOLTAR"] = "ver_provas";
 
-        $id = $_POST["id-prova"];
-        $id_prova =$_POST["id_prova_origin"];
-        $_SESSION["ID_PROVA_EDITAR"] = $id;
+            $id = $_POST["id-prova"];
+            $id_prova = $_POST["id_prova_origin"];
+            $_SESSION["ID_PROVA_EDITAR"] = $id;
 
-        $prova_professor = ProfessorModel::GetProvaRecbyID($id);
-        $valor = $prova_professor["valor"];
-        $perguntas = $prova_professor["QNT_perguntas"];
+            $prova_professor = ProfessorModel::GetProvaRecbyID($id);
+            $valor = $prova_professor["valor"];
+            $perguntas = $prova_professor["QNT_perguntas"];
 
-        $gabarito = explode(";",$prova_professor["gabarito"]);
+            $gabarito = explode(";", $prova_professor["gabarito"]);
 
-         
-        if($prova_professor["descritores"] == null){
-            $descritores = null;
-        }else{
-            $descritores = explode(";",$prova_professor["descritores"]);
+            if ($prova_professor["descritores"] == null) {
+                $descritores = null;
+            } else {
+                $descritores = explode(";", $prova_professor["descritores"]);
+            }
+
+            $dados = [
+                "gabarito" => $gabarito,
+                "descritores" => $descritores,
+                "valor" => $valor,
+                "perguntas" => $perguntas,
+                "nome" => $prova_professor["nome_prova"],
+                "id_prova" => $id_prova,
+            ];
+
+            // echo "<pre>";
+            // print_r($dados);
+            // echo "</pre>";
+
+            MainController::Templates("public/views/professor/editar_provaRec.php", "PROFESSOR", $dados);
+        } else {
+            header("location: ADM");
         }
- 
-
-        $dados = [
-            "gabarito" => $gabarito,
-            "descritores" => $descritores,
-            "valor"     => $valor,
-            "perguntas"    => $perguntas,
-            "nome"  => $prova_professor["nome_prova"],
-            "id_prova" => $id_prova
-        ];
-
-        // echo "<pre>";
-        // print_r($dados);
-        // echo "</pre>";
-
-        MainController::Templates("public/views/professor/editar_provaRec.php","PROFESSOR",$dados);
-    }else{
-        header("location: ADM");
-    }
     }
 
-    public static function atualizar_gabarito_rec() {
+    public static function atualizar_gabarito_rec()
+    {
         if ($_SESSION["PROFESSOR"]) {
             $id_prova = $_POST['id_prova_origin'];
             $numero_perguntas = $_POST['numero_perguntas'];
@@ -466,137 +482,137 @@ class ProfessorController{
 
             $gabarito_prova = [];
             $descritores_prova = [];
-            
+
             for ($contador = 1; $contador <= $numero_perguntas; $contador++) {
                 $descritores_prova[$contador] = $contador . "," . $_POST["DESCRITOR_" . $contador];
                 $gabarito_prova[$contador] = $_POST[$contador];
             }
-    
+
             $descritores = implode(";", $descritores_prova);
             if ($descritor_flag == "não") {
-                $descritores = NULL;
+                $descritores = null;
             }
-    
+
             $gabarito = implode(";", $gabarito_prova);
-    
+
             $novo_gabarito_professor = [
                 "descritores" => $descritores,
                 "valor" => $_POST['valor_prova'],
                 "gabarito" => $gabarito,
-                "ID_prova" => $id_prova
+                "ID_prova" => $id_prova,
             ];
 
             ProfessorModel::atualizar_gabarito_professorRec($novo_gabarito_professor);
-                echo $id_prova;
-                $provas_alunos = ProfessorModel::GetProvasRecFeitasbyID($id_prova);
- 
+            echo $id_prova;
+            $provas_alunos = ProfessorModel::GetProvasRecFeitasbyID($id_prova);
 
-                foreach ($provas_alunos as $prova_aluno) {
-                    $gabarito_professor = explode(";", $novo_gabarito_professor["gabarito"]);
-                    $gabarito_aluno = explode(";", $prova_aluno["perguntas_respostas"]);
-                    $descritores_questoes = explode(";", $prova_aluno["descritores"]);
-    
-                    $acertos_aluno = 0;
-                    $perguntas_certas = [];
-                    $perguntas_erradas = [];
-                    $descritores_corretos = [];
-                    $descritores_errados = [];
-    
-                    foreach ($gabarito_professor as $index => $resposta_correta) {
-                        
-                         if ($gabarito_aluno[$index] == $resposta_correta || strpos($resposta_correta,"null") !== FALSE) {
-                            $acertos_aluno++;
-                            $perguntas_certas[] = $gabarito_aluno[$index];
-                            $descritores_corretos[] = $descritores_questoes[$index];
-                        } else {
-                            $perguntas_erradas[] = $gabarito_aluno[$index];
-                            $descritores_errados[] = $descritores_questoes[$index];
-                        }
+            foreach ($provas_alunos as $prova_aluno) {
+                $gabarito_professor = explode(";", $novo_gabarito_professor["gabarito"]);
+                $gabarito_aluno = explode(";", $prova_aluno["perguntas_respostas"]);
+                $descritores_questoes = explode(";", $prova_aluno["descritores"]);
+
+                $acertos_aluno = 0;
+                $perguntas_certas = [];
+                $perguntas_erradas = [];
+                $descritores_corretos = [];
+                $descritores_errados = [];
+
+                foreach ($gabarito_professor as $index => $resposta_correta) {
+
+                    if ($gabarito_aluno[$index] == $resposta_correta || strpos($resposta_correta, "null") !== false) {
+                        $acertos_aluno++;
+                        $perguntas_certas[] = $gabarito_aluno[$index];
+                        $descritores_corretos[] = $descritores_questoes[$index];
+                    } else {
+                        $perguntas_erradas[] = $gabarito_aluno[$index];
+                        $descritores_errados[] = $descritores_questoes[$index];
                     }
-    
-                    $valor_cada_pergunta = $novo_gabarito_professor["valor"] / count($gabarito_professor);
-                    $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
-    
-                    $dados_atualizacao = [
-                        "ra" => $prova_aluno["ra"],
-                        "ID" => $prova_aluno["id"],
-                        "ID_prova" => $id_prova,
-                        "acertos" => $acertos_aluno,
-                        "porcentagem" => ($acertos_aluno / count($gabarito_professor)) * 100,
-                        "pontos_aluno" => $pontos_aluno,
-                        "perguntas_certas" => implode(";", $perguntas_certas),
-                        "perguntas_erradas" => implode(";", $perguntas_erradas),
-                        "descritores_certos" => implode(";", $descritores_corretos),
-                        "descritores_errados" => implode(";", $descritores_errados),
-                        "pontos_prova" => $_POST['valor_prova']
-                    ];
-  
-                    ProfessorModel::atualizar_gabarito_aluno_rec($dados_atualizacao);
                 }
-    
-                $_SESSION["PopUp_inserir_prova"] = True;
-                header("location: professor_home");
-                exit();
-            
+
+                $valor_cada_pergunta = $novo_gabarito_professor["valor"] / count($gabarito_professor);
+                $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
+
+                $dados_atualizacao = [
+                    "ra" => $prova_aluno["ra"],
+                    "ID" => $prova_aluno["id"],
+                    "ID_prova" => $id_prova,
+                    "acertos" => $acertos_aluno,
+                    "porcentagem" => ($acertos_aluno / count($gabarito_professor)) * 100,
+                    "pontos_aluno" => $pontos_aluno,
+                    "perguntas_certas" => implode(";", $perguntas_certas),
+                    "perguntas_erradas" => implode(";", $perguntas_erradas),
+                    "descritores_certos" => implode(";", $descritores_corretos),
+                    "descritores_errados" => implode(";", $descritores_errados),
+                    "pontos_prova" => $_POST['valor_prova'],
+                ];
+
+                ProfessorModel::atualizar_gabarito_aluno_rec($dados_atualizacao);
+            }
+
+            $_SESSION["PopUp_inserir_prova"] = true;
+            header("location: professor_home");
+            exit();
+
         } else {
             header("location: ADM");
         }
     }
-    
-   
-    public static function relatorio_professor(){
-        if($_SESSION["PROFESSOR"]){
-        $provas_professores = AlunoModel::GetProvas();
-        $provas_alunos = AlunoModel::GetProvasFinalizadas();
-        $_SESSION["PAG_VOLTAR"] = "professor_home";
-        $provas = []; 
-        if($provas_professores != NULL){
-            foreach($provas_professores as $professor){
-                if($professor["nome_professor"] == $_SESSION["nome_professor"]){
-                    $provas[] = $professor; 
-                }
-            }
-            $dados = [ 
-                "provas"        => $provas,
-                "provas_alunos" => $provas_alunos
-            ];
-        } 
-        if($provas == NULL || $provas_professores == NULL){
-            $dados = NULL;
-        }
-        
-        MainController::Templates("public/views/professor/provas_relatorios.php", "PROFESSOR", $dados);
-    }else{
-        header("location: ADM");
-    }
-}
 
-    public static function relatorio_prova(){
-        if($_SESSION["PROFESSOR"]){
-            
-            $id_prova = $_POST["id-prova"];
-            $_SESSION["PAG_VOLTAR"] = "relatorio_professor";
-            $provas = AlunoModel::GetProvasFinalizadas(); 
-            $provasRec = ProfessorModel::GetProvaRecAlunos(); 
-            $provasPrimeira = ProfessorModel::GetProvaPrimeira(); 
+    public static function relatorio_professor()
+    {
+        if ($_SESSION["PROFESSOR"]) {
             $provas_professores = AlunoModel::GetProvas();
-            $dados_turmas = [];
-            $filtro_turmas = False;
-            $status_desc = False; 
-        
-            foreach($provas_professores as $professor){
-                if($professor["id"] == $id_prova){
-                    $turmas = explode(",", $professor["turmas"]); 
-                    $nome_prova = $professor["nome_prova"];
-                    if($professor["descritores"] != NULL){
-                    $descritores = explode(";",$professor["descritores"]);
-                        $status_desc = True;
-                    }else{
-                        $status_desc = False;
+            $provas_alunos = AlunoModel::GetProvasFinalizadas();
+            $_SESSION["PAG_VOLTAR"] = "professor_home";
+            $provas = [];
+            if ($provas_professores != null) {
+                foreach ($provas_professores as $professor) {
+                    if ($professor["nome_professor"] == $_SESSION["nome_professor"]) {
+                        $provas[] = $professor;
                     }
                 }
-            } 
-        
+                $dados = [
+                    "provas" => $provas,
+                    "provas_alunos" => $provas_alunos,
+                ];
+            }
+            if ($provas == null || $provas_professores == null) {
+                $dados = null;
+            }
+
+            MainController::Templates("public/views/professor/provas_relatorios.php", "PROFESSOR", $dados);
+        } else {
+            header("location: ADM");
+        }
+    }
+
+    public static function relatorio_prova()
+    {
+        if ($_SESSION["PROFESSOR"]) {
+
+            $id_prova = $_POST["id-prova"];
+            $_SESSION["PAG_VOLTAR"] = "relatorio_professor";
+            $provas = AlunoModel::GetProvasFinalizadas();
+            $provasRec = ProfessorModel::GetProvaRecAlunos();
+            $provasPrimeira = ProfessorModel::GetProvaPrimeira();
+            $provas_professores = AlunoModel::GetProvas();
+            $dados_turmas = [];
+            $filtro_turmas = false;
+            $status_desc = false;
+
+            foreach ($provas_professores as $professor) {
+                if ($professor["id"] == $id_prova) {
+                    $turmas = explode(",", $professor["turmas"]);
+                    $nome_prova = $professor["nome_prova"];
+                    if ($professor["descritores"] != null) {
+                        $descritores = explode(";", $professor["descritores"]);
+                        $status_desc = true;
+                    } else {
+                        $status_desc = false;
+                    }
+                }
+            }
+
             $alunos_por_turma = array();
             foreach ($provas as $prova) {
                 if ($prova["id_prova"] == $id_prova) {
@@ -607,7 +623,7 @@ class ProfessorController{
                     $alunos_por_turma[$turma_prova][] = $prova;
                 }
             }
-    
+
             $alunos_por_turma_rec = array();
             foreach ($provasRec as $prova) {
                 if ($prova["id_prova"] == $id_prova) {
@@ -618,7 +634,7 @@ class ProfessorController{
                     $alunos_por_turma_rec[$turma_prova][] = $prova;
                 }
             }
-    
+
             $alunos_por_turma_primeira = array();
             foreach ($provasPrimeira as $prova) {
                 if ($prova["id_prova"] == $id_prova) {
@@ -629,74 +645,71 @@ class ProfessorController{
                     $alunos_por_turma_primeira[$turma_prova][] = $prova;
                 }
             }
-        
+
             $total_pontos_geral = 0;
             $total_alunos_geral = 0;
             $total_acima_60 = 0;
             $total_alunos = 0;
-          
-            foreach($alunos_por_turma as $turma){
+
+            foreach ($alunos_por_turma as $turma) {
                 $pontos = 0;
                 $alunos = 0;
                 $alunos_acima_60 = 0;
-                foreach($turma as $aluno){
+                foreach ($turma as $aluno) {
                     $pontos += $aluno["pontos_aluno"];
                     $alunos++;
                     $turma_nome = $aluno["turma"];
                     $pontos_prova = $aluno["pontos_prova"];
-                    $porcentagem_aluno =  ($aluno["acertos"] / $aluno["QNT_perguntas"]) * 100;
-                    if($aluno["descritores"] == null ){
+                    $porcentagem_aluno = ($aluno["acertos"] / $aluno["QNT_perguntas"]) * 100;
+                    if ($aluno["descritores"] == null) {
                         $descriotores_sn = false;
-                    }else{
+                    } else {
                         $descriotores_sn = true;
                     }
                     if ($porcentagem_aluno >= 60) {
-                        $alunos_acima_60++;                                                         
+                        $alunos_acima_60++;
                         $total_acima_60++;
                     }
                 }
-                
+
                 $porcentagem_acima_60 = number_format(($alunos_acima_60 / $alunos) * 100, 1);
-                
+
                 $dados_turmas[$turma_nome] = [
                     "total_pontos_turma" => $pontos,
                     "alunos" => $alunos,
                     "pontos_prova" => $pontos_prova,
-                    "porcentagem" => number_format((($pontos / $alunos ) / $pontos_prova) * 100, 0),
+                    "porcentagem" => number_format((($pontos / $alunos) / $pontos_prova) * 100, 0),
                     "porcentagem_acima_60" => $porcentagem_acima_60,
-                    "turma_nome" => $turma_nome, 
-                    "grafico" => MainController::gerarGraficoRosca(number_format((($pontos / $alunos ) / $pontos_prova) * 100, 1))
+                    "turma_nome" => $turma_nome,
+                    "grafico" => MainController::gerarGraficoRosca(number_format((($pontos / $alunos) / $pontos_prova) * 100, 1)),
                 ];
-        
+
                 $total_pontos_geral += $pontos;
                 $total_alunos_geral += $alunos;
                 $total_alunos += $alunos;
-            } 
-        
-            $media_geral_porcentagem = number_format((($total_pontos_geral / $total_alunos_geral) / $pontos_prova) * 100, 2); 
-            $porcentagem_geral_acima_60 = number_format(($total_acima_60 / $total_alunos) * 100, 1);
-            
-     
+            }
 
+            $media_geral_porcentagem = number_format((($total_pontos_geral / $total_alunos_geral) / $pontos_prova) * 100, 2);
+            $porcentagem_geral_acima_60 = number_format(($total_acima_60 / $total_alunos) * 100, 1);
 
             $media_descritores_geral = [];
 
-            if($status_desc == True){
+            if ($status_desc == true) {
                 $acertos_por_descritor = [];
 
                 foreach ($alunos_por_turma as $turma => $alunos) {
                     $acertos_por_descritor[$turma] = [];
-                
+
                     foreach ($alunos as $aluno) {
                         $descritores_prova = explode(';', $aluno['descritores']);
                         $descritores_certos = explode(';', $aluno['descritores_certos']);
-                
+
                         foreach ($descritores_prova as $descritor) {
                             if (!isset($acertos_por_descritor[$turma][$descritor])) {
                                 $acertos_por_descritor[$turma][$descritor] = 0;
                             }
                         }
-                
+
                         foreach ($descritores_certos as $descritor) {
                             if (!empty($descritor)) {
                                 $acertos_por_descritor[$turma][$descritor]++;
@@ -704,28 +717,28 @@ class ProfessorController{
                         }
                     }
                 }
-                
+
                 $percentual_por_descritor = [];
-                
+
                 foreach ($acertos_por_descritor as $turma => $acertos) {
                     $total_alunos = count($alunos_por_turma[$turma]);
-                
+
                     foreach ($acertos as $descritor => $quantidade_acertos) {
                         $percentual = ($quantidade_acertos / $total_alunos) * 100;
                         $percentual_por_descritor[$turma][$descritor] = $percentual;
                     }
                 }
-                
+
                 $percentual_descritores_turmas = [];
-                
+
                 foreach ($percentual_por_descritor as $turma => $descritores) {
                     $descritores_modificados = [];
                     $percentuais_sem_questao = [];
-                
+
                     foreach ($descritores as $descritor => $percentual) {
                         if (!empty($descritor)) {
                             $nome_descritor = explode(',', $descritor)[1];
-                
+
                             if (!isset($percentuais_sem_questao[$nome_descritor])) {
                                 $percentuais_sem_questao[$nome_descritor] = [$percentual];
                             } else {
@@ -733,16 +746,15 @@ class ProfessorController{
                             }
                         }
                     }
-                
+
                     foreach ($percentuais_sem_questao as $nome_descritor => $percentuais) {
                         $media_percentual = array_sum($percentuais) / count($percentuais);
                         $descritores_modificados[$nome_descritor] = $media_percentual;
                     }
-                
+
                     $percentual_descritores_turmas[$turma] = $descritores_modificados;
                 }
-                
-                
+
                 foreach ($percentual_descritores_turmas as $turma) {
                     foreach ($turma as $descritor => $percentual) {
                         if (!isset($media_descritores_geral[$descritor])) {
@@ -751,143 +763,137 @@ class ProfessorController{
                         $media_descritores_geral[$descritor] += $percentual / count($percentual_descritores_turmas);
                     }
                 }
-                
+
                 foreach ($media_descritores_geral as $descritor => $percentual) {
                     $media_descritores_geral[$descritor] = MainController::gerarGraficoRosca(number_format($percentual, 1));
                 }
             }
-            
-             
+
             // print_r($acertos_por_descritor);
             // print_r($percentual_por_descritor);
             // print_r($percentual_descritores_turmas);
             // print_r($media_descritores_geral);
-
-
 
             // MainController::pre($acertos_por_descritor);
             // MainController::pre($percentual_por_descritor);
             // MainController::pre($percentual_descritores_turmas);
             // MainController::pre($media_descritores_geral);
 
-           
-
-            
             $contador_alunos = 0;
-    
+
             $medida_geral = [
                 "Abaixo do Básico" => 0,
                 "Básico" => 0,
                 "Médio" => 0,
                 "Avançado" => 0,
             ];
-            
+
             $porcentagem_alunos_turma = [];
             $contador_turma = 0;
-            
-            foreach($alunos_por_turma as $turma){
+
+            foreach ($alunos_por_turma as $turma) {
                 $medida_turma = [
                     "Abaixo do Básico" => 0,
                     "Básico" => 0,
                     "Médio" => 0,
                     "Avançado" => 0,
                 ];
-            
+
                 $contador_alunos_turma = 0;
-                foreach($turma as $aluno){
+                foreach ($turma as $aluno) {
                     $percentual = ($aluno["acertos"] / $aluno["QNT_perguntas"]) * 100;
-                    if($percentual <= 25){
+                    if ($percentual <= 25) {
                         $medida_turma["Abaixo do Básico"] += 1;
-                    }else if($percentual <= 50) {
+                    } else if ($percentual <= 50) {
                         $medida_turma["Básico"] += 1;
-                    }else if($percentual <= 75){
+                    } else if ($percentual <= 75) {
                         $medida_turma["Médio"] += 1;
-                    }else{
+                    } else {
                         $medida_turma["Avançado"] += 1;
                     }
                     $contador_alunos_turma++;
                     $nome = $aluno["turma"];
                 }
-            
+
                 $porcentagem_turma = [];
                 foreach ($medida_turma as $categoria => $quantidade) {
                     $porcentagem_turma[$categoria] = number_format(($quantidade / $contador_alunos_turma) * 100, 0);
                 }
-            
+
                 $porcentagem_alunos_turma[$nome] = $porcentagem_turma;
-             
+
                 foreach ($medida_turma as $categoria => $quantidade) {
                     $medida_geral[$categoria] += $quantidade;
                 }
-            
+
                 $contador_alunos += $contador_alunos_turma;
             }
-             
+
             $porcentagem_alunos = [];
             foreach ($medida_geral as $categoria => $quantidade) {
                 $porcentagem_alunos[$categoria] = number_format(($quantidade / $contador_alunos) * 100, 0);
             }
             $dados_turma = null;
-    
-            if(isset($_POST["filtrar"])){
+
+            if (isset($_POST["filtrar"])) {
                 $turma = $_POST["turma-filtros"];
-                if($turma != "geral"){
-                    $filtro_turmas = True;
-    
+                if ($turma != "geral") {
+                    $filtro_turmas = true;
+
                     $grafico_descritores_turma = [];
-                        if($status_desc){
-                        foreach($percentual_descritores_turmas[$turma] as $descritor => $percentual){
-                            $grafico_descritores_turma[$descritor] = MainController::gerarGraficoRosca(number_format($percentual,1));
+                    if ($status_desc) {
+                        foreach ($percentual_descritores_turmas[$turma] as $descritor => $percentual) {
+                            $grafico_descritores_turma[$descritor] = MainController::gerarGraficoRosca(number_format($percentual, 1));
                         }
                     }
-        
+
                     $dados_turma = [
-                        "nome"=> $turma,
+                        "nome" => $turma,
                         "grafico_coluna" => MainController::gerarGraficoColunas($porcentagem_alunos_turma[$turma]),
                         "descritores" => $grafico_descritores_turma,
                         "percentual_turma" => MainController::gerarGraficoRosca($dados_turmas[$turma]["porcentagem"]),
-                        "percentual_turma_60" => MainController::gerarGraficoRosca($dados_turmas[$turma]["porcentagem_acima_60"]) 
+                        "percentual_turma_60" => MainController::gerarGraficoRosca($dados_turmas[$turma]["porcentagem_acima_60"]),
                     ];
-                }else{
-                    $filtro_turmas = False;
+                } else {
+                    $filtro_turmas = false;
                 }
-               
+
             }
-    
+
             $turmass = array_column($dados_turmas, 'turma_nome');
-     
+
             array_multisort($turmass, SORT_ASC, $dados_turmas);
-    
+
             $provas_tudo = [];
-    
+
             foreach ($provas as $prova) {
                 if ($prova["id_prova"] == $id_prova) {
-    
+
                     $prova["NotaP"] = "INDEFINIDO";
-                    foreach($provasPrimeira as $pm){
-                        if($pm["id_prova"] == $prova["id_prova"]){
-                            if($pm["ra"] == $prova["ra"]){
+                    foreach ($provasPrimeira as $pm) {
+                        if ($pm["id_prova"] == $prova["id_prova"]) {
+                            if ($pm["ra"] == $prova["ra"]) {
                                 $prova["NotaP"] = $pm["pontos_aluno"];
                             }
                         }
                     }
-    
-                    if($prova["recuperacao"] != NULL){
-                        foreach($provasRec as $pr){
-                            if($pr["id_prova"] == $prova["id_prova"]){
-                                if($pr["ra"] == $prova["ra"]){
+
+                    if ($prova["recuperacao"] != null) {
+                        foreach ($provasRec as $pr) {
+                            if ($pr["id_prova"] == $prova["id_prova"]) {
+                                if ($pr["ra"] == $prova["ra"]) {
                                     $prova["notaRec"] = $pr["pontos_aluno"];
                                 }
                             }
                         }
-                    }else{
+                    } else {
                         $prova["notaRec"] = "INDEFINIDO";
                     }
-    
+
                     $provas_tudo[] = $prova;
                 }
             }
-    
+
             usort($provas_tudo, function ($a, $b) {
                 $result = strcmp($a['turma'], $b['turma']);
                 if ($result === 0) {
@@ -895,170 +901,166 @@ class ProfessorController{
                 }
                 return $result;
             });
-    
 
             $respostas_por_aluno = [];
 
-                if (isset($_POST["filtrar"])) {
-                    $turma = $_POST["turma-filtros"];
-                    if ($turma != "geral") {
-                        $provas_filtro = array_filter($provas_tudo, function($prova) use ($turma) {
-                            return $prova["turma"] == $turma;
-                        });
-                        $provas_tudo = $provas_filtro;
+            if (isset($_POST["filtrar"])) {
+                $turma = $_POST["turma-filtros"];
+                if ($turma != "geral") {
+                    $provas_filtro = array_filter($provas_tudo, function ($prova) use ($turma) {
+                        return $prova["turma"] == $turma;
+                    });
+                    $provas_tudo = $provas_filtro;
+                }
+            }
+
+            foreach ($provas_tudo as $prova) {
+                if ($prova["id_prova"] == $id_prova) {
+                    $aluno = $prova["aluno"];
+                    if (!isset($respostas_por_aluno[$aluno])) {
+                        $respostas_por_aluno[$aluno] = [];
+                    }
+
+                    $perguntas_respostas = explode(';', $prova["perguntas_respostas"]);
+                    foreach ($perguntas_respostas as $pergunta_resposta) {
+                        list($questao, $resposta) = explode(',', $pergunta_resposta);
+                        $respostas_por_aluno[$aluno][$questao] = in_array($pergunta_resposta, explode(';', $prova["perguntas_certas"])) ? "ACERTOU" : "ERROU";
                     }
                 }
+            }
 
-                foreach ($provas_tudo as $prova) {
-                    if ($prova["id_prova"] == $id_prova) {
-                        $aluno = $prova["aluno"];
-                        if (!isset($respostas_por_aluno[$aluno])) {
-                            $respostas_por_aluno[$aluno] = [];
-                        }
-
-                        $perguntas_respostas = explode(';', $prova["perguntas_respostas"]);
-                        foreach ($perguntas_respostas as $pergunta_resposta) {
-                            list($questao, $resposta) = explode(',', $pergunta_resposta);
-                            $respostas_por_aluno[$aluno][$questao] = in_array($pergunta_resposta, explode(';', $prova["perguntas_certas"])) ? "ACERTOU" : "ERROU";
-                        }
-                    }
-                }
- 
             ksort($respostas_por_aluno);
- 
+
             $descritores_por_aluno_primeira = $status_desc ? ProfessorController::calcular_descritores_por_aluno($alunos_por_turma_primeira) : null;
 
             // MainController::pre($descritores_por_aluno_primeira);
 
             $descritores_por_aluno_rec = $status_desc ? ProfessorController::calcular_descritores_por_aluno($alunos_por_turma_rec) : null;
 
-
-
             $dados = [
-                "dados_turma"                   => $dados_turmas,
-                "nome_prova"                    => $nome_prova,
-                "media_geral_porcentagem"       => MainController::gerarGraficoRosca($media_geral_porcentagem),
-                "porcentagem_geral_acima_60"    => MainController::gerarGraficoRosca($porcentagem_geral_acima_60),
-                "descritores"                   => $descriotores_sn,
-                "percentual_descritores"        => $media_descritores_geral,
-                "grafico_colunas"               => MainController::gerarGraficoColunas($porcentagem_alunos),
-                "dados_turma_grafico"           => $dados_turma,
-                "respostas_alunos"              => $respostas_por_aluno,
-                "filtro"                        => $filtro_turmas,
-                "provas_turma"                  => $provas_tudo,
-                "descritores_alunos"            => $descritores_por_aluno_primeira,
-                "descritores_alunos_rec"        => $descritores_por_aluno_rec
+                "dados_turma" => $dados_turmas,
+                "nome_prova" => $nome_prova,
+                "media_geral_porcentagem" => MainController::gerarGraficoRosca($media_geral_porcentagem),
+                "porcentagem_geral_acima_60" => MainController::gerarGraficoRosca($porcentagem_geral_acima_60),
+                "descritores" => $descriotores_sn,
+                "percentual_descritores" => $media_descritores_geral,
+                "grafico_colunas" => MainController::gerarGraficoColunas($porcentagem_alunos),
+                "dados_turma_grafico" => $dados_turma,
+                "respostas_alunos" => $respostas_por_aluno,
+                "filtro" => $filtro_turmas,
+                "provas_turma" => $provas_tudo,
+                "descritores_alunos" => $descritores_por_aluno_primeira,
+                "descritores_alunos_rec" => $descritores_por_aluno_rec,
             ];
-    
-        MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);
-    }else{
-        header("location: ADM");
-    }
-}
-    
-public static function calcular_descritores_por_aluno($alunos_por_turma) {
-    $descritores_por_aluno = ["descritores" => [], "ALUNOS" => []];
-    $alunos_para_processar = [];
 
-    if (isset($_POST["filtrar"])) {
-        $turma = $_POST["turma-filtros"];
-        if ($turma != "geral" && isset($alunos_por_turma[$turma])) {
-            $alunos_para_processar = $alunos_por_turma[$turma];
+            MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);
+        } else {
+            header("location: ADM");
+        }
+    }
+
+    public static function calcular_descritores_por_aluno($alunos_por_turma)
+    {
+        $descritores_por_aluno = ["descritores" => [], "ALUNOS" => []];
+        $alunos_para_processar = [];
+
+        if (isset($_POST["filtrar"])) {
+            $turma = $_POST["turma-filtros"];
+            if ($turma != "geral" && isset($alunos_por_turma[$turma])) {
+                $alunos_para_processar = $alunos_por_turma[$turma];
+            } else {
+                foreach ($alunos_por_turma as $turma_alunos) {
+                    $alunos_para_processar = array_merge($alunos_para_processar, $turma_alunos);
+                }
+            }
         } else {
             foreach ($alunos_por_turma as $turma_alunos) {
                 $alunos_para_processar = array_merge($alunos_para_processar, $turma_alunos);
             }
         }
-    } else {
-        foreach ($alunos_por_turma as $turma_alunos) {
-            $alunos_para_processar = array_merge($alunos_para_processar, $turma_alunos);
-        }
-    }
 
-    foreach ($alunos_para_processar as $aluno) {
-        $descritores_aluno = [];
-        $descritores_raw = explode(';', $aluno['descritores']);
-        
-        foreach ($descritores_raw as $index => $descritor_raw) {
-            $partes_descritor = explode(',', $descritor_raw);
-            $descritor = $partes_descritor[1];
-            $descritores_aluno[$index + 1] = "ERROU";
-            $descritores_por_aluno["descritores"][$index + 1] = $descritor;
-        }
+        foreach ($alunos_para_processar as $aluno) {
+            $descritores_aluno = [];
+            $descritores_raw = explode(';', $aluno['descritores']);
 
-        $descritores_certos = explode(';', $aluno['descritores_certos']);
-        foreach ($descritores_certos as $descritor_certos) {
-            $partes_certos = explode(',', $descritor_certos);
-            if (count($partes_certos) >= 2) {
-                $index_certo = array_search($descritor_certos, $descritores_raw) + 1;
-                if ($index_certo !== false) {
-                    $descritores_aluno[$index_certo] = "ACERTOU";
+            foreach ($descritores_raw as $index => $descritor_raw) {
+                $partes_descritor = explode(',', $descritor_raw);
+                $descritor = $partes_descritor[1];
+                $descritores_aluno[$index + 1] = "ERROU";
+                $descritores_por_aluno["descritores"][$index + 1] = $descritor;
+            }
+
+            $descritores_certos = explode(';', $aluno['descritores_certos']);
+            foreach ($descritores_certos as $descritor_certos) {
+                $partes_certos = explode(',', $descritor_certos);
+                if (count($partes_certos) >= 2) {
+                    $index_certo = array_search($descritor_certos, $descritores_raw) + 1;
+                    if ($index_certo !== false) {
+                        $descritores_aluno[$index_certo] = "ACERTOU";
+                    }
                 }
             }
+            $descritores_por_aluno["ALUNOS"][$aluno["aluno"]] = $descritores_aluno;
         }
-        $descritores_por_aluno["ALUNOS"][$aluno["aluno"]] = $descritores_aluno;
+
+        ksort($descritores_por_aluno["descritores"]);
+
+        if (empty($descritores_por_aluno["ALUNOS"])) {
+            $descritores_por_aluno = null;
+        }
+
+        return $descritores_por_aluno;
     }
 
-    ksort($descritores_por_aluno["descritores"]);
-
-    if (empty($descritores_por_aluno["ALUNOS"])) {
-        $descritores_por_aluno = NULL;
-    }
-
-    return $descritores_por_aluno;
-}
-
-
-
-
-    public static function calcularPorcentagem($total, $parte){
+    public static function calcularPorcentagem($total, $parte)
+    {
         if ($total == 0) {
             return 0;
         }
         return ($parte / $total) * 100;
     }
 
-    public static function editar_prova(){
+    public static function editar_prova()
+    {
 
-        if($_SESSION["PROFESSOR"]){
+        if ($_SESSION["PROFESSOR"]) {
             $_SESSION["PAG_VOLTAR"] = "ver_provas";
 
-        $id = $_POST["id-prova"];
-        $_SESSION["ID_PROVA_EDITAR"] = $id;
+            $id = $_POST["id-prova"];
+            $_SESSION["ID_PROVA_EDITAR"] = $id;
 
-        $prova_professor = ProfessorModel::GetProvabyID($id);
-        $valor = $prova_professor["valor"];
-        $perguntas = $prova_professor["QNT_perguntas"];
+            $prova_professor = ProfessorModel::GetProvabyID($id);
+            $valor = $prova_professor["valor"];
+            $perguntas = $prova_professor["QNT_perguntas"];
 
-        $gabarito = explode(";",$prova_professor["gabarito"]);
+            $gabarito = explode(";", $prova_professor["gabarito"]);
 
-         
-        if($prova_professor["descritores"] == null){
-            $descritores = null;
-        }else{
-            $descritores = explode(";",$prova_professor["descritores"]);
+            if ($prova_professor["descritores"] == null) {
+                $descritores = null;
+            } else {
+                $descritores = explode(";", $prova_professor["descritores"]);
+            }
+
+            $dados = [
+                "gabarito" => $gabarito,
+                "descritores" => $descritores,
+                "valor" => $valor,
+                "perguntas" => $perguntas,
+                "nome" => $prova_professor["nome_prova"],
+            ];
+
+            // echo "<pre>";
+            // print_r($dados);
+            // echo "</pre>";
+
+            MainController::Templates("public/views/professor/editar_prova.php", "PROFESSOR", $dados);
+        } else {
+            header("location: ADM");
         }
- 
-
-        $dados = [
-            "gabarito" => $gabarito,
-            "descritores" => $descritores,
-            "valor"     => $valor,
-            "perguntas"    => $perguntas,
-            "nome"  => $prova_professor["nome_prova"],    
-        ];
-
-        // echo "<pre>";
-        // print_r($dados);
-        // echo "</pre>";
-
-        MainController::Templates("public/views/professor/editar_prova.php","PROFESSOR",$dados);
-    }else{
-        header("location: ADM");
-    }
     }
 
-    public static function atualizar_gabarito() {
+    public static function atualizar_gabarito()
+    {
         if ($_SESSION["PROFESSOR"]) {
             $id_prova = $_SESSION["ID_PROVA_EDITAR"];
             $numero_perguntas = $_POST['numero_perguntas'];
@@ -1066,102 +1068,102 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
 
             $gabarito_prova = [];
             $descritores_prova = [];
-            
+
             for ($contador = 1; $contador <= $numero_perguntas; $contador++) {
                 $descritores_prova[$contador] = $contador . "," . $_POST["DESCRITOR_" . $contador];
                 $gabarito_prova[$contador] = $_POST[$contador];
             }
-    
+
             $descritores = implode(";", $descritores_prova);
             if ($descritor_flag == "não") {
-                $descritores = NULL;
+                $descritores = null;
             }
-    
+
             $gabarito = implode(";", $gabarito_prova);
-    
+
             $novo_gabarito_professor = [
                 "descritores" => $descritores,
                 "valor" => $_POST['valor_prova'],
                 "gabarito" => $gabarito,
-                "ID_prova" => $id_prova
+                "ID_prova" => $id_prova,
             ];
 
             ProfessorModel::atualizar_gabarito_professor($novo_gabarito_professor);
-      
-                $provas_alunos = ProfessorModel::GetProvasFeitasbyID($id_prova);
-    
-                foreach ($provas_alunos as $prova_aluno) {
-                    $gabarito_professor = explode(";", $novo_gabarito_professor["gabarito"]);
-                    $gabarito_aluno = explode(";", $prova_aluno["perguntas_respostas"]);
-                    $descritores_questoes = explode(";", $prova_aluno["descritores"]);
-    
-                    $acertos_aluno = 0;
-                    $perguntas_certas = [];
-                    $perguntas_erradas = [];
-                    $descritores_corretos = [];
-                    $descritores_errados = [];
-    
-                    foreach ($gabarito_professor as $index => $resposta_correta) {
-                        
-                         if ($gabarito_aluno[$index] == $resposta_correta || strpos($resposta_correta,"null") !== FALSE) {
-                            $acertos_aluno++;
-                            $perguntas_certas[] = $gabarito_aluno[$index];
-                            $descritores_corretos[] = $descritores_questoes[$index];
-                        } else {
-                            $perguntas_erradas[] = $gabarito_aluno[$index];
-                            $descritores_errados[] = $descritores_questoes[$index];
-                        }
+
+            $provas_alunos = ProfessorModel::GetProvasFeitasbyID($id_prova);
+
+            foreach ($provas_alunos as $prova_aluno) {
+                $gabarito_professor = explode(";", $novo_gabarito_professor["gabarito"]);
+                $gabarito_aluno = explode(";", $prova_aluno["perguntas_respostas"]);
+                $descritores_questoes = explode(";", $prova_aluno["descritores"]);
+
+                $acertos_aluno = 0;
+                $perguntas_certas = [];
+                $perguntas_erradas = [];
+                $descritores_corretos = [];
+                $descritores_errados = [];
+
+                foreach ($gabarito_professor as $index => $resposta_correta) {
+
+                    if ($gabarito_aluno[$index] == $resposta_correta || strpos($resposta_correta, "null") !== false) {
+                        $acertos_aluno++;
+                        $perguntas_certas[] = $gabarito_aluno[$index];
+                        $descritores_corretos[] = $descritores_questoes[$index];
+                    } else {
+                        $perguntas_erradas[] = $gabarito_aluno[$index];
+                        $descritores_errados[] = $descritores_questoes[$index];
                     }
-    
-                    $valor_cada_pergunta = $novo_gabarito_professor["valor"] / count($gabarito_professor);
-                    $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
-    
-                    $dados_atualizacao = [
-                        "ra" => $prova_aluno["ra"],
-                        "ID" => $prova_aluno["id"],
-                        "ID_prova" => $id_prova,
-                        "acertos" => $acertos_aluno,
-                        "porcentagem" => ($acertos_aluno / count($gabarito_professor)) * 100,
-                        "pontos_aluno" => $pontos_aluno,
-                        "perguntas_certas" => implode(";", $perguntas_certas),
-                        "perguntas_erradas" => implode(";", $perguntas_erradas),
-                        "descritores_certos" => implode(";", $descritores_corretos),
-                        "descritores_errados" => implode(";", $descritores_errados),
-                        "pontos_prova" => $_POST['valor_prova']
-                    ];
- 
-                    ProfessorModel::atualizar_gabarito_aluno($dados_atualizacao);
-                    ProfessorModel::atualizar_gabarito_aluno_primeira($dados_atualizacao);
                 }
-    
-                $_SESSION["PopUp_inserir_prova"] = True;
-                header("location: professor_home");
-                exit();
-            
+
+                $valor_cada_pergunta = $novo_gabarito_professor["valor"] / count($gabarito_professor);
+                $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
+
+                $dados_atualizacao = [
+                    "ra" => $prova_aluno["ra"],
+                    "ID" => $prova_aluno["id"],
+                    "ID_prova" => $id_prova,
+                    "acertos" => $acertos_aluno,
+                    "porcentagem" => ($acertos_aluno / count($gabarito_professor)) * 100,
+                    "pontos_aluno" => $pontos_aluno,
+                    "perguntas_certas" => implode(";", $perguntas_certas),
+                    "perguntas_erradas" => implode(";", $perguntas_erradas),
+                    "descritores_certos" => implode(";", $descritores_corretos),
+                    "descritores_errados" => implode(";", $descritores_errados),
+                    "pontos_prova" => $_POST['valor_prova'],
+                ];
+
+                ProfessorModel::atualizar_gabarito_aluno($dados_atualizacao);
+                ProfessorModel::atualizar_gabarito_aluno_primeira($dados_atualizacao);
+            }
+
+            $_SESSION["PopUp_inserir_prova"] = true;
+            header("location: professor_home");
+            exit();
+
         } else {
             header("location: ADM");
         }
     }
-    
 
-    public static function add_recuperacao(){
+    public static function add_recuperacao()
+    {
         $id = $_SESSION["id_prova_professor"];
         $provas_professores = AlunoModel::GetProvas();
         $_SESSION["dados_prova_rec"]["id"] = $_POST["id-prova"];
         $alunos = AlunoModel::GetAlunos();
 
-        foreach($provas_professores as $prova){
-            if($prova["id"] == $id){
-                $turmas = explode(",",$prova["turmas"]);
+        foreach ($provas_professores as $prova) {
+            if ($prova["id"] == $id) {
+                $turmas = explode(",", $prova["turmas"]);
             }
         }
         $turmas_alunos = [];
 
-        foreach($alunos as $aluno){
+        foreach ($alunos as $aluno) {
 
-            foreach($turmas as $turma){
-                if($aluno["turma"] == $turma){ 
-                    $turmas_alunos[$turma][$aluno["ra"]] = $aluno["nome"];  
+            foreach ($turmas as $turma) {
+                if ($aluno["turma"] == $turma) {
+                    $turmas_alunos[$turma][$aluno["ra"]] = $aluno["nome"];
                 }
             }
         }
@@ -1182,24 +1184,24 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
         // echo "<pre>";
 
         $dados = [
-            "alunos" => $turmas_truncated
+            "alunos" => $turmas_truncated,
         ];
 
-
-        MainController::Templates("public/views/professor/add_recuperacao.php","PROFESSOR",$dados);
+        MainController::Templates("public/views/professor/add_recuperacao.php", "PROFESSOR", $dados);
 
     }
 
-    public static function inserir_gabarito_rec(){
-        $alunos = implode(";",$_POST["alunos"]);
+    public static function inserir_gabarito_rec()
+    {
+        $alunos = implode(";", $_POST["alunos"]);
         $perguntas = $_POST["qtn-perguntas"];
         $descritores = $_POST["descritores"];
         $id_prova = $_SESSION["dados_prova_rec"]["id"];
         $_SESSION["dados_prova_rec"] = [
-            "id"   => $id_prova,
+            "id" => $id_prova,
             "alunos" => $alunos,
             "perguntas" => $perguntas,
-            "descritores" => $descritores
+            "descritores" => $descritores,
         ];
         $_SESSION["GABARITO_REC"] = true;
 
@@ -1210,27 +1212,29 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
         // echo "<pre>";
     }
 
-    public static function criar_gabarito_rec(){
-        MainController::Templates("public/views/professor/criar_gabarito_rec.php","PROFESSOR",NULL);
+    public static function criar_gabarito_rec()
+    {
+        MainController::Templates("public/views/professor/criar_gabarito_rec.php", "PROFESSOR", null);
     }
 
-    public static function criar_gabarito_rec_resp(){
-        
-        foreach(AlunoModel::GetProvas() as $prova){
-            if($prova["id"] == $_SESSION["dados_prova_rec"]["id"]){
+    public static function criar_gabarito_rec_resp()
+    {
+
+        foreach (AlunoModel::GetProvas() as $prova) {
+            if ($prova["id"] == $_SESSION["dados_prova_rec"]["id"]) {
                 $nome_prova = $prova["nome_prova"];
                 $materia = $prova["disciplina"];
                 $valor = $prova["valor"];
             }
         }
-        $dataHoraAtual = new DateTime();    
+        $dataHoraAtual = new DateTime();
         $dataFormatada = $dataHoraAtual->format('Y-m-d H:i:s');
 
         $descritores = '';
         $gabarito = '';
-    
+
         $total_perguntas = $_SESSION["dados_prova_rec"]["perguntas"];
-    
+
         for ($i = 1; $i <= $total_perguntas; $i++) {
             $descritor = ($_SESSION["dados_prova_rec"]["descritores"] == "sim") ? $_POST["DESCRITOR_$i"] : "";
             $descritores .= "$i,{$descritor};";
@@ -1238,10 +1242,10 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
             list($numero_pergunta, $letra_resposta) = explode(",", $resposta);
             $gabarito .= "$numero_pergunta,$letra_resposta;";
         }
-    
+
         $descritores = rtrim($descritores, ";");
-        if( $_SESSION["dados_prova_rec"]["descritores"] != "sim"){
-        $descritores = NULL;
+        if ($_SESSION["dados_prova_rec"]["descritores"] != "sim") {
+            $descritores = null;
         }
         $gabarito = rtrim($gabarito, ";");
 
@@ -1251,23 +1255,22 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
         // echo $descritores;
 
         $dados = [
-            "id_prova"      => $_SESSION["dados_prova_rec"]["id"],
-            "alunos"        => $_SESSION["dados_prova_rec"]["alunos"],
-            "perguntas"     => $_SESSION["dados_prova_rec"]["perguntas"],
-            "valor"         => $valor,
-            "data"          => $dataFormatada,
-            "nome_prova"    => $nome_prova,
-            "descritores"   =>  $descritores,
-            "gabarito"      =>  $gabarito,
-            "nome_prof"     =>  $_SESSION["nome_professor"],
-            "materia"       =>  $materia
+            "id_prova" => $_SESSION["dados_prova_rec"]["id"],
+            "alunos" => $_SESSION["dados_prova_rec"]["alunos"],
+            "perguntas" => $_SESSION["dados_prova_rec"]["perguntas"],
+            "valor" => $valor,
+            "data" => $dataFormatada,
+            "nome_prova" => $nome_prova,
+            "descritores" => $descritores,
+            "gabarito" => $gabarito,
+            "nome_prof" => $_SESSION["nome_professor"],
+            "materia" => $materia,
         ];
 
         $consulta = ProfessorModel::inserir_gabarito_recuperacao($dados);
 
-
-        if($consulta){
-            $_SESSION["PopUp_inserir_gabarito_professor"] = True;
+        if ($consulta) {
+            $_SESSION["PopUp_inserir_gabarito_professor"] = true;
             header("location: ver_provas");
             exit();
         }
@@ -1278,6 +1281,4 @@ public static function calcular_descritores_por_aluno($alunos_por_turma) {
 
     }
 
-
 }
-

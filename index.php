@@ -24,7 +24,7 @@ Backup::runBackup();
 
 session_start();
 
-if (!isset($_SESSION["PopUp_excluir_prova"])) {
+if (!isset($_SESSION["PopUp_not_QntP"])) {
 
     $_SESSION["PopUp_professor"] = false;
     $_SESSION["popup_not_gestor"] = false;
@@ -51,6 +51,8 @@ if (!isset($_SESSION["PopUp_excluir_prova"])) {
     $_SESSION["PopUp_Excluir_aluno"] = false;
     $_SESSION["PopUp_ditar_prova"] = false;
     $_SESSION["PopUp_excluir_prova"] = false;
+    $_SESSION["PopUp_not_valor"] = false;
+    $_SESSION["PopUp_not_QntP"] = false;
 
     $_SESSION["Gabarito_aluno"] = false;
 
