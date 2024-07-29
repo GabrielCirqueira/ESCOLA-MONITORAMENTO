@@ -80,7 +80,6 @@ while ($contador <= $data["perguntas"]) {
                                     <?=$resposta == 'D' ? 'checked' : '';?>><label
                                     for="<?="{$contador},D"?>">D</label></div>
                         </td>
-                        <!-- <td><div><input type="radio" name="<?="{$contador}"?>" required value="<?="{$contador},E"?>" <?=$resposta == 'E' ? 'checked' : '';?>><span>E</span></div></td> -->
 
                         <td style="padding: 13px;border-top: solid 1px white; border-bottom:  solid 1px white;"></td>
 

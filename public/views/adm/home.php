@@ -83,7 +83,7 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
 
                 <div id="logsProfessor" class="conteudo-item">
                     <center>
-                        <h1>LOGS ADM</h1>
+                        <h1>LOGS PROFESSOR</h1>
                     </center>
 
                     <table class="tabela_alunos_adm">
