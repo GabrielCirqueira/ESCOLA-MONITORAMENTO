@@ -272,16 +272,16 @@ function MostrarCarregamento() {
 
 function filtrarAlunos() {
     var inputRA, inputNome, filterRA, filterNome, table, tr, tdRA, tdNome, i;
-    inputRA = document.getElementById("filtroRA");
-    inputNome = document.getElementById("filtroNome");
+    inputRA = document.getElementById("filtroRAAlunos");
+    inputNome = document.getElementById("filtroNomeAlunos");
     filterRA = inputRA.value.toUpperCase();
     filterNome = inputNome.value.toUpperCase();
     table = document.getElementById("tabelaAlunos");
     tr = table.getElementsByTagName("tr");
 
     for (i = 0; i < tr.length; i++) {
-        tdRA = tr[i].getElementsByTagName("td")[0]; // Coluna do RA
-        tdNome = tr[i].getElementsByTagName("td")[1]; // Coluna do Nome
+        tdRA = tr[i].getElementsByTagName("td")[0];
+        tdNome = tr[i].getElementsByTagName("td")[1]; 
 
         if (tdRA && tdNome) {
             var raValue = tdRA.textContent || tdRA.innerText;

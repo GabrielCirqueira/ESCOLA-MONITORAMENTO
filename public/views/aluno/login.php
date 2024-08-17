@@ -1,14 +1,15 @@
 <main class="main">
 
     <div id="campo-ra" class="login-aluno peq">
-        <h1>ALUNO</h1>
+        <h1>ALUNO  <i class="fas fa-user-graduate"></i> </h1>
         <form action="login_aluno_entrar" method="post">
-            
+
             <br>
             <div class="campo-ra">
-                <input class="input-campo-aluno" name="ra" id="RA" type="text" placeholder="Digite seu RA" required>
+                <input class="input-campo-aluno" name="ra" id="RA" type="text"  required>
+                <label class="label-campo-login" for="RA">Digite seu RA</label>
             </div>
-            
+            <br>
             <input type="submit">
         </form>
 
@@ -16,7 +17,7 @@
         <br>
     </div>
 
-    <!-- 
+    <!--
     <div id="campo-email" class="login-aluno">
         <h1> ALUNO</h1>
         <form action="" method="post">
@@ -28,7 +29,7 @@
             <input type="submit">
         </form>
         <button onclick="Mostrar_campo_ra()" class="button-enter-email">Entrar com RA</button>
-        <br> 
+        <br>
     </div> -->
 
 </main>

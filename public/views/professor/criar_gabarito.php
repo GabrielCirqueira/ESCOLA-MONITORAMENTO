@@ -44,7 +44,7 @@ while ($contador <= $data["perguntas"]) {?>
                         <?php if ($data["descritores"] == "sim") {?>
                         <td>
                             <div class="campos-selecionar-descritores">
-                                <input type="text" class="searchInput" required data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}" ?>" placeholder="DESCRITOR">
+                                <input type="text" class="searchInput" required data-index="<?php echo $contador ?>" name="DESCRITOR_<?php echo "{$contador}" ?>" maxlength="8" placeholder="DESCRITOR">
                                 <div class="descritoresContainer" data-index="<?php echo $contador ?>"></div>
                             </div>
                         </td>

@@ -498,9 +498,9 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                         <h1>ALUNOS</h1>
                         <div id="filtro-container-alunos" class="filtro-container">
                             <input type="text" id="filtroRAAlunos" class="filtro-ra" placeholder="Filtrar por RA"
-                                oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
+                                oninput="filtrarAlunos()" >
                             <input type="text" id="filtroNomeAlunos" class="filtro-nome" placeholder="Filtrar por Nome"
-                                oninput="filtrarTabela('tabelaAlunos', 'filtroRAAlunos', 'filtroNomeAlunos')">
+                                oninput="filtrarAlunos()">
                         </div>
                     </center>
                     <?php if ($data["alunos"]["alunos"] != null) {?>
@@ -713,9 +713,6 @@ $disciplinas = explode(";", $professor["disciplinas"]);
         <br><br><br>
     </div>
 
-
-
-
-            </div>
+</div>
     </section>
 </main>

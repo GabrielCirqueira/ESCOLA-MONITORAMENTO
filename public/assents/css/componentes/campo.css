@@ -2,7 +2,7 @@
   display: none;
 }
 
-.input-campo-aluno {
+/* .input-campo-aluno {
   background-color: rgba(245, 245, 220, 0);
   width: 70%;
   margin: 10px;
@@ -21,7 +21,59 @@
 
 .input-campo-aluno:focus {
   outline: none;
+} */
+ 
+.input-campo-aluno {
+    background-color: rgba(245, 245, 220, 0);
+    width: 65%;
+    margin: 20px;
+    height: 30px;
+    border: none;
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    transition: 0.5s ease-in;
+    outline: none;
+    border-bottom: 4px solid white;
 }
+ 
+.input-campo-aluno::placeholder {
+    color: white;
+}
+
+.campo-ra {
+  position: relative;
+}
+
+.label-campo-login {
+  position: absolute;
+  font-weight: bold;
+  left: 60px;
+  font-size: 20px;
+  top: 15px;
+  color: aliceblue;
+  transition: 0.5s;
+}
+
+input:focus+.label-campo-login {
+  color: rgb(255, 255, 255);
+  top: -4px;
+  font-size: 12px;
+}
+
+input:valid+.label-campo-login {
+  top: -4px;
+  font-size: 12px;
+}
+
+.label-campo-login {
+    cursor: text;
+}
+ 
+.campo-ra input:focus { 
+    border-bottom: 4px solid rgb(87, 87, 87);
+}
+
 
 .input-add {
   width: 70%;

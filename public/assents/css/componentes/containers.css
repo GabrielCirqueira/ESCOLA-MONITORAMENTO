@@ -1,6 +1,6 @@
 .main {
     flex: 1 1 0;
-    display: flex;
+    display: flex; 
     background-image: url('../../../../public/assents/img/FULL\ FRAME\ MOBILE.jpg');
     background-size: cover;
     background-position: center;
@@ -203,15 +203,14 @@
 .login-aluno {
     padding-top: 50px;
     text-align: center;
-    border-radius: 10px; 
-    max-width: 400px;
-    min-width: 340px;
+    border-radius: 5px; 
+    width: 350px; 
     position: relative;
-    border: 2px solid white;
+    border: 7px solid rgb(199, 199, 199);
     background-color: rgba(248, 248, 248, 0.298);
     height: 400px;
     font-family: Arial, Helvetica, sans-serif;
-    box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.185);
+    box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.197);
 }
 
 .peq{
