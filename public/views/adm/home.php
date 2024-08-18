@@ -64,7 +64,6 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                     <table id="tabelaMaterias" class="tabela_alunos_adm">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>NOME</th>
                                 <th>DATA INICIAL</th>
                                 <th>DATA FINAL</th>
@@ -74,10 +73,9 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                         <tbody>
                             <?php foreach ($data["periodos"] as $periodo) {?>
                             <tr>
-                                <td><?=$periodo["id"]?></td>
                                 <td><?=$periodo["nome"]?></td>
-                                <td><?=$periodo["data_inicial"]?></td>
-                                <td><?=$periodo["data_final"]?></td>
+                                <td><?=date('d/m/Y', strtotime($periodo["data_inicial"]))?></td>
+                                <td><?=date('d/m/Y', strtotime($periodo["data_final"]))?></td>
                                 <td>
                                     <form action="" class="form-excluir-materia" method="post">
                                         <button type="submit" name="excluir-periodo"
@@ -142,8 +140,8 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                             <tr>
                                 <td><?=$logs["autor"]?></td>
                                 <td><?=$logs["descricao"]?></td>
+                                <td><?=date('d/m/Y', strtotime(explode(" ", $logs["data"])[0]))?></td>
 
-                                <td> <?=explode(" ", $logs["data"])[0]?> </td>
                                 <td> <?=explode(":", explode(" ", $logs["data"])[1])[0] . ":" . explode(":", explode(" ", $logs["data"])[1])[1]?>
                                 </td>
                             </tr>
@@ -173,8 +171,7 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                             <tr>
                                 <td><?=$logs["autor"]?></td>
                                 <td><?=$logs["descricao"]?></td>
-
-                                <td> <?=explode(" ", $logs["data"])[0]?> </td>
+                                <td><?=date('d/m/Y', strtotime(explode(" ", $logs["data"])[0]))?></td>
                                 <td> <?=explode(":", explode(" ", $logs["data"])[1])[0] . ":" . explode(":", explode(" ", $logs["data"])[1])[1]?>
                                 </td>
                             </tr>
@@ -679,7 +676,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><?=$aluno["ra"]?></td>
                                 <td><?=$aluno["aluno"]?></td>
                                 <td><?=$aluno["turma"]?></td>
-                                <td><?=$aluno["data_aluno"]?></td>
+                                <td><?=date('d/m/Y', strtotime($aluno["data_aluno"]))?></td>
                                 <td><?=$aluno["disciplina"]?></td>
                                 <td><?=$aluno["pontos_aluno"]?></td>
                                 <td><button class="btn-editar"

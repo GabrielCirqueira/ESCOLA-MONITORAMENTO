@@ -3,6 +3,7 @@
 namespace app\controllers\monitoramento;
 
 use app\controllers\monitoramento\MainController;
+use app\models\monitoramento\ADModel;
 use app\models\monitoramento\AlunoModel;
 use app\models\monitoramento\ProfessorModel;
 use DateTime;
@@ -93,6 +94,7 @@ class AlunoController
             // echo "</pre>";
 
             MainController::Templates("public/views/aluno/home.php", "ALUNO", [
+                "periodos" => ADModel::GetPeriodos(),
                 "provas" => $provas_aluno,
                 "provas_feitas" => $provas_aluno_feitas,
                 "rec" => $provas_aluno_rec,
