@@ -207,6 +207,14 @@ class Database
             descricao   TEXT
         );";
 
+        $Periodo = "CREATE TABLE IF NOT EXISTS periodo(
+            id          int AUTO_INCREMENT primary key,
+            nome varchar(255),
+            data_inicial DATE,
+            data_final   DATE,
+            data_criacao DATETIME
+        );";
+
         self::GetInstance()->query($logsADM);
         self::GetInstance()->query($logsPROFESSOR);
         self::GetInstance()->query($professores);
@@ -219,5 +227,6 @@ class Database
         self::GetInstance()->query($gabarito_provas_alunos_rec);
         self::GetInstance()->query($gabarito_provas_alunos_prova);
         self::GetInstance()->query($gabarito_provas_professores_gabarito);
+        self::GetInstance()->query($Periodo);
     }
 }

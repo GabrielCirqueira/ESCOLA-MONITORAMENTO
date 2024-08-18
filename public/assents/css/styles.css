@@ -2080,3 +2080,58 @@ grid-template-columns: 1fr 1fr 1fr 1fr;
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
+
+
+/* Estilização geral para a div principal */
+.data-periodo {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  width: 75%;
+  margin: auto;
+  flex-direction: column;
+  border-radius: 8px; 
+}
+
+/* Estilo para cada bloco individual */
+.data-periodo div {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Estilo para os labels */
+.data-periodo label {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* Estilo para os inputs */
+.data-periodo input[type="date"] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #fff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Estilo de foco para os inputs */
+.data-periodo input[type="date"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+/* Adicionar responsividade */
+@media (max-width: 768px) {
+  .data-periodo {
+      flex-direction: column;
+      gap: 15px;
+  }
+}

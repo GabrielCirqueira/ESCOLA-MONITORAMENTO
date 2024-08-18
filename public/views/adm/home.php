@@ -45,10 +45,82 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('logsProfessor')">Logs
                     Professor</button>
             </details>
+
+            <details class="details-menu-gestor"  >
+                <summary class="sumary-menu-gestor">Períodos</summary>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('addperiodo')">Adicionar Período</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('periodos')">Ver Períodos</button>
+
+            </details>
         </div>
 
         <div class="info-gestor">
             <div id="conteudo">
+
+                <div id="periodos" class="conteudo-item">
+
+                    <?php if ($data["periodos"] != null) {?>
+
+                    <table id="tabelaMaterias" class="tabela_alunos_adm">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOME</th>
+                                <th>DATA INICIAL</th>
+                                <th>DATA FINAL</th>
+                                <th>EXCLUIR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data["periodos"] as $periodo) {?>
+                            <tr>
+                                <td><?=$periodo["id"]?></td>
+                                <td><?=$periodo["nome"]?></td>
+                                <td><?=$periodo["data_inicial"]?></td>
+                                <td><?=$periodo["data_final"]?></td>
+                                <td>
+                                    <form action="" class="form-excluir-materia" method="post">
+                                        <button type="submit" name="excluir-periodo"
+                                            value="<?=$periodo['id']?>;<?=$periodo["nome"]?>"
+                                            class="btn-excluir">EXCLUIR</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                    <?php } else {?>
+                    <center>
+                        <h2 class="back-red">NENHUM PERÍODO CADASTRADO!</h2>
+                    </center>
+                    <?php }?>
+                    </div>
+
+                <div id="addperiodo" class="conteudo-item">
+                <div class="form_add_materia_adm">
+                        <form id="formAddMateria" action="" method="post">
+                            <h1 class="form-title-add-materia">Adicionar Novo Período de provas</h1>
+                            <br>
+                            <div class="form-group-add-materia">
+                                <input type="text" name="NomePeriodo"
+                                    placeholder="Digite o nome do Período" required>
+                            </div>
+                            <div class="data-periodo">
+                                <div>
+                                    <label for="dataInicial">DATA INICIAL DO PERIODO:</label>
+                                    <input id="dataInicial" name="dataInicial" type="date">
+                                </div>
+                                <div>
+                                    <label for="dataFinal">DATA FINAL DO PERIODO:</label>
+                                    <input id="dataFinal" name="dataFinal" type="date">
+                                </div>
+</div>
+                            <br>
+                            <button type="submit" name="Enviar-periodo" class="submit-button-add-materia">Adicionar
+                                Período</button>
+                        </form>
+                    </div>
+                </div>
 
                 <div id="logsADM" class="conteudo-item">
                     <center>
@@ -706,6 +778,8 @@ $disciplinas = explode(";", $professor["disciplinas"]);
         <button class="painel-button" onclick="mostrarConteudo('database')">Backups</button>
         <button class="painel-button" onclick="mostrarConteudo('logsADM')">Logs ADM</button>
         <button class="painel-button" onclick="mostrarConteudo('logsProfessor')">Logs Professor</button>
+        <button class="painel-button" onclick="mostrarConteudo('addperiodo')">Adicionar Período</button>
+        <button class="painel-button" onclick="mostrarConteudo('periodos')">Períodos</button>
         <br><br><br>
         <br><br><br>
     </div>

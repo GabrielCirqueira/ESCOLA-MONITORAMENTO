@@ -10,7 +10,6 @@ require_once "vendor/autoload.php";
 
 date_default_timezone_set('America/Sao_Paulo');
 
-
 use app\config\Backup;
 use app\controllers\monitoramento\ADMcontroller;
 use app\controllers\monitoramento\AlunoController;
@@ -26,7 +25,7 @@ Backup::runBackup();
 
 session_start();
 
-if (!isset($_SESSION["PopUp_prova_editada"])) {
+if (!isset($_SESSION["PopUp_excluir_periodo"])) {
 
     $_SESSION["PopUp_professor"] = false;
     $_SESSION["popup_not_gestor"] = false;
@@ -56,6 +55,8 @@ if (!isset($_SESSION["PopUp_prova_editada"])) {
     $_SESSION["PopUp_prova_editada"] = false;
     $_SESSION["PopUp_not_valor"] = false;
     $_SESSION["PopUp_not_QntP"] = false;
+    $_SESSION["PopUp_add_periodo"] = false;
+    $_SESSION["PopUp_excluir_periodo"] = false;
 
     $_SESSION["Gabarito_aluno"] = false;
 
@@ -67,47 +68,47 @@ if (!isset($_SESSION["PopUp_prova_editada"])) {
 }
 
 $rotas = [
-    "login_adm_verifica"            => ADMcontroller::class,
-    "adm_home"                      => ADMcontroller::class,
-    "adicionar_aluno"               => ADMcontroller::class,
-    "editar_dados_aluno"            => ADMcontroller::class,
-    "adm_info"                      => ADMcontroller::class,
-    "home"                          => MainController::class,
-    "ADM"                           => MainController::class,
-    "login_professor"               => MainController::class,
-    "login_gestor"                  => MainController::class,
-    "index"                         => MainController::class,
-    "login_adm"                     => MainController::class,
-    "encerrar_sessao"               => MainController::class,
-    "aluno_home"                    => AlunoController::class,
-    "login_aluno_entrar"            => AlunoController::class,
-    "cadastrar_gabarito_aluno"      => AlunoController::class,
-    "cadastrar_gabarito_aluno_rec"  => AlunoController::class,
-    "gabarito_aluno"                => AlunoController::class,
-    "gabarito_aluno_rec"            => AlunoController::class,
-    "gestor_home"                   => GestorController::class,
-    "gestor_descritores"            => GestorController::class,
-    "gestor_provas"                 => GestorController::class,
-    "gestor_prova"                  => GestorController::class,
-    "login_gestor_verifica"         => GestorController::class,
-    "home_professor"                => ProfessorController::class,
-    "professor_home"                => ProfessorController::class,
-    "inserir_gabarito"              => ProfessorController::class,
-    "ver_provas"                    => ProfessorController::class,
-    "prova"                         => ProfessorController::class,
-    "criar_gabarito"                => ProfessorController::class,
-    "atualizar_gabarito"            => ProfessorController::class,
-    "editar_prova"                  => ProfessorController::class,
-    "relatorio_professor"           => ProfessorController::class,
-    "relatorio_prova"               => ProfessorController::class,
-    "add_recuperacao"               => ProfessorController::class,
-    "criar_gabarito_respostas"      => ProfessorController::class,
-    "inserir_gabarito_rec"          => ProfessorController::class,
-    "criar_gabarito_rec"            => ProfessorController::class,
-    "criar_gabarito_rec_resp"       => ProfessorController::class,
-    "prova_recuperacao"             => ProfessorController::class,
-    "editar_gabarito_recuperacao"   => ProfessorController::class,
-    "atualizar_gabarito_rec"        => ProfessorController::class,
+    "login_adm_verifica" => ADMcontroller::class,
+    "adm_home" => ADMcontroller::class,
+    "adicionar_aluno" => ADMcontroller::class,
+    "editar_dados_aluno" => ADMcontroller::class,
+    "adm_info" => ADMcontroller::class,
+    "home" => MainController::class,
+    "ADM" => MainController::class,
+    "login_professor" => MainController::class,
+    "login_gestor" => MainController::class,
+    "index" => MainController::class,
+    "login_adm" => MainController::class,
+    "encerrar_sessao" => MainController::class,
+    "aluno_home" => AlunoController::class,
+    "login_aluno_entrar" => AlunoController::class,
+    "cadastrar_gabarito_aluno" => AlunoController::class,
+    "cadastrar_gabarito_aluno_rec" => AlunoController::class,
+    "gabarito_aluno" => AlunoController::class,
+    "gabarito_aluno_rec" => AlunoController::class,
+    "gestor_home" => GestorController::class,
+    "gestor_descritores" => GestorController::class,
+    "gestor_provas" => GestorController::class,
+    "gestor_prova" => GestorController::class,
+    "login_gestor_verifica" => GestorController::class,
+    "home_professor" => ProfessorController::class,
+    "professor_home" => ProfessorController::class,
+    "inserir_gabarito" => ProfessorController::class,
+    "ver_provas" => ProfessorController::class,
+    "prova" => ProfessorController::class,
+    "criar_gabarito" => ProfessorController::class,
+    "atualizar_gabarito" => ProfessorController::class,
+    "editar_prova" => ProfessorController::class,
+    "relatorio_professor" => ProfessorController::class,
+    "relatorio_prova" => ProfessorController::class,
+    "add_recuperacao" => ProfessorController::class,
+    "criar_gabarito_respostas" => ProfessorController::class,
+    "inserir_gabarito_rec" => ProfessorController::class,
+    "criar_gabarito_rec" => ProfessorController::class,
+    "criar_gabarito_rec_resp" => ProfessorController::class,
+    "prova_recuperacao" => ProfessorController::class,
+    "editar_gabarito_recuperacao" => ProfessorController::class,
+    "atualizar_gabarito_rec" => ProfessorController::class,
 ];
 
 $action = isset($_GET["action"]) ? $_GET["action"] : "";

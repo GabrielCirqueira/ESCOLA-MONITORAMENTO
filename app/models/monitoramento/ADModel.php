@@ -137,6 +137,19 @@ class ADModel
         return $query;
     }
 
+    public static function adicionarPeriodo($dados)
+    {
+        $sql = "INSERT INTO periodo(nome,data_inicial,data_final,data_criacao) VALUES (:NM,:DI,:DF,:DC)";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':NM', $dados["nome"]);
+        $query->bindParam(':DI', $dados["dataInicial"]);
+        $query->bindParam(':DF', $dados["dataFinal"]);
+        $query->bindParam(':DC', $dados["data"]);
+        $query->execute();
+        return $query;
+    }
+
     public static function ExcluirProfessor($id)
     {
         $sql = "DELETE FROM professores WHERE id = :id";
@@ -157,6 +170,15 @@ class ADModel
         return $query;
     }
 
+    public static function ExcluirPeriodo($id)
+    {
+        $sql = "DELETE FROM periodo WHERE id = :id";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query;
+    }
     public static function ExcluirProva($id_prova, $ra)
     {
         $sql1 = "DELETE FROM gabarito_alunos WHERE id_prova = :id AND ra = :ra";
@@ -243,6 +265,15 @@ class ADModel
     public static function GetDisciplinas()
     {
         $sql = "SELECT * FROM disciplinas ORDER BY id DESC ";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function GetPeriodos()
+    {
+        $sql = "SELECT * FROM periodo ORDER BY data_criacao DESC ";
         $query = Database::GetInstance()->prepare($sql);
         $query->execute();
 

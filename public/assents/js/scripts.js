@@ -1,4 +1,3 @@
-AOS.init();
  
 
 function Mostrar_campo_email() {
@@ -535,9 +534,6 @@ function editarProvaAluno(ra, gabarito, nome,IdProva,id,disciplina,data) {
     
     document.getElementById('tabela-alternativar-editar').innerHTML = tabela;
 }
-
-
-
 
 // JavaScript to handle the number selection
 document.querySelectorAll('.professor-selectable-numbers .number-box').forEach(box => {

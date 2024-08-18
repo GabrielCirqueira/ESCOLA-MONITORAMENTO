@@ -79,6 +79,18 @@ $popups = [
         "message" => "Matéria inserida com <br> sucesso!",
     ],
 
+    "PopUp_add_periodo" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "Período inserido com <br> sucesso!",
+    ],
+
+    "PopUp_excluir_periodo" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "Período excluído com <br> sucesso!",
+    ],
+
     "PopUp_not_QntP" => [
         "status_class" => "uncheck",
         "title" => "ERRO",

@@ -81,11 +81,12 @@ class ADMcontroller
                 "turmas" => [
                     "turmas" => ADModel::GetTurmas(),
                 ],
-                "disciplinas" => ADModel::GetDisciplinas(),
                 "turnos" => explode(",", $_ENV["TURNOS"]),
                 "cursos" => explode(",", $_ENV["CURSOS"]),
                 "NTurmas" => explode(",", $_ENV["NUMERO_TURMAS"]),
                 "Nseries" => explode(",", $_ENV["NUMEROS_SERIES"]),
+                "periodos" => ADModel::GetPeriodos(),
+                "disciplinas" => ADModel::GetDisciplinas(),
                 "logsADM" => ADModel::GetLogsADM(),
                 "logsPROF" => ADModel::GetLogsProfessor(),
                 "backups" => self::backups(),
@@ -100,6 +101,36 @@ class ADMcontroller
 
     public static function Get_forms()
     {
+
+        if (isset($_POST["Enviar-periodo"])) {
+            $dataAtual = new \DateTime();
+            $dataFormatada = $dataAtual->format('Y-m-d H:i:s');
+
+            $dados = [
+                "nome" => $_POST["NomePeriodo"],
+                "dataInicial" => $_POST["dataInicial"],
+                "dataFinal" => $_POST["dataFinal"],
+                "data" => $dataFormatada,
+            ];
+            if (ADModel::adicionarPeriodo($dados)) {
+                self::inserirLogsADM("Foi adicionado o período {$dados["nome"]}.");
+                $_SESSION["PopUp_add_periodo"] = true;
+                header("location: adm_home");
+                exit();
+            }
+
+        }
+
+        if (isset($_POST["excluir-periodo"])) {
+            $periodo = explode(";", $_POST["excluir-periodo"]);
+            if (ADModel::ExcluirPeriodo($periodo[0])) {
+
+                self::inserirLogsADM("A turma {$periodo[1]} foi excuída.");
+                $_SESSION["PopUp_excluir_periodo"] = true;
+                header("location: adm_home");
+                exit();
+            }
+        }
 
         if (isset($_POST["enviar-prova-editada"])) {
 
