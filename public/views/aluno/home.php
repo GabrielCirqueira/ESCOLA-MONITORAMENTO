@@ -31,7 +31,7 @@ if ($data["provas"] != null || $data["rec"] != null) {
             $temProvaPendente = true;
             $provas_finalizadas[] = false;
             ?>
-                <div class="prova-pendente">
+                <div class="prova-pendente" style="width: 85%;" >
                     <div class="linha-vertical-campo-prova"></div>
                     <div class="conteudo-prova">
                         <i class="fas fa-exclamation-triangle fa-4x" style="color: #EFCC00;"></i>
@@ -143,7 +143,6 @@ if ($data["provas"] != null || $data["rec"] != null) {
     }
 }
 
-// Verifica se não há provas pendentes e imprime a div "TUDO EM DIA"
 if (!$temProvaPendente) {
     ?>
         <div class="nao_tem_prova">
@@ -163,10 +162,26 @@ if (!$temProvaPendente) {
 
     <h2>Provas Finalizadas:</h2>
 
+
     <?php
 if ($data["provas_feitas"] != null) {
-    foreach ($data["provas_feitas"] as $prova) {?>
+    foreach ($data["provas_organizadas"] as $periodo => $provas) {?>
 
+
+
+<details class="periodo-provas" >
+    <summary> <?=$periodo?> </summary>
+
+    <?php if ($provas == null) {?>
+
+        <center>
+            <h3>VOCÊ AINDA NÃO FEZ NENHUMA PROVA DESSE PERÍODO!</h3>
+        </center>
+
+    <?php }?>
+    <br><br>
+
+        <?php foreach ($provas as $prova) {?>
 
             <div class="prova-pendente">
                 <div class="linha-vertical-campo-prova " style="background-color:#39C000"></div>
@@ -299,7 +314,12 @@ $contador2 = 0;
                 </div>
             </div>
 
-        <?php }
+        <?php }?>
+    <br><br>
+    </details>
+
+    <?php }?>
+<?php
 } else {?>
 
           <h4>Você não realizou nenhuma prova!</h4>

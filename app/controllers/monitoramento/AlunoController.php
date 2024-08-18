@@ -93,9 +93,34 @@ class AlunoController
             // print_r($provas_aluno);
             // echo "</pre>";
 
+            // dd($provas_aluno_feitas);
+
+            // dd(ADModel::GetPeriodos());
+
+            $provas_organizadas = [];
+
+            foreach (ADModel::GetPeriodos() as $periodo) {
+                $nome_periodo = $periodo['nome'];
+                $data_inicial = $periodo['data_inicial'];
+                $data_final = $periodo['data_final'];
+
+                $provas_organizadas[$nome_periodo] = [];
+
+                foreach ($provas_aluno_feitas as $prova) {
+                    $data_prova = $prova['data_aluno'];
+
+                    if ($data_prova >= $data_inicial && $data_prova <= $data_final) {
+                        $provas_organizadas[$nome_periodo][] = $prova;
+                    }
+                }
+            }
+
+            // dd($provas_organizadas);
+
             MainController::Templates("public/views/aluno/home.php", "ALUNO", [
                 "periodos" => ADModel::GetPeriodos(),
                 "provas" => $provas_aluno,
+                "provas_organizadas" => $provas_organizadas,
                 "provas_feitas" => $provas_aluno_feitas,
                 "rec" => $provas_aluno_rec,
             ]);
