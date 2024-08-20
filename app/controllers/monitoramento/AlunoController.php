@@ -121,8 +121,10 @@ class AlunoController
                 "periodos" => ADModel::GetPeriodos(),
                 "provas" => $provas_aluno,
                 "provas_organizadas" => $provas_organizadas,
+                "alternativas" => explode(",",$_ENV["ALTERNATIVAS"]),
                 "provas_feitas" => $provas_aluno_feitas,
                 "rec" => $provas_aluno_rec,
+                
             ]);
         } else {
             header("location: home");
@@ -346,7 +348,11 @@ class AlunoController
             foreach ($dados as $prova) {
                 if ($prova["id"] == $id) {
                     $_SESSION["prova_gabarito"] = $prova;
-                    MainController::Templates("public/views/aluno/gabarito.php", "ALUNO", $prova);
+                    $dados = [
+                        "prova" => $prova,
+                        "alternativas" => explode(",",$_ENV["ALTERNATIVAS"])
+                    ];
+                    MainController::Templates("public/views/aluno/gabarito.php", "ALUNO", $dados);
                 }
             }
 

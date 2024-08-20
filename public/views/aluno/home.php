@@ -218,7 +218,7 @@ if ($data["provas_feitas"] != null) {
                     <table>
                         <?php
 $contador = 1;
-        $alternativas = ["A", "B", "C", "D"];
+        $alternativas = $data["alternativas"];
         $gabarito_professor = [];
         $gabarito_aluno = [];
 
@@ -257,9 +257,8 @@ $contador2 = 0;
             $resposta_correta = $gabarito_professor[$contador];
 
             $resposta_aluno = $gabarito_aluno[$contador];
-
             if ($liberado != null) {
-                while ($contador2 < 4) {
+                while ($contador2 < count($alternativas)) {
                     $alternativa_atual = $alternativas[$contador2];
                     $classe = "";
                     // echo $resposta_aluno;
@@ -282,7 +281,7 @@ $contador2 = 0;
                     $contador2++;
                 }
             } else {
-                while ($contador2 < 4) {
+                while ($contador2 < count($alternativas)) {
                     $alternativa_atual = $alternativas[$contador2];
                     $classe = "";
 

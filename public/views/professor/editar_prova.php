@@ -56,30 +56,19 @@ while ($contador <= $data["perguntas"]) {
                         </td>
                         <?php }?>
 
-                        <td>
+                        <?php  foreach($data["alternativas"] as $a){?>  
+                            
+                            <td>
                             <div  class="Ds" ><input type="radio" name="<?="{$contador}"?>" required
-                                    value="<?="{$contador},A"?>" id="<?="{$contador},A"?>"
-                                    <?=$resposta == 'A' ? 'checked' : '';?>><label
-                                    for="<?="{$contador},A"?>">A</label></div>
+                                    value="<?="{$contador},{$a}"?>" id="<?="{$contador},{$a}"?>"
+                                    <?=$resposta == $a ? 'checked' : '';?>><label
+                                    for="<?="{$contador},{$a}"?>"><?= $a?></label></div>
                         </td>
-                        <td>
-                            <div class="Ds"><input type="radio" name="<?="{$contador}"?>" required
-                                    value="<?="{$contador},B"?>" id="<?="{$contador},B"?>"
-                                    <?=$resposta == 'B' ? 'checked' : '';?>><label
-                                    for="<?="{$contador},B"?>">B</label></div>
-                        </td>
-                        <td>
-                            <div class="Ds"><input type="radio" name="<?="{$contador}"?>" required
-                                    value="<?="{$contador},C"?>" id="<?="{$contador},C"?>"
-                                    <?=$resposta == 'C' ? 'checked' : '';?>><label
-                                    for="<?="{$contador},C"?>">C</label></div>
-                        </td>
-                        <td>
-                            <div class="Ds"><input type="radio" name="<?="{$contador}"?>" required
-                                    value="<?="{$contador},D"?>" id="<?="{$contador},D"?>"
-                                    <?=$resposta == 'D' ? 'checked' : '';?>><label
-                                    for="<?="{$contador},D"?>">D</label></div>
-                        </td>
+
+                        <?php } ?>
+
+                      
+                       
 
                         <td style="padding: 13px;border-top: solid 1px white; border-bottom:  solid 1px white;"></td>
 

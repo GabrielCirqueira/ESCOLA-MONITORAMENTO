@@ -106,6 +106,7 @@ class ProfessorController
                     "valor" => $valor,
                     "nome_prova" => $nome,
                     "materia" => $materia,
+                    "alternativas" => explode(",",$_ENV["ALTERNATIVAS"]),
                     "descritores" => $descritores,
                 ];
 
@@ -1059,7 +1060,8 @@ class ProfessorController
             $dados = [
                 "gabarito" => $gabarito,
                 "descritores" => $descritores,
-                "valor" => $valor,
+                "valor" => $valor,               
+                "alternativas" => explode(",",$_ENV["ALTERNATIVAS"]),
                 "perguntas" => $perguntas,
                 "nome" => $prova_professor["nome_prova"],
             ];

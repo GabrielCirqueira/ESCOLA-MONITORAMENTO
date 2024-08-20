@@ -50,10 +50,11 @@ while ($contador <= $data["perguntas"]) {?>
                         </td>
                         <?php }?>
 
-                        <td><div class="Ds"><input type="radio" id="A_<?php echo "{$contador}" ?>" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},A" ?>"><label for="A_<?php echo "{$contador}" ?>">A</label></div></td>
-                        <td><div class="Ds"><input type="radio" id="B_<?php echo "{$contador}" ?>" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},B" ?>"><label for="B_<?php echo "{$contador}" ?>">B</label></div></td>
-                        <td><div class="Ds"><input type="radio" id="C_<?php echo "{$contador}" ?>" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},C" ?>"><label for="C_<?php echo "{$contador}" ?>">C</label></div></td>
-                        <td><div class="Ds"><input type="radio" id="D_<?php echo "{$contador}" ?>" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},D" ?>"><label for="D_<?php echo "{$contador}" ?>">D</label></div></td>
+                        <?php  foreach($data["alternativas"] as $a){?>  
+                            <td><div class="Ds"><input type="radio" id="<?= $a?>_<?php echo "{$contador}" ?>" name="<?php echo "{$contador}" ?>" required value="<?php echo "{$contador},{$a}" ?>"><label for="<?= $a?>_<?php echo "{$contador}" ?>"><?= $a?></label></div></td>
+                        <?php } ?>
+
+                        
                     </tr>
                 <?php $contador++;}?>
             </table>
