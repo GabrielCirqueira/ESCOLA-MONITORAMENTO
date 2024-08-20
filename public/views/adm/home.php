@@ -570,6 +570,12 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 oninput="filtrarAlunos()" >
                             <input type="text" id="filtroNomeAlunos" class="filtro-nome" placeholder="Filtrar por Nome"
                                 oninput="filtrarAlunos()">
+                                <select id="selecionar-turmas-aluno" onchange="filtrarAlunos()">
+                                    <option value="SELECIONAR">SELECIONAR</option>
+                                    <?php foreach ($data["turmas"]["turmas"] as $turma) {?>
+                                        <option value="<?=$turma["nome"]?>"><?=$turma["nome"]?></option>
+                                    <?php }?>
+                                </select>
                         </div>
                     </center>
                     <?php if ($data["alunos"]["alunos"] != null) {?>
@@ -602,6 +608,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                             <?php }?>
                         </tbody>
                     </table>
+                        <br><br><br><br><br>
                     <?php } else {?>
                     <center>
                         <h2 class="back-red">NENHUM ALUNO CADASTRADO!</h2>

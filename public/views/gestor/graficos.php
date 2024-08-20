@@ -55,6 +55,15 @@
             <option value="3" <?= $selected_3 ?>>3º Série</option>
         </select>
 
+        <select name="periodo" id="periodo">
+            <option value="SELECIONAR">PERÍODO</option>
+            <?php foreach ($data["periodos"] as $periodo) {
+                $selected = ($data["filtros"]["periodo"] ?? '') == $periodo["nome"] ? 'selected' : '';
+            ?>
+                <option value="<?= $periodo["nome"] ?>" <?= $selected ?>><?= $periodo["nome"] ?></option>
+            <?php } ?>
+        </select>
+
         <button class="fechar" onclick="resetForm()">Limpar</button>
         <input type="submit" name="filtro" value="Filtrar">
     </form>
@@ -69,7 +78,7 @@
         <h2>FILTROS</h2>
             <div class="filtros_exibir">
                 <?php foreach ($data["filtros"] as $filtro => $value) {
-                    if ($value != NULL) { ?>
+                    if ($value != NULL && $filtro != "datas" ) { ?>
                         <div>
                             <h4> <?= $filtro ?> </h4>
                             <?php if($filtro == "serie"){ ?>
@@ -89,7 +98,7 @@
                 <h2>FILTROS</h2> 
             <div class="filtros_exibir">
                 <?php foreach ($data["filtros"] as $filtro => $value) {
-                    if ($value != NULL) { ?>
+                    if ($value != NULL && $filtro != "datas" ) { ?>
                         <div>
                             <h4> <?= $filtro ?> </h4>
                             <?php if($filtro == "serie"){ ?>
@@ -195,4 +204,12 @@
         </center>
         </div>
         <?php } ?>
+
+        <div class="area-dados-graficos">
+            <span>
+            <?= $data["quantidade_dados"]?> PROVA(S) CONTABILIZADAS
+            </span>
+        </div>
+<br><br><br>
+<br>
 </main>

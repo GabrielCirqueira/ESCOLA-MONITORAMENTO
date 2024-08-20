@@ -42,6 +42,7 @@
 .login-aluno input[type="submit"]:hover {
   background-color: #2fbac9;
   color: #ffffff;
+  border: 2px solid #ffffff;
   transform: scale(1.03);
   cursor: pointer;
 }

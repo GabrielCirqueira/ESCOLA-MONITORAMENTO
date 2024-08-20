@@ -48,7 +48,7 @@
                 <option value="3" <?= $selected_3 ?>>3º Série</option>
             </select>
             <div class="descritor-pesquisar-grafico">
-                <input type="text" class="searchInput" value="<?= $desc ?>" data-index="0" name="DESCRITOR" id="descritor" placeholder="DESCRITOR">
+                <input type="text" style="height: 30px;" class="searchInput" value="<?= $desc ?>" data-index="0" name="DESCRITOR" id="descritor" placeholder="DESCRITOR">
                 <div class="descritoresContainer" data-index="0"></div>
             </div>
             <button class="fechar" onclick="resetFormDesc()">Limpar</button>

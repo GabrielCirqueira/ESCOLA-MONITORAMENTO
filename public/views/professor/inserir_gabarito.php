@@ -1,3 +1,53 @@
+<?php 
+$icones = [
+    "LÍNGUA PORTUGUESA" => '<i class="fas fa-book fa-2x" style="color: #ff6347;"></i>',
+    "LÍNGUA INGLESA" => '<i class="fas fa-language fa-2x" style="color: #4682b4;"></i>',
+    "EDUCAÇÃO FÍSICA" => '<i class="fas fa-running fa-2x" style="color: #ff4500;"></i>',
+    "ARTE" => '<i class="fas fa-paint-brush fa-2x" style="color: #ff69b4;"></i>',
+    "FÍSICA" => '<i class="fas fa-atom fa-2x" style="color: #00bfff;"></i>',
+    "QUÍMICA" => '<i class="fas fa-flask fa-2x" style="color: #32cd32;"></i>',
+    "MATEMÁTICA" => '<i class="fas fa-square-root-alt fa-2x" style="color: #ffd700;"></i>',
+    "FILOSOFIA" => '<i class="fas fa-brain fa-2x" style="color: #8b0000;"></i>',
+    "SOCIOLOGIA" => '<i class="fas fa-users fa-2x" style="color: #daa520;"></i>',
+    "HIGIENE, SAÚDE E SEGURANÇA" => '<i class="fas fa-medkit fa-2x" style="color: #ff4500;"></i>',
+    "SISTEMAS OPERACIONAIS" => '<i class="fas fa-desktop fa-2x" style="color: #4682b4;"></i>',
+    "ALGORITMO E LÓGICA DE PROGRAMAÇÃO" => '<i class="fas fa-code fa-2x" style="color: #2e8b57;"></i>',
+    "BIOLOGIA" => '<i class="fas fa-leaf fa-2x" style="color: green;"></i>',
+    "GEOGRAFIA" => '<i class="fas fa-globe fa-2x" style="color: #4682b4;"></i>',
+    "HISTÓRIA" => '<i class="fas fa-hourglass-half fa-2x" style="color: #cd853f;"></i>',
+    "CULTURA DIGITAL" => '<i class="fas fa-network-wired fa-2x" style="color: #ff4500;"></i>',
+    "INTRODUÇÃO A REDE DE COMPUTADORES E PROTOCOLOS" => '<i class="fas fa-project-diagram fa-2x" style="color: #4682b4;"></i>',
+    "LINGUAGEM DE PROGRAMAÇÃO APLICADA A WEB" => '<i class="fas fa-laptop-code fa-2x" style="color: #2e8b57;"></i>',
+    "IOT - INTERNET OF THINGS" => '<i class="fas fa-sitemap fa-2x" style="color: #4682b4;"></i>',
+    "BANCO DE DADOS" => '<i class="fas fa-database fa-2x" style="color: #ff6347;"></i>',
+    "APLICATIVOS WEB" => '<i class="fas fa-mobile-alt fa-2x" style="color: #4682b4;"></i>',
+    "A ESPÉCIE HUMANA E A RELAÇÃO COM OS RECURSOS NATURAIS" => '<i class="fas fa-tree fa-2x" style="color: green;"></i>',
+    "PERCURSO FILOSÓFICO SOBRE A ESPÉCIE HUMANA" => '<i class="fas fa-brain fa-2x" style="color: #8b0000;"></i>',
+    "TRAJETÓRIAS HUMANAS NA HISTÓRIA" => '<i class="fas fa-hourglass-half fa-2x" style="color: #cd853f;"></i>',
+    "ANÁLISE E PROJETO DE SISTEMAS" => '<i class="fas fa-project-diagram fa-2x" style="color: #4682b4;"></i>',
+    "ARQUITETURA, SEGURANÇA E PROJETOS DE REDE" => '<i class="fas fa-network-wired fa-2x" style="color: #2e8b57;"></i>',
+    "PROGRAMAÇÃO PARA WEB DESIGN" => '<i class="fas fa-laptop-code fa-2x" style="color: #ff6347;"></i>',
+    "LINGUAGEM DE PROGRAMAÇÃO ORIENTADA A OBJETO" => '<i class="fas fa-code fa-2x" style="color: #4682b4;"></i>',
+    "DESENVOLVIMENTO DE SISTEMAS" => '<i class="fas fa-laptop-code fa-2x" style="color: #2e8b57;"></i>',
+    "DESENVOLVIMENTO DE GAMES" => '<i class="fas fa-gamepad fa-2x" style="color: #ff4500;"></i>',
+    "COMUNICAÇÃO E BRANDING" => '<i class="fas fa-bullhorn fa-2x" style="color: #ffd700;"></i>',
+    "ADMINISTRAÇÃO FINANCEIRA" => '<i class="fas fa-chart-line fa-2x" style="color: #32cd32;"></i>',
+    "DIREITO EMPRESARIAL E TRIBUTÁRIO" => '<i class="fas fa-gavel fa-2x" style="color: #8b0000;"></i>',
+    "GESTÃO DE PRODUÇÃO E QUALIDADE" => '<i class="fas fa-cogs fa-2x" style="color: #4682b4;"></i>',
+    "PLANEJAMENTOS E INVESTIMENTOS" => '<i class="fas fa-chart-pie fa-2x" style="color: #ffd700;"></i>',
+    "GESTÃO PÚBLICA" => '<i class="fas fa-landmark fa-2x" style="color: #4682b4;"></i>',
+    "E-COMMERCE" => '<i class="fas fa-shopping-cart fa-2x" style="color: #32cd32;"></i>',
+    "ROTINAS ADMINISTRATIVAS" => '<i class="fas fa-tasks fa-2x" style="color: #ff4500;"></i>',
+    "ECONOMIA" => '<i class="fas fa-money-bill-wave fa-2x" style="color: #ffd700;"></i>',
+    "LOGÍSTICA" => '<i class="fas fa-truck fa-2x" style="color: #4682b4;"></i>',
+    "COOPERATIVISMO" => '<i class="fas fa-handshake fa-2x" style="color: #32cd32;"></i>',
+    "MARKETING ORGANIZACIONAL" => '<i class="fas fa-bullseye fa-2x" style="color: #ff4500;"></i>',
+    "INDIVÍDUO, NATUREZA E SOCIEDADE" => '<i class="fas fa-leaf fa-2x" style="color: green;"></i>',
+    "PERSPECTIVA GEOGRÁFICA: DESENVOLVIMENTO E ESPAÇO" => '<i class="fas fa-globe fa-2x" style="color: #4682b4;"></i>',
+];
+
+
+?>
 <main class="main-home-professor">
     <div class="professor-form-section">
         <center>
@@ -60,20 +110,27 @@
             </div>
 
             <div class="professor-disciplinas-section">
-                <h3 class="form-section-header">SELECIONE A DISCIPLINA CORRESPONDENTE:</h3>
+                <h3 class="form-section-header">SELECIONE A DISCIPLINA CORRESPONDENTE:</h3> <br>
                 <div class="professor-disciplinas-container">
                     <?php
-if (strpos($_SESSION["disciplinas"], ";")) {?>
+                        if (strpos($_SESSION["disciplinas"], ";")) {?>
                     <?php $materias = explode(";", $_SESSION["disciplinas"]);
-    foreach ($materias as $materia) {?>
-                    <div>
+                        foreach ($materias as $materia) {?>
+                    <div class="input-radio-disciplina-gabarito">
+                       
+                        <?php if (isset($icones[mb_strtoupper($materia, 'UTF-8')])) {
+                            echo $icones[mb_strtoupper($materia, 'UTF-8')];
+                        } ?>
                         <input type="radio" required name="Materias-professor-gabarito" id="<?=$materia?>"
                             value="<?=$materia?>" class="custom-disciplinas-radio">
                         <label for="<?=$materia?>"><?=$materia?></label>
                     </div>
                     <?php }?>
                     <?php } else {?>
-                    <div>
+                    <div class="input-radio-disciplina-gabarito">
+                    <?php if (isset($icones[mb_strtoupper($_SESSION["disciplinas"], 'UTF-8')])) {
+                            echo $icones[mb_strtoupper($_SESSION["disciplinas"], 'UTF-8')];
+                        } ?>
                         <input type="radio" required name="Materias-professor-gabarito" id="<?=$_SESSION["disciplinas"]?>"
                             value="<?=$_SESSION["disciplinas"]?>" class="custom-disciplinas-radio">
                         <label for="<?=$_SESSION["disciplinas"]?>"><?=$_SESSION["disciplinas"]?></label>

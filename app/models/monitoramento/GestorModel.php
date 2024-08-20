@@ -26,6 +26,12 @@ class GestorModel{
             $query .= " AND serie = :serie";
         }
 
+        if($filtros['datas']){
+            // $query .= " AND data_aluno >= :data_inicial AND data_aluno <= :data_final";
+            $query .= " AND data_aluno BETWEEN :data_inicial AND :data_final";
+        }
+
+
         $stmt = Database::GetInstance()->prepare($query);
     
         if($filtros['turma']){
@@ -43,6 +49,11 @@ class GestorModel{
         if($filtros['serie']){
             $stmt->bindValue(':serie', $filtros['serie']);
         }
+        if($filtros['datas']){
+            $stmt->bindValue(':data_inicial', $filtros['datas']["data_inicial"]);
+            $stmt->bindValue(':data_final', $filtros['datas']["data_final"]);
+        }
+
     
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

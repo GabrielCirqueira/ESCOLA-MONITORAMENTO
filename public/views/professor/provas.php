@@ -29,7 +29,7 @@
         ?>
 
 
-        <div   class="prova-pendente">
+        <div   class="prova-pendente" style="width:85%" >
             <div class="linha-vertical-campo-prova" style="background-color: #04C636;"></div>
             <div class="conteudo-prova">
                 <i class="fas fa-file-alt fa-4x" style="color: #04C636;"></i>

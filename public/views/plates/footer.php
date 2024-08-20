@@ -1,4 +1,4 @@
-<script src="public/assents/js/scripts.js?v=6"></script>
+<script src="public/assents/js/scripts.js?v=9"></script>
 <footer class="footer">
     <center>
     <h4>&copy; ESCOLA NSL</h4>

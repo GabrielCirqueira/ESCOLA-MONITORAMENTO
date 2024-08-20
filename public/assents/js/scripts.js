@@ -158,6 +158,7 @@ function resetForm() {
     document.getElementById('disciplina').selectedIndex = 0;
     document.getElementById('serie').selectedIndex = 0;
     document.getElementById('professor').selectedIndex = 0;
+    document.getElementById('periodo').selectedIndex = 0;
 }
 
 function resetFormProva() {
@@ -268,25 +269,32 @@ function MostrarCarregamento() {
 }
 
 
-
 function filtrarAlunos() {
-    var inputRA, inputNome, filterRA, filterNome, table, tr, tdRA, tdNome, i;
+    var inputRA, inputNome, filterRA, filterNome, selectTurma, filterTurma, table, tr, tdRA, tdNome, tdTurma, i;
     inputRA = document.getElementById("filtroRAAlunos");
     inputNome = document.getElementById("filtroNomeAlunos");
+    selectTurma = document.getElementById("selecionar-turmas-aluno");
     filterRA = inputRA.value.toUpperCase();
     filterNome = inputNome.value.toUpperCase();
+    filterTurma = selectTurma.value.toUpperCase();
     table = document.getElementById("tabelaAlunos");
     tr = table.getElementsByTagName("tr");
 
     for (i = 0; i < tr.length; i++) {
         tdRA = tr[i].getElementsByTagName("td")[0];
-        tdNome = tr[i].getElementsByTagName("td")[1]; 
+        tdNome = tr[i].getElementsByTagName("td")[1];
+        tdTurma = tr[i].getElementsByTagName("td")[2];
 
-        if (tdRA && tdNome) {
+        if (tdRA && tdNome && tdTurma) {
             var raValue = tdRA.textContent || tdRA.innerText;
             var nomeValue = tdNome.textContent || tdNome.innerText;
+            var turmaValue = tdTurma.textContent || tdTurma.innerText;
 
-            if (raValue.toUpperCase().indexOf(filterRA) > -1 && nomeValue.toUpperCase().indexOf(filterNome) > -1) {
+            if (
+                (raValue.toUpperCase().indexOf(filterRA) > -1 || filterRA === '') &&
+                (nomeValue.toUpperCase().indexOf(filterNome) > -1 || filterNome === '') &&
+                (turmaValue.toUpperCase().indexOf(filterTurma) > -1 || filterTurma === 'SELECIONAR')
+            ) {
                 tr[i].style.display = "";
             } else {
                 tr[i].style.display = "none";
@@ -294,6 +302,7 @@ function filtrarAlunos() {
         }
     }
 }
+
 
 function filtrarTabela(tabelaId, filtroRAId, filtroNomeId) {
     var filtroRA = document.getElementById(filtroRAId).value.toUpperCase();

@@ -70,7 +70,7 @@
 
 
 
-            <div class="prova-pendente">
+            <div class="prova-pendente" style="width:85%" >
                 <div class="linha-vertical-campo-prova" style="background-color: #eb7134;"></div>
                 <div class="conteudo-prova">
                     <i class="fas fa-chart-bar fa-4x" style="color: #eb7134;"></i>

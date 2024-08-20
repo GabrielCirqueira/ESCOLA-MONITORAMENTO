@@ -8,29 +8,29 @@ $tabela = "table-notas";
 
 <main class="main-home-professor">
     <center>
-        <h1 data-aos="fade-up" class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
-        <h2 data-aos="fade-up"><?= $data["nome_prova"] ?></h2>
+        <h1  class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
+        <h2 ><?= $data["nome_prova"] ?></h2>
     </center>
 
-    <h3 data-aos="fade-up">Classificar por:</h3>
-    <div data-aos="fade-up" class="buttons-professor">
+    <h3 >Classificar por:</h3>
+    <div  class="buttons-professor">
         <form action="relatorio_prova" method="post">
             <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
-            <button data-aos="fade-up" class="button-professor-turma" name="turma-filtros" value="geral" type="submit">Desempenho Geral</button>
-            <select data-aos="fade-up" name="turma-filtros" id="">
+            <button  class="button-professor-turma" name="turma-filtros" value="geral" type="submit">Desempenho Geral</button>
+            <select  name="turma-filtros" id="">
                 <?php foreach ($data["dados_turma"] as $turma) { ?>
                     <option value="<?= $turma["turma_nome"] ?>"><?= $turma["turma_nome"] ?></option>
                 <?php } ?>
             </select>
-            <button data-aos="fade-up" class="button-professor-turma-enviar" name="filtrar" value="filtrar" type="submit">Filtrar</button>
+            <button  class="button-professor-turma-enviar" name="filtrar" value="filtrar" type="submit">Filtrar</button>
         </form>
     </div>
 
     <?php if ($data["filtro"] == false) { ?>
-        <h1 data-aos="fade-up">DESEMPENHO GERAL</h1>
+        <h1 >DESEMPENHO GERAL</h1>
 
         <br><br>
-        <div data-aos="fade-up" class="professor-grafico-geral-60">
+        <div  class="professor-grafico-geral-60">
             <div>
                 <h3>Percentual geral:</h3>
                 <span><?= $data["media_geral_porcentagem"] ?></span>
@@ -42,14 +42,14 @@ $tabela = "table-notas";
             </div>
         </div>
 
-        <h2 data-aos="fade-up">PERCENTUAL DOS DESCRITORES</h2>
+        <h2 >PERCENTUAL DOS DESCRITORES</h2>
 
-        <div data-aos="fade-up" class="area-graficos-descritores">
+        <div  class="area-graficos-descritores">
             <?php if ($data["descritores"] == false) { ?>
                 <h1>A prova não tem descritores!</h1>
             <?php } else {
                 foreach ($data["percentual_descritores"] as $descritor => $grafico) { ?>
-                    <div data-aos="fade-up">
+                    <div >
                         <?= $grafico ?>
                         <h4><?= $descritor ?></h4>
                     </div>
@@ -57,27 +57,27 @@ $tabela = "table-notas";
             } ?>
         </div>
 
-        <h3 data-aos="fade-up">Nível de proficiência</h3>
-        <div data-aos="fade-up">
+        <h3 >Nível de proficiência</h3>
+        <div >
             <?= $data["grafico_colunas"] ?>
         </div>
         <br><br>
 
-        <h3 data-aos="fade-up">Desempenho total das turmas</h3>
-        <div data-aos="fade-up" class="graficos-professor-rosca-turmas">
+        <h3 >Desempenho total das turmas</h3>
+        <div  class="graficos-professor-rosca-turmas">
             <?php foreach ($data["dados_turma"] as $turma) { ?>
-                <div data-aos="fade-up">
+                <div >
                     <?= $turma["grafico"] ?>
                     <span><?= $turma["turma_nome"] ?></span>
                 </div>
             <?php } ?>
         </div>
     <?php } else { ?>
-        <h3 data-aos="fade-up">Desempenho <?= $data["dados_turma_grafico"]["nome"] ?></h3>
-        <div data-aos="fade-up" class="graficos-professor-rosca">
+        <h3 >Desempenho <?= $data["dados_turma_grafico"]["nome"] ?></h3>
+        <div  class="graficos-professor-rosca">
         </div>
         <br><br>
-        <div data-aos="fade-up" class="professor-grafico-geral-60">
+        <div  class="professor-grafico-geral-60">
             <div>
                 <h3>Percentual geral:</h3>
                 <span><?= $data["dados_turma_grafico"]["percentual_turma"] ?></span>
@@ -89,14 +89,14 @@ $tabela = "table-notas";
             </div>
         </div>
 
-        <h2 data-aos="fade-up">PERCENTUAL DOS DESCRITORES</h2>
+        <h2 >PERCENTUAL DOS DESCRITORES</h2>
 
-        <div data-aos="fade-up" class="area-graficos-descritores">
+        <div  class="area-graficos-descritores">
             <?php if ($data["descritores"] == false) { ?>
                 <h1>A prova não tem descritores!</h1>
             <?php } else {
                 foreach ($data["dados_turma_grafico"]["descritores"] as $descritor => $grafico) { ?>
-                    <div data-aos="fade-up">
+                    <div >
                         <?= $grafico ?>
                         <h4><?= $descritor ?></h4>
                     </div>
@@ -104,7 +104,7 @@ $tabela = "table-notas";
             } ?>
         </div>
 
-        <h3 data-aos="fade-up">Nível de Proficiência</h3>
+        <h3 >Nível de Proficiência</h3>
         <?= $data["dados_turma_grafico"]["grafico_coluna"] ?>
     <?php } ?>
 
@@ -187,7 +187,7 @@ $tabela = "table-notas";
             </tbody>
         </table>
         <?php if (count($data["provas_turma"]) > 0) { ?>
-        <button id="export-descritores" data-aos="fade-up" class="export-excel hidden" onclick="exportToExcel('<?= 'RESPOSTAS - (' . $filtro_ . ') ' . $data['nome_prova'] ?>', 'table-descritores-primeira')">EXPORTAR DADOS ACERTOS</button>
+        <button id="export-descritores"  class="export-excel hidden" onclick="exportToExcel('<?= 'RESPOSTAS - (' . $filtro_ . ') ' . $data['nome_prova'] ?>', 'table-descritores-primeira')">EXPORTAR DADOS ACERTOS</button>
     <?php } ?>
     <?php } else { ?>
         <div class="area_button_tabelas">
@@ -225,11 +225,11 @@ $tabela = "table-notas";
             </tbody>
         </table>
         <?php if (count($data["provas_turma"]) > 0) { ?>
-        <button id="export-respostas" data-aos="fade-up" class="export-excel hidden" onclick="exportToExcel('<?= 'RESPOSTAS - (' . $filtro_ . ') ' . $data['nome_prova'] ?>', 'table-respostas')">EXPORTAR DADOS RESPOSTAS</button>
+        <button id="export-respostas"  class="export-excel hidden" onclick="exportToExcel('<?= 'RESPOSTAS - (' . $filtro_ . ') ' . $data['nome_prova'] ?>', 'table-respostas')">EXPORTAR DADOS RESPOSTAS</button>
     <?php } ?>
     <?php } ?>
 
-    <table id="table-notas" data-aos="fade-up" class="tabela-prova-aluno">
+    <table id="table-notas"  class="tabela-prova-aluno">
         <thead>
             <tr>
                 <th colspan="6">
@@ -262,7 +262,7 @@ $tabela = "table-notas";
     </table>
 
     <?php if (count($data["provas_turma"]) > 0) { ?>
-        <button id="export-notas" data-aos="fade-up" class="export-excel" onclick="exportToExcel('<?= 'NOTAS - (' . $filtro_ . ') ' . $data['nome_prova'] ?>', 'table-notas')">EXPORTAR DADOS NOTAS</button>
+        <button id="export-notas"  class="export-excel" onclick="exportToExcel('<?= 'NOTAS - (' . $filtro_ . ') ' . $data['nome_prova'] ?>', 'table-notas')">EXPORTAR DADOS NOTAS</button>
     <?php } ?>
 
     <div id="botoes-alternar-prova" class="hidden">
