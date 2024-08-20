@@ -7,7 +7,12 @@
     <?php
     $status = false;
     if($data != NULL){
-    foreach ($data["provas"] as $prova) {
+        foreach ($data["provas"] as $periodo => $provas) {?>
+            <details class="periodo-provas" >
+                <summary> <?=$periodo?> </summary>
+        <?php
+        foreach($provas as $prova){
+
         $contador = 0;
         if ($data["provas_alunos"] != null) {
 
@@ -64,9 +69,12 @@
 
 
         <?php } ?>
-        <div><br><br><br><br><br><br><br><br><br></div>
-        <div><br><br><br><br><br><br><br><br><br></div>
-        <?php } else { ?>
+        </details>
+        <?php }
+     ?>
+    <div><br><br><br><br><br><br><br><br><br></div>
+    <div><br><br><br><br><br><br><br><br><br></div>
+    <?php } else { ?>
     <div class="height">
         <center>
             <h1>SEM DADOS !</h1>

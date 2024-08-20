@@ -18,6 +18,7 @@ $tabela = "table-notas";
             <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
             <button  class="button-professor-turma" name="turma-filtros" value="geral" type="submit">Desempenho Geral</button>
             <select  name="turma-filtros" id="">
+            <option value="geral">GERAL</option>
                 <?php foreach ($data["dados_turma"] as $turma) { ?>
                     <option value="<?= $turma["turma_nome"] ?>"><?= $turma["turma_nome"] ?></option>
                 <?php } ?>
@@ -32,7 +33,10 @@ $tabela = "table-notas";
         <br><br>
         <div  class="professor-grafico-geral-60">
             <div>
+                <center>
                 <h3>Percentual geral:</h3>
+
+                </center>
                 <span><?= $data["media_geral_porcentagem"] ?></span>
             </div>
             <hr>

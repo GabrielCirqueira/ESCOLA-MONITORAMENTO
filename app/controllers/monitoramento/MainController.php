@@ -96,16 +96,31 @@ class MainController{
         $offset = $circunferencia * (1 - $porcentagem / 100);
     
         return "
-        <svg 
-        width='120' height='120' viewBox='0 0 120 120'>
-            <circle cx='60' cy='60' r='$raio' stroke='#dbd9d9' stroke-width='20' fill='none' />
-            <circle class='animated-circle' cx='60' cy='60' r='$raio' stroke='$cor' stroke-width='20' fill='none'
-                    stroke-dasharray='$circunferencia' stroke-dashoffset='$circunferencia' data-offset='$offset'
-                    transform='rotate(-90 60 60)' />
-            <text x='50%' y='50%' text-anchor='middle' dy='.3em' font-size='20' fill='#000'>$porcentagem%</text>
-
+        <svg width='180' height='180' viewBox='0 0 180 180'>
+            <defs>
+                <filter id='shadow' x='-20%' y='-20%' width='140%' height='140%'>
+                    <feGaussianBlur in='SourceAlpha' stdDeviation='4' result='blur'/>
+                    <feOffset dx='0' dy='0' result='offsetBlur'/>
+                    <feFlood flood-color='#000' flood-opacity='0.25'/>
+                    <feComposite in2='offsetBlur' operator='in'/>
+                    <feMerge>
+                        <feMergeNode/>
+                        <feMergeNode in='SourceGraphic'/>
+                    </feMerge>
+                </filter>
+            </defs>
+            <circle cx='90' cy='90' r='$raio' stroke='#f0f0f0' stroke-width='20' fill='none' filter='url(#shadow)' />
+            <circle cx='90' cy='90' r='$raio' stroke='$cor' stroke-width='20' fill='none'
+                    stroke-dasharray='$circunferencia' stroke-dashoffset='$circunferencia'
+                    transform='rotate(-90 90 90)' stroke-linecap='round'>
+                <animate attributeName='stroke-dashoffset' from='$circunferencia' to='$offset' dur='1s' fill='freeze' />
+            </circle>
+            <text x='50%' y='50%' text-anchor='middle' dy='.3em' font-size='19' font-weight='bold' fill='#6e6e6e'>$porcentagem%</text>
         </svg>";
     }
+    
+    
+    
  
     public static function gerarGraficoColunas($dados) {
         $largura_coluna = 50;

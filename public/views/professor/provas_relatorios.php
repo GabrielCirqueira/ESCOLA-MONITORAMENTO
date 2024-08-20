@@ -8,7 +8,11 @@
     <?php
     $status = false;
     if ($data != NULL) {
-        foreach ($data["provas"] as $prova) {
+        foreach ($data["provas"] as $periodo => $provas) {?>
+            <details class="periodo-provas" >
+                <summary> <?=$periodo?> </summary>
+        <?php
+        foreach($provas as $prova){
             $status = false;
             if ($data["provas_alunos"] != null) {
                 foreach ($data["provas_alunos"] as $prova_aluno) {
@@ -17,6 +21,15 @@
                     }
                 }
             }
+            
+            $contador = 0;
+
+            foreach ($data["provas_alunos"] as $P_aluno) {
+                if ($P_aluno["id_prova"] == $prova["id"]) {
+                    $contador++;
+                }
+            }
+            
     ?>
 
 
@@ -34,6 +47,9 @@
                             <span class="prova-nome-disciplina">
                                 <?= $prova["data_prova"] ?>
                             </span> <br>
+                            <span class="prova-nome-professor">
+                            <?= $contador ?> aluno(s) Fizeram a prova.
+                        </span>
                         </center>
                     </div>
 
@@ -47,16 +63,20 @@
                 </div>
             </div><br>
 
-        <?php } ?>
-        <div><br><br><br><br><br><br><br><br><br></div>
-        <div><br><br><br><br><br><br><br><br><br></div>
-        <?php } else { ?>
-        <div class="height">
-            <center>
-                <h1>SEM DADOS !</h1>
-                <h2>Você não inseriu nenhuma prova !</h2>
-            </center>
+            <?php } ?>
+        </details>
+        <?php }
+     ?>
+    <div><br><br><br><br><br><br><br><br><br></div>
+    <div><br><br><br><br><br><br><br><br><br></div>
+    <?php } else { ?>
+    <div class="height">
+        <center>
+            <h1>SEM DADOS !</h1>
+            <h2>Você não inseriu nenhuma prova !</h2>
+        </center>
         </div>
     <?php } ?>
-
+ 
+<div><br><br><br></div>
 </main>

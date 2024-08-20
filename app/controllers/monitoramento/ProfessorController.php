@@ -181,8 +181,25 @@ class ProfessorController
                         $provas[] = $professor;
                     }
                 }
+
+                foreach (ADModel::GetPeriodos() as $periodo) {
+                    $nome_periodo = $periodo['nome'];
+                    $data_inicial = $periodo['data_inicial'];
+                    $data_final = $periodo['data_final'];
+    
+                    $provas_organizadas[$nome_periodo] = [];
+    
+                    foreach ($provas as $prova) {
+                        $data_prova = $prova['data_prova'];
+    
+                        if ($data_prova >= $data_inicial && $data_prova <= $data_final) {
+                            $provas_organizadas[$nome_periodo][] = $prova;
+                        }
+                    }
+                }
+
                 $dados = [
-                    "provas" => $provas,
+                    "provas" => $provas_organizadas,
                     "provas_alunos" => $provas_alunos,
                 ];
             }
@@ -587,8 +604,25 @@ class ProfessorController
                         $provas[] = $professor;
                     }
                 }
+
+                foreach (ADModel::GetPeriodos() as $periodo) {
+                    $nome_periodo = $periodo['nome'];
+                    $data_inicial = $periodo['data_inicial'];
+                    $data_final = $periodo['data_final'];
+    
+                    $provas_organizadas[$nome_periodo] = [];
+    
+                    foreach ($provas as $prova) {
+                        $data_prova = $prova['data_prova'];
+    
+                        if ($data_prova >= $data_inicial && $data_prova <= $data_final) {
+                            $provas_organizadas[$nome_periodo][] = $prova;
+                        }
+                    }
+                }
+
                 $dados = [
-                    "provas" => $provas,
+                    "provas" => $provas_organizadas,
                     "provas_alunos" => $provas_alunos,
                 ];
             }
@@ -650,6 +684,7 @@ class ProfessorController
                     $alunos_por_turma_rec[$turma_prova][] = $prova;
                 }
             }
+
 
             $alunos_por_turma_primeira = array();
             foreach ($provasPrimeira as $prova) {
