@@ -913,6 +913,81 @@ class GestorController
 
             $descritores_por_aluno_rec = $status_desc ? ProfessorController::calcular_descritores_por_aluno($alunos_por_turma_rec) : null;
 
+            $alunosTurma = AlunoModel::GetAlunos();
+
+            if (isset($_POST["filtrar"])) {
+                $turma = $_POST["turma-filtros"];
+                $alunos_prova = [];
+                $alunosFazerProva = [];
+
+                foreach($alunosTurma as $aluno){
+                    if($turma == $aluno["turma"]){
+                        $alunosFazerProva[] = $aluno;
+                    }
+                }
+                
+                $AlunosQueFaltou = [];
+                foreach($alunosFazerProva as $aluno){
+                    $statusAluno = false;  
+                    foreach($provas_tudo as $provs){
+                        if($aluno["ra"] == $provs["ra"]){
+                            $statusAluno = true;
+                            break;
+                        }
+                    }
+                    if(!$statusAluno){
+                        $AlunosQueFaltou[] = [
+                            "aluno" => $aluno["nome"],
+                            "ra" => $aluno["ra"],
+                            "turma" => $aluno["turma"],
+                            "porcentagem" => 0,
+                            "NotaP" => 1,
+                            "status" => "FALTOU",
+                            "QNT_perguntas" => 0,
+                            "acertos" => 0
+                        ];
+                    }       
+                }
+            } else {
+                $alunos_prova = [];
+                $alunosFazerProva = [];
+
+                foreach($alunosTurma as $aluno){
+                    if(in_array($aluno["turma"], $turmas)){
+                        $alunosFazerProva[] = $aluno;
+                    }
+                }
+                
+                $AlunosQueFaltou = [];
+                foreach($alunosFazerProva as $aluno){
+                    $statusAluno = false;  
+                    foreach($provas_tudo as $provs){
+                        if($aluno["ra"] == $provs["ra"]){
+                            $statusAluno = true;
+                            break;
+                        }
+                    }
+                    if(!$statusAluno){
+                        $AlunosQueFaltou[] = [
+                            "aluno" => $aluno["nome"],
+                            "ra" => $aluno["ra"],
+                            "turma" => $aluno["turma"],
+                            "porcentagem" => 0,
+                            "NotaP" => 1,
+                            "status" => "FALTOU",
+                            "QNT_perguntas" => 0,
+                            "acertos" => 0
+                        ];
+                    }       
+                }
+            }
+
+            $provas_tudo = array_merge($AlunosQueFaltou,$provas_tudo);
+
+            usort($provas_tudo, function($a, $b) {
+                return strcmp($a['aluno'], $b['aluno']);
+            });
+
             $dados = [
                 "dados_turma" => $dados_turmas,
                 "nome_prova" => $nome_prova,

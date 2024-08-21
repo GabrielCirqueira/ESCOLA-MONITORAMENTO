@@ -247,19 +247,28 @@ $tabela = "table-notas";
                 <th>TURMA</th>
                 <th>P. ACERTOS</th>
                 <th>PONTOS</th>
-                <th>PONTOS REC</th>
+                <!-- <th>PONTOS REC</th> -->
                 <th>STATUS</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($data["provas_turma"] as $prova) { ?>
+                <?php if($prova["status"] != "FALTOU"){ ?>
                 <tr style="background-color:<?php echo $prova['porcentagem'] >= 60 ? '#4BCC8B' : '#DF7474' ?>">
+                    <?php }else{ ?>
+                <tr style="background-color:<?php echo '#eec22589' ?>">
+                    <?php } ?>
                     <td><?= $prova["aluno"] ?></td>
                     <td><?= $prova["turma"] ?></td>
+                    <?php if($prova["status"] != "FALTOU"){ ?>
                     <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 0) ?>%</td>
                     <td><?= number_format($prova["NotaP"], 1) ?></td>
-                    <td><?= $prova["notaRec"] ?></td>
+                    <!-- <td><?= $prova["notaRec"] ?></td> -->
                     <td><?= $prova["status"] ?></td>
+                    <?php }else{ ?>
+                        <td colspan="3" >
+                            <center>ALUNO FALTOU OU NÃO FEZ A PROVA</center></td>
+                    <?php } ?>
                 </tr>
             <?php } ?>
         </tbody>

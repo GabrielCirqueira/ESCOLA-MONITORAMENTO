@@ -452,9 +452,12 @@ input:checked + .slider:before {
 
 
 .button-prova-liberado{
-  width: 55px;
-  height: 25px;
+  width: 110px;
+  height: 35px;
   border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.19);
+  border: 2px solid rgba(128, 128, 128, 0.628);
   background-color: rgba(128, 128, 128, 0.534);
 }
 
@@ -553,7 +556,6 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 20px;
 }
 
 .area-graficos-descritores div{
@@ -561,6 +563,10 @@ input:checked + .slider:before {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.area-graficos-descritores h4{
+  margin: 0px;
 }
 
 .buttons-professor form{
@@ -1020,16 +1026,16 @@ input:checked + .slider:before {
 
 .excluir-prova{
   width: 270px;
-  height: 50px;
+  height: 40px;
   padding: 10px;
-  background-color: #921f1fb5;
+  background-color: #921f1fa2;
   color: white;
   font-weight: bold;
   font-size: 18px;
   transition: 0.5s ease;
   border: none;
-  border-radius: 6px;
-  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.148);
+  border-radius: 3px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.218);
 }
 
 .excluir-prova:hover{
@@ -2157,7 +2163,7 @@ grid-template-columns: 1fr 1fr 1fr 1fr;
 
 .periodo-provas {
   display: flex;
-  background-color: #cecece6b;
+  background-color: #cecece2b;
   width: 85%;
   border: 5px solid rgba(128, 128, 128, 0.1);
   border-radius: 10px;

@@ -7,6 +7,7 @@
  .header__title {
    margin: 0;
    font-size: 33px;
+   text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.246);
    color: #ffffff;
  }
 
@@ -30,14 +31,14 @@
 
  .boton-header {
    height: 10px;
-   background-color: #148e9c;
+   background-color: #169baa;
    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.356);
  }
 
  .header i {
    position: absolute;
    right: 40px;
-   top: 35px;
+   top: 30px;
  }
 
  .header i {
@@ -47,5 +48,5 @@
  .menu i {
    position: absolute;
    left: 50px;
-   top: 35px;
+   top: 30px;
  }
