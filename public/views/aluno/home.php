@@ -208,7 +208,7 @@ if ($data["provas_feitas"] != null) {
                 </div>
             </div><br>
 
-            <div style="display: none; padding-top:10%; "  id="popup-gabarito-<?=$prova["id"]?>" class="PopUp-sobreposicao">
+            <div style="display: none; padding-top:10%; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"  id="popup-gabarito-<?=$prova["id"]?>" class="PopUp-sobreposicao">
                 <div class="conteudo-popup">
                     <br>
                     <h4> <?=$prova["nome_prova"]?></h4>

@@ -1246,6 +1246,7 @@ class ProfessorController
                     "pontos_aluno" => $pontos_aluno,
                     "descritores" => $descritores,
                     "perguntas_certas" => implode(";", $perguntas_certas),
+                    "perguntas_respostas" => $prova_aluno["perguntas_respostas"],
                     "perguntas_erradas" => implode(";", $perguntas_erradas),
                     "descritores_certos" => implode(";", $descritores_corretos),
                     "descritores_errados" => implode(";", $descritores_errados),

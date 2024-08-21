@@ -687,7 +687,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><?=$aluno["disciplina"]?></td>
                                 <td><?=$aluno["pontos_aluno"]?></td>
                                 <td><button class="btn-editar"
-                                        onclick="editarProvaAluno('<?=$aluno['ra']?>', '<?=$aluno['perguntas_respostas']?>', '<?=$aluno['aluno']?>','<?=$aluno['id_prova']?>',<?=$aluno['id']?>,'<?=$aluno['disciplina']?>',<?=$aluno['data_aluno']?>)">EDITAR</button>
+                                        onclick="editarProvaAluno('<?=$aluno['ra']?>', '<?=$aluno['perguntas_respostas']?>', '<?=$aluno['aluno']?>','<?=$aluno['id_prova']?>',<?=$aluno['id']?>,'<?=$aluno['disciplina']?>',<?=$aluno['data_aluno']?>,'<?=$aluno['turma']?>')">EDITAR</button>
                                 </td>
 
 
@@ -706,7 +706,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                     </center>
                     <?php }?>
 
-                    <div id="editar-prova-aluno" class="hidden">
+                    <div id="editar-prova-aluno" class="hidden form-editar">
                         <center>
                             <h1>EDITAR PROVA</h1>
                             <h3 id="nome-aluno-editar"></h3>
@@ -720,6 +720,15 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <div id="tabela-alternativar-editar">
 
                                 </div>
+                                <br>
+                                <h3>TURMA CADASTRADA NA PROVA:</h3>
+                            <div class="radio-group">
+                                <?php foreach ($data["turmas"]["turmas"] as $turma) {?>
+                                <input type="radio" id="turma_prova_<?=$turma["nome"]?>" name="turmas_prova"
+                                    value="<?=$turma["nome"]?>">
+                                <label for="turma_prova_<?=$turma["nome"]?>"><?=$turma["nome"]?></label>
+                                <?php }?>
+                            </div>
                                 <br><br>
                                 <div class="buttons-editar">
                                     <button type="submit" class="btn-editar item"

@@ -320,41 +320,55 @@ function filtrarTabela(tabelaId, filtroRAId, filtroNomeId) {
             dados.forEach(function(aluno) {
                 if (aluno.ra.toUpperCase().indexOf(filtroRA) > -1 && aluno.aluno.toUpperCase().indexOf(filtroNome) > -1) {
                     var tr = document.createElement('tr');
-
+            
                     var tdRA = document.createElement('td');
                     tdRA.textContent = aluno.ra;
                     tr.appendChild(tdRA);
-
+            
                     var tdNome = document.createElement('td');
                     tdNome.textContent = aluno.aluno;
                     tr.appendChild(tdNome);
-
+            
                     var tdTurma = document.createElement('td');
                     tdTurma.textContent = aluno.turma;
                     tr.appendChild(tdTurma);
-
+            
                     var tdData = document.createElement('td');
                     tdData.textContent = aluno.data_aluno;
                     tr.appendChild(tdData);
-
+            
                     var tdDisciplina = document.createElement('td');
                     tdDisciplina.textContent = aluno.disciplina;
                     tr.appendChild(tdDisciplina);
-
+            
                     var tdPontos = document.createElement('td');
                     tdPontos.textContent = aluno.pontos_aluno;
                     tr.appendChild(tdPontos);
-
+            
+                    // Botão Editar
                     var tdEditar = document.createElement('td');
                     var btnEditar = document.createElement('button');
                     btnEditar.className = 'btn-editar';
                     btnEditar.textContent = 'EDITAR';
+            
+                    // Definindo os parâmetros diretamente no onclick
                     btnEditar.onclick = function() {
-                        editarProvaAluno(aluno.ra, aluno.perguntas_respostas, aluno.aluno, aluno.id_prova, aluno.id, aluno.disciplina, aluno.data_aluno);
+                        editarProvaAluno(
+                            aluno.ra,
+                            aluno.perguntas_respostas,
+                            aluno.aluno,
+                            aluno.id_prova,
+                            aluno.id,
+                            aluno.disciplina,
+                            aluno.data_aluno,
+                            aluno.turma
+                        );
                     };
+            
                     tdEditar.appendChild(btnEditar);
                     tr.appendChild(tdEditar);
-
+            
+                    // Botão Excluir
                     var tdExcluir = document.createElement('td');
                     var formExcluir = document.createElement('form');
                     formExcluir.method = 'post';
@@ -367,7 +381,7 @@ function filtrarTabela(tabelaId, filtroRAId, filtroNomeId) {
                     formExcluir.appendChild(btnExcluir);
                     tdExcluir.appendChild(formExcluir);
                     tr.appendChild(tdExcluir);
-
+            
                     tbody.appendChild(tr);
                 }
             });
@@ -505,7 +519,7 @@ function AlterarModoAddTurma(container,status){
     }
 }
 
-function editarProvaAluno(ra, gabarito, nome,IdProva,id,disciplina,data) {
+function editarProvaAluno(ra, gabarito, nome,IdProva,id,disciplina,data,turma) {
     document.getElementById('tabelaProvas').style.display = 'none';
     document.getElementById('titulo-provas-feitas').style.display = 'none';
     document.getElementById('filtro-container-provas').style.display = 'none';
@@ -519,6 +533,14 @@ function editarProvaAluno(ra, gabarito, nome,IdProva,id,disciplina,data) {
     document.getElementById('nome_aluno_prova').value = nome;
     document.getElementById('id_prova').value = IdProva;
     document.getElementById('id_aluno_prova').value = id; 
+
+    var turmas = document.getElementsByName('turmas_prova');
+    for (var i = 0; i < turmas.length; i++) {
+        if (turmas[i].value === turma) {
+            turmas[i].checked = true;
+            break;
+        }
+    }
 
 
     let respostas = gabarito.split(';');
@@ -534,6 +556,7 @@ function editarProvaAluno(ra, gabarito, nome,IdProva,id,disciplina,data) {
                 <td><div><input type="radio" name="gabarito_questao_${questao}" value="${questao},B" ${alternativa === 'B' ? 'checked' : ''}><span>B</span></div></td>
                 <td><div><input type="radio" name="gabarito_questao_${questao}" value="${questao},C" ${alternativa === 'C' ? 'checked' : ''}><span>C</span></div></td>
                 <td><div><input type="radio" name="gabarito_questao_${questao}" value="${questao},D" ${alternativa === 'D' ? 'checked' : ''}><span>D</span></div></td>
+                <td><div><input type="radio" name="gabarito_questao_${questao}" value="${questao},E" ${alternativa === 'E' ? 'checked' : ''}><span>E</span></div></td>
             </tr>
         `;
     });

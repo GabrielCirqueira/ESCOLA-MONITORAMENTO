@@ -136,13 +136,13 @@ class ADMcontroller
 
             $contador = 1;
             $perguntas = [];
-            while (true) {
-                if (isset($_POST["gabarito_questao_" . $contador])) {
+
+            $prova = ProfessorModel::GetProvabyID($_POST["id_prova"]);
+
+
+            while ($contador <= $prova["QNT_perguntas"]) {
                     $perguntas[] = $_POST["gabarito_questao_" . $contador];
                     $contador++;
-                } else {
-                    break;
-                }
             }
 
             $dadosProva = [
@@ -151,7 +151,10 @@ class ADMcontroller
                 "ra" => $_POST["ra"],
                 "nome" => $_POST["nome_aluno_prova"],
                 "id" => $_POST["id_aluno_prova"],
+                "turma" => $_POST["turmas_prova"]
             ];
+
+            MainController::pre($dadosProva);
 
             self::alterarProvaAluno($dadosProva);
         }
@@ -317,8 +320,9 @@ class ADMcontroller
         $valor_cada_pergunta = $prova["valor"] / $prova["QNT_perguntas"];
         $descritores_questoes = $prova["descritores"] != null ? explode(";", $prova["descritores"]) : null;
 
-        $contador = 0;
 
+        $contador = 0;
+        MainController::pre($descritores_questoes);
         while ($contador < $prova["QNT_perguntas"]) {
             if ($gabarito_aluno[$contador] == $gabarito_professor[$contador]) {
                 $descritores_corretos[] = $descritores_questoes != null ? $descritores_questoes[$contador] : null;
@@ -330,6 +334,7 @@ class ADMcontroller
                 $perguntas_respostas[] = $gabarito_aluno[$contador];
                 $perguntas_erradas[] = $gabarito_aluno[$contador];
             }
+
 
             $contador++;
         }
@@ -352,14 +357,20 @@ class ADMcontroller
             "ID" => $dados["id"],
             "ID_prova" => $dados["id_prova"],
             "acertos" => $acertos_aluno,
+            "descritores" => $prova["descritores"],
+            "turma" => $dados["turma"],
             "porcentagem" => ($acertos_aluno / count($gabarito_professor)) * 100,
             "pontos_aluno" => $pontos_aluno,
+            "perguntas_respostas" => $dados["gabarito"],
             "perguntas_certas" => implode(";", $perguntas_certas),
             "perguntas_erradas" => implode(";", $perguntas_erradas),
-            "descritores_certos" => $descritores_questoes != null ? implode(";", $descritores_corretos) : null,
-            "descritores_errados" => $descritores_questoes != null ? implode(";", $descritores_errados) : null,
+            "descritores_certos" => $descritores_questoes != null ? $descritores_corretos : null,
+            "descritores_errados" => $descritores_questoes != null ? $descritores_errados : null,
             "pontos_prova" => $prova["valor"],
         ];
+
+        MainController::pre($dados_atualizacao);
+
 
         if (ProfessorModel::atualizar_gabarito_aluno($dados_atualizacao) && ProfessorModel::atualizar_gabarito_aluno_primeira($dados_atualizacao)) {
             self::inserirLogsADM("A Prova do aluno(a) {$dados["nome"]} da materia {$prova["disciplina"]} Foi Editada.");

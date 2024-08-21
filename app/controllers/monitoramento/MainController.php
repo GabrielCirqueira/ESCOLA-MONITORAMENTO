@@ -59,10 +59,13 @@ class MainController{
     }
 
     public static function pre($dados){
-        echo "<pre>";
+        echo "<pre style='background-color: #f4f4f4; color: #333; padding: 10px; border-radius: 5px; font-family: Courier, monospace;'>";
         print_r($dados);
         echo "</pre>";
+        echo "<br>";
+        echo "<br>";
     }
+    
 
     public static function gerarGraficoRosca($porcentagem, $corPersonalizada = null) {
         if ($corPersonalizada === null) {

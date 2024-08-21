@@ -230,15 +230,16 @@ td {
 }
 
 .button-ver-prova button{
-  background-color: #1ac3d6;
-  border-radius: 5px;
+  background-color: #17b3c5;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.338);
   border: none;
-  width: 90px;
+  width: 70px;
   height: 30px;
   font-weight: bold;
-  font-size: 16px;
-  color: black;
-  transition: 0.5s ease-in-out;
+  font-size: 13px;
+  color: rgb(26, 26, 26);
+  transition: 0.3s ease-in-out;
 }
 
 .button-ver-prova button:hover{
