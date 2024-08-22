@@ -77,7 +77,7 @@ $tabela = "table-notas";
             <?php } ?>
         </div>
     <?php } else { ?>
-        <h3  >Desempenho <?= $data["dados_turma_grafico"]["nome"] ?></h3>
+        <h1  >DESEMPENHO <?= $data["dados_turma_grafico"]["nome"] ?></h1>
         <div   class="graficos-professor-rosca">
         </div>
         <br><br>

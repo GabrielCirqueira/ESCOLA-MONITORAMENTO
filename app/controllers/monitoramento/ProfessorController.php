@@ -936,13 +936,7 @@ class ProfessorController
                 }
             }
 
-            usort($provas_tudo, function ($a, $b) {
-                $result = strcmp($a['turma'], $b['turma']);
-                if ($result === 0) {
-                    return strcmp($a['aluno'], $b['aluno']);
-                }
-                return $result;
-            });
+
 
             $respostas_por_aluno = [];
 
@@ -1049,8 +1043,12 @@ class ProfessorController
 
             $provas_tudo = array_merge($AlunosQueFaltou,$provas_tudo);
 
-            usort($provas_tudo, function($a, $b) {
-                return strcmp($a['aluno'], $b['aluno']);
+            usort($provas_tudo, function ($a, $b) {
+                $result = strcmp($a['turma'], $b['turma']);
+                if ($result === 0) {
+                    return strcmp($a['aluno'], $b['aluno']);
+                }
+                return $result;
             });
 
             $dados = [

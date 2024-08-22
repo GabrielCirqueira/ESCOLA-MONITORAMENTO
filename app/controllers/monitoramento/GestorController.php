@@ -870,14 +870,7 @@ class GestorController
                 }
             }
 
-            usort($provas_tudo, function ($a, $b) {
-                $result = strcmp($a['turma'], $b['turma']);
-                if ($result === 0) {
-                    return strcmp($a['aluno'], $b['aluno']);
-                }
-                return $result;
-            });
-
+ 
             $respostas_por_aluno = [];
 
             if (isset($_POST["filtrar"])) {
@@ -984,10 +977,14 @@ class GestorController
 
             $provas_tudo = array_merge($AlunosQueFaltou,$provas_tudo);
 
-            usort($provas_tudo, function($a, $b) {
-                return strcmp($a['aluno'], $b['aluno']);
+            usort($provas_tudo, function ($a, $b) {
+                $result = strcmp($a['turma'], $b['turma']);
+                if ($result === 0) {
+                    return strcmp($a['aluno'], $b['aluno']);
+                }
+                return $result;
             });
-
+            
             $dados = [
                 "dados_turma" => $dados_turmas,
                 "nome_prova" => $nome_prova,

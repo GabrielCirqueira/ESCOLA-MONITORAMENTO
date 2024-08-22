@@ -696,10 +696,18 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   padding: 9px;
-  background-color: rgba(197, 197, 197, 0.718); 
+  background-color: rgba(197, 197, 197, 0.718);
+  border-radius: 5px;
+  border: 2px solid rgba(128, 128, 128, 0.704);
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.334);
   height: 40px;
+}
+
+.filtros_exibir div:hover{
+  background-color: rgba(173, 173, 173, 0.718);
+  cursor: default;
 }
 
 .button-vsGeral{

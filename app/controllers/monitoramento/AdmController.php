@@ -406,6 +406,7 @@ class ADMcontroller
                 "turma" => $_POST["turma"],
             ];
 
+
             $Edit = ADModel::EditarAluno($dados);
 
             if ($Edit) {

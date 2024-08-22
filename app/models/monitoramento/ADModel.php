@@ -11,7 +11,6 @@ class ADModel
     public static function EditarAluno($dados)
     {
         $sql = "UPDATE alunos SET nome = :nome, turno = :turno, data_nasc = :data_nasc, turma = :turma WHERE ra = :ra";
-
         $query = Database::GetInstance()->prepare($sql);
         $query->bindParam(':ra', $dados['ra']);
         $query->bindParam(':nome', $dados['nome']);
@@ -19,8 +18,26 @@ class ADModel
         $query->bindParam(':data_nasc', $dados['data_nasc']);
         $query->bindParam(':turma', $dados['turma']);
         $query->execute();
-        return $query;
+    
+        $sql2 = "UPDATE gabarito_alunos SET turma = :turma, turno = :turno, aluno = :nome WHERE ra = :ra";
+        $query2 = Database::GetInstance()->prepare($sql2);
+        $query2->bindParam(':ra', $dados['ra']);
+        $query2->bindParam(':turma', $dados['turma']);
+        $query2->bindParam(':turno', $dados['turno']);
+        $query2->bindParam(':nome', $dados['nome']);
+        $query2->execute();
+    
+        $sql3 = "UPDATE gabarito_alunos_primeira_prova SET turma = :turma, turno = :turno, aluno = :nome WHERE ra = :ra";
+        $query3 = Database::GetInstance()->prepare($sql3);
+        $query3->bindParam(':ra', $dados['ra']);
+        $query3->bindParam(':turma', $dados['turma']);
+        $query3->bindParam(':turno', $dados['turno']);
+        $query3->bindParam(':nome', $dados['nome']);
+        $query3->execute();
+    
+        return $query && $query2 && $query3;
     }
+    
 
     public static function EditarProfessor($dados)
     {

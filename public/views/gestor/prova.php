@@ -14,7 +14,7 @@ $tabela = "table-notas";
 
     <h3 >Classificar por:</h3>
     <div  class="buttons-professor">
-        <form action="relatorio_prova" method="post">
+        <form action="" method="post">
             <input type="hidden" name="id-prova" value="<?= $_POST["id-prova"] ?>">
             <button  class="button-professor-turma" name="turma-filtros" value="geral" type="submit">Desempenho Geral</button>
             <select  name="turma-filtros" id="">
@@ -76,7 +76,7 @@ $tabela = "table-notas";
             <?php } ?>
         </div>
     <?php } else { ?>
-        <h3 >Desempenho <?= $data["dados_turma_grafico"]["nome"] ?></h3>
+        <h1 >DESEMPENHO <?= $data["dados_turma_grafico"]["nome"] ?></h1>
         <div  class="graficos-professor-rosca">
         </div>
         <br><br>
