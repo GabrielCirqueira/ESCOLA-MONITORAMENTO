@@ -61,8 +61,8 @@ class AlunoModel
     public static function Inserir_dados_prova($dados, $string)
     {
         $sql = "INSERT INTO gabarito_alunos
-        (aluno, ra, turma, id_prova, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie,status)
-        VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP,:PORC,:TURNO,:SER,:ALN)";
+        (aluno, ra, turma, id_prova, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno,pontos_aluno_quebrado, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie,status)
+        VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO,:PNTQ, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP,:PORC,:TURNO,:SER,:ALN)";
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":ALUNO", $dados["aluno"]);
@@ -78,6 +78,7 @@ class AlunoModel
         $query->bindValue(":DATA_ALUNO", $dados["data_aluno"]);
         $query->bindValue(":ACERTOS", $dados["acertos"]);
         $query->bindValue(":PONTOS_ALUNO", $dados["pontos_aluno"]);
+        $query->bindValue(":PNTQ", $dados["pontos_aluno_quebrado"]);
         $query->bindValue(":PERGUNTAS_CERTAS", $dados["perguntas_certas"]);
         $query->bindValue(":DESCRITORES_CERTOS", $dados["descritores_certos"]);
         $query->bindValue(":DESCRITORES_ERRADOS", $dados["descritores_errados"]);
@@ -96,8 +97,8 @@ class AlunoModel
     public static function Inserir_dados_prova_1_prova($dados)
     {
         $sql = "INSERT INTO gabarito_alunos_primeira_prova
-        (aluno, ra, turma, id_prova, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie)
-        VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP,:PORC,:TURNO,:SER)";
+        (aluno, ra, turma, id_prova, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno,pontos_aluno_quebrado, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie)
+        VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO,:PNTQ, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP,:PORC,:TURNO,:SER)";
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":ALUNO", $dados["aluno"]);
@@ -113,6 +114,7 @@ class AlunoModel
         $query->bindValue(":DATA_ALUNO", $dados["data_aluno"]);
         $query->bindValue(":ACERTOS", $dados["acertos"]);
         $query->bindValue(":PONTOS_ALUNO", $dados["pontos_aluno"]);
+        $query->bindValue(":PNTQ", $dados["pontos_aluno_quebrado"]);
         $query->bindValue(":PERGUNTAS_CERTAS", $dados["perguntas_certas"]);
         $query->bindValue(":DESCRITORES_CERTOS", $dados["descritores_certos"]);
         $query->bindValue(":DESCRITORES_ERRADOS", $dados["descritores_errados"]);
@@ -129,7 +131,7 @@ class AlunoModel
     public static function Inserir_dados_prova_rec($dados)
     {
         $sql = "INSERT INTO gabarito_alunos_recuperacao
-        (aluno, ra, turma, id_prova,id_prova_rec, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie)
+        (aluno, ra, turma, id_prova,id_prova_rec, nome_professor, descritores, disciplina, nome_prova, pontos_prova, QNT_perguntas, data_aluno, acertos, pontos_aluno,pontos_aluno_quebrado, perguntas_certas, descritores_certos, descritores_errados,perguntas_erradas,perguntas_respostas,porcentagem,turno,serie)
         VALUES (:ALUNO, :RA, :TURMA, :ID_PROVA, :ID_PROVA_REC, :NOME_PROFESSOR, :DESCRITORES, :DISCIPLINA, :NOME_PROVA, :PONTOS_PROVA, :QNT_PERGUNTAS, :DATA_ALUNO, :ACERTOS, :PONTOS_ALUNO, :PERGUNTAS_CERTAS, :DESCRITORES_CERTOS, :DESCRITORES_ERRADOS,:PERG_ERRADAS,:PERG_RESP,:PORC,:TURNO,:SER)";
 
         $query = Database::GetInstance()->prepare($sql);

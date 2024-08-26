@@ -249,6 +249,8 @@ $contador = 1;
             $gabarito_aluno[$questao] = $resposta;
         }
 
+
+
         while ($contador <= $prova["QNT_perguntas"]) {?>
                             <tr>
                                 <td class="numero"><?=$contador?></td>
@@ -303,9 +305,8 @@ $contador2 = 0;
             echo "<h5>O PROFESSOR AINDA NÃO LIBEROU O ACESSO AS RESPOSTAS!</h5>";
         } else {?>
                     <br>
-                        <span><b>VALOR DA PROVA:</b> <?=$prova["pontos_prova"]?></span>
-                        <span><b>VALOR OBTIDO:</b> <?=number_format($prova["pontos_aluno"], 1)?></span>
-                        <span><b>STATUS:</b> <?=$prova["status"]?></span>
+                        <span><b>VALOR DA PROVA:</b> <?=$prova["pontos_prova"]?></span> <br>
+                        <span><b>VALOR OBTIDO:</b> <?= $prova["pontos_aluno"]?> PONTOS</span>
                     <?php
 }?>
 

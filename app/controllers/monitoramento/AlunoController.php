@@ -373,12 +373,15 @@ class AlunoController
 
             $provas_alunos_verificar = AlunoModel::GetProvasFinalizadas();
 
-            foreach ($provas_alunos_verificar as $prov) {
-                if ($prov["id_prova"] == $_SESSION["prova_gabarito"]["id"] && $_SESSION["ra"] == $prov["ra"]) {
-                    $_SESSION["PopUp_Prova_Feita"] = true;
-                    // MainController::pre($_SESSION["prova_gabarito"]);
-                    header("location:aluno_home");
-                    exit();
+            if($provas_alunos_verificar != null){
+
+                foreach ($provas_alunos_verificar as $prov) {
+                    if ($prov["id_prova"] == $_SESSION["prova_gabarito"]["id"] && $_SESSION["ra"] == $prov["ra"]) {
+                        $_SESSION["PopUp_Prova_Feita"] = true;
+                        // MainController::pre($_SESSION["prova_gabarito"]);
+                        header("location:aluno_home");
+                        exit();
+                    }
                 }
             }
 
@@ -443,11 +446,12 @@ class AlunoController
                 "pontos_prova" => $_SESSION["prova_gabarito"]["valor"],
                 "QNT_perguntas" => $_SESSION["prova_gabarito"]["QNT_perguntas"],
                 "turno" => $_SESSION["turno"],
-                "porcentagem" => ($acertos_aluno / $_SESSION["prova_gabarito"]["QNT_perguntas"]) * 100,
+                "porcentagem" => (number_format(round($pontos_aluno),0) / $_SESSION["prova_gabarito"]["valor"]) * 100,
                 "serie" => substr($_SESSION["turma"], 0, 1),
                 "data_aluno" => $dataFormatada,
                 "acertos" => $acertos_aluno,
-                "pontos_aluno" => $pontos_aluno,
+                "pontos_aluno" => number_format(round($pontos_aluno),0),
+                "pontos_aluno_quebrado" => number_format($pontos_aluno,1),
                 "perguntas_certas" => implode(";", $perguntas_certas),
                 "perguntas_respostas" => implode(";", $perguntas_respostas),
                 "perguntas_erradas" => implode(";", $perguntas_erradas),

@@ -260,8 +260,8 @@ $tabela = "table-notas";
                     <td><?= $prova["aluno"] ?></td>
                     <td><?= $prova["turma"] ?></td>
                     <?php if($prova["status"] != "FALTOU"){ ?>
-                    <td><?= number_format(($prova["acertos"] / $prova["QNT_perguntas"]) * 100, 0) ?>%</td>
-                    <td><?= number_format($prova["NotaP"], 1) ?></td>
+                    <td><?= number_format($prova['porcentagem'],0) ?>%</td>
+                    <td><?=$prova["NotaP"] ?> PONTOS</td>
                     <!-- <td><?= $prova["notaRec"] ?></td> -->
                     <td><?= $prova["status"] ?></td>
                     <?php }else{ ?>

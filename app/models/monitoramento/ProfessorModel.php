@@ -170,13 +170,14 @@ class ProfessorModel
 
     public static function atualizar_gabarito_aluno($dados)
     {
-        $sql = "UPDATE gabarito_alunos SET acertos = :AC, porcentagem = :PORC,turma = :TURMA, pontos_aluno = :PN, perguntas_certas = :PC,perguntas_respostas = :PER_RESP,  perguntas_erradas = :PE, descritores = :DESCR,descritores_certos = :DC, descritores_errados = :DE, pontos_prova = :PV WHERE id = :ID_ALUNO AND id_prova = :ID_PROVA";
+        $sql = "UPDATE gabarito_alunos SET acertos = :AC, porcentagem = :PORC,turma = :TURMA, pontos_aluno = :PN, pontos_aluno_quebrado = :PNTQ, perguntas_certas = :PC,perguntas_respostas = :PER_RESP,  perguntas_erradas = :PE, descritores = :DESCR,descritores_certos = :DC, descritores_errados = :DE, pontos_prova = :PV WHERE id = :ID_ALUNO AND id_prova = :ID_PROVA";
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":AC", $dados["acertos"]);
         $query->bindValue(":PORC", $dados["porcentagem"]);
         $query->bindValue(":TURMA", $dados["turma"]);
         $query->bindValue(":PN", $dados["pontos_aluno"]);
+        $query->bindValue(":PNTQ", $dados["pontos_aluno_quebrado"]);
         $query->bindValue(":PC", $dados["perguntas_certas"]);
         $query->bindValue(":PER_RESP", $dados["perguntas_respostas"]);
         $query->bindValue(":PE", $dados["perguntas_erradas"]);
@@ -188,18 +189,20 @@ class ProfessorModel
         $query->bindValue(":ID_PROVA", $dados["ID_prova"]);
         $query->execute();
 
-        return $query;
+        return $query;  
     }
 
     public static function atualizar_gabarito_aluno_primeira($dados)
     {
-        $sql = "UPDATE gabarito_alunos_primeira_prova SET acertos = :AC, porcentagem = :PORC, pontos_aluno = :PN,  perguntas_certas = :PC, perguntas_erradas = :PE, descritores = :DESCR, descritores_certos = :DC, descritores_errados = :DE, pontos_prova = :PV WHERE ra = :RA AND id_prova = :ID_PROVA";
+        $sql = "UPDATE gabarito_alunos_primeira_prova SET acertos = :AC,turma = :TURMA, porcentagem = :PORC, pontos_aluno = :PN,pontos_aluno_quebrado = :PNTQ, perguntas_certas = :PC, perguntas_erradas = :PE, descritores = :DESCR, descritores_certos = :DC, descritores_errados = :DE, pontos_prova = :PV WHERE ra = :RA AND id_prova = :ID_PROVA";
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":AC", $dados["acertos"]);
         $query->bindValue(":PORC", $dados["porcentagem"]);
         $query->bindValue(":PN", $dados["pontos_aluno"]);
+        $query->bindValue(":PNTQ", $dados["pontos_aluno_quebrado"]);
         $query->bindValue(":PC", $dados["perguntas_certas"]);
+        $query->bindValue(":TURMA", $dados["turma"]);
         $query->bindValue(":PE", $dados["perguntas_erradas"]);
         $query->bindValue(":DESCR", $dados["descritores"]);
         $query->bindValue(":DC", $dados["descritores_certos"]);

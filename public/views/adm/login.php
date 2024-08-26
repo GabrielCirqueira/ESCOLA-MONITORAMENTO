@@ -5,7 +5,7 @@
         <form action="login_adm_verifica" method="post">
             <!-- @csrf -->
             <div class="campo-ra">
-                <input class="input-campo-aluno"  name="campo_adm" type="text"  required>
+                <input class="input-campo-aluno" id="login_adm"  name="campo_adm" type="password"  required>
                 <label class="label-campo-login" for="SENHA">SENHA</label>
 
             </div>

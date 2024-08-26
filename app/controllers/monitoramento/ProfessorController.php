@@ -272,7 +272,7 @@ class ProfessorController
             if (isset($_POST["status-liberado"])) {
                 if ($_POST["status-liberado"] == "sim") {
                     ProfessorModel::alterar_liberado_ver($id_prova, null);
-                    self::inserirLogsProfessor("O professor(a) {$_SESSION["nome_professor"]} permitiu os alunos de fazerem a prova {$nome_prova} ");
+                    self::inserirLogsProfessor("O professor(a) {$_SESSION["nome_professor"]} permitiu os alunos fazerem a prova {$nome_prova} ");
                     header("Location: prova");
                 } else {
                     ProfessorModel::alterar_liberado_ver($id_prova, "NÃO");
@@ -1238,10 +1238,12 @@ class ProfessorController
                 $dados_atualizacao = [
                     "ra" => $prova_aluno["ra"],
                     "ID" => $prova_aluno["id"],
+                    "turma" => $prova_aluno["turma"],
                     "ID_prova" => $id_prova,
                     "acertos" => $acertos_aluno,
-                    "porcentagem" => ($acertos_aluno / count($gabarito_professor)) * 100,
-                    "pontos_aluno" => $pontos_aluno,
+                    "porcentagem" => (number_format(round($pontos_aluno),0) / $_POST['valor_prova']) * 100,
+                    "pontos_aluno" => number_format(round($pontos_aluno),0),
+                    "pontos_aluno_quebrado" => number_format($pontos_aluno,1),
                     "descritores" => $descritores,
                     "perguntas_certas" => implode(";", $perguntas_certas),
                     "perguntas_respostas" => $prova_aluno["perguntas_respostas"],
@@ -1250,8 +1252,10 @@ class ProfessorController
                     "descritores_errados" => implode(";", $descritores_errados),
                     "pontos_prova" => $_POST['valor_prova'],
                 ];
+
                 ProfessorModel::atualizar_gabarito_aluno($dados_atualizacao);
                 ProfessorModel::atualizar_gabarito_aluno_primeira($dados_atualizacao);
+                
             }
 
             self::inserirLogsProfessor("O professor(a) {$_SESSION["nome_professor"]} editou a prova {$nome_prova}. ");

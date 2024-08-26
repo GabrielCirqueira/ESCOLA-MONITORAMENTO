@@ -125,7 +125,7 @@ class ADMcontroller
             $periodo = explode(";", $_POST["excluir-periodo"]);
             if (ADModel::ExcluirPeriodo($periodo[0])) {
 
-                self::inserirLogsADM("A turma {$periodo[1]} foi excuída.");
+                self::inserirLogsADM("O período {$periodo[1]} foi excuído.");
                 $_SESSION["PopUp_excluir_periodo"] = true;
                 header("location: adm_home");
                 exit();
@@ -359,8 +359,9 @@ class ADMcontroller
             "acertos" => $acertos_aluno,
             "descritores" => $prova["descritores"],
             "turma" => $dados["turma"],
-            "porcentagem" => ($acertos_aluno / count($gabarito_professor)) * 100,
-            "pontos_aluno" => $pontos_aluno,
+            "porcentagem" => (number_format(round($pontos_aluno),0) / $prova["valor"]) * 100,
+            "pontos_aluno" => number_format(round($pontos_aluno),0),
+            "pontos_aluno_quebrado" => number_format($pontos_aluno,1),
             "perguntas_respostas" => $dados["gabarito"],
             "perguntas_certas" => implode(";", $perguntas_certas),
             "perguntas_erradas" => implode(";", $perguntas_erradas),
