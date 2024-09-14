@@ -1,0 +1,60 @@
+:root {
+    --primary-color: #0bd1eb;
+    --text-color: #ffffff;
+    --header: #11c5da;
+    --background-color: #fff;
+    --botoes-text: gray;
+  }
+  
+  body {
+    margin: 0;
+    font-family: "Oswald", sans-serif;
+    display: flex; 
+    position: relative;
+    flex-direction: column; 
+    background-size: cover;
+    background-position: center;
+    color: #464646;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+.main {
+    flex: 1 1 0;
+    display: flex; 
+    background-image: url('../../../../public/assents/img/FULL\ FRAME\ MOBILE.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+    align-items: center;
+    justify-content: center;
+    min-height: 90vh;
+}
+ 
+.main-home-professor {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-home-professor section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-home-professor {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-home {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #9c9c9c20;
+    justify-content: center;
+}

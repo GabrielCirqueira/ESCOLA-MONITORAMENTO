@@ -4,9 +4,7 @@
         <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1> 
     </center>
     <br>
-
-
-
+ 
     <div   class="form-filtros-gestor">
     <form id="filterFormProva" action="gestor_provas" method="post">
                 <button   name="geral" class="button-vsGeral" onclick="resetFormProva()" value="geral">GERAL</button>

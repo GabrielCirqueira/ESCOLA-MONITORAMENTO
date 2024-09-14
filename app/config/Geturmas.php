@@ -11,7 +11,7 @@ $dotenv->load();
 
 use app\config\Database;
 
-$sql = "SELECT * FROM alunos";
+$sql = "SELECT * FROM turmas";
 $result = Database::GetInstance()->query($sql);
 
 $dados = $result->fetchAll(PDO::FETCH_ASSOC);

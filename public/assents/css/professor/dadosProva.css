@@ -1,0 +1,109 @@
+.button-prova-liberado {
+    width: 110px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.19);
+    border: 2px solid rgba(128, 128, 128, 0.628);
+    background-color: rgba(128, 128, 128, 0.534);
+  }
+  
+  .button-prova-liberado:hover {
+    cursor: pointer;
+  }
+
+  .tabela-prova-aluno {
+    width: 85%;
+    transition: 0.5 ease;
+    border-collapse: collapse;
+  }
+  
+  .detalhes-prova td,
+  .detalhes-prova th,
+  .tabela-prova-aluno th,
+  .tabela-prova-aluno td {
+    padding: 8px;
+    border: 1px solid #c4c4c4;
+    text-align: left;
+  }
+  
+  .detalhes-prova th,
+  .tabela-prova-aluno th {
+    background-color: #d3d3d3;
+    color: #1a1a1a;
+    font-weight: bold;
+  }
+  
+  .tabela-prova-aluno td {
+    color: #1e1e1e;
+  }
+  
+  .detalhes-prova tr:nth-child(even),
+  .tabela-prova-aluno tr:nth-child(even) {
+    background-color: #e7e7e7;
+  }
+  
+  .tabela-prova-aluno tr:hover {
+    background-color: #358bb955;
+  }
+
+  
+.excluir-prova {
+    width: 270px;
+    height: 40px;
+    padding: 10px;
+    background-color: #921f1fa2;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.5s ease;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.218);
+  }
+  
+  .excluir-prova:hover {
+    cursor: pointer;
+    background-color: #7e0b0bb5;
+  }
+
+  .area-professor-botoes-prova {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .area_provas_rec_professor button {
+    width: 270px;
+    height: 50px;
+    background-color: #b19f17b5;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.5s ease;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.148);
+  }
+  
+  .area_provas_rec_professor button:hover {
+    font-size: 19px;
+    cursor: pointer;
+    background-color: #80730eb5;
+  }
+
+  .inserir-usuario-excluir-prova form div {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .inserir-usuario-excluir-prova input[type="text"] {
+    padding: 3px;
+    height: 20px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 0px;
+  }
+  

@@ -1,0 +1,133 @@
+.buttons-professor select,
+.select-turmas-professor {
+  height: 40px;
+  margin: 5px;
+  width: 150px;
+  font-weight: bold;
+  transition: 0.5s ease;
+  outline: none;
+  border-radius: 0px;
+  color: rgb(78, 78, 78);
+  border: 1px solid rgb(149, 149, 149);
+  background-color: rgb(255, 255, 255);
+}
+
+.buttons-professor form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button-professor-turma {
+    height: 40px;
+    margin: 5px;
+    width: 150px;
+    background-color: #21b1f3;
+    border: none;
+    transition: 0.6s;
+    border-radius: 2px;
+  }
+  
+  .button-professor-turma:hover {
+    background-color: #168ec5;
+    cursor: pointer;
+  }
+
+  .button-professor-turma-enviar {
+    height: 40px;
+    margin: 5px;
+    width: 150px;
+    border-radius: 0px;
+    border: none;
+    background-color: rgb(87, 191, 137);
+    transition: 0.5s ease;
+  }
+  
+  .button-professor-turma-enviar:hover {
+    background-color: rgb(54, 151, 101);
+    cursor: pointer;
+  }
+
+  .professor-grafico-geral-60 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .professor-grafico-geral-60 hr {
+    height: 150px;
+  }
+
+  .area-graficos-descritores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .area-graficos-descritores div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .area-graficos-descritores h4 {
+    margin: 0px;
+  }
+
+  .graficos-professor-rosca-turmas {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  } 
+  
+  .graficos-professor-rosca-turmas div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .area_button_tabelas {
+    display: flex;
+    gap: 10px;
+    margin: 30px;
+  }
+  
+  .area_button_tabelas button {
+    width: 200px;
+    height: 40px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.311);
+    background-color: #6eb65c;
+    color: #252525;
+    font-weight: bold;
+    border: none;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .area_button_tabelas button:hover {
+    background-color: #266517;
+    cursor: pointer;
+  }
+
+  .export-excel {
+    width: 85%;
+    height: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.311);
+    background-color: #5fa54e;
+    font-weight: bold;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 1s ease;
+    border: none;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.148);
+  }
+  
+  .export-excel:hover {
+    cursor: pointer;
+    background-color: #0a572d;
+  }
+  

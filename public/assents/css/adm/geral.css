@@ -1,0 +1,154 @@
+.gestor-main {
+    display: flex;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.219);
+    margin: 20px;
+    width: 90%;
+    overflow: hidden;
+    min-height: 40vw;
+  }
+  
+.tabela_alunos_adm {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin: 20px 0;
+  }
+  
+  .tabela_alunos_adm thead {
+    background-color: #f2f2f2;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  .tabela_alunos_adm th,
+  .tabela_alunos_adm td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .tabela_alunos_adm tbody tr:nth-child(even) {
+    background-color: #fff;
+  }
+  
+  .tabela_alunos_adm tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  .campo-formulario-add {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .form-editar .btn-editar {
+    background-color: #80bf82;
+    transition: 0.5s ease-in-out;
+    color: white;
+  }
+  
+  .form-editar .btn-excluir {
+    transition: 0.5s ease-in-out;
+    background-color: #bf6e68;
+    color: white;
+  }
+  
+  .form-editar .btn-editar:hover {
+    cursor: pointer;
+    background-color: #457146;
+    color: white;
+  }
+  
+  .form-editar .btn-excluir:hover {
+    background-color: #783530;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .form-editar {
+    text-align: center;
+    display: none;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  .form-editar.active {
+    display: block;
+  }
+  .form-editar .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-editar label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .form-editar input[type="text"],
+  .form-editar button {
+    width: calc(50% - 10px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  .form-editar input[type="text"] {
+    margin-bottom: 10px;
+  }
+  .form-editar .btn-group {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .buttons-editar{
+    display: flex;
+    width: 70%;
+  }
+
+  .item {
+    flex: 1;
+    border: 1px solid #ccc;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .filtro-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .filtro-container input,.filtro-container select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    outline: none;
+  }
+
+  .botao-form-editar{
+    background-color: #1ac3d6;
+    width:  40px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    transition: 0.5s ease;
+  }
+
+  .btn-editar {
+    background-color: #80bf82;
+    color: white;
+  }
+  
+  .btn-excluir {
+    background-color: #bf6e68;
+    color: white;
+  }

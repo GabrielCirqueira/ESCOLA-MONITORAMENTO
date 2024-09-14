@@ -1,0 +1,73 @@
+.menu-lateral-gestor {
+    overflow-y: auto;
+    background-color: #333;
+  }
+  
+  .menu-lateral-gestor {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    padding: 20px;
+  }
+
+  /* .info-gestor {
+    background-color: #e6e6e6;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+  } */
+
+  .info-gestor {
+    width: 80%;
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #e6e6e6;
+    overflow-y: auto;  
+    max-height: calc(100vh - 100px); 
+}
+
+  .details-menu-gestor {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .button-details-menu-gestor:hover {
+    color: rgb(215, 207, 207);
+    cursor: pointer;
+  }
+
+  .sumary-menu-gestor {
+    margin: 5px 20px;
+    color: white;
+    font-weight: bold;
+    transition: 0.5s;
+    font-size: 19px;
+  }
+  
+  .sumary-menu-gestor:hover {
+    cursor: pointer;
+    color: rgb(193, 199, 204);
+  }
+
+  .button-details-menu-gestor {
+    background-color: rgba(240, 248, 255, 0);
+    border: none;
+    color: white;
+    font-size: 16px;
+    margin: 0px;
+    margin-left: 40px;
+    margin-bottom: 10px;
+    transition: 0.5s;
+  }
+
+  .conteudo-item {
+    display: none;
+}
+
+.conteudo-item.active {
+    display: block;
+}

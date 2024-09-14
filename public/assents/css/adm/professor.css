@@ -1,0 +1,86 @@
+
+.form-editar-professor h1,
+.form-adicionar-professor h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.form-editar-professor label ,
+.form-adicionar-professor label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333333;
+}
+
+
+.form-adicionar-professor form{
+  text-align: center;
+}
+
+.form-editar-professor input[type="text"],.form-editar-professor input[type="password"],
+.form-adicionar-professor input[type="text"],.form-adicionar-professor input[type="password"] {
+  width: 70%;
+  padding: 5px 12px;
+  height: 40px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  outline: none;
+  font-size: 17px;
+}
+
+.form-adicionar-professor h3 {
+  font-size: 20px;
+  color: #2e2e2e;
+  margin-bottom: 10px;
+}
+
+.form-editar-professor input[type="checkbox"],
+.form-adicionar-professor input[type="checkbox"] {
+  display: none;
+}
+
+.form-editar-professor label[for^="disciplina_professor"],
+.form-adicionar-professor label[for^="disciplina_professor"] {
+  display: block;
+  padding: 10px;
+  background-color: #d3d3d3;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+
+.form-editar-professor input[type="checkbox"]:checked + label,
+.form-adicionar-professor input[type="checkbox"]:checked + label {
+  background-color: #77ae77;
+  color: #fff;
+}
+ 
+
+.filtro-container {
+    margin-bottom: 10px;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+  }
+  .filtro-container .input-group {
+    display: flex;
+    align-items: center;
+  }
+  .filtro-container input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 1px;
+    margin-right: 10px;
+    flex-grow: 1;
+    width: 250px; 
+    outline: none;
+  }
+  .filtro-container input::placeholder {
+    color: #999;
+  }

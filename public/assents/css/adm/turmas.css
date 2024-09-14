@@ -1,0 +1,54 @@
+.buttons-turmas-escolher{
+    margin: 10px auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .buttons-turmas-escolher button{
+    width: 50%;
+    height: 40px;
+    border-radius: 3px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    color: #000;
+    background-color: rgba(103, 103, 103, 0.694);
+    transition: 0.6s ease;
+  }
+  
+  
+  .buttons-turmas-escolher button:hover{
+    color: #ffff;
+    background-color: rgba(52, 52, 52, 0.694);
+    cursor: pointer;
+  }  
+
+  .radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .radio-group input[type="radio"] {
+    display: none;
+  }
+  
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .radio-group input[type="radio"]:checked + label {
+    background-color: #238b60c3;
+    color: white;
+    border-color: #238b60c3;
+  }

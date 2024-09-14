@@ -3,5 +3,6 @@
     <a href="login_professor" class="btn-index"><i class="fas fa-user"></i> PROFESSOR</a>
     <a href="login_gestor" class="btn-index"><i class="fas fa-chart-bar"></i> GESTOR</a>
     <a href="login_adm" class="btn-index"><i class="fas fa-cogs"></i> ADM</a>
+    <a href="login_pfa" class="btn-index"><i class="fas fa-graduation-cap"></i> PFA</a>
     <br><br>
-    </main>
+</main>

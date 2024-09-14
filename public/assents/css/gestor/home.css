@@ -1,0 +1,226 @@
+.form-filtros-gestor select {
+    width: 150px;
+    height: 30px;
+    font-weight: bold;
+    transition: 0.5s ease;
+    outline: none;
+    border-radius: 0px;
+    color: rgb(78, 78, 78);
+    border: 1px solid rgb(149, 149, 149);
+    background-color: rgb(255, 255, 255);
+  }
+  
+  .form-filtros-gestor select:hover {
+    background-color: rgb(226, 226, 226);
+    cursor: pointer;
+  }
+  
+  .form-filtros-gestor input[type="submit"] {
+    width: 70px;
+    height: 30px;
+    border-radius: 0px;
+    border: none;
+    background-color: rgb(87, 191, 137);
+    transition: 0.5s ease;
+  }
+  
+  .form-filtros-gestor input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: rgb(50, 147, 97);
+  }
+  
+  .form-filtros-gestor .fechar {
+    width: 70px;
+    background-color: rgb(255, 106, 106);
+    transition: 0.5s ease;
+    border: none;
+    border-radius: 0px;
+    height: 30px;
+  }
+  
+  .form-filtros-gestor .fechar:hover {
+    background-color: rgb(161, 61, 61);
+    cursor: pointer;
+  }
+  
+  .form-filtros-gestor select option {
+    border: none;
+    border-radius: 0px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: #dfdfdfaa;
+    font-size: 15px;
+  }
+  
+  .form-filtros-gestor select option:hover {
+    cursor: pointer;
+    background-color: #00899b;
+  }
+
+  .form-filtros-gestor form {
+    display: flex;
+    gap: 5px;
+  }
+
+  .button-vsGeral {
+    width: 70px;
+    height: 30px;
+    background-color: #03a4b9;
+    transition: 0.5s ease;
+    border: none;
+    color: white;
+  }
+  
+  .button-vsGeral:hover {
+    background-color: #00899b;
+    cursor: pointer;
+  }
+
+  .filtros_exibir {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  
+  .filtros_exibir h4 {
+    margin: 0px;
+  }
+  
+  .filtros_exibir div {
+    display: flex;
+    flex-direction: column;
+    padding: 9px;
+    background-color: rgba(197, 197, 197, 0.718);
+    border-radius: 5px;
+    border: 2px solid rgba(128, 128, 128, 0.704);
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.334);
+    height: 40px;
+  }
+  
+  .filtros_exibir div:hover {
+    background-color: rgba(173, 173, 173, 0.718);
+    cursor: default;
+  }
+
+  .gestor_area_turmas_geral div,
+.gestor_desempenho_escola div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.gestor_desempenho_escola {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px 50px;
+  width: 800px;
+  border: 2px solid rgba(130, 130, 130, 0.333);
+}
+
+.gestor_desempenho_escola hr {
+  height: 310px;
+  border: 2px solid rgba(130, 130, 130, 0.333);
+}
+
+.rosca svg {
+    width: 200px;
+    height: 200px;
+    padding-bottom: 50px;
+    padding-top: 40px;
+  }
+
+  .gestor_area_turmas_geral {
+    display: grid;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 40px 100px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .turno {
+    border: 2px solid rgba(130, 130, 130, 0.333);
+    display: flex;
+    width: 700px;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+  
+  .turno_rosca svg {
+    width: 180px;
+    height: 180px;
+    padding: 59px 10px;
+  } 
+
+  .area-dados-graficos {
+    font-weight: bold;
+    padding: 10px 50px;
+    box-shadow: 0px 10px 10px 2px rgba(0, 0, 0, 0.176);
+    font-size: 20px;
+    background-color: #dedede;
+    border-radius: 5px;
+    border: 2px solid rgba(128, 128, 128, 0.439);
+    margin-bottom: 100px;
+  }
+
+  .descritor-pesquisar-grafico input[type="text"] {
+    width: 85px;
+    height: 26px;
+    font-weight: bold;
+    outline: none;
+    border-radius: 0px;
+    color: rgb(78, 78, 78);
+    border: 1px solid rgb(149, 149, 149);
+    background-color: rgb(255, 255, 255);
+  }
+
+  .area-descritores-cores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .descritores-cor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+    padding: 7px;
+    border-radius: 2px;
+  }
+  
+  .descritores-cor:hover {
+    background-color: rgba(0, 0, 0, 0.226);
+    cursor: pointer;
+  }
+  
+  .descritores-cor div {
+    height: 20px;
+    width: 20px;
+    border-radius: 3px;
+    border: 0.1px solid rgb(182, 182, 182);
+    margin-right: 5px;
+  }
+
+  .area-descritores {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  
+  .area-descritores svg {
+    margin-bottom: 50px;
+  }
+
+  .container-gestor-info h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }

@@ -1,0 +1,192 @@
+.titulo-NSL {
+    color: #01a8c5;
+  }
+
+  .botao-ver-relatorio {
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #03a4b987;
+    border: none;
+    transition: 0.5s ease-in-out;
+  }
+  
+  .botao-ver-relatorio:hover {
+    cursor: pointer;
+    background-color: #02616e87;
+  }
+
+.div_editar_ver_prova {
+  display: flex;
+  gap: 7px;
+}
+
+.botao-form-editar:hover,
+.botao-form-enviar-prova:hover {
+  background-color: #03a9bb;
+  cursor: pointer;
+}
+
+.botao-form-enviar-prova {
+  background-color: #1ac3d6;
+  width: 70px;
+  height: 35px;
+  transition: 0.5s ease;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+}
+
+
+.professor-campos div input {
+  width: 300px;
+  font-size: 20px;
+  height: 30px;
+}
+
+.professor-area-turmas input[type="checkbox"]:hover,
+.professor-area-turmas label:hover {
+  cursor: pointer;
+}
+
+.disciplinas-gabarito-professor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.professor-area-turmas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 200px;
+}
+
+.professor-campos {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0px;
+}
+
+.professor-campos div {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.dados-professor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  border-radius: 5px;
+  margin: 60px 0px;
+  height: auto;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.226);
+}
+
+.formulario-add-professor {
+  background-color: #ffffff00;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+
+.dados-professor h3 {
+  margin: 4px;
+}
+ 
+.professor-form-title {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.professor-editar-gabarito table td div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
+.professor-area-alunos-rec {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+}
+.professor-area-alunos-rec h3 {
+  grid-column: span 6;
+  font-size: 25px;
+}
+.professor-rec-aluno-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.professor-rec-aluno-checkbox label:hover,
+.professor-rec-aluno-checkbox input:hover {
+  cursor: pointer;
+}
+
+.professor-rec-aluno-checkbox input {
+  margin-right: 6px;
+  width: 20px;
+  height: 20px;
+}
+
+.graficos-professor-rosca {
+  display: flex;
+  gap: 20px;
+}
+
+.graficos-professor-rosca div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.graficos-professor-rosca svg {
+  width: 150px;
+  height: 150px;
+}
+
+.graficos-professor-rosca {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.professor-descritores-marcar div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.professor-descritores-marcar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.professor-descritores {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

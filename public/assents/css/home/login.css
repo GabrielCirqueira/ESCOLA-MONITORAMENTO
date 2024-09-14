@@ -1,0 +1,120 @@
+.main-home-aluno{
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-aluno {
+  padding-top: 50px;
+  text-align: center;
+  border-radius: 5px; 
+  width: 350px; 
+  position: relative;
+  border: 7px solid rgb(199, 199, 199);
+  background-color: rgba(248, 248, 248, 0.444);
+  height: 400px;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.197);
+}
+
+.login-aluno input[type="submit"] {
+  background-color: #efefeffb;
+  border-radius: 1px;
+  border: 2px solid #31a7bc;
+  width: 65%;
+  font-size: 15px;
+  color: #24939f; 
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.137);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin: 15px 0px;
+  font-weight: bold;
+  height: 40px; 
+}
+
+.login-aluno input[type="submit"]:hover {
+  background-color: #2fbac9;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  transform: scale(1.03);
+  cursor: pointer;
+}
+.login-aluno h1 {
+  font-size: 30px;
+  color: white;
+}
+
+.peq{
+  height: 300px;
+}
+
+.campo-ra {
+  position: relative;
+}
+
+.campo-ra input:focus { 
+    border-bottom: 4px solid rgb(193, 193, 193);
+}
+
+.input-campo-aluno {
+  background-color: rgba(245, 245, 220, 0);
+  width: 65%;
+  margin: 20px;
+  height: 30px;
+  border: none;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  transition: 0.5s ease-in;
+  outline: none;
+  border-bottom: 4px solid white;
+}
+ 
+.input-campo-aluno::placeholder {
+    color: white;
+}
+
+.label-campo-login {
+  position: absolute;
+  font-weight: bold;
+  left: 60px;
+  font-size: 20px;
+  top: 15px;
+  color: aliceblue;
+  transition: 0.5s;
+}
+
+input:focus+.label-campo-login {
+  color: rgb(255, 255, 255);
+  top: -4px;
+  font-size: 12px;
+}
+
+input:valid+.label-campo-login {
+  top: -4px;
+  font-size: 12px;
+}
+
+.label-campo-login {
+    cursor: text;
+}
+
+.Botao-voltar-lobby {
+  background-color: rgba(59, 17, 17, 0);
+  color: rgb(255, 255, 255);
+  margin: 20px;
+  position: absolute;
+  transition: 0.5s ease;
+  top: 37px;
+  left: 8px;
+  padding: 10px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  text-decoration: none;
+}
+
+.Botao-voltar-lobby:hover {
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+}

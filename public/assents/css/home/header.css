@@ -1,0 +1,52 @@
+.header {
+    background-color: #16b0c1;
+    height: 50px;
+    padding: 20px 0;
+  }
+ 
+  .header__title {
+    margin: 0;
+    font-size: 33px;
+    text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.246);
+    color: #ffffff;
+  }
+ 
+  .header h4 {
+    margin: 0px;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+  }
+ 
+  .img-tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+ 
+  .img-tile img {
+    width: 35px;
+    margin-right: 20px;
+  }
+ 
+  .boton-header {
+    height: 10px;
+    background-color: #169baa;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.356);
+  }
+ 
+  .header i {
+    position: absolute;
+    right: 40px;
+    top: 30px;
+  }
+ 
+  .header i {
+    cursor: pointer;
+  }
+ 
+  .menu i {
+    position: absolute;
+    left: 50px;
+    top: 30px;
+  }
