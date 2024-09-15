@@ -141,6 +141,11 @@ $popups = [
         "title" => "SUCESSO",
         "message" => "Gabarito inserido com <br> sucesso!",
     ],
+    "PopUp_Inserir_PFA" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "PFA inserido com <br> sucesso!",
+    ],
 ];
 
 foreach ($popups as $popup_id => $popup_data) {

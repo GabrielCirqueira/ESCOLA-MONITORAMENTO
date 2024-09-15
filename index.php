@@ -26,7 +26,7 @@ Backup::runBackup();
 
 session_start();
 
-if (!isset($_SESSION["PopUp_excluir_periodo"])) {
+if (!isset($_SESSION["PopUp_Excluir_PFA"])) {
 
     $_SESSION["PopUp_professor"] = false;
     $_SESSION["popup_not_gestor"] = false;
@@ -58,6 +58,8 @@ if (!isset($_SESSION["PopUp_excluir_periodo"])) {
     $_SESSION["PopUp_not_QntP"] = false;
     $_SESSION["PopUp_add_periodo"] = false;
     $_SESSION["PopUp_excluir_periodo"] = false;
+    $_SESSION["PopUp_Inserir_PFA"] = false;
+    $_SESSION["PopUp_Excluir_PFA"] = false;
 
     $_SESSION["Gabarito_aluno"] = false;
 

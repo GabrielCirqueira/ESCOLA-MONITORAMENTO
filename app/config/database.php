@@ -218,6 +218,15 @@ class Database
             data_criacao DATETIME
         );";
 
+        $PFA = "CREATE TABLE IF NOT EXISTS usuarios_pfa(
+            id          int AUTO_INCREMENT primary key,
+            nome varchar(255),
+            usuario varchar(255),
+            senha varchar(255),
+            turno varchar(255),
+            disciplina varchar(255)
+        );";
+
         self::GetInstance()->query($logsADM);
         self::GetInstance()->query($logsPROFESSOR);
         self::GetInstance()->query($professores);
@@ -231,5 +240,6 @@ class Database
         self::GetInstance()->query($gabarito_provas_alunos_prova);
         self::GetInstance()->query($gabarito_provas_professores_gabarito);
         self::GetInstance()->query($Periodo);
+        self::GetInstance()->query($PFA);
     }
 }

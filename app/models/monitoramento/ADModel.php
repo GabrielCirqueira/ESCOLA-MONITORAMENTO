@@ -296,4 +296,21 @@ class ADModel
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function inserirPFA($dados)
+    {
+        $sql = "INSERT INTO usuarios_pfa
+        (nome, usuario, senha, disciplina, turno)
+        VALUES (:NOME, :USUARIO, :SENHA, :DISCIPLINA, :TURNO)";
+    
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindValue(":NOME", $dados["nome"]);
+        $query->bindValue(":USUARIO", $dados["usuario"]);
+        $query->bindValue(":SENHA", $dados["senha"]);
+        $query->bindValue(":DISCIPLINA", $dados["disciplina"]);
+        $query->bindValue(":TURNO", $dados["turno"]);
+        $query->execute();
+    
+        return $query;
+    }
 }

@@ -194,6 +194,25 @@ class ADMcontroller
             }
         }
 
+        if (isset($_POST["salvarPFA"])) {
+            
+            $dados = [
+                "nome" => $_POST["nome"],
+                "usuario" => $_POST["user"],
+                "senha" => $_POST["senha"],
+                "disciplina" => $_POST["disciplinaPFA"],
+                "turno" => $_POST["TurnoPFA"]
+            ];
+
+            if (ADModel::inserirPFA($dados)) {
+
+                self::inserirLogsADM("O usuario de PFA {$dados["nome"]} foi adicionando.");
+                $_SESSION["PopUp_Inserir_PFA"] = true;
+                header("location: adm_home");
+                exit();
+            }
+        }
+
         if (isset($_POST["excluir-prova-aluno"])) {
             $prova = explode(";", $_POST["excluir-prova-aluno"]);
             if (ADModel::ExcluirProva($prova[1], $prova[0])) {
