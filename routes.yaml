@@ -1,5 +1,7 @@
 rotas:
   pfa_home:                       app\controllers\monitoramento\PFAcontroller
+  pfa_provas:                     app\controllers\monitoramento\PFAcontroller
+  pfa_prova:                      app\controllers\monitoramento\PFAcontroller
   validar_login_pfa:              app\controllers\monitoramento\PFAcontroller
   login_adm_verifica:             app\controllers\monitoramento\ADMcontroller
   adm_home:                       app\controllers\monitoramento\ADMcontroller

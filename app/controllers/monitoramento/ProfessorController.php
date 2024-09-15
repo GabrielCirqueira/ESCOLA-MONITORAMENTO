@@ -820,6 +820,8 @@ class ProfessorController
                     $media_descritores_geral[$descritor] = MainController::gerarGraficoRosca(number_format($percentual, 1));
                 }
             }
+
+            // MainController::pre($media_descritores_geral);
   
             $contador_alunos = 0;
 

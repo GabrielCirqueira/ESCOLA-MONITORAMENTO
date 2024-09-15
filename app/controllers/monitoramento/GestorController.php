@@ -213,7 +213,7 @@ class GestorController
         return $descritores_total;
     }
 
-    private static function obterFiltros()
+    public static function obterFiltros()
     {
         $turma = ($_POST['turma'] ?? null) === "SELECIONAR" ? null : ($_POST['turma'] ?? null);
         $turno = ($_POST['turno'] ?? null) === "SELECIONAR" ? null : ($_POST['turno'] ?? null);
@@ -279,10 +279,10 @@ class GestorController
             $dados_turno_geral = self::gerarDadosTurnos();
 
             $dados = [
-                "turmas" => ADModel::GetTurmas(),
                 "turnos" => $turnos,
                 "disciplinas" => ADModel::GetDisciplinas(),
                 "professores" => ADModel::GetProfessores(),
+                "turmas" => ADModel::GetTurmas(),
                 "status" => false,
                 "periodos" => ADModel::GetPeriodos(),
                 "filtros" => $filtros,

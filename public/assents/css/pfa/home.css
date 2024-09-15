@@ -1,0 +1,164 @@
+ 
+.pagina-principal-corpo {
+    background-color: #f7f9fc;
+    color: #333;
+    line-height: 1.6;
+    padding: 40px;
+    text-align: center;
+}
+
+.conteudo-principal-area {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+.titulo-principal-nsl {
+    font-size: 2.5rem;
+    color: #16c1aa;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.titulo-desempenho-escolar, .titulo-turmas-graficos, .titulo-descritores-graficos {
+    font-size: 2.2rem;
+    color: #34495e;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.area-formulario-filtro {
+    background: #ecf0f1;
+    padding: 30px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.formulario-filtro-graficos select, .formulario-filtro-graficos button {
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #bdc3c7;
+    font-size: 1rem;
+    outline: none;
+    min-width: 180px;
+}
+
+.botao-geral-filtrar, .botao-filtro-detalhado {
+    background-color: #16c1aa;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+.botao-geral-filtrar:hover, .botao-filtro-detalhado:hover {
+    background-color: #13a494;
+}
+
+.area-filtros-exibidos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.filtro-exibido-item {
+    background-color: #16c1aa;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 1rem;
+}
+
+.caixa-graficos-proficiencia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #16c1aa; 
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.grafico-alunos-acima60 svg{
+    width: 270px;
+    height: 270px;
+}
+
+.grafico-alunos-acima60, 
+.grafico-proeficiencia-detalhado {
+    width: 45%;
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    color: #34495e; 
+}
+
+.barra-divisoria {
+    width: 2px;
+    background-color: white; 
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+.titulo-grafico-acima60,
+.titulo-grafico-proeficiencia {
+    font-weight: bold;
+    display: block;
+    font-size: 20px;
+    color: #16c1aa; 
+}
+
+.area-turmas-graficos,
+.area-descritores-graficos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 50px;
+    justify-items: center; 
+}
+
+.grafico-turma-unica,
+.grafico-descritor-unico {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.grafico-turma-unica span,
+.grafico-descritor-unico span {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #454545; 
+}
+
+.mensagem-sem-resultados {
+    background-color: #e74c3c;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.mensagem-sem-resultados p {
+    font-size: 1.2rem;
+}

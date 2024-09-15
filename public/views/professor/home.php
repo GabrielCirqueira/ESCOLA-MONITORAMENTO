@@ -1,7 +1,7 @@
 <main class="main-home-professor height gray">
     <br><br>
     <center>
-        <h1 data-aos="fade-up" class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1> 
+        <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1> 
     </center>
     <br><br>
     <section>

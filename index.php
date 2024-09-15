@@ -1,6 +1,5 @@
 <?php
 
-use Symfony\Component\Yaml\Yaml;
 
 ob_start();
 
@@ -13,6 +12,7 @@ require_once "vendor/autoload.php";
 date_default_timezone_set('America/Sao_Paulo');
 
 use app\config\Backup;
+use Symfony\Component\Yaml\Yaml; 
 use app\controllers\monitoramento\MainController;
 use Dotenv\Dotenv;
 

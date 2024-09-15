@@ -3,7 +3,7 @@
 
     <div class="menu">
       <?php if ($user != "ALUNO" && $user != "home" && $user != "ADM") {?>
-        <i class="fas fa-bars fa-2x" id="icone-menu-esquerdo-lateral" style="color:gray;width:20px"></i>
+        <i class="fas fa-bars fa-2x" id="icone-menu-esquerdo-lateral" style="width:20px"></i>
 
       <?php }?>
     </div>
@@ -20,7 +20,7 @@
 
     <div class="user">
       <?php if ($user != "home") {?>
-        <i class="far fa-user fa-2x" id="icone-menu-lateral" style="color:gray"></i>
+        <i class="far fa-user fa-2x" id="icone-menu-lateral"  ></i>
       <?php }?>
     </div>
 
@@ -145,7 +145,12 @@
             <hr>
             <a class="button-menu" href="backups">BACKUPS</a>
 
+          <?php }else if($user == "PFA"){?>
+            <a class="button-menu" href="pfa_home">GERAL</a>
+            <hr>
+            <a class="button-menu" href="pfa_provas">PROVAS</a>
           <?php }?>
+
         </div>
 
       </div>
