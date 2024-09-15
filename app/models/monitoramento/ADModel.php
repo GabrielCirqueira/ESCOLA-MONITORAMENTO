@@ -196,6 +196,8 @@ class ADModel
         $query->execute();
         return $query;
     }
+
+
     public static function ExcluirProva($id_prova, $ra)
     {
         $sql1 = "DELETE FROM gabarito_alunos WHERE id_prova = :id AND ra = :ra";
@@ -288,6 +290,15 @@ class ADModel
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function GetPFA()
+    {
+        $sql = "SELECT * FROM usuarios_pfa ORDER BY id DESC ";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function GetPeriodos()
     {
         $sql = "SELECT * FROM periodo ORDER BY data_criacao DESC ";
@@ -313,4 +324,29 @@ class ADModel
     
         return $query;
     }
+
+    public static function ExcluirPFA($id)
+    {
+        $sql = "DELETE FROM usuarios_pfa WHERE id = :id";
+
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query;
+    }
+
+    public static function verificarLoginPFA($user)
+    {
+        $sql = "SELECT * FROM usuarios_pfa WHERE usuario = :user";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->bindvalue(":user", $user);
+        $query->execute();
+
+        if ($query->rowCount() > 0) {
+            return $query->fetch(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
 }

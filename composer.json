@@ -1,6 +1,7 @@
 {
     "require": {
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "symfony/yaml": "^7.1"
     },
     "require-dev": {
         "symfony/var-dumper": "*"
@@ -12,5 +13,4 @@
             "app\\config\\": "app/config/"
         }
     }
-
 }

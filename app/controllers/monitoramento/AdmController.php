@@ -89,6 +89,7 @@ class ADMcontroller
                 "disciplinas" => ADModel::GetDisciplinas(),
                 "logsADM" => ADModel::GetLogsADM(),
                 "logsPROF" => ADModel::GetLogsProfessor(),
+                "PFAs" => ADModel::GetPFA(),
                 "backups" => self::backups(),
                 "professores" => ADModel::GetProfessores(),
             ];
@@ -125,8 +126,19 @@ class ADMcontroller
             $periodo = explode(";", $_POST["excluir-periodo"]);
             if (ADModel::ExcluirPeriodo($periodo[0])) {
 
-                self::inserirLogsADM("O período {$periodo[1]} foi excuído.");
+                self::inserirLogsADM("O período {$periodo[1]} foi excluído.");
                 $_SESSION["PopUp_excluir_periodo"] = true;
+                header("location: adm_home");
+                exit();
+            }
+        }
+
+        if (isset($_POST["excluir-pfa"])) {
+            $PFA = explode(";", $_POST["excluir-pfa"]);
+            if (ADModel::ExcluirPFA($PFA[0])) {
+
+                self::inserirLogsADM("O PFA {$PFA[1]} foi excluído.");
+                $_SESSION["PopUp_Excluir_PFA"] = true;
                 header("location: adm_home");
                 exit();
             }

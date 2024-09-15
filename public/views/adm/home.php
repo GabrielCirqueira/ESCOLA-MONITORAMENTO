@@ -405,7 +405,8 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                             </div>
                             <center>
 
-                                <button type="submit" name="salvarPFA" class="btn-salvar-adicionar-aluno">Salvar</button>
+                                <button type="submit" name="salvarPFA"
+                                    class="btn-salvar-adicionar-aluno">Salvar</button>
                             </center>
 
 
@@ -421,6 +422,51 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
 
                         </div>
                     </div>
+                </div>
+
+                <div id="verPFA" class="conteudo-item">
+
+                    <center>
+                        <h2>PFA's CADASTRADOS</h2>
+                    </center>
+
+                    <?php if ($data["PFAs"] != null) {?>
+
+                    <table id="tabelaMaterias" class="tabela_alunos_adm">
+                        <thead>
+                            <tr>
+                                <th>NOME</th>
+                                <th>TURNO</th>
+                                <th>DISCIPLINA</th>
+                                <th>USUARIO</th>
+                                <th>SENHA</th>
+                                <th>EXCLUIR</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($data["PFAs"] as $PFA) {?>
+                            <tr>
+                                <td><?=$PFA["nome"]?></td>
+                                <td><?=$PFA["turno"]?></td>
+                                <td><?=$PFA["disciplina"]?></td>
+                                <td><?=$PFA["usuario"]?></td>
+                                <td><?=$PFA["senha"]?></td>
+                                <td>
+                                    <form action="" class="form-excluir-pfa" method="post">
+                                        <button type="submit" name="excluir-pfa"
+                                            value="<?=$PFA['id']?>;<?=$PFA["nome"]?>"
+                                            class="btn-excluir">EXCLUIR</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <?php }?>
+                        </tbody>
+                    </table>
+                    <?php } else {?>
+                    <center>
+                        <h2 class="back-red">NENHUMA PFA CADASTRADO!</h2>
+                    </center>
+                    <?php }?>
                 </div>
 
                 <div id="verProfessores" class="conteudo-item">

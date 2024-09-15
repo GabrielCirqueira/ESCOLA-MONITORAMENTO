@@ -40,6 +40,11 @@ $popups = [
         "title" => "USUÁRIO NÃO ENCONTRADO",
         "message" => "Infelizmente não encontramos o <br> Usuário em nossos registros.",
     ],
+    "PopUp_PFA_NaoENC" => [
+        "status_class" => "uncheck",
+        "title" => "USUÁRIO NÃO ENCONTRADO",
+        "message" => "Infelizmente não encontramos o <br> Usuário em nossos registros.",
+    ],
     "PopUp_Prova_Feita" => [
         "status_class" => "uncheck",
         "title" => "PROVA JÁ FEITA!",
@@ -146,10 +151,15 @@ $popups = [
         "title" => "SUCESSO",
         "message" => "PFA inserido com <br> sucesso!",
     ],
+    "PopUp_Excluir_PFA" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "PFA excluído com <br> sucesso!",
+    ],
 ];
 
 foreach ($popups as $popup_id => $popup_data) {
-    if ($_SESSION[$popup_id] == true) {
+        if (isset($_SESSION[$popup_id]) && $_SESSION[$popup_id] === true) {
         echo "<div id='$popup_id' class='PopUp-sobreposicao'>";
         echo "<div class='conteudo-popup'>";
         echo "<h2>{$popup_data['title']}</h2>";
