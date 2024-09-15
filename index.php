@@ -15,6 +15,7 @@ use app\controllers\monitoramento\ADMcontroller;
 use app\controllers\monitoramento\AlunoController;
 use app\controllers\monitoramento\GestorController;
 use app\controllers\monitoramento\MainController;
+use app\controllers\monitoramento\PFAcontroller;
 use app\controllers\monitoramento\ProfessorController;
 use Dotenv\Dotenv;
 
@@ -64,10 +65,11 @@ if (!isset($_SESSION["PopUp_excluir_periodo"])) {
     $_SESSION["ALUNO"] = false;
     $_SESSION["ADM"] = false;
     $_SESSION["PROFESSOR"] = false;
-
+    $_SESSION["PFA"] = false;
 }
 
 $rotas = [
+    "validar_login_pfa"             => PFAcontroller::class,
     "login_adm_verifica"            => ADMcontroller::class,
     "adm_home"                      => ADMcontroller::class,
     "adicionar_aluno"               => ADMcontroller::class,
@@ -75,6 +77,7 @@ $rotas = [
     "adm_info"                      => ADMcontroller::class,
     "home"                          => MainController::class,
     "ADM"                           => MainController::class,
+    "login_pfa"                     => MainController::class,
     "login_professor"               => MainController::class,
     "login_gestor"                  => MainController::class,
     "index"                         => MainController::class,

@@ -58,6 +58,10 @@ class MainController{
         self::Templates("public/views/adm/login.php");
     }
 
+    public static function login_pfa(){
+        self::Templates("public/views/pfa/login.php");
+    }
+
     public static function pre($dados){
         echo "<pre style='background-color: #f4f4f4; color: #333; padding: 10px; border-radius: 5px; font-family: Courier, monospace;'>";
         print_r($dados);
