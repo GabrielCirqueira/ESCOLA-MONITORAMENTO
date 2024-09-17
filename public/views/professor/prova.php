@@ -11,12 +11,12 @@
                 <?php if ($data["liberado"] == "SIM") {?>
 
                 <button type="submit" name="status" value="sim" class="button-prova-liberado"
-                    style="background-color: #0394b9;">SIM</button>
+                    style="background-color: #16c1aa;">SIM</button>
                 <button type="submit" name="status" value="não" class="button-prova-liberado">NÃO</button>
                 <?php } else {?>
                 <button type="submit" name="status" value="sim" class="button-prova-liberado">SIM</button>
                 <button type="submit" name="status" value="não" class="button-prova-liberado"
-                    style="background-color: #0394b9;">NÃO</button>
+                    style="background-color: #16c1aa;">NÃO</button>
 
                 <?php }?>
             </div> <br><br>
@@ -29,12 +29,12 @@
                 <?php if ($data["liberar_prova"] == true) {?>
 
                 <button type="submit" name="status-liberado" value="sim" class="button-prova-liberado"
-                    style="background-color: #0394b9;">SIM</button>
+                    style="background-color: #16c1aa;">SIM</button>
                 <button type="submit" name="status-liberado" value="não" class="button-prova-liberado">NÃO</button>
                 <?php } else {?>
                 <button type="submit" name="status-liberado" value="sim" class="button-prova-liberado">SIM</button>
                 <button type="submit" name="status-liberado" value="não" class="button-prova-liberado"
-                    style="background-color: #0394b9;">NÃO</button>
+                    style="background-color: #16c1aa;">NÃO</button>
 
                 <?php }?>
             </div> <br><br>

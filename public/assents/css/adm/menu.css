@@ -4,12 +4,14 @@
   }
   
   .menu-lateral-gestor {
-    background-color: #333;
+    background-color: #343a40;
+    border-radius: 10px;
     color: #fff;
     display: flex;
     flex-direction: column;
     width: 200px;
     padding: 20px;
+    margin-right: 50px;
   }
 
   /* .info-gestor {
@@ -26,6 +28,7 @@
     flex-grow: 1;
     padding: 20px;
     background-color: #e6e6e6;
+    border-radius: 10px;
     overflow-y: auto;  
     max-height: calc(100vh - 100px); 
 }

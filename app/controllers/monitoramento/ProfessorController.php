@@ -46,7 +46,7 @@ class ProfessorController
             ]);
 
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -59,7 +59,7 @@ class ProfessorController
 
             MainController::Templates("public/views/professor/inserir_gabarito.php", "PROFESSOR", $turmas);
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -115,7 +115,7 @@ class ProfessorController
                 header("location: home");
             }
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -211,7 +211,7 @@ class ProfessorController
             MainController::Templates("public/views/professor/provas.php", "PROFESSOR", $dados);
 
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
     public static function prova()
@@ -332,7 +332,7 @@ class ProfessorController
 
             MainController::Templates("public/views/professor/prova.php", "PROFESSOR", $dados);
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -460,7 +460,7 @@ class ProfessorController
             MainController::Templates("public/views/professor/dados_prova_rec.php", "PROFESSOR", $dados);
 
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -500,7 +500,7 @@ class ProfessorController
 
             MainController::Templates("public/views/professor/editar_provaRec.php", "PROFESSOR", $dados);
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -587,7 +587,7 @@ class ProfessorController
             exit();
 
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -632,13 +632,17 @@ class ProfessorController
 
             MainController::Templates("public/views/professor/provas_relatorios.php", "PROFESSOR", $dados);
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
     public static function relatorio_prova()
     {
         if ($_SESSION["PROFESSOR"]) {
+
+            if(!isset($_POST["id-prova"])){
+                header("location: relatorio_professor");
+            }
 
             $id_prova = $_POST["id-prova"];
             $_SESSION["PAG_VOLTAR"] = "relatorio_professor";
@@ -1071,7 +1075,7 @@ class ProfessorController
 
             MainController::Templates("public/views/professor/relatorio_prova.php", "PROFESSOR", $dados);
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -1172,7 +1176,7 @@ class ProfessorController
 
             MainController::Templates("public/views/professor/editar_prova.php", "PROFESSOR", $dados);
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -1266,7 +1270,7 @@ class ProfessorController
             exit();
 
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 

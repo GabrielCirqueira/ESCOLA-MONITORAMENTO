@@ -1,18 +1,28 @@
-<main class="main">
-
-    <div id="campo-ra" class="login-aluno peq">
-        <h1>ALUNO  <i class="fas fa-user-graduate"></i> </h1>
-        <form action="login_aluno_entrar" method="post">
-
-            <br>
-            <div class="campo-ra">
-                <input class="input-campo-aluno" name="ra" id="RA" type="text"  required>
-                <label class="label-campo-login" for="RA">Digite seu RA</label>
-            </div>
-            <br>
-            <input type="submit">
-        </form>
  
-        <br>
+<section>
+    <div class="tela-login-container">
+        <div class="tela-login-wrapper">
+            <div class="tela-login-formContent">
+                <div class="tela-login-formHeader">
+                    <div class="tela-login-fadeIn tela-login-first">
+                        <img src="https://telegra.ph/file/daa4ccd71a49aae9a7cc9.png" id="tela-login-icon"
+                            alt="User Icon" />
+                    </div>
+                    <a class="tela-login-underlineHover" href="#">ESCOLA NSL</a>
+                </div>
+
+                <form method="POST" action="login_aluno_entrar" class="tela-login-form" >
+                    <input type="text" id="RA" class="tela-login-fadeIn tela-login-second" name="ra"
+                        required placeholder="Insira seu RA">
+                    <input type="submit" class="tela-login-fadeIn tela-login-fourth" name="submit" value="Logar">
+                </form>
+
+                <div class="tela-login-formFooter">
+                    <a class="tela-login-underlineHover" href="adm">PROFESSOR</a>
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+</section>
+
+<script src="public/assents/js/scripts.js?v=10"></script>

@@ -65,14 +65,14 @@
   .button-vsGeral {
     width: 70px;
     height: 30px;
-    background-color: #03a4b9;
+    background-color: #16c1aa;
     transition: 0.5s ease;
     border: none;
     color: white;
   }
   
   .button-vsGeral:hover {
-    background-color: #00899b;
+    background-color: #15a18e;
     cursor: pointer;
   }
 

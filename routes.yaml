@@ -9,7 +9,7 @@ rotas:
   editar_dados_aluno:             app\controllers\monitoramento\ADMcontroller
   adm_info:                       app\controllers\monitoramento\ADMcontroller
   home:                           app\controllers\monitoramento\MainController
-  ADM:                            app\controllers\monitoramento\MainController
+  adm:                            app\controllers\monitoramento\MainController
   login_pfa:                      app\controllers\monitoramento\MainController
   login_professor:                app\controllers\monitoramento\MainController
   login_gestor:                   app\controllers\monitoramento\MainController

@@ -1,10 +1,15 @@
 <main class="main-home-aluno">
     <br><br>
+    <center>
     <h3><?=$_SESSION["nome_aluno"]?></h3>
+
+    </center>
     <br>
 
 
+    <center>
     <h2>Provas Pendentes:</h2>
+    </center>
 
     <?php
 $provas_finalizadas = [];
@@ -160,7 +165,10 @@ if (!$temProvaPendente) {
 }
 ?>
 
-    <h2>Provas Finalizadas:</h2>
+<center>
+<h2>Provas Finalizadas:</h2>
+
+</center>
 
 
     <?php

@@ -39,7 +39,7 @@ class GestorController
             // MainController::Templates("public/views/gestor/descritores.php", "GESTOR", $dados);
 
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -559,13 +559,17 @@ class GestorController
             MainController::Templates("public/views/gestor/provas.php", "GESTOR", $dados);
 
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
     public static function gestor_prova()
     {
         if ($_SESSION["GESTOR"]) {
+            if(!isset($_POST["id-prova"])){
+                header("location: gestor_provas");
+            }
+
             $id_prova = $_POST["id-prova"];
             $_SESSION["PAG_VOLTAR"] = "relatorio_professor";
             $provas = AlunoModel::GetProvasFinalizadas();
@@ -1003,7 +1007,7 @@ class GestorController
 
             MainController::Templates("public/views/gestor/prova.php", "GESTOR", $dados);
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 

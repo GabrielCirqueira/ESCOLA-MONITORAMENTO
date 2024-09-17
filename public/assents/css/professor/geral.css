@@ -1,19 +1,19 @@
 .titulo-NSL {
-    color: #01a8c5;
+    color: #16b39e;
   }
 
   .botao-ver-relatorio {
     width: 120px;
     height: 35px;
     border-radius: 5px;
-    background-color: #03a4b987;
+    background-color: #16c1aa;
     border: none;
     transition: 0.5s ease-in-out;
   }
   
   .botao-ver-relatorio:hover {
     cursor: pointer;
-    background-color: #02616e87;
+    background-color: #13a28f;
   }
 
 .div_editar_ver_prova {
@@ -23,12 +23,12 @@
 
 .botao-form-editar:hover,
 .botao-form-enviar-prova:hover {
-  background-color: #03a9bb;
+  background-color: #15a18e;
   cursor: pointer;
 }
 
 .botao-form-enviar-prova {
-  background-color: #1ac3d6;
+  background-color: #16c1aa;
   width: 70px;
   height: 35px;
   transition: 0.5s ease;

@@ -57,8 +57,8 @@
 }
 
 .custom-radio-button:checked + label {
-  background-color: #04abc1;
-  border-color: rgb(0, 149, 169);
+  background-color: #16c1aa;
+  border-color: rgb(0, 169, 138);
   color: #fff;
 }
 
@@ -77,8 +77,8 @@
   }
 
   .custom-checkbox-button:checked + label {
-    background-color: #2196f3;
-    border-color: #1e88e5;
+    background-color: #16c1aa;
+    border-color: #13a793;
     color: #fff;
   }
 
@@ -129,8 +129,8 @@
   }
   
   .custom-disciplinas-radio:checked + label {
-    background-color: #04abc1;
-    border-color: #018192;
+    background-color: #16c1aa;
+    border-color: rgb(3, 124, 114);
     color: #fff;
   }
   
@@ -166,8 +166,8 @@
   }
   
   .number-box.selected {
-    background-color: #4374c3;
-    border-color: #2c5596;
+    background-color: #16c1aa;
+    border-color: #13a591;
     color: #fff;
   }
 

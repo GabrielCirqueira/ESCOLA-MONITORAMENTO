@@ -30,6 +30,7 @@ if (!isset($_SESSION["ALUNO"])) {
     $_SESSION["ADM"] = false;
     $_SESSION["PROFESSOR"] = false;
     $_SESSION["PFA"] = false;
+    $_SESSION["PAG_VOLTAR"] = "adm";
 }
 
 $routesYaml = Yaml::parseFile(__DIR__ . '/routes.yaml');

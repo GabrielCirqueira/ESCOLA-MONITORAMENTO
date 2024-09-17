@@ -1,120 +1,136 @@
-.main-home-aluno{
-    flex: 1 1 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.login-aluno {
-  padding-top: 50px;
-  text-align: center;
-  border-radius: 5px; 
-  width: 350px; 
-  position: relative;
-  border: 7px solid rgb(199, 199, 199);
-  background-color: rgba(248, 248, 248, 0.444);
-  height: 400px;
-  font-family: Arial, Helvetica, sans-serif;
-  box-shadow: 0px 0px 30px 10px rgba(255, 255, 255, 0.197);
-}
-
-.login-aluno input[type="submit"] {
-  background-color: #efefeffb;
-  border-radius: 1px;
-  border: 2px solid #31a7bc;
-  width: 65%;
-  font-size: 15px;
-  color: #24939f; 
-  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.137);
-  transition: background-color 0.2s ease, transform 0.2s ease;
-  margin: 15px 0px;
-  font-weight: bold;
-  height: 40px; 
-}
-
-.login-aluno input[type="submit"]:hover {
-  background-color: #2fbac9;
-  color: #ffffff;
-  border: 2px solid #ffffff;
-  transform: scale(1.03);
-  cursor: pointer;
-}
-.login-aluno h1 {
-  font-size: 30px;
-  color: white;
-}
-
-.peq{
-  height: 300px;
-}
-
-.campo-ra {
-  position: relative;
-}
-
-.campo-ra input:focus { 
-    border-bottom: 4px solid rgb(193, 193, 193);
-}
-
-.input-campo-aluno {
-  background-color: rgba(245, 245, 220, 0);
-  width: 65%;
-  margin: 20px;
-  height: 30px;
-  border: none;
-  font-size: 16px;
-  color: white;
-  font-weight: bold;
-  transition: 0.5s ease-in;
-  outline: none;
-  border-bottom: 4px solid white;
-}
  
-.input-campo-aluno::placeholder {
-    color: white;
-}
-
-.label-campo-login {
-  position: absolute;
-  font-weight: bold;
-  left: 60px;
-  font-size: 20px;
-  top: 15px;
-  color: aliceblue;
-  transition: 0.5s;
-}
-
-input:focus+.label-campo-login {
-  color: rgb(255, 255, 255);
-  top: -4px;
-  font-size: 12px;
-}
-
-input:valid+.label-campo-login {
-  top: -4px;
-  font-size: 12px;
-}
-
-.label-campo-login {
-    cursor: text;
-}
-
-.Botao-voltar-lobby {
-  background-color: rgba(59, 17, 17, 0);
-  color: rgb(255, 255, 255);
-  margin: 20px;
-  position: absolute;
-  transition: 0.5s ease;
-  top: 37px;
-  left: 8px;
-  padding: 10px 20px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 32px;
+.tela-login-container a {
+  color: #92ddd3;
+  display: inline-block;
   text-decoration: none;
+  font-weight: 400;
 }
 
-.Botao-voltar-lobby:hover {
+.tela-login-container h2 {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  display: inline-block;
+  margin: 40px 8px 10px 8px;
+  color: #cccccc;
+}
+
+.tela-login-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.tela-login-formContent {
+  border-radius: 10px;
+  background: #fff;
+  padding: 30px;
+  width: 90%;
+  max-width: 350px;
+  position: relative;
+  margin: 50px auto;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.tela-login-formFooter {
+  background-color: #f6f6f6;
+  border-top: 1px solid #dce8f1;
+  padding: 25px;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+}
+
+.tela-login-form input[type=submit]{
+  background-color: #4ad3ba;
+  border: none;
+  color: white;
+  padding: 15px 80px;
+  text-transform: uppercase;
+  font-size: 13px;
+  box-shadow: 0 10px 30px rgba(95, 186, 233, 0.4);
+  border-radius: 5px;
+  margin: 20px auto;
   cursor: pointer;
-  color: rgb(0, 0, 0);
+  transition: all 0.3s ease-in-out;
+}
+
+.tela-login-form input[type=submit]:hover {
+  background-color: #29c292;
+}
+
+.tela-login-form input[type=submit]:active {
+  transform: scale(0.95);
+}
+
+.tela-login-form input[type=password], 
+.tela-login-form input[type=text] {
+  background-color: #f6f6f6;
+  border: none;
+  color: #0d0d0d;
+  padding: 20px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 10px 0;
+  width: 75%;
+  border: 2px solid #f6f6f6;
+  transition: all 0.5s ease-in-out;
+  border-radius: 5px;
+  outline: none;
+}
+
+.tela-login-form input[type=password]:focus,
+.tela-login-form input[type=text]:focus {
+  background-color: #fff;
+  border-bottom: 2px solid #54d5a5;
+}
+
+.tela-login-fadeIn {
+  opacity: 0;
+  animation: tela-login-fadeIn ease-in 0.6s forwards;
+}
+
+@keyframes tela-login-fadeIn {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
+.tela-login-first {
+  animation-delay: 0.4s;
+}
+
+.tela-login-second {
+  animation-delay: 0.6s;
+}
+
+.tela-login-fourth {
+  animation-delay: 0.6s;
+}
+
+.tela-login-underlineHover:after {
+  display: block;
+  left: 0;
+  bottom: -10px;
+  width: 0;
+  height: 2px;
+  background-color: #41c4a8;
+  content: "";
+  transition: width 0.2s;
+}
+
+.tela-login-underlineHover:hover:after {
+  width: 100%;
+}
+
+#tela-login-icon {
+  width: 40px;
 }

@@ -38,28 +38,40 @@ class MainController{
         header("location: {$location}");
     }
 
-    public static function ADM(){
-        self::Templates("public/views/plates/main.php","home");
+    public static function adm(){
+        include "public/views/plates/head.php";
+        include "public/views/plates/main.php";
+        include "public/views/plates/PopUps.php";
     }
 
     public static function index(){
-        self::Templates("public/views/aluno/login.php","home");
+        include "public/views/plates/head.php";
+        include "public/views/aluno/login.php";
+        include "public/views/plates/PopUps.php";
     }
 
     public static function login_professor(){
-        self::Templates("public/views/professor/login.php","home");
+        include "public/views/plates/head.php";
+        include "public/views/professor/login.php";
+        include "public/views/plates/PopUps.php";
     }
 
     public static function login_gestor(){
-        self::Templates("public/views/gestor/login.php","home");
+        include "public/views/plates/head.php";
+        include "public/views/gestor/login.php";
+        include "public/views/plates/PopUps.php";
     }
 
     public static function login_adm(){
-        self::Templates("public/views/adm/login.php");
+        include "public/views/plates/head.php";
+        include "public/views/adm/login.php";
+        include "public/views/plates/PopUps.php";
     }
 
     public static function login_pfa(){
-        self::Templates("public/views/pfa/login.php");
+        include "public/views/plates/head.php";
+        include "public/views/pfa/login.php";
+        include "public/views/plates/PopUps.php";
     }
 
     public static function pre($dados){

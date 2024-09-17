@@ -92,7 +92,7 @@ class PFAcontroller
             MainController::Templates("public/views/pfa/home.php","PFA",$dados);
 
         }else{
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
@@ -296,13 +296,19 @@ class PFAcontroller
             MainController::Templates("public/views/pfa/provas.php", "PFA", $dados);
 
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 
     public static function pfa_prova(){
         if($_SESSION["PFA"]){    
+
+            if(!isset($_POST["id-prova"])){
+                header("location: pfa_provas");
+            }
+
             $id_prova = $_POST["id-prova"];
+
             $_SESSION["PAG_VOLTAR"] = "relatorio_professor";
             $provas = AlunoModel::GetProvasFinalizadas();
             $provasRec = ProfessorModel::GetProvaRecAlunos();
@@ -739,7 +745,7 @@ class PFAcontroller
 
             MainController::Templates("public/views/pfa/prova.php", "PFA", $dados);
         } else {
-            header("location: ADM");
+            header("location: adm");
         }
     }
 }
