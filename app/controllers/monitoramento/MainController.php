@@ -43,7 +43,7 @@ class MainController{
         include "public/views/plates/main.php";
         include "public/views/plates/PopUps.php";
     }
-
+    
     public static function index(){
         include "public/views/plates/head.php";
         include "public/views/aluno/login.php";

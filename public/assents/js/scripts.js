@@ -43,7 +43,6 @@ function mostrarConteudo(id) {
     });
     document.getElementById(id).classList.add('active');
 }
-
   document.addEventListener('DOMContentLoaded', function() {
     const searchInputs = document.querySelectorAll('.searchInput');
 
@@ -52,19 +51,16 @@ function mostrarConteudo(id) {
             const inputText = this.value.trim();
             const index = this.dataset.index;
             const descritoresContainer = document.querySelector(`.descritoresContainer[data-index="${index}"]`);
-
             if (inputText.length === 0) {
                 descritoresContainer.innerHTML = '';
                 return;
             }
-
             fetch('app/config/GetDescritores.php')
                 .then(response => response.json())
                 .then(data => {
                     const filteredDescritores = data.filter(descritor => {
                         return descritor.descritor.toLowerCase().includes(inputText.toLowerCase());
                     });
-
                     renderDescritores(filteredDescritores, descritoresContainer);
                 })
                 .catch(error => console.error('Erro ao obter descritores:', error));

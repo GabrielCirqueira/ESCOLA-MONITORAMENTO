@@ -1,133 +1,255 @@
-.buttons-professor select,
-.select-turmas-professor {
-  height: 40px;
-  margin: 5px;
-  width: 150px;
+.container-professor {
+  padding: 20px;
+  width: 85%;
+  margin: 40px auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.197);
+}
+
+.container-professor *{
+  text-align: center;
+}
+
+.titulo-sistema-monitoramento, .nome-prova, .titulo-classificacao {
+  text-align: center;
+}
+
+.titulo-sistema-monitoramento {
+  color: #16c1aa;
+  font-size: 36px;
   font-weight: bold;
-  transition: 0.5s ease;
-  outline: none;
-  border-radius: 0px;
-  color: rgb(78, 78, 78);
-  border: 1px solid rgb(149, 149, 149);
-  background-color: rgb(255, 255, 255);
+  margin-bottom: 20px;
 }
 
-.buttons-professor form {
+.nome-prova {
+  font-size: 24px;
+  color: #16c1aa;
+  font-weight: bold;
+}
+
+.titulo-classificacao {
+  font-size: 20px;
+  color: #16c1aa;
+  margin-bottom: 10px;
+}
+
+.formulario-filtros-professor {
+  margin: 20px 0;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
-.button-professor-turma {
-    height: 40px;
-    margin: 5px;
-    width: 150px;
-    background-color: #16c1aa;
-    border: none;
-    transition: 0.6s;
-    border-radius: 2px;
-  }
-  
-  .button-professor-turma:hover {
-    background-color: #16c1aa;
-    cursor: pointer;
-  }
+.formulario-filtros-professor form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  .button-professor-turma-enviar {
-    height: 40px;
-    margin: 5px;
-    width: 150px;
-    border-radius: 0px;
-    border: none;
-    background-color: rgb(87, 191, 137);
-    transition: 0.5s ease;
-  }
-  
-  .button-professor-turma-enviar:hover {
-    background-color: rgb(54, 151, 101);
-    cursor: pointer;
-  }
+.formulario-filtros-professor select, .formulario-filtros-professor button {
+  width: 180px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 2px solid #16c1aa;
+  background-color: white;
+}
 
-  .professor-grafico-geral-60 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-  }
-  
-  .professor-grafico-geral-60 hr {
-    height: 150px;
-  }
+.area-button-tabelas{
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+.botao-exportar-dados{
+  background-color: #16c1aa;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.area-button-tabelas button{
+  background-color: #16c1aa;
+  color: white;
+  border: none;
+  width: 280px;
+  border-radius: 5px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  .area-graficos-descritores {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .area-graficos-descritores div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  
-  .area-graficos-descritores h4 {
-    margin: 0px;
-  }
+.formulario-filtros-professor button {
+  background-color: #16c1aa;
+  color: white;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
 
-  .graficos-professor-rosca-turmas {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 20px;
-  } 
-  
-  .graficos-professor-rosca-turmas div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+.formulario-filtros-professor button i,.area-button-tabelas button i {
+  margin-right: 10px;
+}
 
-  .area_button_tabelas {
-    display: flex;
-    gap: 10px;
-    margin: 30px;
-  }
-  
-  .area_button_tabelas button {
-    width: 200px;
-    height: 40px;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.311);
-    background-color: #6eb65c;
-    color: #252525;
-    font-weight: bold;
-    border: none;
-    transition: 0.5s ease-in-out;
-  }
-  
-  .area_button_tabelas button:hover {
-    background-color: #266517;
-    cursor: pointer;
-  }
+.botao-exportar-dados:hover,.area-button-tabelas button:hover,.formulario-filtros-professor button:hover {
+  background-color: #13a693;
+}
 
-  .export-excel {
-    width: 85%;
-    height: 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.311);
-    background-color: #5fa54e;
-    font-weight: bold;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    transition: 1s ease;
-    border: none;
-    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.148);
-  }
-  
-  .export-excel:hover {
-    cursor: pointer;
-    background-color: #0a572d;
-  }
-  
+.grafico-colunas-proficiencia {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.grafico-colunas-proficiencia hr {
+  width: 3px;
+  height: 250px;
+  border-radius: 4px;
+  background-color: rgba(124, 124, 124, 0.63);
+  border: none; 
+}
+
+.box-grafico-geral {
+  background-color: #e6f9f78c;
+  border: 2px solid #16c1aa;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around ;
+  align-items: center;
+}
+
+.grafico-detalhes-geral {
+  margin-right: 20px;
+}
+.titulo-percentual-geral,
+.titulo-alunos-acima {
+  font-size: 18px;
+  color: #16c1aa;
+  font-weight: bold;
+}
+
+.valor-percentual-geral,
+.valor-alunos-acima {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.area-graficos-descritores, .area-grafico-rosca-turmas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.box-descritor-grafico, .box-grafico-rosca-turma {
+  background-color: white;
+  border: 4px solid #1fa6743e;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+}
+
+.nome-descritor, .nome-turma {
+  color: #5e5e5e;
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.mensagem-sem-descritores {
+  font-size: 18px;
+  color: #f00;
+  text-align: center;
+}
+
+.tabela-notas-aluno, .tabela-aluno-primeira, .tabela-aluno-rec, .tabela-respostas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.tabela-notas-aluno th, .tabela-notas-aluno td,
+.tabela-aluno-primeira th, .tabela-aluno-primeira td,
+.tabela-aluno-rec th, .tabela-aluno-rec td,
+.tabela-respostas th, .tabela-respostas td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.tabela-notas-aluno td{
+  color: #383838;
+}
+
+.tabela-notas-aluno th, .tabela-aluno-primeira th,
+.tabela-aluno-rec th, .tabela-respostas th {
+  background-color: #16c1aa;
+  color: white;
+  font-size: 14px;
+}
+
+.tabela-notas-aluno td, .tabela-aluno-primeira td,
+.tabela-aluno-rec td, .tabela-respostas td {
+  font-size: 15px;
+}
+
+.linha-nota-aluno {
+  transition: background-color 0.3s;
+}
+
+.fundo-aprovado {
+  background-color: #4BCC8B;
+}
+
+.fundo-reprovado {
+  background-color: #DF7474;
+}
+
+.linha-nota-faltou {
+  background-color: #eec22589;
+}
+
+.aluno-nome-rec, .aluno-nome-primeira, .aluno-nome-respostas {
+  background-color: #B4F1E7;
+  font-size: 13px;
+}
+
+.alternativa-acerto {
+  background-color: #4BCC8B;
+  color: white;
+}
+
+.alternativa-erro {
+  background-color: #DF7474;
+  color: white;
+}
+
+/* Espaçamento Final */
+.espaco-final {
+  height: 50px;
+}
+
+
+
+
+
+
