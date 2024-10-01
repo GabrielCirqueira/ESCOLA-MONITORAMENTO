@@ -33,76 +33,68 @@
 
   <div id="area_menu_lateral" class="area_menu_lateral"></div>
 
-  <div id="menu-lateral-icone-conteudo" class="menu-lateral-main">
-
+<div id="menu-lateral-icone-conteudo" class="menu-lateral-main">
     <div class="icone-menu-lateral-fechar">
-      <i class="fas fa-times fa-2x" style="color: gray;"></i>
+        <i class="fas fa-times fa-2x" style="color: gray;"></i>
     </div>
 
     <div class="conteudo-menu-lateral">
-
-      <div class="menu-lateral-main-header">
-
-        <div>
-          <img src="https://telegra.ph/file/daa4ccd71a49aae9a7cc9.png" alt="BRAZÃO NSL">
+        <div class="menu-lateral-main-header">
+            <div>
+                <img src="https://telegra.ph/file/daa4ccd71a49aae9a7cc9.png" alt="BRAZÃO NSL">
+            </div>
+            <h2>Perfil</h2>
+        </div>
+        <div class="menu-lateral-main-main">
+            <?php if ($user == "ALUNO") {?>
+                <h4>NOME:</h4>
+                <span><?=$_SESSION["nome_aluno"]?></span>
+                <hr>
+                <h4>RA:</h4>
+                <span><?=$_SESSION["ra"]?></span>
+                <hr>
+                <h4>TURMA:</h4>
+                <span><?=$_SESSION["turma"]?></span>
+                <hr>
+                <br>
+            <?php } else if ($user == "PROFESSOR") {?>
+                <h4>NOME:</h4>
+                <span><?=$_SESSION["nome_professor"]?></span>
+                <hr>
+                <h4>DISCIPLINA(S):</h4>
+                <span>
+                    <?php
+                    if (strpos($_SESSION["disciplinas"], ";")) {
+                        $materias = explode(";", $_SESSION["disciplinas"]);
+                        foreach ($materias as $materia) {?>
+                            <span><?=$materia?> <br> </span>
+                        <?php }
+                    } else {?>
+                        <span><?=$_SESSION["disciplinas"]?></span>
+                    <?php }?>
+                </span>
+                <hr>
+            <?php } else if ($user == "GESTOR") {?>
+                <hr>
+                <h3>GESTOR</h3>
+                <hr>
+            <?php }?>
+            <br>
+            <?php $_SESSION["USUARIO"] = $user?>
+            <a class="button-sair-menu" href="encerrar_sessao">Sair</a>
         </div>
 
-        <h2>Perfil</h2>
-      </div>
-      <div class="menu-lateral-main-main">
-        <?php if ($user == "ALUNO") {?>
-          <h4>NOME:</h4>
-          <span><?=$_SESSION["nome_aluno"]?></span>
-          <hr>
-          <h4>RA:</h4>
-          <span><?=$_SESSION["ra"]?></span>
-          <hr>
-          <h4>TURMA:</h4>
-          <span><?=$_SESSION["turma"]?></span>
-          <hr>
-          <br>
-
-        <?php } else if ($user == "PROFESSOR") {?>
-          <h4>NOME:</h4>
-          <span><?=$_SESSION["nome_professor"]?></span>
-          <hr>
-          <h4>DISCIPLINA(S):</h4>
-          <span>
-            <?php
-
-    if (strpos($_SESSION["disciplinas"], ";")) {
-        $materias = explode(";", $_SESSION["disciplinas"]);
-        foreach ($materias as $materia) {?>
-                <span><?=$materia?> <br> </span>
-              <?php }
-    } else {?>
-              <span><?=$_SESSION["disciplinas"]?></span>
-            <?php }?>
-          </span>
-          <hr>
-        <?php } else if ($user == "GESTOR") {?>
-
-          <hr>
-          <h3>GESTOR</h3>
-          <hr>
-
-        <?php }?>
-        <br>
-        <?php $_SESSION["USUARIO"] = $user?>
-        <a class="button-sair-menu" href="encerrar_sessao">Sair</a>
-
-      </div>
-
-      <div class="menu-lateral-main-footer">
-          <div>
-            <a href="https://linktr.ee/GabrielCirqueira" target="_blank" >Gabriel Cirqueira</a>
-            <i class="fas fa-laptop-code"></i>
-          </div>
-          <span  class="loader"></span>
-          <p>É O TECNICOO 😜 </p>
-      </div>
+        <div class="menu-lateral-main-footer">
+            <div>
+                <a href="https://linktr.ee/GabrielCirqueira" target="_blank">Gabriel Cirqueira</a>
+                <i class="fas fa-laptop-code"></i>
+            </div>
+            <span class="loader"></span>
+            <p>É O TECNICOO 😜 </p>
+        </div>
     </div>
-    </div>
+</div>
+
 
 
   <div id="menu-lateral-esquerdo-icone-conteudo" class="menu-lateral-esquerdo-main">

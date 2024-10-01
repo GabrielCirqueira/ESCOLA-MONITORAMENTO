@@ -18,7 +18,7 @@
                 </form>
 
                 <div class="tela-login-formFooter">
-                    <a class="tela-login-underlineHover" href="adm">PROFESSOR</a>
+                    <a class="tela-login-underlineHover" href="#">ALUNO</a>
                 </div>
             </div>
         </div>
