@@ -173,6 +173,7 @@ $icones = [
                     <h3 class="form-section-header">VALOR:</h3>
                     <div class="professor-form-group">
                         <div class="professor-selectable-numbers" id="valor">
+                            <div class="number-box" data-value="0">0</div>
                             <div class="number-box" data-value="1">1</div>
                             <div class="number-box" data-value="2">2</div>
                             <div class="number-box" data-value="3">3</div>

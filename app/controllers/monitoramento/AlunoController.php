@@ -434,6 +434,12 @@ class AlunoController
                 $pontos_aluno = number_format($pontos_aluno, 1);
             }
 
+            if($_SESSION["prova_gabarito"]["valor"] == 0){
+                $porcentagemm = ($acertos_aluno / $_SESSION["prova_gabarito"]["QNT_perguntas"]) * 100;
+            }else{
+                $porcentagemm = (number_format(round($pontos_aluno),0) / $_SESSION["prova_gabarito"]["valor"]) * 100;
+            }
+            
             $dados = [
                 "aluno" => $_SESSION["nome_aluno"],
                 "ra" => $_SESSION["ra"],
@@ -446,7 +452,7 @@ class AlunoController
                 "pontos_prova" => $_SESSION["prova_gabarito"]["valor"],
                 "QNT_perguntas" => $_SESSION["prova_gabarito"]["QNT_perguntas"],
                 "turno" => $_SESSION["turno"],
-                "porcentagem" => (number_format(round($pontos_aluno),0) / $_SESSION["prova_gabarito"]["valor"]) * 100,
+                "porcentagem" => $porcentagemm,
                 "serie" => substr($_SESSION["turma"], 0, 1),
                 "data_aluno" => $dataFormatada,
                 "acertos" => $acertos_aluno,

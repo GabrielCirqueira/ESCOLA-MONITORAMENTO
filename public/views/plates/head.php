@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ESCOLA NSL</title>
   <link rel="shortcut icon" href="public/assents/img/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="public/assents/css/styles.css?v=14">
+  <link rel="stylesheet" href="public/assents/css/styles.css?v=16">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
   <script src="https://kit.fontawesome.com/bf7e05c402.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>

@@ -1241,13 +1241,19 @@ class ProfessorController
                 $valor_cada_pergunta = $novo_gabarito_professor["valor"] / count($gabarito_professor);
                 $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
 
+                if($prova_aluno["valor"] == 0){
+                    $porcentagemm = ($acertos_aluno / $prova_aluno["QNT_perguntas"]) * 100;
+                }else{
+                    $porcentagemm = (number_format(round($pontos_aluno),0) / $prova_aluno["valor"]) * 100;
+                }
+
                 $dados_atualizacao = [
                     "ra" => $prova_aluno["ra"],
                     "ID" => $prova_aluno["id"],
                     "turma" => $prova_aluno["turma"],
                     "ID_prova" => $id_prova,
                     "acertos" => $acertos_aluno,
-                    "porcentagem" => (number_format(round($pontos_aluno),0) / $_POST['valor_prova']) * 100,
+                    "porcentagem" => $porcentagemm,
                     "pontos_aluno" => number_format(round($pontos_aluno),0),
                     "pontos_aluno_quebrado" => number_format($pontos_aluno,1),
                     "descritores" => $descritores,
