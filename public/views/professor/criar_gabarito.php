@@ -19,6 +19,12 @@
     <div class="professor-dados-gabarito-criar">
         <div class="dados-gabarito">
             <div class="info-card">
+                <?php if($data["metodo"] != "prova"){ ?>
+                <h3><i class="fas fa-chalkboard-teacher"></i> ATIVIDADE DE REVISÃO</h3>
+                <?php  }else{ ?>
+                <h3><i class="fas fa-chalkboard-teacher"></i> PROVA AVALIATIVA</h3>
+                <?php  } ?>
+
                 <h3><i class="fas fa-users"></i> Turmas:</h3>
                 <div class="turma-colunas">
                     <?php foreach ($data["turmas"] as $turma) {
@@ -26,10 +32,13 @@
                 }?>
                 </div>
             </div>
+            <?php if($data["metodo"] == "prova"){ ?>
             <div class="info-card">
                 <h3><i class="fas fa-file-alt"></i> Valor da Prova:</h3>
                 <p><?php echo $data["valor"] ?> pontos</p>
             </div>
+            <?php  } ?>
+
             <div class="info-card">
                 <h3><i class="fas fa-question-circle"></i> Questões:</h3>
                 <p><?php echo $data["perguntas"] ?> questões</p>
@@ -40,6 +49,7 @@
 
     <div class="professor-inserir-gabarito">
         <form action="criar_gabarito_respostas" method="post">
+            <input type="hidden" name="metodo" value="<?php echo $data['metodo']; ?>">
             <input type="hidden" name="numero_perguntas" value="<?php echo $data['perguntas']; ?>">
             <input type="hidden" name="turmas_gabarito" value="<?php echo implode(",", $data['turmas']); ?>">
             <input type="hidden" name="valor_prova" value="<?php echo $data["valor"]; ?>">
@@ -48,7 +58,7 @@
             <input type="hidden" name="descritor" value="<?php echo $data["descritores"]; ?>">
 
             <div class="tabela-gabarito">
-            <h3><i class="fas fa-pencil-alt"></i> Preencha o gabarito abaixo</h3>
+                <h3><i class="fas fa-pencil-alt"></i> Preencha o gabarito abaixo</h3>
                 <table class="tabela-alternativas-escolher">
                     <?php $contador = 1;
         while ($contador <= $data["perguntas"]) {?>
@@ -77,17 +87,17 @@
                 </table>
 
                 <div class="alerta">
-                        <h3><i class="fas fa-exclamation-triangle"></i> Revise todas as respostas antes de enviar!</h3>
-                    </div>
-                    <br>
+                    <h3><i class="fas fa-exclamation-triangle"></i> Revise todas as respostas antes de enviar!</h3>
+                </div>
+                <br>
 
 
-            <br><br><br>
-            <center>
-                <input type="submit" value="Criar Gabarito" class="botao-form-enviar">
-            </center>
+                <br><br><br>
+                <center>
+                    <input type="submit" value="Criar Gabarito" class="botao-form-enviar">
+                </center>
             </div>
-            </form>
+        </form>
     </div>
     <br><br><br>
 </main>

@@ -562,8 +562,7 @@ function editarProvaAluno(ra, gabarito, nome,IdProva,id,disciplina,data,turma) {
     
     document.getElementById('tabela-alternativar-editar').innerHTML = tabela;
 }
-
-// JavaScript to handle the number selection
+ 
 document.querySelectorAll('.professor-selectable-numbers .number-box').forEach(box => {
     box.addEventListener('click', function() {
         const parentDiv = this.parentElement;
@@ -575,4 +574,19 @@ document.querySelectorAll('.professor-selectable-numbers .number-box').forEach(b
     });
 });
 
- ;
+document.getElementById('metodo_prova').addEventListener('change', function() {
+    if (this.checked) {
+        document.getElementById('valor-container').style.display = 'block';
+    }
+});
+
+document.getElementById('metodo_att').addEventListener('change', function() {
+    if (this.checked) {
+        document.getElementById('valor-container').style.display = 'none';
+    }
+});
+
+if (document.getElementById('metodo_att').checked) {
+    document.getElementById('valor-container').style.display = 'none';
+}
+

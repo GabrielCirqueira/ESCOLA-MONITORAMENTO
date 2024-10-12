@@ -84,33 +84,6 @@ class Database
                     materia     varchar(255)
                 );";
 
-        $gabarito_provas_alunos_rec = "CREATE TABLE IF NOT EXISTS gabarito_alunos_recuperacao(
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                aluno VARCHAR(255),
-                ra VARCHAR(255),
-                turma VARCHAR(255),
-                turno VARCHAR(255),
-                id_prova INT,
-                id_prova_rec INT,
-                serie INT,
-                nome_professor VARCHAR(255),
-                descritores VARCHAR(255),
-                disciplina VARCHAR(255),
-                nome_prova VARCHAR(255),
-                pontos_prova FLOAT,
-                QNT_perguntas INT,
-                data_aluno DATE,
-                acertos INT,
-                porcentagem INT,
-                pontos_aluno INT, 
-                pontos_aluno_quebrado FLOAT,
-                perguntas_respostas VARCHAR(255),
-                perguntas_certas VARCHAR(255),
-                perguntas_erradas VARCHAR(255),
-                descritores_certos VARCHAR(255),
-                descritores_errados VARCHAR(255)
-            );";
-
         $gabarito_provas_alunos = "CREATE TABLE IF NOT EXISTS gabarito_alunos(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 aluno VARCHAR(255),
@@ -136,7 +109,8 @@ class Database
                 descritores_certos VARCHAR(255),
                 descritores_errados VARCHAR(255),
                 recuperacao VARCHAR(255),
-                status VARCHAR(255)
+                status VARCHAR(255),
+                metodo VARCHAR(255)
             );";
 
         $gabarito_provas_alunos_prova = "CREATE TABLE IF NOT EXISTS gabarito_alunos_primeira_prova(
@@ -162,7 +136,8 @@ class Database
                 perguntas_certas VARCHAR(255),
                 perguntas_erradas VARCHAR(255),
                 descritores_certos VARCHAR(255),
-                descritores_errados VARCHAR(255)
+                descritores_errados VARCHAR(255),
+                metodo          varchar(255)
             );";
 
         $gabarito_provas_professores = "CREATE TABLE IF NOT EXISTS gabarito_professores(
@@ -177,24 +152,9 @@ class Database
                 data_prova      date,
                 gabarito        varchar(255),
                 liberado        varchar(255),
-                liberar_prova   varchar(255)
-                );";
-
-        $gabarito_provas_professores_gabarito = "CREATE TABLE IF NOT EXISTS gabarito_professores_recuperacao(
-                id              int AUTO_INCREMENT primary key,
-                id_prova        int,
-                alunos          TEXT,
-                nome_professor  varchar(255),
-                nome_prova      varchar(255),
-                descritores     varchar(255),
-                disciplina     varchar(255),
-                valor           int,
-                QNT_perguntas   int,
-                data_prova_rec  datetime,
-                gabarito        varchar(255),
-                liberado        varchar(255),
-                liberar_prova   varchar(255)
-                );";
+                liberar_prova   varchar(255),
+                metodo          varchar(255)
+                );"; 
 
         $logsADM = "CREATE TABLE IF NOT EXISTS logs_adm(
             id          int AUTO_INCREMENT primary key,
@@ -236,9 +196,7 @@ class Database
         self::GetInstance()->query($descritores);
         self::GetInstance()->query($gabarito_provas_professores);
         self::GetInstance()->query($gabarito_provas_alunos);
-        self::GetInstance()->query($gabarito_provas_alunos_rec);
         self::GetInstance()->query($gabarito_provas_alunos_prova);
-        self::GetInstance()->query($gabarito_provas_professores_gabarito);
         self::GetInstance()->query($Periodo);
         self::GetInstance()->query($PFA);
     }

@@ -35,10 +35,15 @@
 
 
         <div   class="prova-pendente" style="width:85%" >
-            <div class="linha-vertical-campo-prova" style="background-color: #04C636;"></div>
+            <?php if($prova["metodo"] == "prova"){ ?>
+            <div class="linha-vertical-campo-prova" style="background-color: #33C27A;"></div>
             <div class="conteudo-prova">
-                <i class="fas fa-file-alt fa-4x" style="color: #04C636;"></i>
-
+                <i class="fas fa-file-alt fa-4x" style="color: #33C27A;"></i>
+            <?php }else{?>
+                <div class="linha-vertical-campo-prova" style="background-color: #217D7D;"></div>
+                <div class="conteudo-prova">
+                <i class="fas fa-tasks fa-4x" style="color: #217D7D;"></i>
+            <?php }?>
                 <div class="prova-detalhes">
                     <center>
 
@@ -49,7 +54,7 @@
                             <?= $prova["data_prova"] ?>
                         </span> <br>
                         <span class="prova-nome-professor">
-                            <?= $contador ?> aluno(s) Fizeram a prova.
+                            <?= $contador ?> aluno(s) Fizeram a prova/atividade.
                         </span>
                     </center>
                 </div>

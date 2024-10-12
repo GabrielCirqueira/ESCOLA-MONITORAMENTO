@@ -80,7 +80,7 @@ class ProfessorController
                 exit;
             }
 
-            if ($_POST["valor-prova"] == null) {
+            if ($_POST["valor-prova"] == null && $_POST["metodo"] == "prova") {
                 $_SESSION["PopUp_not_valor"] = true;
                 header("location: inserir_gabarito");
                 exit;
@@ -104,6 +104,7 @@ class ProfessorController
                     "turmas" => $turmas,
                     "perguntas" => $perguntas,
                     "valor" => $valor,
+                    "metodo" => $_POST["metodo"],
                     "nome_prova" => $nome,
                     "materia" => $materia,
                     "alternativas" => explode(",",$_ENV["ALTERNATIVAS"]),
@@ -148,6 +149,7 @@ class ProfessorController
                 "turmas" => $_POST["turmas_gabarito"],
                 "perguntas" => $_POST["numero_perguntas"],
                 "valor" => $_POST["valor_prova"],
+                "metodo" => $_POST["metodo"],
                 "data" => $dataFormatada,
                 "nome_prova" => $_POST["nome_prova"],
                 "descritores" => $descritores,

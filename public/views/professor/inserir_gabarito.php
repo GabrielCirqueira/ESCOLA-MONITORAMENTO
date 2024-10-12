@@ -59,9 +59,27 @@ $icones = [
         <form action="criar_gabarito" method="post">
             <div class="professor-form-section-wrapper">
                 <center>
-                    <label for="nome-prova" class="professor-form-group-label">Insira o Nome da Prova</label><br>
+                    <label for="nome-prova" class="professor-form-group-label">Insira o Nome da Prova/atividade:</label><br>
                     <input type="text" maxlength="25" required id="nome-prova" name="nome-prova"
                         class="professor-input-text-field">
+                </center>
+            </div>
+
+            <div class="professor-form-section-wrapper">
+                <center>
+                    <h3 class="form-section-header">METODO AVALIATIVO:</h3>
+                    <div class="professor-form-group">
+                        <div>
+                            <input type="radio" required id="metodo_prova" name="metodo" value="prova"
+                                class="custom-radio-button">
+                            <label style="width: 220px;" for="metodo_prova">PROVA AVALIATIVA</label>
+                        </div>
+                        <div>
+                            <input type="radio" required name="metodo" id="metodo_att" value="atividade"
+                                class="custom-radio-button">
+                            <label style="width: 220px;" for="metodo_att">ATIVIDADE DE REVISÃO</label>
+                        </div>
+                    </div>
                 </center>
             </div>
 
@@ -170,10 +188,10 @@ $icones = [
                     </div>
                 </center>
                 <center>
+                    <div id="valor-container">
                     <h3 class="form-section-header">VALOR:</h3>
                     <div class="professor-form-group">
                         <div class="professor-selectable-numbers" id="valor">
-                            <div class="number-box" data-value="0">0</div>
                             <div class="number-box" data-value="1">1</div>
                             <div class="number-box" data-value="2">2</div>
                             <div class="number-box" data-value="3">3</div>
@@ -196,6 +214,7 @@ $icones = [
                             <div class="number-box" data-value="20">20</div>
                         </div>
                         <input name="valor-prova" required type="hidden" class="professor-input-number-field">
+                    </div>
                     </div>
                 </center>
             </div>
