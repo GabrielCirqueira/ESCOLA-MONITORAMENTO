@@ -318,15 +318,16 @@ class ProfessorController
                 "nome_prova" => $nome_prova,
             ];
 
-            $provas_rec = ProfessorModel::GetProvaRecbyIDprova($id_prova);
-            if (count($provas_rec) > 0) {
-                $dados["provas_rec"] = [
-                    "quantidade" => count($provas_rec),
-                    "provas" => $provas_rec,
-                ];
-            } else {
-                $dados["provas_rec"] = null;
-            }
+            // $provas_rec = ProfessorModel::GetProvaRecbyIDprova($id_prova);
+            // if (count($provas_rec) > 0) {
+            //     $dados["provas_rec"] = [
+            //         "quantidade" => count($provas_rec),
+            //         "provas" => $provas_rec,
+            //     ];
+            // } else {
+            //     $dados["provas_rec"] = null;
+            // }
+            $dados["provas_rec"] = null;
 
             // echo "<pre>";
             // print_r($dados);
@@ -649,7 +650,7 @@ class ProfessorController
             $id_prova = $_POST["id-prova"];
             $_SESSION["PAG_VOLTAR"] = "relatorio_professor";
             $provas = AlunoModel::GetProvasFinalizadas();
-            $provasRec = ProfessorModel::GetProvaRecAlunos();
+            // $provasRec = ProfessorModel::GetProvaRecAlunos();
             $provasPrimeira = ProfessorModel::GetProvaPrimeira();
             $provas_professores = AlunoModel::GetProvas();
             $dados_turmas = [];
@@ -681,16 +682,16 @@ class ProfessorController
                 }
             }
 
-            $alunos_por_turma_rec = array();
-            foreach ($provasRec as $prova) {
-                if ($prova["id_prova"] == $id_prova) {
-                    $turma_prova = $prova["turma"];
-                    if (!isset($alunos_por_turma_rec[$turma_prova])) {
-                        $alunos_por_turma_rec[$turma_prova] = array();
-                    }
-                    $alunos_por_turma_rec[$turma_prova][] = $prova;
-                }
-            }
+            // $alunos_por_turma_rec = array();
+            // foreach ($provasRec as $prova) {
+            //     if ($prova["id_prova"] == $id_prova) {
+            //         $turma_prova = $prova["turma"];
+            //         if (!isset($alunos_por_turma_rec[$turma_prova])) {
+            //             $alunos_por_turma_rec[$turma_prova] = array();
+            //         }
+            //         $alunos_por_turma_rec[$turma_prova][] = $prova;
+            //     }
+            // }
 
 
             $alunos_por_turma_primeira = array();
@@ -928,17 +929,18 @@ class ProfessorController
                         }
                     }
 
-                    if ($prova["recuperacao"] != null) {
-                        foreach ($provasRec as $pr) {
-                            if ($pr["id_prova"] == $prova["id_prova"]) {
-                                if ($pr["ra"] == $prova["ra"]) {
-                                    $prova["notaRec"] = $pr["pontos_aluno"];
-                                }
-                            }
-                        }
-                    } else {
-                        $prova["notaRec"] = "INDEFINIDO";
-                    }
+                    // if ($prova["recuperacao"] != null) {
+                    //     foreach ($provasRec as $pr) {
+                    //         if ($pr["id_prova"] == $prova["id_prova"]) {
+                    //             if ($pr["ra"] == $prova["ra"]) {
+                    //                 $prova["notaRec"] = $pr["pontos_aluno"];
+                    //             }
+                    //         }
+                    //     }
+                    // } else {
+                    //     $prova["notaRec"] = "INDEFINIDO";
+                    // }
+                    $prova["notaRec"] = "INDEFINIDO";
 
                     $provas_tudo[] = $prova;
                 }
@@ -977,9 +979,10 @@ class ProfessorController
 
             $descritores_por_aluno_primeira = $status_desc ? ProfessorController::calcular_descritores_por_aluno($alunos_por_turma_primeira) : null;
 
-            $descritores_por_aluno_rec = $status_desc ? ProfessorController::calcular_descritores_por_aluno($alunos_por_turma_rec) : null;
+            // $descritores_por_aluno_rec = $status_desc ? ProfessorController::calcular_descritores_por_aluno($alunos_por_turma_rec) : null;
 
- 
+             $descritores_por_aluno_rec = null;
+
             $alunosTurma = AlunoModel::GetAlunos();
 
             if (isset($_POST["filtrar"])) {

@@ -2,6 +2,7 @@
 
 namespace app\controllers\monitoramento;
 
+use app\config\Queryy;
 use app\controllers\monitoramento\MainController;
 use app\models\monitoramento\ADModel;
 use app\models\monitoramento\AlunoModel;
@@ -40,8 +41,8 @@ class AlunoController
 
             $dados = AlunoModel::GetProvas();
             $provas_feitas = AlunoModel::GetProvasFinalizadas();
-            $provas_rec = ProfessorModel::GetProvaRec();
-            $provas_rec_feitas = ProfessorModel::GetProvaRecAlunos();
+            // $provas_rec = ProfessorModel::GetProvaRec();
+            // $provas_rec_feitas = ProfessorModel::GetProvaRecAlunos();
             $provas_aluno = [];
             $provas_aluno_feitas = [];
 
@@ -74,20 +75,6 @@ class AlunoController
                 $provas_aluno_feitas = null;
             }
 
-            $provas_aluno_rec = [];
-            foreach ($provas_rec as $prova) {
-                if (strpos($prova["alunos"], $_SESSION["ra"]) !== false) {
-                    $provas_aluno_rec[] = $prova;
-                }
-            }
-
-            foreach ($provas_rec_feitas as $prova) {
-                foreach ($provas_aluno_rec as $key => $p) {
-                    if ($p["id_prova"] == $prova["id_prova"] && $prova["ra"] == $_SESSION["ra"]) {
-                        $provas_aluno_rec[$key]["statuss"] = "FEZ";
-                    }
-                }
-            }
 
             // echo "<pre>";
             // print_r($provas_aluno);
@@ -122,8 +109,7 @@ class AlunoController
                 "provas" => $provas_aluno,
                 "provas_organizadas" => $provas_organizadas,
                 "alternativas" => explode(",",$_ENV["ALTERNATIVAS"]),
-                "provas_feitas" => $provas_aluno_feitas,
-                "rec" => $provas_aluno_rec,
+                "provas_feitas" => $provas_aluno_feitas
                 
             ]);
         } else {
@@ -149,6 +135,7 @@ class AlunoController
 
     }
 
+    /*
     public static function cadastrar_gabarito_aluno_rec()
     {
         if ($_SESSION["ALUNO"]) {
@@ -331,8 +318,9 @@ class AlunoController
             }
         }
     }
-
-    public static function gabarito_aluno()
+*/
+    
+public static function gabarito_aluno()
     {
         if ($_SESSION["ALUNO"]) {
 
@@ -371,12 +359,15 @@ class AlunoController
     {
         if ($_SESSION["ALUNO"]) {
 
-            $provas_alunos_verificar = AlunoModel::GetProvasFinalizadas();
+            
+            // $provas_alunos_verificar = AlunoModel::GetProvasFinalizadas();
+
+            $provas_alunos_verificar = Queryy::select("gabarito_alunos","ra = {$_SESSION["ra"]}");
 
             if($provas_alunos_verificar != null){
 
                 foreach ($provas_alunos_verificar as $prov) {
-                    if ($prov["id_prova"] == $_SESSION["prova_gabarito"]["id"] && $_SESSION["ra"] == $prov["ra"]) {
+                    if ($prov["id_prova"] == $_SESSION["prova_gabarito"]["id"]) {
                         $_SESSION["PopUp_Prova_Feita"] = true;
                         // MainController::pre($_SESSION["prova_gabarito"]);
                         header("location:aluno_home");
@@ -450,6 +441,7 @@ class AlunoController
                 "disciplina" => $_SESSION["prova_gabarito"]["disciplina"],
                 "nome_prova" => $_SESSION["prova_gabarito"]["nome_prova"],
                 "pontos_prova" => $_SESSION["prova_gabarito"]["valor"],
+                "metodo" => $_SESSION["prova_gabarito"]["metodo"],
                 "QNT_perguntas" => $_SESSION["prova_gabarito"]["QNT_perguntas"],
                 "turno" => $_SESSION["turno"],
                 "porcentagem" => $porcentagemm,

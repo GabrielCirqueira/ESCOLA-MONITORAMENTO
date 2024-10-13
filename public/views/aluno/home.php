@@ -2,33 +2,33 @@
     <br><br>
     <center>
 
-    <div class="caixa-boas-vindas">
-    <div class="boas-vindas-header">
-        <div class="icone-boas-vindas">
-            <i class="fas fa-user-graduate"></i>
+        <div class="caixa-boas-vindas">
+            <div class="boas-vindas-header">
+                <div class="icone-boas-vindas">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="boas-vindas-texto">
+                    <h3>Bem-vindo, <?= $_SESSION["nome_aluno"] ?>!</h3>
+                    <p>Este é o seu sistema de monitoramento acadêmico.</p>
+                </div>
+            </div>
+
+            <div class="mensagem-sistema">
+                <i class="fas fa-check-circle"></i>
+                <p>Verifique se há provas disponíveis para você realizar.</p>
+            </div>
+
+            <div class="mensagem-sistema">
+                <i class="fas fa-file-alt"></i>
+                <p>Logo abaixo você poderá visualizar os gabaritos e provas lançados.</p>
+            </div>
+
+            <div class="mensagem-alerta">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Atenção: Certifique-se de não lançar o gabarito na disciplina errada!</p>
+            </div>
+
         </div>
-        <div class="boas-vindas-texto">
-            <h3>Bem-vindo, <?= $_SESSION["nome_aluno"] ?>!</h3>
-            <p>Este é o seu sistema de monitoramento acadêmico.</p>
-        </div>
-        </div>
-
-    <div class="mensagem-sistema">
-        <i class="fas fa-check-circle"></i>
-        <p>Verifique se há provas disponíveis para você realizar.</p>
-    </div>
-
-    <div class="mensagem-sistema">
-        <i class="fas fa-file-alt"></i>
-        <p>Logo abaixo você poderá visualizar os gabaritos e provas lançados.</p>
-    </div>
-
-    <div class="mensagem-alerta">
-        <i class="fas fa-exclamation-triangle"></i>
-        <p>Atenção: Certifique-se de não lançar o gabarito na disciplina errada!</p>
-    </div>
-
-</div>
 
 
 
@@ -37,17 +37,17 @@
 
 
     <center>
-    <div class="titulo-area-provas">
-    <i class="fas fa-tasks icone-titulo"></i>
-    <h2 class="titulo-principal-provas">Provas Pendentes:</h2>
-</div>
+        <div class="titulo-area-provas">
+            <i class="fas fa-tasks icone-titulo"></i>
+            <h2 class="titulo-principal-provas">Provas/atividades Pendentes:</h2>
+        </div>
     </center>
 
     <?php
 $provas_finalizadas = [];
 $temProvaPendente = false;
 
-if ($data["provas"] != null || $data["rec"] != null) {
+if ($data["provas"] != null) {
     foreach ($data["provas"] as $prova) {
         $prova_feita = false;
         if ($data["provas_feitas"] != null) {
@@ -71,204 +71,170 @@ if ($data["provas"] != null || $data["rec"] != null) {
 
 
 
-<div class="prova-pendente">
-    <div class="linha-vertical-campo-prova"></div>
-    <div class="conteudo-prova">
-        <i class="fas fa-exclamation-triangle icone-alerta"></i>
-        
-        <div class="prova-detalhes">
-            <center>
-                <span class="prova-nome-disciplina">
-                    <?=$prova["disciplina"]?>
-                </span> <br>
-                <span class="prova-nome-professor">
-                    <?=$prova["nome_prova"]?>
-                </span> <br>
-                <span class="prova-nome-professor">
-                    <?=$prova["nome_professor"]?>
-                </span>
-            </center>
-        </div>
-        <div class="button-ver-prova">
-            <button onclick="Mostrar_PopUp('popup-prova-<?=$prova['id']?>')">
-                <i class="fas fa-eye"></i> Ver
-            </button>
-        </div>
-    </div>
-</div>
-
-
-    <br>
-
-    <div style="display: none; padding-top:10%; " id="popup-prova-<?=$prova["id"]?>" class="PopUp-sobreposicao">
-        <div class="conteudo-popup">
-            <br>
-            <h2> <?=$prova["nome_prova"]?> </h2>
-            <br>
-            <center>
-
-                <div style="text-align:left;margin-left:20px;">
-
-                    <span><b>PROFESSOR: </b><?=$prova["nome_professor"]?></span><br>
-                    <span><b>DISCIPLINA:</b> <?=$prova["disciplina"]?></span><br>
-                    <span><b>VALOR: </b> <?=$prova["valor"]?></span><br>
-                    <span><b>DATA: </b> <?=$prova["data_prova"]?> </span><br>
-                    <span><b>QUESTÕES: </b><?=$prova["QNT_perguntas"]?> </span><br>
-                </div>
-            </center>
-
-            <form method="post" action="gabarito_aluno">
-                <button type="submit" value="<?=$prova['id']?>" name="id-prova" class="Fechar-Popup">ENVIAR
-                    GABARITO</button>
-            </form>
-            <button onclick="Fechar_PopUp('popup-prova-<?=$prova['id']?>')" class="Fechar-Popup-icon">X</button>
-        </div>
-    </div>
-
-    <?php
-}
-    }
-
-    if ($data["rec"] != null) {
-        foreach ($data["rec"] as $provaa) {
-            if ((!isset($provaa["statuss"]) && $provaa["liberar_prova"] == null)) {
-                ?>
-
-
     <div class="prova-pendente">
-        <div style="background-color: #B35A37;" class="linha-vertical-campo-prova"></div>
+        <?php if($prova["metodo"] == "prova"){?>
+        <div class="linha-vertical-campo-prova"></div>
         <div class="conteudo-prova">
-            <i class="fas fa-exclamation-triangle fa-4x" style="color: #B35A37;"></i>
+            <i class="fas fa-exclamation-triangle icone-alerta"></i>
+            <?php }else {?>
+            <div style="background-color: #C4FF5B;" class="linha-vertical-campo-prova"></div>
+            <div class="conteudo-prova">
+                <i style="color: #C4FF5B;" class="fas fa-exclamation-triangle icone-alerta"></i>
+                <?php } ?>
 
-            <div class="prova-detalhes">
+
+                <div class="prova-detalhes">
+                    <center>
+                        <span class="prova-nome-disciplina">
+                            <?= strtoupper($prova["disciplina"])?>
+                        </span> <br>
+                        <span class="prova-nome-disciplina">
+                            <?=$prova["metodo"] == "prova" ? "PROVA AVALIATIVA" : "ATIVIDADE DE REVISÃO"?>
+                        </span> <br>
+                        <span class="prova-nome-professor">
+                            <?=$prova["nome_prova"]?>
+                        </span> <br>
+
+                        <span class="prova-nome-professor">
+                            <?=$prova["nome_professor"]?>
+                        </span>
+                    </center>
+                </div>
+                <div class="button-ver-prova">
+                    <button onclick="Mostrar_PopUp('popup-prova-<?=$prova['id']?>')">
+                        <i class="fas fa-eye"></i> Ver
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <br>
+
+        <div style="display: none; padding-top:10%; " id="popup-prova-<?=$prova["id"]?>" class="PopUp-sobreposicao">
+            <div class="conteudo-popup">
+                <br>
+                <h3 style="margin:0px;"> <?=$prova["metodo"] == "prova" ? "PROVA AVALIATIVA" : "ATIVIDADE DE REVISÃO"?>
+                </h3>
+                <h2 style="margin:0px;"> <?=$prova["nome_prova"]?> </h2>
+                <br>
                 <center>
-                    <span class="prova-nome-disciplina">RECUPERAÇÃO</span><br>
-                    <span class="prova-nome-disciplina">
-                        <?=$provaa["disciplina"]?>
-                    </span> <br>
-                    <span class="prova-nome-professor">
-                        <?=$provaa["nome_professor"]?>
-                    </span>
+
+                    <div style="text-align:left;margin-left:20px;">
+
+                        <span><b>PROFESSOR: </b><?=$prova["nome_professor"]?></span><br>
+                        <span><b>DISCIPLINA:</b> <?=$prova["disciplina"]?></span><br>
+                        <span><b>VALOR: </b> <?=$prova["valor"]?></span><br>
+                        <span><b>DATA: </b> <?=date('d/m/Y', strtotime($prova["data_prova"]))?> </span><br>
+                        <span><b>QUESTÕES: </b><?=$prova["QNT_perguntas"]?> </span><br>
+                    </div>
                 </center>
-            </div>
 
-            <div class="button-ver-prova">
-                <button onclick="Mostrar_PopUp('popup-prova-<?=$provaa['id']?>')">Ver</button>
+                <form method="post" action="gabarito_aluno">
+                    <button type="submit" value="<?=$prova['id']?>" name="id-prova" class="Fechar-Popup">ENVIAR
+                        GABARITO</button>
+                </form>
+                <button onclick="Fechar_PopUp('popup-prova-<?=$prova['id']?>')" class="Fechar-Popup-icon">X</button>
             </div>
         </div>
-    </div>
-    <br>
 
-    <div style="display: none;" id="popup-prova-<?=$provaa["id"]?>" class="PopUp-sobreposicao">
-        <div class="conteudo-popup">
-            <br>
-            <h2> RECUPERAÇÃO </h2>
-            <h3> <?=$provaa["nome_prova"]?> </h3>
-            <br>
-            <div style="text-align:left;">
-
-                <span><b>PROFESSOR: </b><?=$provaa["nome_professor"]?></span><br>
-                <span><b>DISCIPLINA:</b> <?=$provaa["disciplina"]?></span><br>
-                <span><b>VALOR: </b> <?=$provaa["valor"]?></span><br>
-                <span><b>QUESTÕES: </b><?=$provaa["QNT_perguntas"]?> </span><br>
-            </div>
-
-            <form method="post" action="gabarito_aluno_rec">
-                <button type="submit" value="<?=$provaa['id']?>" name="id-prova" class="Fechar-Popup">ENVIAR
-                    GABARITO</button>
-            </form>
-            <button onclick="Fechar_PopUp('popup-prova-<?=$provaa['id']?>')" class="Fechar-Popup-icon">X</button>
-        </div>
-    </div>
-
-    <?php
+        <?php
 }
-        }
     }
 }
 
 if (!$temProvaPendente) {
     ?>
-    <br><br>
-    <div class="nao_tem_prova">
-        <span>TUDO EM DIA 📚 </span>
-        <div>
-            <img src="public/assents/img/semprovas.gif" alt="">
+        <br><br>
+        <div class="nao_tem_prova">
+            <span>TUDO EM DIA 📚 </span>
+            <div>
+                <img src="public/assents/img/semprovas.gif" alt="">
+            </div>
+            <div>
+                <center>
+                    <p>VOCÊ NÃO TEM PROVAS PENDENTES <br> A SEREM FEITAS 🤠</p>
+                </center>
+            </div>
         </div>
-        <div>
-            <center>
-                <p>VOCÊ NÃO TEM PROVAS PENDENTES <br> A SEREM FEITAS 🤠</p>
-            </center>
-        </div>
-    </div>
-    <br><br>
-    <?php
+        <br><br>
+        <?php
 }
 ?>
 
-    <center>
-    <div class="titulo-area-provas">
-    <i class="fas fa-check-circle icone-titulo"></i>
-    <h2 class="titulo-principal-provas">Provas Finalizadas:</h2>
-</div>
-    </center>
+        <center>
+            <div class="titulo-area-provas">
+                <i class="fas fa-check-circle icone-titulo"></i>
+                <h2 class="titulo-principal-provas">Provas/atividades Finalizadas:</h2>
+            </div>
+        </center>
 
 
-    <?php
+        <?php
 if ($data["provas_feitas"] != null) {
     foreach ($data["provas_organizadas"] as $periodo => $provas) {?>
 
 
 
-    <details class="periodo-provas">
-        <summary> <i class="fas fa-calendar-alt" style="color:#0dad98;margin-right:10px;"> </i><?=$periodo?> </summary>
+        <details class="periodo-provas">
+            <summary> <i class="fas fa-calendar-alt" style="color:#0dad98;margin-right:10px;"> </i><?=$periodo?>
+            </summary>
 
-        <?php if ($provas == null) {?>
+            <?php if ($provas == null) {?>
 
-        <center>
-            <h3>VOCÊ AINDA NÃO FEZ NENHUMA PROVA DESSE PERÍODO!</h3>
-        </center>
+            <center>
+                <h3>VOCÊ AINDA NÃO FEZ NENHUMA PROVA DESSE PERÍODO!</h3>
+            </center>
 
-        <?php }?>
-        <br><br>
+            <?php }?>
+            <br><br>
 
-        <?php foreach ($provas as $prova) {?>
+            <?php foreach ($provas as $prova) {?>
 
-        <div class="prova-pendente">
-            <div class="linha-vertical-campo-prova " style="background-color:#39C000"></div>
-            <div class="conteudo-prova">
-                <i class="fas fa-check fa-4x" style="color:#39C000"></i>
+            <div class="prova-pendente">
+                <?php if($prova["metodo"] == "prova"){?>
 
-                <div class="prova-detalhes">
-                    <center>
-                        <span class="prova-nome-disciplina">
-                            <?=$prova["disciplina"]?>
-                        </span> <br>
-                        <span class="prova-nome-professor">
-                            <?=$prova["nome_prova"]?>
-                        </span> <br>
-                        <span class="prova-nome-professor">
-                            <?=$prova["data_aluno"]?>
-                        </span>
-                    </center>
-                </div>
+                <div class="linha-vertical-campo-prova " style="background-color:#39C000"></div>
+                <div class="conteudo-prova">
+                    <i class="fas fa-check fa-4x" style="color:#39C000"></i>
+                    <?php }else {?>
+                    <div class="linha-vertical-campo-prova " style="background-color:#2FC29F"></div>
+                    <div class="conteudo-prova">
+                        <i class="fas fa-check fa-4x" style="color:#2FC29F"></i>
+                        <?php } ?>
+                        <div class="prova-detalhes">
+                            <center>
+                                <span class="prova-nome-disciplina">
+                                    <?= strtoupper($prova["disciplina"])?>
+                                </span> <br>
+                                <span class="prova-nome-disciplina">
+                                    <?=$prova["metodo"] == "prova" ? "PROVA AVALIATIVA" : "ATIVIDADE DE REVISÃO"?>
+                                </span> <br>
+                                <span class="prova-nome-professor">
+                                    <?=$prova["nome_prova"]?>
+                                </span> <br>
+                                <span class="prova-nome-professor">
+                                    <?=date('d/m/Y', strtotime($prova["data_aluno"]))?>
+                                </span>
+                            </center>
+                        </div>
 
-                <div class="button-ver-prova">
-                    <button onclick="Mostrar_PopUp('popup-gabarito-<?=$prova['id']?>')">Resultado</button>
-                </div>
-            </div>
-        </div><br>
+                        <div class="button-ver-prova">
+                            <button onclick="Mostrar_PopUp('popup-gabarito-<?=$prova['id']?>')">Resultado</button>
+                        </div>
+                    </div>
+                </div><br>
 
-        <div style="display: none; padding-top:10%; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
-            id="popup-gabarito-<?=$prova["id"]?>" class="PopUp-sobreposicao">
-            <div class="conteudo-popup">
-                <br>
-                <h4> <?=$prova["nome_prova"]?></h4>
+                <div style="display: none; padding-top:10%; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+                    id="popup-gabarito-<?=$prova["id"]?>" class="PopUp-sobreposicao">
+                    <div class="conteudo-popup">
+                        <br>
+                        <h4> <?=$prova["nome_prova"]?></h4>
 
 
 
-                <table>
-                    <?php
+                        <table>
+                            <?php
 $contador = 1;
         $alternativas = $data["alternativas"];
         $gabarito_professor = [];
@@ -304,9 +270,9 @@ $contador = 1;
 
 
         while ($contador <= $prova["QNT_perguntas"]) {?>
-                    <tr>
-                        <td class="numero"><?=$contador?></td>
-                        <?php
+                            <tr>
+                                <td class="numero"><?=$contador?></td>
+                                <?php
 $contador2 = 0;
             $resposta_correta = $gabarito_professor[$contador];
 
@@ -349,37 +315,45 @@ $contador2 = 0;
                 }
             }
             ?>
-                    </tr>
-                    <?php $contador++;}?>
-                </table>
+                            </tr>
+                            <?php $contador++;}?>
+                        </table>
 
-                <?php if ($liberado == null) {
+                    <?php if ($liberado == null) {
             echo "<h5>O PROFESSOR AINDA NÃO LIBEROU O ACESSO AS RESPOSTAS!</h5>";
         } else {?>
-                <br>
-                <span><b>VALOR DA PROVA:</b> <?=$prova["pontos_prova"]?></span> <br>
-                <span><b>VALOR OBTIDO:</b> <?= $prova["pontos_aluno"]?> PONTOS</span>
-                <?php
-}?>
+                        <?php if($prova["metodo"] == "prova"){ ?>
+                        <br>
+                        <span><b>VALOR DA PROVA: </b> <?=$prova["pontos_prova"]?> PONTOS</span>
+                        <span><b>VALOR OBTIDO: </b> <?= $prova["pontos_aluno"]?> PONTOS</span>
+                        <span><b>PORCETAGEM: </b> <?= $prova["porcentagem"]?>% DA PROVA</span>
+                        <?php }else{ ?>
+                        <br>
+                        <span><b>PORCETAGEM: </b> <?= $prova["porcentagem"]?>% DA PROVA</span>
+                        <span><b>ACERTOS: </b> <?= $prova["acertos"]?> ACERTO(S)</span>
+                        <?php } ?>
 
-                <button onclick="Fechar_PopUp('popup-gabarito-<?=$prova['id']?>')" class="Fechar-Popup-icon">X</button>
-            </div>
-        </div>
+                    <?php }?>
+
+                        <button onclick="Fechar_PopUp('popup-gabarito-<?=$prova['id']?>')"
+                            class="Fechar-Popup-icon">X</button>
+                    </div>
+                </div>
+
+                <?php }?>
+                <br><br>
+        </details>
 
         <?php }?>
-        <br><br>
-    </details>
-
-    <?php }?>
-    <?php
+        <?php
 } else {?>
 
-    <h4>Você não realizou nenhuma prova!</h4>
+        <h4>Você não realizou nenhuma prova!</h4>
 
 
-    <?php
+        <?php
 }?>
-    <div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    </div>
+        <div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        </div>
 </main>

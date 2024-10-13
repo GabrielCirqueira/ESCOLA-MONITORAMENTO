@@ -211,7 +211,7 @@
   border-radius: 50%;
 }
 .loader2::before {
-  border-color: #16b0c1 #0000;
+  border-color: #0dad98 #0000;
   animation: inherit; 
   animation-duration: .5s;
   animation-direction: reverse;
@@ -226,7 +226,7 @@
   font-family: monospace;
   font-size: 18px;
   color:#0000;
-  background:linear-gradient(90deg,#000 calc(50% - 0.5ch),#16b0c1 0 calc(50% + 0.5ch),#000 0) right/calc(200% + 1ch) 100%;
+  background:linear-gradient(90deg,#000 calc(50% - 0.5ch),#0dad98 0 calc(50% + 0.5ch),#000 0) right/calc(200% + 1ch) 100%;
   -webkit-background-clip:text;
           background-clip:text;
   animation: l8 2s infinite steps(11);

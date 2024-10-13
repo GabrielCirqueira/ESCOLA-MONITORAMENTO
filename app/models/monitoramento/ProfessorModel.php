@@ -109,14 +109,14 @@ class ProfessorModel
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function GetProvaRecbyIDprova($id)
-    {
-        $sql = "SELECT * FROM gabarito_professores_recuperacao WHERE id_prova = :id";
-        $query = Database::GetInstance()->prepare($sql);
-        $query->bindValue(":id", $id);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
-    }
+    // public static function GetProvaRecbyIDprova($id)
+    // {
+    //     $sql = "SELECT * FROM gabarito_professores_recuperacao WHERE id_prova = :id";
+    //     $query = Database::GetInstance()->prepare($sql);
+    //     $query->bindValue(":id", $id);
+    //     $query->execute();
+    //     return $query->fetchAll(PDO::FETCH_ASSOC);
+    // }
 
     public static function GetProvaRecbyID($id)
     {

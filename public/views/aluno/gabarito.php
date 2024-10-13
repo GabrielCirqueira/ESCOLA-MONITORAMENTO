@@ -6,7 +6,8 @@
             <div class="info-prova">
                 <span><b><i class="fas fa-book"></i> DISCIPLINA:</b> <?=$data["prova"]["disciplina"]?></span><br>
                 <span><b><i class="fas fa-chalkboard-teacher"></i> PROFESSOR:</b> <?=$data["prova"]["nome_professor"]?></span><br>
-                <span><b><i class="fas fa-coins"></i> VALOR:</b> <?=$data["prova"]["valor"]?></span><br>
+                <span><b><i class="fas fa-star"></i> VALOR:</b> <?=$data["prova"]["valor"]?></span><br>
+                <span><b><i class="fas fa-file-alt"></i> METODO:</b> <?=$data["prova"]["metodo"] == "prova" ? "PROVA AVALIATIVA" : "ATIVIDADE AVALIATIVA"?></span><br>
             </div>
         </div>
 
@@ -34,11 +35,11 @@
                         $contador++;}
                         ?>
                     </table>
-                    <br><br><br>
+                    <br><br>
                     <div class="alerta">
                         <h3><i class="fas fa-exclamation-triangle"></i> Revise todas as respostas antes de enviar!</h3>
                     </div>
-                    <br>
+                    <br><br>
                     <center>
                         <div id="div_carregamento" class="hidden">
                             <div class="loader2"></div><br><br>
@@ -48,7 +49,7 @@
                             <i class="fas fa-paper-plane"></i> Enviar Gabarito
                         </button>
                     </center>
-                </form>
+                </form><br>
             </div>
         </div>
         
@@ -57,7 +58,7 @@
             <ul>
                 <li><i class="fas fa-check-circle"></i> Confira todas as alternativas antes de selecionar sua resposta.</li>
                 <li><i class="fas fa-times-circle"></i> Se tiver dúvidas, revise o enunciado da questão novamente.</li>
-                <li><i class="fas fa-clock"></i> Não se apresse, faça com cuidade.</li>
+                <li><i class="fas fa-clock"></i> Não se apresse, faça com cuidado.</li>
             </ul>
         </div>
     </center>
