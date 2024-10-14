@@ -311,7 +311,7 @@ class PFAcontroller
 
             $_SESSION["PAG_VOLTAR"] = "relatorio_professor";
             $provas = AlunoModel::GetProvasFinalizadas();
-            $provasRec = ProfessorModel::GetProvaRecAlunos();
+            // $provasRec = ProfessorModel::GetProvaRecAlunos();
             $provasPrimeira = ProfessorModel::GetProvaPrimeira();
             $provas_professores = AlunoModel::GetProvas();
             $dados_turmas = [];
@@ -342,16 +342,16 @@ class PFAcontroller
                 }
             }
 
-            $alunos_por_turma_rec = array();
-            foreach ($provasRec as $prova) {
-                if ($prova["id_prova"] == $id_prova) {
-                    $turma_prova = $prova["turma"];
-                    if (!isset($alunos_por_turma_rec[$turma_prova])) {
-                        $alunos_por_turma_rec[$turma_prova] = array();
-                    }
-                    $alunos_por_turma_rec[$turma_prova][] = $prova;
-                }
-            }
+            // $alunos_por_turma_rec = array();
+            // foreach ($provasRec as $prova) {
+            //     if ($prova["id_prova"] == $id_prova) {
+            //         $turma_prova = $prova["turma"];
+            //         if (!isset($alunos_por_turma_rec[$turma_prova])) {
+            //             $alunos_por_turma_rec[$turma_prova] = array();
+            //         }
+            //         $alunos_por_turma_rec[$turma_prova][] = $prova;
+            //     }
+            // }
 
             $alunos_por_turma_primeira = array();
             foreach ($provasPrimeira as $prova) {
@@ -366,18 +366,22 @@ class PFAcontroller
 
             $total_pontos_geral = 0;
             $total_alunos_geral = 0;
+            $total_acertos_geral = 0;
             $total_acima_60 = 0;
             $total_alunos = 0;
 
             foreach ($alunos_por_turma as $turma) {
                 $pontos = 0;
                 $alunos = 0;
+                $acertos = 0;
                 $alunos_acima_60 = 0;
                 foreach ($turma as $aluno) {
                     $pontos += $aluno["pontos_aluno"];
+                    $acertos += $aluno["acertos"];
                     $alunos++;
                     $turma_nome = $aluno["turma"];
                     $pontos_prova = $aluno["pontos_prova"];
+                    $acertosTotal = $aluno["QNT_perguntas"];
                     $porcentagem_aluno = ($aluno["acertos"] / $aluno["QNT_perguntas"]) * 100;
                     if ($aluno["descritores"] == null) {
                         $descriotores_sn = false;
@@ -392,22 +396,33 @@ class PFAcontroller
 
                 $porcentagem_acima_60 = number_format(($alunos_acima_60 / $alunos) * 100, 1);
 
+                if($aluno["metodo"] == "prova"){ 
+                    $porcentagemm = number_format((($pontos / $alunos) / $pontos_prova) * 100, 0);
+                    $graficor = MainController::gerarGraficoRosca(number_format((($pontos / $alunos) / $pontos_prova) * 100, 1));
+                }else{
+                    $graficor = MainController::gerarGraficoRosca(number_format((($acertos / $alunos) / $acertosTotal) * 100, 1));
+                    $porcentagemm = ($aluno["acertos"] / $aluno["QNT_perguntas"]) * 100;
+                }
+
                 $dados_turmas[$turma_nome] = [
                     "total_pontos_turma" => $pontos,
                     "alunos" => $alunos,
                     "pontos_prova" => $pontos_prova,
-                    "porcentagem" => number_format((($pontos / $alunos) / $pontos_prova) * 100, 0),
+                    "porcentagem" => $porcentagemm,
                     "porcentagem_acima_60" => $porcentagem_acima_60,
                     "turma_nome" => $turma_nome,
-                    "grafico" => MainController::gerarGraficoRosca(number_format((($pontos / $alunos) / $pontos_prova) * 100, 1)),
+                    "grafico" => $graficor,
                 ];
 
                 $total_pontos_geral += $pontos;
+                $total_acertos_geral += $acertos;
                 $total_alunos_geral += $alunos;
                 $total_alunos += $alunos;
             }
 
-            $media_geral_porcentagem = number_format((($total_pontos_geral / $total_alunos_geral) / $pontos_prova) * 100, 2);
+            $media_geral_porcentagem = number_format((($total_acertos_geral / $total_alunos_geral) / $acertosTotal) * 100, 2);
+            // $media_geral_porcentagem = number_format((($total_pontos_geral / $total_alunos_geral) / $pontos_prova) * 100, 2);
+
             $porcentagem_geral_acima_60 = number_format(($total_acima_60 / $total_alunos) * 100, 1);
 
             $media_descritores_geral = [];
@@ -596,17 +611,18 @@ class PFAcontroller
                         }
                     }
 
-                    if ($prova["recuperacao"] != null) {
-                        foreach ($provasRec as $pr) {
-                            if ($pr["id_prova"] == $prova["id_prova"]) {
-                                if ($pr["ra"] == $prova["ra"]) {
-                                    $prova["notaRec"] = $pr["pontos_aluno"];
-                                }
-                            }
-                        }
-                    } else {
-                        $prova["notaRec"] = "INDEFINIDO";
-                    }
+                    // if ($prova["recuperacao"] != null) {
+                    //     foreach ($provasRec as $pr) {
+                    //         if ($pr["id_prova"] == $prova["id_prova"]) {
+                    //             if ($pr["ra"] == $prova["ra"]) {
+                    //                 $prova["notaRec"] = $pr["pontos_aluno"];
+                    //             }
+                    //         }
+                    //     }
+                    // } else {
+                    //     $prova["notaRec"] = "INDEFINIDO";
+                    // }
+                    $prova["notaRec"] = "INDEFINIDO";
 
                     $provas_tudo[] = $prova;
                 }
@@ -646,7 +662,8 @@ class PFAcontroller
 
             // MainController::pre($descritores_por_aluno_primeira);
 
-            $descritores_por_aluno_rec = $status_desc ? ProfessorController::calcular_descritores_por_aluno($alunos_por_turma_rec) : null;
+            // $descritores_por_aluno_rec = $status_desc ? ProfessorController::calcular_descritores_por_aluno($alunos_por_turma_rec) : null;
+            $descritores_por_aluno_rec =  null;
 
             $alunosTurma = AlunoModel::GetAlunos();
 

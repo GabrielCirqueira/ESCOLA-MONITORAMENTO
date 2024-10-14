@@ -143,6 +143,8 @@ class ProfessorController
                 $descritores = null;
             }
 
+            
+
             $gabarito = implode(";", $gabarito_prova);
 
             $dados = [
@@ -707,18 +709,22 @@ class ProfessorController
 
             $total_pontos_geral = 0;
             $total_alunos_geral = 0;
+            $total_acertos_geral = 0;
             $total_acima_60 = 0;
             $total_alunos = 0;
 
             foreach ($alunos_por_turma as $turma) {
                 $pontos = 0;
                 $alunos = 0;
+                $acertos = 0;
                 $alunos_acima_60 = 0;
                 foreach ($turma as $aluno) {
                     $pontos += $aluno["pontos_aluno"];
+                    $acertos += $aluno["acertos"];
                     $alunos++;
                     $turma_nome = $aluno["turma"];
                     $pontos_prova = $aluno["pontos_prova"];
+                    $acertosTotal = $aluno["QNT_perguntas"];
                     $porcentagem_aluno = ($aluno["acertos"] / $aluno["QNT_perguntas"]) * 100;
                     if ($aluno["descritores"] == null) {
                         $descriotores_sn = false;
@@ -733,22 +739,33 @@ class ProfessorController
 
                 $porcentagem_acima_60 = number_format(($alunos_acima_60 / $alunos) * 100, 1);
 
+                if($aluno["metodo"] == "prova"){ 
+                    $porcentagemm = number_format((($pontos / $alunos) / $pontos_prova) * 100, 0);
+                    $graficor = MainController::gerarGraficoRosca(number_format((($pontos / $alunos) / $pontos_prova) * 100, 1));
+                }else{
+                    $graficor = MainController::gerarGraficoRosca(number_format((($acertos / $alunos) / $acertosTotal) * 100, 1));
+                    $porcentagemm = ($aluno["acertos"] / $aluno["QNT_perguntas"]) * 100;
+                }
+
                 $dados_turmas[$turma_nome] = [
                     "total_pontos_turma" => $pontos,
                     "alunos" => $alunos,
                     "pontos_prova" => $pontos_prova,
-                    "porcentagem" => number_format((($pontos / $alunos) / $pontos_prova) * 100, 0),
+                    "porcentagem" => $porcentagemm,
                     "porcentagem_acima_60" => $porcentagem_acima_60,
                     "turma_nome" => $turma_nome,
-                    "grafico" => MainController::gerarGraficoRosca(number_format((($pontos / $alunos) / $pontos_prova) * 100, 1)),
+                    "grafico" => $graficor,
                 ];
 
                 $total_pontos_geral += $pontos;
+                $total_acertos_geral += $acertos;
                 $total_alunos_geral += $alunos;
                 $total_alunos += $alunos;
             }
 
-            $media_geral_porcentagem = number_format((($total_pontos_geral / $total_alunos_geral) / $pontos_prova) * 100, 2);
+            $media_geral_porcentagem = number_format((($total_acertos_geral / $total_alunos_geral) / $acertosTotal) * 100, 2);
+            // $media_geral_porcentagem = number_format((($total_pontos_geral / $total_alunos_geral) / $pontos_prova) * 100, 2);
+
             $porcentagem_geral_acima_60 = number_format(($total_acima_60 / $total_alunos) * 100, 1);
 
             $media_descritores_geral = [];

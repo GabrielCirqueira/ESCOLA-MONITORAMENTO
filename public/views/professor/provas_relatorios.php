@@ -34,9 +34,16 @@
 
 
             <div class="prova-pendente" style="width:85%" >
-                <div class="linha-vertical-campo-prova" style="background-color: #eb7134;"></div>
+                <?php if($prova["metodo"] == "prova"){?>
+                    <div class="linha-vertical-campo-prova" style="background-color: #eb7134;"></div>
                 <div class="conteudo-prova">
                     <i class="fas fa-chart-bar fa-4x" style="color: #eb7134;"></i>
+                    <?php }else{?>
+                        <div class="linha-vertical-campo-prova" style="background-color: #BDE146;"></div>
+                <div class="conteudo-prova">
+                    <i class="fas fa-tasks fa-4x" style="color: #BDE146;"></i>
+                    <?php }?>
+
 
                     <div class="prova-detalhes">
                         <center>
