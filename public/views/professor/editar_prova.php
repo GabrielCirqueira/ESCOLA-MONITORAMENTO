@@ -33,7 +33,7 @@
                     <?php
 $contador = 1;
 while ($contador <= $data["perguntas"]) {
-    $resposta = explode(",", $data["gabarito"][$contador - 1])[1];
+    $resposta = explode(",", base64_decode($data["gabarito"][$contador - 1]))[1];
     ?>
                     <tr>
                         <td>

@@ -7,6 +7,11 @@
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.197);
 }
 
+.titulo-desempenho-geral,.titulo-desempenho-turma{
+  color: rgb(149, 149, 149);
+  font-weight: bold;
+}
+
 .container-professor *{
   text-align: center;
 }

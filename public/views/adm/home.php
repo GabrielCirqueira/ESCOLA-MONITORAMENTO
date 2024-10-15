@@ -788,6 +788,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <th>TURMA</th>
                                 <th>DATA</th>
                                 <th>DISCIPLINA</th>
+                                <th>NOME P.</th>
                                 <th>PONTOS</th>
                                 <th>EDITAR</th>
                                 <th>EXCLUIR</th>
@@ -801,6 +802,7 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                                 <td><?=$aluno["turma"]?></td>
                                 <td><?=date('d/m/Y', strtotime($aluno["data_aluno"]))?></td>
                                 <td><?=$aluno["disciplina"]?></td>
+                                <td><?=$aluno["nome_prova"]?></td>
                                 <td><?=$aluno["pontos_aluno"]?></td>
                                 <td><button class="btn-editar"
                                         onclick="editarProvaAluno('<?=$aluno['ra']?>', '<?=$aluno['perguntas_respostas']?>', '<?=$aluno['aluno']?>','<?=$aluno['id_prova']?>',<?=$aluno['id']?>,'<?=$aluno['disciplina']?>',<?=$aluno['data_aluno']?>,'<?=$aluno['turma']?>')">EDITAR</button>

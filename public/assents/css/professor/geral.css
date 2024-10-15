@@ -1,6 +1,11 @@
 .titulo-NSL {
     color: #16b39e;
   }
+  
+  .main-home-professor h1,.main-home-professor h2,.titulo-desempenho-turmas,.titulo-desempenho-descritores {
+    color: #16c1aa;
+    font-weight: bold;
+  }
 
   .botao-ver-relatorio {
     width: 120px;

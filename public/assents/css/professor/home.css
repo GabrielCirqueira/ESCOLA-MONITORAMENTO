@@ -9,10 +9,10 @@
 .altura-completa {
   min-height: 100vh;
 }
-
+/* 
 .fundo-cinza-claro {
-  background-color: #f9f9f9;
-}
+  background-color: #ffffff;
+} */
 
 .cabecalho-sistema {
   text-align: center;
@@ -38,8 +38,8 @@
 }
 
 .botao-interativo-professor {
-  width: 310px;
-  height: 250px;
+  width: 300px;
+  height: 240px;
   background-color: #2ac8b3;
   text-decoration: none;
   color: #fff;
@@ -111,4 +111,108 @@
 .texto-dica {
   font-size: 16px;
   color: #555;
+}
+
+.link-seguranca-sistema {
+  align-items: center;
+  gap: 8px;
+  color: #e9da00;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 10px;
+  transition: color 0.3s ease;
+}
+
+.link-seguranca-sistema:hover {
+  color: #d6a800;
+  cursor: pointer;
+}
+
+.icone-link-seguranca {
+  font-size: 18px;
+}
+
+
+/* Responsividade para telas menores (tablets e celulares) */
+@media (max-width: 1024px) {
+  .area-botoes-acoes {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .botao-interativo-professor {
+    width: 80%;
+    margin-bottom: 20px;
+  }
+
+  .titulo-sistema-monitoramento {
+    font-size: 32px;
+  }
+
+  .subtitulo-sistema-monitoramento {
+    font-size: 18px;
+  }
+
+  .titulo-dicas {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .titulo-sistema-monitoramento {
+    font-size: 28px;
+  }
+
+  .botao-interativo-professor {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+
+  .icone-interativo {
+    font-size: 2.5em;
+  }
+
+  .descricao-botao-professor {
+    font-size: 12px;
+  }
+
+  .titulo-dicas {
+    font-size: 22px;
+  }
+
+  .cartao-dica-professor {
+    padding: 10px;
+  }
+
+  .texto-dica {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .titulo-sistema-monitoramento {
+    font-size: 24px;
+  }
+
+  .icone-interativo {
+    font-size: 2em;
+  }
+
+  .descricao-botao-professor {
+    font-size: 11px;
+  }
+
+  .titulo-dicas {
+    font-size: 20px;
+  }
+
+  .cartao-dica-professor {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .texto-dica {
+    font-size: 12px;
+  }
 }

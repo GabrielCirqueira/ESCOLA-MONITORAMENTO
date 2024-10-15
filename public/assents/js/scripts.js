@@ -336,6 +336,11 @@ function filtrarTabela(tabelaId, filtroRAId, filtroNomeId) {
                     var tdDisciplina = document.createElement('td');
                     tdDisciplina.textContent = aluno.disciplina;
                     tr.appendChild(tdDisciplina);
+
+                                
+                    var tdDisciplina = document.createElement('td');
+                    tdDisciplina.textContent = aluno.nome_prova;
+                    tr.appendChild(tdDisciplina);
             
                     var tdPontos = document.createElement('td');
                     tdPontos.textContent = aluno.pontos_aluno;
@@ -356,6 +361,7 @@ function filtrarTabela(tabelaId, filtroRAId, filtroNomeId) {
                             aluno.id_prova,
                             aluno.id,
                             aluno.disciplina,
+                            aluno.nome_prova,
                             aluno.data_aluno,
                             aluno.turma
                         );

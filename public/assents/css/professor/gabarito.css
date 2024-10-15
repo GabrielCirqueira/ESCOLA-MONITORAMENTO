@@ -130,12 +130,10 @@
 .tabela-gabarito {
   text-align: center;
   font-size: 25px;
-  color: #0dad98;
-  background-color: #f1f1f1;
+  color: #0dad98; 
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   font-weight: bold;
 }

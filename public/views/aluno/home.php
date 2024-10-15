@@ -44,6 +44,8 @@
     </center>
 
     <?php
+
+
 $provas_finalizadas = [];
 $temProvaPendente = false;
 
@@ -161,7 +163,7 @@ if (!$temProvaPendente) {
         <?php
 }
 ?>
-
+<br><br><br>
         <center>
             <div class="titulo-area-provas">
                 <i class="fas fa-check-circle icone-titulo"></i>
@@ -254,7 +256,7 @@ $contador = 1;
             foreach ($data["provas"] as $P) {
                 if ($P["id"] == $prova["id_prova"]) {
                     foreach (explode(";", $P["gabarito"]) as $gabarito) {
-                        list($questao, $resposta) = explode(",", $gabarito);
+                        list($questao, $resposta) = explode(",", base64_decode($gabarito));
                         $gabarito_professor[$questao] = $resposta;
                         $liberado = $P["liberado"];
                     }

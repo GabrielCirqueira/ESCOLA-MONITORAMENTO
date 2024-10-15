@@ -275,7 +275,7 @@
   border-radius: 7px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, transform 0.3s ease;
-  border: 3px solid #0dad98;
+  border: 2px solid #0dad98;
 }
 
 .icone-titulo {
@@ -286,7 +286,7 @@
 }
 
 .titulo-principal-provas {
-  font-size: 20px;
+  font-size: 17px;
   color: #333;
   font-weight: bold;
   text-transform: uppercase;
@@ -308,7 +308,6 @@
   color: #0a8a6e;
 }
 
-/* Media Queries */
 @media (max-width: 768px) {
   .prova-pendente,
   .caixa-boas-vindas {
@@ -361,11 +360,11 @@
 
 @media (max-width: 480px) {
   .titulo-principal-provas {
-    font-size: 18px;
+    font-size: 15px;
     text-align: center;
   }
 
   .icone-titulo {
-    font-size: 25px;
+    font-size: 22px;
   }
 }

@@ -376,7 +376,11 @@ public static function gabarito_aluno()
                 }
             }
 
-            $gabarito_professor = explode(";", $_SESSION["prova_gabarito"]["gabarito"]);
+            $gabarito_professor = [];
+            $gabarito_crip = explode(";", $_SESSION["prova_gabarito"]["gabarito"]);
+            foreach($gabarito_crip as $resposta){
+                $gabarito_professor[] = base64_decode($resposta);
+            }
             $gabarito_aluno = [];
             $perguntas_certas = [];
             $perguntas_erradas = [];
@@ -388,13 +392,13 @@ public static function gabarito_aluno()
             $dataFormatada = $dataAtual->format('Y-m-d');
             $valor_cada_pergunta = $_SESSION["prova_gabarito"]["valor"] / $_SESSION["prova_gabarito"]["QNT_perguntas"];
             $descritores_questoes = explode(";", $_SESSION["prova_gabarito"]["descritores"]);
-
+            
             $contador = 1;
             while ($contador <= $_SESSION["prova_gabarito"]["QNT_perguntas"]) {
                 $gabarito_aluno[] = $_POST["gabarito_questao_" . $contador];
                 $contador++;
             }
-
+            
             $contador = 0;
 
             while ($contador < $_SESSION["prova_gabarito"]["QNT_perguntas"]) {

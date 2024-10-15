@@ -63,6 +63,16 @@ class ProfessorController
         }
     }
 
+    public static function professor_security(){
+        if ($_SESSION["PROFESSOR"]) {
+            $_SESSION["PAG_VOLTAR"] = "professor_home";
+
+            MainController::Templates("public/views/professor/security.php", "PROFESSOR");
+        } else {
+            header("location: adm");
+        }
+    }
+
     public static function criar_gabarito()
     {
 
@@ -132,7 +142,7 @@ class ProfessorController
 
             while ($contador <= $_POST["numero_perguntas"]) {
                 $descritores_prova[$contador] = $contador . "," . $_POST["DESCRITOR_" . $contador];
-                $gabarito_prova[$contador] = $_POST[$contador];
+                $gabarito_prova[$contador] = base64_encode($_POST[$contador]);
 
                 $contador++;
             }
@@ -142,8 +152,6 @@ class ProfessorController
             if ($_POST["descritor"] == "não") {
                 $descritores = null;
             }
-
-            
 
             $gabarito = implode(";", $gabarito_prova);
 
@@ -206,6 +214,14 @@ class ProfessorController
                     "provas" => $provas_organizadas,
                     "provas_alunos" => $provas_alunos,
                 ];
+
+                foreach ($dados['provas'] as $periodo => $provas) {
+                    usort($provas, function ($a, $b) {
+                        return strtotime($b['data_prova']) - strtotime($a['data_prova']);
+                    });
+                    $dados['provas'][$periodo] = $provas;
+                }
+
             }
 
             if ($provas == null || $provas_professores == null) {
@@ -624,13 +640,21 @@ class ProfessorController
                             $provas_organizadas[$nome_periodo][] = $prova;
                         }
                     }
-                }
-
+                } 
                 $dados = [
                     "provas" => $provas_organizadas,
                     "provas_alunos" => $provas_alunos,
                 ];
+
+                foreach ($dados['provas'] as $periodo => $provas) {
+                    usort($provas, function ($a, $b) {
+                        return strtotime($b['data_prova']) - strtotime($a['data_prova']);
+                    });
+                    $dados['provas'][$periodo] = $provas;
+                }
+
             }
+
             if ($provas == null || $provas_professores == null) {
                 $dados = null;
             }
@@ -1216,7 +1240,7 @@ class ProfessorController
 
             for ($contador = 1; $contador <= $numero_perguntas; $contador++) {
                 $descritores_prova[$contador] = $contador . "," . $_POST["DESCRITOR_" . $contador];
-                $gabarito_prova[$contador] = $_POST[$contador];
+                $gabarito_prova[$contador] = base64_encode($_POST[$contador]);
             }
 
             $descritores = implode(";", $descritores_prova);
@@ -1238,7 +1262,11 @@ class ProfessorController
             $provas_alunos = ProfessorModel::GetProvasFeitasbyID($id_prova);
 
             foreach ($provas_alunos as $prova_aluno) {
-                $gabarito_professor = explode(";", $novo_gabarito_professor["gabarito"]);
+                $gabarito_professor = [];
+                $gabarito_crip = explode(";", $novo_gabarito_professor["gabarito"]);
+                foreach($gabarito_crip as $resposta){
+                    $gabarito_professor[] = base64_decode($resposta);
+                }
                 $gabarito_aluno = explode(";", $prova_aluno["perguntas_respostas"]);
                 $descritores_questoes = $descritores_prova;
 
@@ -1263,10 +1291,10 @@ class ProfessorController
                 $valor_cada_pergunta = $novo_gabarito_professor["valor"] / count($gabarito_professor);
                 $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
 
-                if($prova_aluno["valor"] == 0){
+                if($prova_aluno["pontos_prova"] == 0){
                     $porcentagemm = ($acertos_aluno / $prova_aluno["QNT_perguntas"]) * 100;
                 }else{
-                    $porcentagemm = (number_format(round($pontos_aluno),0) / $prova_aluno["valor"]) * 100;
+                    $porcentagemm = (number_format(round($pontos_aluno),0) / $prova_aluno["pontos_prova"]) * 100;
                 }
 
                 $dados_atualizacao = [

@@ -2,7 +2,7 @@
     <center>
 
         <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO</h1>
-        <h2>PROVAS - <?= $_SESSION["nome_professor"] ?></h2>
+        <h2>RELATÓRIOS - <?= $_SESSION["nome_professor"] ?></h2>
     </center>
     <br>
     <?php

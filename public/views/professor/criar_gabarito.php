@@ -1,7 +1,6 @@
 <main class="main-home-professor">
     <h1 class="titulo-NSL">NSL - SISTEMA DE MONITORAMENTO <i class="fas fa-chalkboard-teacher"></i></h1>
-
-    <!-- Introdução com dicas -->
+ 
     <div class="introducao-professor">
         <h2>Bem-vindo(a), Professor(a)!</h2>
         <p>Preencha o gabarito com as alternativas corretas e, caso necessário, os descritores. Aqui estão algumas
@@ -47,7 +46,7 @@
     </div>
     <br><br><br>
 
-    <div class="professor-inserir-gabarito">
+    <div class="professor-dados-gabarito-criar">
         <form action="criar_gabarito_respostas" method="post">
             <input type="hidden" name="metodo" value="<?php echo $data['metodo']; ?>">
             <input type="hidden" name="numero_perguntas" value="<?php echo $data['perguntas']; ?>">

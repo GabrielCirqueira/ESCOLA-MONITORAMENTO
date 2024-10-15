@@ -11,7 +11,15 @@
     flex-direction: column;
     width: 200px;
     padding: 20px;
-    margin-right: 50px;
+    margin-right: 20px;
+  }
+
+  .gestor-main {
+    display: flex;
+    margin: 20px;
+    width: 95%;
+    overflow: hidden;
+    min-height: 40vw;
   }
 
   /* .info-gestor {

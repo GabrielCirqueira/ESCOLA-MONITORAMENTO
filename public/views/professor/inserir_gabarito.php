@@ -182,9 +182,8 @@ $icones = [
                             <div class="number-box" data-value="18">18</div>
                             <div class="number-box" data-value="19">19</div>
                             <div class="number-box" data-value="20">20</div>
-
-                        </div>
-                        <input name="qtn-perguntas" required type="hidden" class="professor-input-number-field">
+                </div>
+                <input name="qtn-perguntas" required type="hidden" class="professor-input-number-field">
                     </div>
                 </center>
                 <center>

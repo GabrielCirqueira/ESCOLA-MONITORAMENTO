@@ -46,3 +46,4 @@ rotas:
   prova_recuperacao:              app\controllers\monitoramento\ProfessorController
   editar_gabarito_recuperacao:    app\controllers\monitoramento\ProfessorController
   atualizar_gabarito_rec:         app\controllers\monitoramento\ProfessorController
+  professor_security:             app\controllers\monitoramento\ProfessorController

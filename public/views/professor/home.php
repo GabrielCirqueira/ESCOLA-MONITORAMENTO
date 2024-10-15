@@ -1,11 +1,17 @@
 <main class="area-conteudo-principal altura-completa fundo-cinza-claro">
+    <div class="area-dicas-sistema">
+
         <section class="cabecalho-sistema">
             <h1 class="titulo-sistema-monitoramento">NSL - SISTEMA DE MONITORAMENTO</h1>
             <p class="subtitulo-sistema-monitoramento">Bem-vindo, professor! Utilize o painel abaixo para gerenciar suas provas e relatórios.</p>
-        </section>
 
-        <!-- Botões principais do sistema -->
-        <section class="area-botoes-acoes">
+            <a href="professor_security" target="_blank" class="link-seguranca-sistema"> 
+                Esse sistema é seguro? <i class="fas fa-external-link-alt icone-link-seguranca"></i>
+
+            </a>
+        </section>
+ 
+        <section class="area-botoes-acoes ">
             <a href="inserir_gabarito" class="botao-interativo-professor">
                 <i class="fas fa-pencil-alt icone-interativo"></i>
                 <h3>INSERIR GABARITO</h3>
@@ -22,8 +28,8 @@
                 <p class="descricao-botao-professor">Acesse os relatórios de desempenho dos alunos.</p>
             </a>
         </section>
-
-        <!-- Dicas e Ajuda -->
+        </div>
+<br><br>
         <section class="area-dicas-sistema">
             <h2 class="titulo-dicas">Dicas Úteis</h2>
             <div class="cartao-dica-professor">
