@@ -6,15 +6,38 @@
 
         <div class="">
             <form action="atualizar_gabarito" method="post">
+
+                
+
                 <div class="valor_pontos_editar">
                     <h2>Valor</h2>
                     <input type="text" name="valor_prova" value="<?=$data['valor'];?>">
                 </div>
                 <br><br>
-                <!-- <pre>
-                <?php print_r($data["descritores"])?>
-            </pre> -->
 
+                <div class="professor-form-section-wrapper">
+                <center>
+                    <h3 class="form-section-header">METODO AVALIATIVO:</h3>
+                    <div class="professor-form-group">
+                        <div>
+                            <input type="radio" <?= $data["metodo"] == "prova" ? "checked" : "" ?> required id="metodo_prova" name="metodo" value="prova"
+                                class="custom-radio-button">
+                            <label style="width: 220px;" for="metodo_prova">PROVA AVALIATIVA</label>
+                        </div>
+                        <div>
+                            <input type="radio"  <?= $data["metodo"] == "atividade" ? "checked" : "" ?>  required name="metodo" id="metodo_att" value="atividade"
+                                class="custom-radio-button">
+                            <label style="width: 220px;" for="metodo_att">ATIVIDADE DE REVISÃO</label>
+                        </div>
+                        <div>
+                            <input type="radio"  <?= $data["metodo"] == "ama" ? "checked" : "" ?>  required name="metodo" id="metodo_ama" value="ama"
+                                class="custom-radio-button">
+                            <label style="width: 220px;" for="metodo_ama">AMA</label>
+                        </div>
+                    </div>
+                </center>
+            </div>
+ 
                 <?php if ($data["descritores"] != null) {?>
                 <center>
                     <h3>Nos descritores, Não esqueça de colocar a "_" e o <br> prefixo da materia, Exemplo : "D027_M"

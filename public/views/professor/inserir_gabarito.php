@@ -79,6 +79,11 @@ $icones = [
                                 class="custom-radio-button">
                             <label style="width: 220px;" for="metodo_att">ATIVIDADE DE REVISÃO</label>
                         </div>
+                        <div>
+                            <input type="radio" required name="metodo" id="metodo_ama" value="ama"
+                                class="custom-radio-button">
+                            <label style="width: 220px;" for="metodo_ama">AMA</label>
+                        </div>
                     </div>
                 </center>
             </div>

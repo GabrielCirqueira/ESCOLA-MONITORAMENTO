@@ -171,7 +171,7 @@ class ProfessorModel
 
     public static function atualizar_gabarito_aluno($dados)
     {
-        $sql = "UPDATE gabarito_alunos SET acertos = :AC, porcentagem = :PORC,turma = :TURMA, pontos_aluno = :PN, pontos_aluno_quebrado = :PNTQ, perguntas_certas = :PC,perguntas_respostas = :PER_RESP,  perguntas_erradas = :PE, descritores = :DESCR,descritores_certos = :DC, descritores_errados = :DE, pontos_prova = :PV WHERE id = :ID_ALUNO AND id_prova = :ID_PROVA";
+        $sql = "UPDATE gabarito_alunos SET acertos = :AC, porcentagem = :PORC,turma = :TURMA, pontos_aluno = :PN, pontos_aluno_quebrado = :PNTQ, perguntas_certas = :PC,perguntas_respostas = :PER_RESP,  perguntas_erradas = :PE, descritores = :DESCR,descritores_certos = :DC, descritores_errados = :DE, pontos_prova = :PV,metodo = :METODO WHERE id = :ID_ALUNO AND id_prova = :ID_PROVA";
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":AC", $dados["acertos"]);
@@ -186,6 +186,7 @@ class ProfessorModel
         $query->bindValue(":DC", $dados["descritores_certos"]);
         $query->bindValue(":DE", $dados["descritores_errados"]);
         $query->bindValue(":PV", $dados["pontos_prova"]);
+        $query->bindValue(":METODO", $dados["metodo"]);
         $query->bindValue(":ID_ALUNO", $dados["ID"]);
         $query->bindValue(":ID_PROVA", $dados["ID_prova"]);
         $query->execute();
@@ -195,7 +196,7 @@ class ProfessorModel
 
     public static function atualizar_gabarito_aluno_primeira($dados)
     {
-        $sql = "UPDATE gabarito_alunos_primeira_prova SET acertos = :AC,turma = :TURMA, porcentagem = :PORC, pontos_aluno = :PN,pontos_aluno_quebrado = :PNTQ, perguntas_certas = :PC, perguntas_erradas = :PE, descritores = :DESCR, descritores_certos = :DC, descritores_errados = :DE, pontos_prova = :PV WHERE ra = :RA AND id_prova = :ID_PROVA";
+        $sql = "UPDATE gabarito_alunos_primeira_prova SET acertos = :AC,turma = :TURMA, porcentagem = :PORC, pontos_aluno = :PN,pontos_aluno_quebrado = :PNTQ, perguntas_certas = :PC, perguntas_erradas = :PE, descritores = :DESCR, descritores_certos = :DC, descritores_errados = :DE, pontos_prova = :PV,metodo = :METODO WHERE ra = :RA AND id_prova = :ID_PROVA";
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":AC", $dados["acertos"]);
@@ -210,6 +211,7 @@ class ProfessorModel
         $query->bindValue(":DE", $dados["descritores_errados"]);
         $query->bindValue(":PV", $dados["pontos_prova"]);
         $query->bindValue(":RA", $dados["ra"]);
+        $query->bindValue(":METODO", $dados["metodo"]);
         $query->bindValue(":ID_PROVA", $dados["ID_prova"]);
         $query->execute();
 
@@ -238,12 +240,13 @@ class ProfessorModel
 
     public static function atualizar_gabarito_professor($dados)
     {
-        $sql = "UPDATE gabarito_professores SET descritores = :DESC, valor = :VALOR, gabarito = :GAB WHERE id = :ID";
+        $sql = "UPDATE gabarito_professores SET descritores = :DESC, valor = :VALOR, gabarito = :GAB, metodo = :MET WHERE id = :ID";
 
         $query = Database::GetInstance()->prepare($sql);
         $query->bindValue(":DESC", $dados["descritores"]);
         $query->bindValue(":VALOR", $dados["valor"]);
         $query->bindValue(":GAB", $dados["gabarito"]);
+        $query->bindValue(":MET", $dados["metodo"]);
         $query->bindValue(":ID", $dados["ID_prova"]);
         $query->execute();
 

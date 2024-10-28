@@ -22,6 +22,7 @@ class ProfessorController
                 $_SESSION["nome_usuario"] = $info["usuario"];
                 $_SESSION["numero"] = $info["numero"];
                 $_SESSION["disciplinas"] = $info["disciplinas"];
+                $_SESSION["id_professor"] = $info["id"];
                 header("location: professor_home");
             } else {
                 $_SESSION["PopUp_PRF_Senha"] = true;
@@ -215,11 +216,11 @@ class ProfessorController
                     "provas_alunos" => $provas_alunos,
                 ];
 
-                foreach ($dados['provas'] as $periodo => $provas) {
-                    usort($provas, function ($a, $b) {
+                foreach ($dados['provas'] as $periodo => $provass) {
+                    usort($provass, function ($a, $b) {
                         return strtotime($b['data_prova']) - strtotime($a['data_prova']);
                     });
-                    $dados['provas'][$periodo] = $provas;
+                    $dados['provas'][$periodo] = $provass;
                 }
 
             }
@@ -619,6 +620,7 @@ class ProfessorController
             $provas_alunos = AlunoModel::GetProvasFinalizadas();
             $_SESSION["PAG_VOLTAR"] = "professor_home";
             $provas = [];
+
             if ($provas_professores != null) {
                 foreach ($provas_professores as $professor) {
                     if ($professor["nome_professor"] == $_SESSION["nome_professor"]) {
@@ -646,11 +648,13 @@ class ProfessorController
                     "provas_alunos" => $provas_alunos,
                 ];
 
-                foreach ($dados['provas'] as $periodo => $provas) {
-                    usort($provas, function ($a, $b) {
+                // dd($dados["provas"]);
+
+                foreach ($dados['provas'] as $periodo => $provass) {
+                    usort($provass, function ($a, $b) {
                         return strtotime($b['data_prova']) - strtotime($a['data_prova']);
                     });
-                    $dados['provas'][$periodo] = $provas;
+                    $dados['provas'][$periodo] = $provass;
                 }
 
             }
@@ -1214,6 +1218,7 @@ class ProfessorController
                 "alternativas" => explode(",",$_ENV["ALTERNATIVAS"]),
                 "perguntas" => $perguntas,
                 "nome" => $prova_professor["nome_prova"],
+                "metodo" => $prova_professor["metodo"],
             ];
 
             // echo "<pre>";
@@ -1255,6 +1260,7 @@ class ProfessorController
                 "valor" => $_POST['valor_prova'],
                 "gabarito" => $gabarito,
                 "ID_prova" => $id_prova,
+                "metodo" => $_POST['metodo'],
             ];
 
             ProfessorModel::atualizar_gabarito_professor($novo_gabarito_professor);
@@ -1313,6 +1319,7 @@ class ProfessorController
                     "descritores_certos" => implode(";", $descritores_corretos),
                     "descritores_errados" => implode(";", $descritores_errados),
                     "pontos_prova" => $_POST['valor_prova'],
+                    "metodo" => $_POST['metodo'],
                 ];
 
                 ProfessorModel::atualizar_gabarito_aluno($dados_atualizacao);

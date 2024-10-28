@@ -39,11 +39,15 @@
             <div class="linha-vertical-campo-prova" style="background-color: #33C27A;"></div>
             <div class="conteudo-prova">
                 <i class="fas fa-file-alt fa-4x" style="color: #33C27A;"></i>
+            <?php }else if($prova["metodo"] == "ama"){?>
+                <div class="linha-vertical-campo-prova" style="background-color: #DBDD10;"></div>
+                <div class="conteudo-prova">
+                <i class="fas fa-clipboard-list fa-4x" style="color: #DBDD10;"></i>
             <?php }else{?>
                 <div class="linha-vertical-campo-prova" style="background-color: #217D7D;"></div>
                 <div class="conteudo-prova">
                 <i class="fas fa-tasks fa-4x" style="color: #217D7D;"></i>
-            <?php }?>
+                <?php }?>
                 <div class="prova-detalhes">
                     <center>
 

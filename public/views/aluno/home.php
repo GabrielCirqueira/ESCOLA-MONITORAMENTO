@@ -270,59 +270,80 @@ $contador = 1;
         }
 
 
-
-        while ($contador <= $prova["QNT_perguntas"]) {?>
-                            <tr>
-                                <td class="numero"><?=$contador?></td>
-                                <?php
+if($liberado != null){
+    while ($contador <= $prova["QNT_perguntas"]) { ?>
+        <tr>
+            <td class="numero"><?=$contador?></td>
+            <?php
 $contador2 = 0;
-            $resposta_correta = $gabarito_professor[$contador];
+$resposta_correta = $gabarito_professor[$contador];
 
-            $resposta_aluno = $gabarito_aluno[$contador];
-            if ($liberado != null) {
-                while ($contador2 < count($alternativas)) {
-                    $alternativa_atual = $alternativas[$contador2];
-                    $classe = "";
-                    // echo $resposta_aluno;
-                    // echo "<br>";
-                    if ($resposta_aluno == $alternativa_atual) {
+$resposta_aluno = $gabarito_aluno[$contador];
+if ($liberado != null) {
+while ($contador2 < count($alternativas)) {
+$alternativa_atual = $alternativas[$contador2];
+$classe = "";
+// echo $resposta_aluno;
+// echo "<br>";
+if ($resposta_aluno == $alternativa_atual) {
 
-                        if ($resposta_aluno == $resposta_correta || $resposta_correta == "null") {
-                            $classe = "alternativa-marcada-true";
+    if ($resposta_aluno == $resposta_correta || $resposta_correta == "null") {
+        $classe = "alternativa-marcada-true";
 
-                        } else {
-                            $classe = "alternativa-marcada-false";
+    } else {
+        $classe = "alternativa-marcada-false";
 
-                        }
-                    } elseif ($resposta_correta == $alternativa_atual && $resposta_aluno != $resposta_correta) {
-                        $classe = "alternativa-marcada-true-gray";
-                    }
+    }
+} elseif ($resposta_correta == $alternativa_atual && $resposta_aluno != $resposta_correta) {
+    $classe = "alternativa-marcada-true-gray";
+}
 
-                    echo "<td class='{$classe}'>{$alternativa_atual}</td>";
+echo "<td class='{$classe}'>{$alternativa_atual}</td>";
 
-                    $contador2++;
-                }
-            } else {
-                while ($contador2 < count($alternativas)) {
-                    $alternativa_atual = $alternativas[$contador2];
-                    $classe = "";
+$contador2++;
+}
+} else {
+while ($contador2 < count($alternativas)) {
+$alternativa_atual = $alternativas[$contador2];
+$classe = "";
 
-                    if ($resposta_aluno == $alternativa_atual) {
-                        $classe = "alternativa-marcada";
-                    }
+if ($resposta_aluno == $alternativa_atual) {
+    $classe = "alternativa-marcada";
+}
 
-                    echo "<td class='{$classe}'>{$alternativa_atual}</td>";
+echo "<td class='{$classe}'>{$alternativa_atual}</td>";
 
-                    $contador2++;
-                }
-            }
-            ?>
-                            </tr>
-                            <?php $contador++;}?>
+$contador2++;
+}
+}
+?>
+        </tr>
+        <?php $contador++;
+        }
+}else{ ?>
+<div class="gabarito-nao-liberado-aluno">
+    <i class="fas fa-paper-plane confirmation-icon"></i>
+    <h2>Sua prova foi inserida com sucesso!</h2>
+    <p>Aguarde o professor liberar o acesso às respostas.</p>
+    
+ 
+
+    <button onclick="location.reload()" class="refresh-btn">
+         Atualizar página
+    </button>
+</div>
+
+    <?php 
+}
+        
+                            
+                            ?>
+
+
                         </table>
 
                     <?php if ($liberado == null) {
-            echo "<h5>O PROFESSOR AINDA NÃO LIBEROU O ACESSO AS RESPOSTAS!</h5>";
+            echo "<br>";
         } else {?>
                         <?php if($prova["metodo"] == "prova"){ ?>
                         <br>
