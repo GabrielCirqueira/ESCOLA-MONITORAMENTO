@@ -155,6 +155,7 @@ function resetForm() {
     document.getElementById('serie').selectedIndex = 0;
     document.getElementById('professor').selectedIndex = 0;
     document.getElementById('periodo').selectedIndex = 0;
+    document.getElementById('metodo').selectedIndex = 0;
 }
 
 function resetFormProva() {

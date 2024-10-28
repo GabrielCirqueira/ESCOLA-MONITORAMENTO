@@ -221,6 +221,7 @@ class GestorController
         $professor = ($_POST['professor'] ?? null) === "SELECIONAR" ? null : ($_POST['professor'] ?? null);
         $serie = ($_POST['serie'] ?? null) === "SELECIONAR" ? null : ($_POST['serie'] ?? null);
         $periodo = ($_POST['periodo'] ?? null) === "SELECIONAR" ? null : ($_POST['periodo'] ?? null);
+        $metodo = ($_POST['metodo'] ?? null) === "SELECIONAR" ? null : ($_POST['metodo'] ?? null);
 
 
     if($periodo != NULL){
@@ -242,6 +243,7 @@ class GestorController
             "professor" => $professor,
             "serie" => $serie,
             "periodo" => $periodo,
+            "metodo" => $metodo,
             "datas" => $datas
         ];
     }

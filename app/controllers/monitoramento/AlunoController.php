@@ -423,16 +423,31 @@ public static function gabarito_aluno()
                 $descritores_corretos = implode(";", $descritores_corretos);
                 $descritores_errados = implode(";", $descritores_errados);
             }
+            
+            $porcentagemm = ($acertos_aluno / $_SESSION["prova_gabarito"]["QNT_perguntas"]) * 100;
 
-            $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
-            if (is_float($pontos_aluno)) {
-                $pontos_aluno = number_format($pontos_aluno, 1);
+            if($_SESSION["prova_gabarito"]["metodo"] == "ama"){
+                if ($porcentagemm >= 0 && $porcentagemm <= 25.0) {
+                    $pontos_aluno = 4;
+                } elseif ($porcentagemm > 25.0 && $porcentagemm <= 50.0) {
+                    $pontos_aluno = 6;
+                } elseif ($porcentagemm > 50.0 && $porcentagemm <= 75.0) {
+                    $pontos_aluno = 8;
+                } elseif ($porcentagemm > 75.0 && $porcentagemm <= 100.0) {
+                    $pontos_aluno = 10;
+                } 
+            }else{
+                $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
             }
 
             if($_SESSION["prova_gabarito"]["valor"] == 0){
                 $porcentagemm = ($acertos_aluno / $_SESSION["prova_gabarito"]["QNT_perguntas"]) * 100;
             }else{
                 $porcentagemm = (number_format(round($pontos_aluno),0) / $_SESSION["prova_gabarito"]["valor"]) * 100;
+            }
+
+            if (is_float($pontos_aluno)) {
+                $pontos_aluno = number_format($pontos_aluno, 1);
             }
             
             $dados = [

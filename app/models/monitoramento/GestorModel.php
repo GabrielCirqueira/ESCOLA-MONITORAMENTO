@@ -25,6 +25,9 @@ class GestorModel{
         if($filtros['serie']){
             $query .= " AND serie = :serie";
         }
+        if($filtros['metodo']){
+            $query .= " AND metodo = :metodo";
+        }
 
         if($filtros['datas']){
             // $query .= " AND data_aluno >= :data_inicial AND data_aluno <= :data_final";
@@ -48,6 +51,9 @@ class GestorModel{
         }
         if($filtros['serie']){
             $stmt->bindValue(':serie', $filtros['serie']);
+        }
+        if($filtros['metodo']){
+            $stmt->bindValue(':metodo', $filtros['metodo']);
         }
         if($filtros['datas']){
             $stmt->bindValue(':data_inicial', $filtros['datas']["data_inicial"]);

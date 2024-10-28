@@ -1297,10 +1297,30 @@ class ProfessorController
                 $valor_cada_pergunta = $novo_gabarito_professor["valor"] / count($gabarito_professor);
                 $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
 
-                if($prova_aluno["pontos_prova"] == 0){
+                $porcentagemm = ($acertos_aluno / $prova_aluno["QNT_perguntas"]) * 100;
+
+                if($_POST['metodo'] == "ama"){
+                    if ($porcentagemm >= 0 && $porcentagemm <= 25) {
+                        $pontos_aluno = 4;
+                    } elseif ($porcentagemm > 26 && $porcentagemm <= 50) {
+                        $pontos_aluno = 6;
+                    } elseif ($porcentagemm > 51 && $porcentagemm <= 75) {
+                        $pontos_aluno = 8;
+                    } elseif ($porcentagemm > 76 && $porcentagemm <= 100) {
+                        $pontos_aluno = 10;
+                    } 
+                }else{
+                    $pontos_aluno = $valor_cada_pergunta * $acertos_aluno;
+                }
+    
+                if($prova_aluno["valor"] == 0){
                     $porcentagemm = ($acertos_aluno / $prova_aluno["QNT_perguntas"]) * 100;
                 }else{
-                    $porcentagemm = (number_format(round($pontos_aluno),0) / $prova_aluno["pontos_prova"]) * 100;
+                    $porcentagemm = (number_format(round($pontos_aluno),0) / $prova_aluno["prova_gabarito"]["valor"]) * 100;
+                }
+    
+                if (is_float($pontos_aluno)) {
+                    $pontos_aluno = number_format($pontos_aluno, 1);
                 }
 
                 $dados_atualizacao = [

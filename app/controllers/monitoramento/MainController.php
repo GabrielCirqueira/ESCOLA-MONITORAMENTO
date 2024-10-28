@@ -8,6 +8,7 @@ class MainController{
 
     public static function Templates($template,$user = null, $data = null){
 
+        $nomeHead = self::nomes_head();
         include "public/views/plates/head.php";
         include "public/views/plates/header-menu.php";
         include $template;
@@ -39,39 +40,61 @@ class MainController{
     }
 
     public static function adm(){
+        $nomeHead = self::nomes_head();
         include "public/views/plates/head.php";
         include "public/views/plates/main.php";
         include "public/views/plates/PopUps.php";
     }
     
     public static function index(){
+        $nomeHead = self::nomes_head();
         include "public/views/plates/head.php";
         include "public/views/aluno/login.php";
         include "public/views/plates/PopUps.php";
     }
 
     public static function login_professor(){
+        $nomeHead = self::nomes_head();
         include "public/views/plates/head.php";
         include "public/views/professor/login.php";
         include "public/views/plates/PopUps.php";
     }
 
     public static function login_gestor(){
+        $nomeHead = self::nomes_head();
         include "public/views/plates/head.php";
         include "public/views/gestor/login.php";
         include "public/views/plates/PopUps.php";
     }
 
     public static function login_adm(){
+        $nomeHead = self::nomes_head();
         include "public/views/plates/head.php";
         include "public/views/adm/login.php";
         include "public/views/plates/PopUps.php";
     }
 
     public static function login_pfa(){
+        $nomeHead = self::nomes_head();
         include "public/views/plates/head.php";
         include "public/views/pfa/login.php";
         include "public/views/plates/PopUps.php";
+    }
+
+    public static function nomes_head(){
+        if($_SESSION["GESTOR"]){
+            return "GESTOR";
+        }else if($_SESSION["ALUNO"]){
+            return "ALUNO";
+        }else if($_SESSION["ADM"]){
+            return "ADM";
+        }else if($_SESSION["PROFESSOR"]){
+            return "PROFESSOR";
+        }else if($_SESSION["PFA"]){
+            return "PFA";
+        }else{
+            return "";
+        }
     }
 
     public static function pre($dados){

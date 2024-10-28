@@ -64,6 +64,18 @@
             <?php } ?>
         </select>
 
+        <select name="metodo" id="metodo">
+        <?php
+                $selectedMetodoProva = ($data["filtros"]["metodo"] ?? '') == 'prova' ? 'selected' : '';
+                $selectedMetodoAtividade = ($data["filtros"]["metodo"] ?? '') == 'atividade' ? 'selected' : '';
+                $selectedMetodoAma = ($data["filtros"]["metodo"] ?? '') == 'ama' ? 'selected' : '';
+            ?>
+            <option  value="SELECIONAR">METODO</option>
+            <option <?= $selectedMetodoProva ?> value="prova">PROVA</option>
+            <option <?= $selectedMetodoAtividade ?> value="atividade">ATIVIDADE</option>
+            <option <?= $selectedMetodoAma ?> value="ama">AMA</option>
+        </select>
+
         <button class="fechar" onclick="resetForm()">Limpar</button>
         <input type="submit" name="filtro" value="Filtrar">
     </form>
