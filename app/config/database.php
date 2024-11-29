@@ -29,7 +29,7 @@ class Database
         if (self::$conn === null) {
             $instance = new self();
 
-            self::$conn = new PDO("mysql:host={$instance->host};port={$instance->port};dbname={$instance->db}", $instance->user, $instance->pass);
+            self::$conn = new PDO("mysql:host={$instance->host};port={$instance->port};dbname={$instance->db};charset=utf8mb4", $instance->user, $instance->pass);
 
             self::CreateTable();
         }
@@ -153,8 +153,10 @@ class Database
                 gabarito        varchar(255),
                 liberado        varchar(255),
                 liberar_prova   varchar(255),
-                metodo          varchar(255)
-                );"; 
+                metodo          varchar(255),
+                area_conhecimento varchar(150) DEFAULT NULL,
+                orientacoes text
+        );"; 
 
         $logsADM = "CREATE TABLE IF NOT EXISTS logs_adm(
             id          int AUTO_INCREMENT primary key,
@@ -187,6 +189,30 @@ class Database
             disciplina varchar(255)
         );";
 
+        $simulados = "CREATE TABLE IF NOT EXISTS `simulados` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `turma_id` int DEFAULT NULL,
+            `nome` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+            `area_conhecimento` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+            `data` datetime NOT NULL,
+            `orientacoes` text COLLATE utf8mb4_general_ci,
+            PRIMARY KEY (`id`),
+            KEY `turma_id` (`turma_id`),
+            CONSTRAINT `turma_id` FOREIGN KEY (`turma_id`) REFERENCES `turmas` (`id`)
+        );";
+
+        $simuladosProva = "CREATE TABLE IF NOT EXISTS `simulados_prova` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `simulado_id` int DEFAULT NULL,
+            `gabarito_professor_id` int DEFAULT NULL,
+            `ordem` int DEFAULT NULL,
+            PRIMARY KEY (`id`),
+            KEY `FK__simulados` (`simulado_id`),
+            KEY `FK__gabarito_professores` (`gabarito_professor_id`),
+            CONSTRAINT `FK__gabarito_professores` FOREIGN KEY (`gabarito_professor_id`) REFERENCES `gabarito_professores` (`id`),
+            CONSTRAINT `FK__simulados` FOREIGN KEY (`simulado_id`) REFERENCES `simulados` (`id`)
+        );";
+
         self::GetInstance()->query($logsADM);
         self::GetInstance()->query($logsPROFESSOR);
         self::GetInstance()->query($professores);
@@ -199,5 +225,7 @@ class Database
         self::GetInstance()->query($gabarito_provas_alunos_prova);
         self::GetInstance()->query($Periodo);
         self::GetInstance()->query($PFA);
+        self::GetInstance()->query($simulados);
+        self::GetInstance()->query($simuladosProva);
     }
 }
