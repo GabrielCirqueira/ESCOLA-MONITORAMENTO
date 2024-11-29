@@ -239,7 +239,6 @@ class SimuladosModel
 
         $simuladoId = $dados["id"];
 
-        // Excluir as prova associada ao simulado
         $stmt = $db->prepare("DELETE FROM simulados_prova WHERE simulado_id = :SIMULADO");
         $stmt->bindParam(':SIMULADO', $simuladoId, PDO::PARAM_INT);
 
@@ -260,7 +259,6 @@ class SimuladosModel
 
         try {
             
-            // Iniciar uma transação
             $db->beginTransaction();
 
             $query = $db->prepare("SELECT id FROM simulados WHERE id = :ID");
@@ -271,17 +269,14 @@ class SimuladosModel
        
             if ($simulado) {
 
-                // Excluir as prova associada ao simulado
                 $stmt = $db->prepare("DELETE FROM simulados_prova WHERE simulado_id = :SIMULADO");
                 $stmt->bindParam(':SIMULADO', $simulado, PDO::PARAM_INT);
                 $stmt->execute();
 
-                // Excluir o simulado da tabela de simulados
                 $stmt = $db->prepare("DELETE FROM simulados WHERE id = :ID");
                 $stmt->bindParam(':ID', $simulado, PDO::PARAM_INT);
                 $stmt->execute();
 
-                // Confirmar a transação
                 $db->commit();
 
                 return true;
@@ -290,7 +285,6 @@ class SimuladosModel
             return false;
             
         } catch (\Throwable $th) {
-            // Em caso de erro, desfaz a transação
             $db->rollBack();
             return false;
         }
