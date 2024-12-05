@@ -33,10 +33,8 @@ if (!isset($_SESSION["ALUNO"])) {
     $_SESSION["PAG_VOLTAR"] = "adm";
 }
 
-// Separa a parte da query string
 $queryString = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
 
-// Converte a query string em um array
 $queryArray = [];
 if ($queryString) {
     parse_str($queryString, $queryArray);
