@@ -1,9 +1,9 @@
 .titulo-NSL {
-    color: #16b39e;
+    color: var(--primary-color);
 }
 
 .main-home-professor h1:not(.ql-editor h1), .main-home-professor h2:not(.ql-editor h2), .titulo-desempenho-turmas, .titulo-desempenho-descritores {
-    color: #16c1aa;
+    color: var(--primary-color);
     font-weight: bold;
 }
 
@@ -11,14 +11,14 @@
     width: 120px;
     height: 35px;
     border-radius: 5px;
-    background-color: #16c1aa;
+    background-color: var(--primary-color);
     border: none;
     transition: 0.5s ease-in-out;
 }
 
 .botao-ver-relatorio:hover {
     cursor: pointer;
-    background-color: #13a28f;
+    background-color: var(--primary-colorh);
 }
 
 .div_editar_ver_prova {
@@ -28,12 +28,12 @@
 
 .botao-form-editar:hover,
 .botao-form-enviar-prova:hover {
-    background-color: #15a18e;
+    background-color: var(--primary-colorh);
     cursor: pointer;
 }
 
 .botao-form-enviar-prova {
-    background-color: #16c1aa;
+    background-color: var(--primary-color);
     width: 70px;
     height: 35px;
     transition: 0.5s ease;

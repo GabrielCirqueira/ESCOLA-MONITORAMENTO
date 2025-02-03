@@ -20,14 +20,14 @@
     height: 30px;
     border-radius: 3px;
     border: none;
-    background-color: #16c1aa;
+    background-color: var(--primary-color);
     transition: 0.5s ease;
   }
   
   .form-filtros-gestor input[type="submit"]:hover {
     cursor: pointer;
     border-radius: 3px;
-    background-color: #0b8877;
+    background-color: var(--primary-colorh);
   }
   
   .form-filtros-gestor .fechar {
@@ -67,14 +67,14 @@
     width: 70px;
     height: 30px;    
     border-radius: 3px; 
-    background-color: #16c1aa;
+    background-color: var(--primary-color);
     transition: 0.5s ease;
     border: none;
     color: white;
   }
   
   .button-vsGeral:hover {
-    background-color: #15a18e;
+    background-color: var(--primary-colorh);
     cursor: pointer;
   }
 

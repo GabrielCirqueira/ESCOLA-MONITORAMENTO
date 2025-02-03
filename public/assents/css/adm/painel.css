@@ -38,7 +38,7 @@
   }
   
   .painel-button {
-    background-color: #16c1aa;
+    background-color: var(--primary-color);
     color: white;
     font-weight: bold;
     border: none;
@@ -53,7 +53,7 @@
   }
   
   .painel-button:hover {
-    background-color: #169b89;
+    background-color: var(--primary-colorh);
     transform: translateY(-2px);
   }
   

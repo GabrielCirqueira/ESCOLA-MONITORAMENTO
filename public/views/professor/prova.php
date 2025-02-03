@@ -15,7 +15,7 @@
                     <i class="fas fa-eye"></i> Aluno pode ver o resultado (gabarito)?
                 </span><br><br>
                 <?php if ($data["liberado"] == "SIM") {?>
-                    <button type="submit" name="status" value="sim" class="button-prova-liberado" style="background-color: #16c1aa;">
+                    <button type="submit" name="status" value="sim" class="button-prova-liberado" style="background-color: var(--primary-color);">
                         <i class="fas fa-check"></i> SIM
                     </button>
                     <button type="submit" name="status" value="não" class="button-prova-liberado">
@@ -25,7 +25,7 @@
                     <button type="submit" name="status" value="sim" class="button-prova-liberado">
                         <i class="fas fa-check"></i> SIM
                     </button>
-                    <button type="submit" name="status" value="não" class="button-prova-liberado" style="background-color: #16c1aa;">
+                    <button type="submit" name="status" value="não" class="button-prova-liberado" style="background-color: var(--primary-color);">
                         <i class="fas fa-times"></i> NÃO
                     </button>
                 <?php }?>
@@ -36,7 +36,7 @@
                     <i class="fas fa-user-check"></i> O aluno que faltou tem permissão para realizar a prova?
                 </span><br><br>
                 <?php if ($data["liberar_prova"] == true) {?>
-                    <button type="submit" name="status-liberado" value="sim" class="button-prova-liberado" style="background-color: #16c1aa;">
+                    <button type="submit" name="status-liberado" value="sim" class="button-prova-liberado" style="background-color: var(--primary-color);">
                         <i class="fas fa-check"></i> SIM
                     </button>
                     <button type="submit" name="status-liberado" value="não" class="button-prova-liberado">
@@ -46,7 +46,7 @@
                     <button type="submit" name="status-liberado" value="sim" class="button-prova-liberado">
                         <i class="fas fa-check"></i> SIM
                     </button>
-                    <button type="submit" name="status-liberado" value="não" class="button-prova-liberado" style="background-color: #16c1aa;">
+                    <button type="submit" name="status-liberado" value="não" class="button-prova-liberado" style="background-color: var(--primary-color);">
                         <i class="fas fa-times"></i> NÃO
                     </button>
                 <?php }?>

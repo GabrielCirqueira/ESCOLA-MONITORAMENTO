@@ -179,7 +179,7 @@ if ($data["provas_feitas"] != null) {
 
 
         <details class="periodo-provas">
-            <summary> <i class="fas fa-calendar-alt" style="color:#0dad98;margin-right:10px;"> </i><?=$periodo?>
+            <summary> <i class="fas fa-calendar-alt" style="color:var(--primary-color);margin-right:10px;"> </i><?=$periodo?>
             </summary>
 
             <?php if ($provas == null) {?>
@@ -200,9 +200,9 @@ if ($data["provas_feitas"] != null) {
                 <div class="conteudo-prova">
                     <i class="fas fa-check fa-4x" style="color:#39C000"></i>
                     <?php }else {?>
-                    <div class="linha-vertical-campo-prova " style="background-color:#2FC29F"></div>
+                    <div class="linha-vertical-campo-prova " style="background-color:var(--primary-color)"></div>
                     <div class="conteudo-prova">
-                        <i class="fas fa-check fa-4x" style="color:#2FC29F"></i>
+                        <i class="fas fa-check fa-4x" style="color:var(--primary-color)"></i>
                         <?php } ?>
                         <div class="prova-detalhes">
                             <center>

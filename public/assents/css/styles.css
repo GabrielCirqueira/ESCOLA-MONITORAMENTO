@@ -1,10 +1,10 @@
+@import url(home/principais.css);
 @import url(home/footer.css);
 @import url(home/header.css);
 @import url(home/popUp.css);
 @import url(home/TelaADM.css);
 @import url(home/menu-lateral.css);
 @import url(home/login.css);
-@import url(home/principais.css);
 @import url(home/resposivo.css);
 @import url(adm/aluno.css);
 @import url(adm/backups.css);
@@ -58,7 +58,7 @@
   }
 
   .botao-form-enviar {
-    background-color: #0dad98;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     padding: 10px 40px;
@@ -68,7 +68,7 @@
   }
   
   .botao-form-enviar:hover {
-    background-color: #0c8f7d;
+    background-color: var(--primary-colorh);
   }
 
   .detalhes-prova table,

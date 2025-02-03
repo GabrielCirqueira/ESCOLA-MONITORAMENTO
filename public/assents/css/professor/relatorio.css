@@ -21,7 +21,7 @@
 }
 
 .titulo-sistema-monitoramento {
-  color: #16c1aa;
+  color: var(--primary-color);
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -29,13 +29,13 @@
 
 .nome-prova {
   font-size: 24px;
-  color: #16c1aa;
+  color: var(--primary-color);
   font-weight: bold;
 }
 
 .titulo-classificacao {
   font-size: 20px;
-  color: #16c1aa;
+  color: var(--primary-color);
   margin-bottom: 10px;
 }
 
@@ -57,7 +57,7 @@
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
-  border: 2px solid #16c1aa;
+  border: 2px solid var(--primary-color);
   background-color: white;
 }
 
@@ -68,7 +68,7 @@
   align-items: center;
 }
 .botao-exportar-dados{
-  background-color: #16c1aa;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 5px;
@@ -81,7 +81,7 @@
   transition: background-color 0.3s;
 }
 .area-button-tabelas button{
-  background-color: #16c1aa;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   width: 280px;
@@ -95,7 +95,7 @@
 }
 
 .formulario-filtros-professor button {
-  background-color: #16c1aa;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   display: flex;
@@ -110,7 +110,7 @@
 }
 
 .botao-exportar-dados:hover,.area-button-tabelas button:hover,.formulario-filtros-professor button:hover {
-  background-color: #13a693;
+  background-color: var(--primary-colorh);
 }
 
 .grafico-colunas-proficiencia {
@@ -130,7 +130,7 @@
 
 .box-grafico-geral {
   background-color: #e6f9f78c;
-  border: 2px solid #16c1aa;
+  border: 2px solid var(--primary-color);
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
@@ -145,7 +145,7 @@
 .titulo-percentual-geral,
 .titulo-alunos-acima {
   font-size: 18px;
-  color: #16c1aa;
+  color: var(--primary-color);
   font-weight: bold;
 }
 
@@ -207,7 +207,7 @@
 
 .tabela-notas-aluno th, .tabela-aluno-primeira th,
 .tabela-aluno-rec th, .tabela-respostas th {
-  background-color: #16c1aa;
+  background-color: var(--primary-color);
   color: white;
   font-size: 14px;
 }

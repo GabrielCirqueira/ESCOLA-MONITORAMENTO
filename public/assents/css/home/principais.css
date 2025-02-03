@@ -1,9 +1,8 @@
 :root {
-    --primary-color: #0bd1eb;
-    --text-color: #ffffff;
-    --header: #11c5da;
-    --background-color: #fff;
-    --botoes-text: gray;
+    --primary-color: #ff7b00;
+    --primary-colorh: #b15b0b;
+    --primary-colorBG: #be444434;
+    --primary-colorBGeasy: #be444417;
 }
 
 body {

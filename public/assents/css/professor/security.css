@@ -17,7 +17,7 @@
 .seguranca-titulo {
     text-align: center;
     font-size: 28px;
-    color: #2ac8b3;
+    color: var(--primary-color);
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
@@ -26,7 +26,7 @@
 }
 
 .seguranca-titulo i {
-    color: #2ac8b3;
+    color: var(--primary-color);
     font-size: 36px;
 }
 
@@ -38,12 +38,12 @@
 }
 
 .seguranca-info strong {
-    color: #2ac8b3;
+    color: var(--primary-color);
 }
 
 .seguranca-subtitulo {
     margin-top: 30px;
-    color: #2ac8b3;
+    color: var(--primary-color);
     font-size: 22px;
     display: flex;
     align-items: center;
@@ -52,7 +52,7 @@
 
 .seguranca-subtitulo i {
     font-size: 20px;
-    color: #2ac8b3;
+    color: var(--primary-color);
 }
 
 .gabarito-exemplo {
@@ -61,7 +61,7 @@
     border-radius: 5px;
     margin: 20px 0;
     font-family: 'Courier New', monospace;
-    color: #2ac8b3;
+    color: var(--primary-color);
     text-align: center;
 }
 
@@ -78,7 +78,7 @@
 }
 
 .seguranca-detalhes h2 {
-    color: #2ac8b3;
+    color: var(--primary-color);
     font-size: 22px;
     margin-bottom: 15px;
 }
@@ -97,7 +97,7 @@
 }
 
 .seguranca-detalhes li i {
-    color: #2ac8b3;
+    color: var(--primary-color);
     margin-right: 10px;
     font-size: 18px;
 }

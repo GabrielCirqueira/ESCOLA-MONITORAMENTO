@@ -18,7 +18,7 @@
 
 .titulo-principal-nsl {
     font-size: 2.5rem;
-    color: #16c1aa;
+    color: var(--primary-color);
     margin-bottom: 40px;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -53,7 +53,7 @@
 }
 
 .botao-geral-filtrar, .botao-filtro-detalhado {
-    background-color: #16c1aa;
+    background-color: var(--primary-color);
     color: white;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -61,7 +61,7 @@
 }
 
 .botao-geral-filtrar:hover, .botao-filtro-detalhado:hover {
-    background-color: #13a494;
+    background-color: var(--primary-colorh);
 }
 
 .area-filtros-exibidos {
@@ -73,7 +73,7 @@
 }
 
 .filtro-exibido-item {
-    background-color: #16c1aa;
+    background-color: var(--primary-colorh);
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
@@ -85,7 +85,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #16c1aa; 
+    background-color: var(--primary-colorh); 
     padding: 30px;
     border-radius: 15px;
     margin-bottom: 40px;
@@ -122,7 +122,7 @@
     font-weight: bold;
     display: block;
     font-size: 20px;
-    color: #16c1aa; 
+    color: var(--primary-colorh);
 }
 
 .area-turmas-graficos,

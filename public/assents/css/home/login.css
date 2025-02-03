@@ -1,6 +1,6 @@
  
 .tela-login-container a {
-  color: #92ddd3;
+  color: var(--primary-color);
   display: inline-block;
   text-decoration: none;
   font-weight: 400;
@@ -50,7 +50,7 @@
 }
 
 .tela-login-form input[type=submit]{
-  background-color: #4ad3ba;
+  background-color: var(--primary-color);
   border: none;
   color: white;
   padding: 15px 80px;
@@ -64,7 +64,7 @@
 }
 
 .tela-login-form input[type=submit]:hover {
-  background-color: #29c292;
+  background-color: var(--primary-colorh);
 }
 
 .tela-login-form input[type=submit]:active {
@@ -90,7 +90,7 @@
 .tela-login-form input[type=password]:focus,
 .tela-login-form input[type=text]:focus {
   background-color: #fff;
-  border-bottom: 2px solid #54d5a5;
+  border-bottom: 2px solid var(--primary-color);
 }
 
 .tela-login-fadeIn {
@@ -126,7 +126,7 @@
   bottom: -10px;
   width: 0;
   height: 2px;
-  background-color: #41c4a8;
+  background-color: var(--primary-color);
   content: "";
   transition: width 0.2s;
 }

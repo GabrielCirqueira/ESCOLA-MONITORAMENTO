@@ -141,7 +141,7 @@
     padding: 6px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #16c1aa;
+    background-color: var(--primary-color);
     transition: 0.5s ease-in-out;
     cursor: pointer;
     text-decoration: none;
@@ -266,7 +266,7 @@
     /* color: #ffffff; */
     border: none;
     border-radius: 5px;
-    background-color: #16c1aa;
+    background-color: var(--primary-color);
     transition: 0.5s ease-in-out;
     cursor: pointer;
 }
@@ -335,7 +335,7 @@
         padding: 6px 20px;
         border: none;
         border-radius: 5px;
-        background-color: #16c1aa;
+        background-color: var(--primary-color);
         transition: 0.5s ease-in-out;
         cursor: pointer;
         text-decoration: none;
