@@ -201,6 +201,11 @@ $popups = [
         "title" => "ERRO",
         "message" => "Erro ao atualizar o simulado",
     ],
+    "PopUp_Cor_Sistema" => [
+        "status_class" => "check",
+        "title" => "SUCESSO",
+        "message" => "Cor do sistema alterado com sucesso",
+    ],
 ];
 
 foreach ($popups as $popup_id => $popup_data) {

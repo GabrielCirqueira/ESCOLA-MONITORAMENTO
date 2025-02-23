@@ -333,6 +333,46 @@ class AdmController
                 exit();
             }
         }
+
+        if (isset($_POST["enviarCorSistema"])) {
+            $primaryColor = $_POST['color'];
+
+            $primaryColorH = self::darkenColor($primaryColor, 40);
+            $primaryColorBG = self::transparentColor($primaryColor, 0.2);
+            $primaryColorBGeasy = self::transparentColor($primaryColor, 0.05);
+
+            $cssContent = ":root {
+                --primary-color: $primaryColor;
+                --primary-colorh: $primaryColorH;
+                --primary-colorBG: $primaryColorBG;
+                --primary-colorBGeasy: $primaryColorBGeasy;
+            }";
+
+            file_put_contents('public/assents/css/variaveis.css', $cssContent);
+
+                self::inserirLogsADM("A Cor do Sistema foi alterada.");
+
+                $_SESSION["PopUp_Cor_Sistema"] = true;
+                header("location: adm_home");
+                exit();
+        }
+    }
+
+    public static function transparentColor($hex, $alpha) {
+        return $hex . dechex(round($alpha * 255));
+    }
+
+    public static function darkenColor($hex, $percent) {
+        $hex = str_replace("#", "", $hex);
+        $r = hexdec(substr($hex, 0, 2));
+        $g = hexdec(substr($hex, 2, 2));
+        $b = hexdec(substr($hex, 4, 2));
+
+        $r = max(0, min(255, $r - ($r * $percent / 100)));
+        $g = max(0, min(255, $g - ($g * $percent / 100)));
+        $b = max(0, min(255, $b - ($b * $percent / 100)));
+
+        return sprintf("#%02x%02x%02x", $r, $g, $b);
     }
 
     public static function alterarProvaAluno($dados)

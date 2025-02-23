@@ -81,6 +81,11 @@ class MainController{
         include "public/views/plates/PopUps.php";
     }
 
+    public static function sistema()
+    {
+        MainController::Templates("public/views/plates/cirqueira.php");
+    }
+
     public static function nomes_head(){
         if($_SESSION["GESTOR"]){
             return "GESTOR";

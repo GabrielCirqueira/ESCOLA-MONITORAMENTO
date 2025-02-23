@@ -1,97 +1,160 @@
-/* Cor de tema */
-:root {
-    --tema-cor: #16c1aa;
-    --cor-secundaria: #0f9d8e;
-    --cor-texto: #ffffff;
-    --cor-fundo: #f4f4f4;
-} 
-
-.tela-adm {
-    background-color: var(--cor-fundo);
-    padding: 50px 0;
-    height: 100vh;
+  .tela-adm-header-principal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    background: var(--primary-colorBGeasy);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+  }
+  
+  .painel-header-image {
+    max-width: 80px;
+    margin-right: 20px;
+  }
+  
+  .tela-adm-header-texto-extra {
     text-align: center;
-}
-
-.tela-adm-container-box {
+  }
+  
+  .tela-adm-header-titulo-principal {
+    font-size: 2em;
+    margin: 0;
+    color: var(--primary-colorh);
+  }
+  
+  .tela-adm-header-descricao-principal {
+    font-size: 1em;
+    margin: 5px 0 0;
+    color: var(--primary-color);
+  }
+  
+  /* Container Principal */
+  .tela-adm-container-main-geral {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    transition: box-shadow 0.3s ease;
-}
-
-.tela-adm-container-box:hover {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-}
-
-.tela-adm-container {
-    padding: 20px;
-}
-
-.tela-adm-titulo {
-    font-size: 2.5em;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
-
-.tela-adm-subtitulo {
-    font-size: 1.2em;
-    color: #333;
+    padding: 0 15px;
+  }
+  
+  /* Boas-vindas */
+  .tela-adm-texto-boasvindas-box {
+    text-align: center;
     margin-bottom: 40px;
-}
-
-.tela-adm-card-container {
+  }
+  
+  .tela-adm-texto-boasvindas-titulo {
+    font-size: 1.8em;
+    color: var(--primary-colorh);
+    margin-bottom: 10px;
+  }
+  
+  .tela-adm-texto-boasvindas-subtitulo {
+    font-size: 1.2em;
+    color: var(--primary-color);
+  }
+  
+  /* Cards de Acesso */
+  .tela-adm-card-grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    justify-content: center;
-}
-
-.tela-adm-card {
-    background-color: var(--primary-color);
-    color: var(--cor-texto);
+    margin-bottom: 50px;
+  }
+  
+  .tela-adm-card-item-box {
+    background: #fff;
     border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .tela-adm-card-item-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .tela-adm-card-item-inner {
     padding: 20px;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.tela-adm-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-}
-
-.tela-adm-icon {
+  }
+  
+  .tela-adm-card-item-icon {
     font-size: 3em;
-    margin-bottom: 10px;
-}
-
-.tela-adm-card h2 {
-    margin: 10px 0;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+  }
+  
+  .tela-adm-card-item-titulo {
     font-size: 1.5em;
-}
-
-.tela-adm-card p {
+    margin-bottom: 10px;
+    color: var(--primary-colorh);
+  }
+  
+  .tela-adm-card-item-texto {
     font-size: 1em;
+    color: #555;
     margin-bottom: 20px;
-}
-
-.tela-adm-btn-index {
+  }
+  
+  .tela-adm-card-item-botao {
     display: inline-block;
-    background-color: var(--primary-colorh);
-    color: var(--cor-texto);
     padding: 10px 20px;
-    border-radius: 5px;
+    background: var(--primary-color);
+    color: #fff;
     text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+  
+  .tela-adm-card-item-botao:hover {
+    background: var(--primary-colorh);
+  }
+  
+  /* Seção de Informações Extras */
+  .tela-adm-extra-info-container-geral {
+    background: var(--primary-colorBG);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .tela-adm-extra-info-titulo-geral {
+    text-align: center;
+    font-size: 1.8em;
+    color: var(--primary-colorh);
+    margin-bottom: 20px;
+  }
+  
+  .tela-adm-extra-info-grid-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .tela-adm-extra-info-box-detalhes {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    flex: 1 1 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .tela-adm-extra-info-icon-detalhes {
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+  }
+  
+  .tela-adm-extra-info-subtitulo-detalhes {
+    font-size: 1.3em;
+    color: var(--primary-colorh);
+    margin-bottom: 10px;
+  }
+  
+  .tela-adm-extra-info-texto-detalhes {
     font-size: 1em;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.tela-adm-btn-index:hover {
-    background-color: var(--primary-colorh);
-    transform: scale(1.25);
-}
+    color: #666;
+  }

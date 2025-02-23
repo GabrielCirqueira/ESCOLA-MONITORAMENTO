@@ -33,7 +33,7 @@
   }
 
   .submit-button-add-materia {
-    background-color: #81b483;
+    background-color: var(--primary-color);
     width: 80%;
     color: white;
     padding: 15px 20px;
@@ -45,7 +45,7 @@
   }
   
   .submit-button-add-materia:hover {
-    background-color: #4b734c;
+    background-color: var(--primary-colorh);
   }
 
   .checkbox-group-disciplinas {

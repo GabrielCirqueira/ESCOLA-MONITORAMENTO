@@ -12,6 +12,7 @@ rotas:
   adm:                            app\controllers\monitoramento\MainController
   ADM:                            app\controllers\monitoramento\MainController
   login_pfa:                      app\controllers\monitoramento\MainController
+  sistema:                        app\controllers\monitoramento\MainController
   login_professor:                app\controllers\monitoramento\MainController
   login_gestor:                   app\controllers\monitoramento\MainController
   index:                          app\controllers\monitoramento\MainController
@@ -28,6 +29,11 @@ rotas:
   gestor_provas:                  app\controllers\monitoramento\GestorController
   gestor_prova:                   app\controllers\monitoramento\GestorController
   login_gestor_verifica:          app\controllers\monitoramento\GestorController
+  simulados:                      app\controllers\monitoramento\GestorController
+  criar_simulado:                 app\controllers\monitoramento\GestorController
+  editar_simulado:                app\controllers\monitoramento\GestorController
+  excluir_simulado:               app\controllers\monitoramento\GestorController
+  download_multi_gabarito:        app\controllers\monitoramento\GestorController
   home_professor:                 app\controllers\monitoramento\ProfessorController
   professor_home:                 app\controllers\monitoramento\ProfessorController
   inserir_gabarito:               app\controllers\monitoramento\ProfessorController
@@ -47,12 +53,7 @@ rotas:
   editar_gabarito_recuperacao:    app\controllers\monitoramento\ProfessorController
   atualizar_gabarito_rec:         app\controllers\monitoramento\ProfessorController
   professor_security:             app\controllers\monitoramento\ProfessorController
-  download_gabarito:       app\controllers\monitoramento\ProfessorController
-  lancar_gabarito:         app\controllers\monitoramento\ProfessorController
-  capturar_gabarito:       app\controllers\monitoramento\ProfessorController
-  salvar_gabarito:         app\controllers\monitoramento\ProfessorController
-  simulados:               app\controllers\monitoramento\GestorController
-  criar_simulado:          app\controllers\monitoramento\GestorController
-  editar_simulado:         app\controllers\monitoramento\GestorController
-  excluir_simulado:        app\controllers\monitoramento\GestorController
-  download_multi_gabarito: app\controllers\monitoramento\GestorController
+  download_gabarito:              app\controllers\monitoramento\ProfessorController
+  lancar_gabarito:                app\controllers\monitoramento\ProfessorController
+  capturar_gabarito:              app\controllers\monitoramento\ProfessorController
+  salvar_gabarito:                app\controllers\monitoramento\ProfessorController

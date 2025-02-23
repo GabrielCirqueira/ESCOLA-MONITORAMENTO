@@ -48,7 +48,7 @@
   }
   
   .radio-group input[type="radio"]:checked + label {
-    background-color: #238b60c3;
+    background-color: var(--primary-color);
     color: white;
-    border-color: #238b60c3;
+    border-color: var(--primary-color);
   }

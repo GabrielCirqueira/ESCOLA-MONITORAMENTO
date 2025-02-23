@@ -57,7 +57,7 @@
 
 .form-editar-professor input[type="checkbox"]:checked + label,
 .form-adicionar-professor input[type="checkbox"]:checked + label {
-  background-color: #77ae77;
+  background-color: var(--primary-color);
   color: #fff;
 }
  

@@ -1,68 +1,131 @@
-.painel-frontal-gestor {
-    text-align: center;
-    padding: 20px;
-    background-color: #f4f4f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-  }
-  
-  .painel-frontal-gestor img {
-    max-width: 150px;
-    margin-bottom: 20px; 
-  }
-  
-  .painel-frontal-gestor h1 {
-    font-size: 2.5em;
-    color: #333;
-    margin-bottom: 20px;
-    font-family: 'Arial', sans-serif;
-  }
+.painel-customized-layout {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  padding: 20px;
+}
 
-  .painel-frontal-gestor img {
-    width: 200px;
-  }
+.painel-header-section {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-colorBG);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.painel-header-image-wrapper {
+  flex: 0 0 auto;
+  margin-right: 20px;
+}
+.painel-header-image {
+  width: 80px;
+  height: auto;
+}
+.painel-header-text-wrapper {
+  flex: 1;
+}
+.painel-header-title {
+  margin: 0;
+  color: var(--primary-color);
+}
+.painel-header-subtitle {
+  margin: 5px 0 0;
+  color: var(--primary-colorh);
+}
 
-  .painel-frontal-gestor {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+.painel-search-bar-section {
+  display: flex;
+  margin-bottom: 20px;
+}
+.painel-search-bar-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px 0 0 5px;
+  outline: none;
+}
+.painel-search-bar-button {
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
 
-  .painel-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .painel-button {
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bold;
-    border: none;
-    padding: 15px 25px;
-    margin: 5px;
-    cursor: pointer;
-    font-size: 1.2em;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.267);
-    font-family: 'Arial', sans-serif;
-  }
-  
-  .painel-button:hover {
-    background-color: var(--primary-colorh);
-    transform: translateY(-2px);
-  }
-  
-  .painel-button:active {
-    background-color: #003f8a;
-    transform: translateY(0);
-  }
-  
-  .painel-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
-  }
+.painel-info-cards-section {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.painel-info-card {
+  background-color: #fff;
+  flex: 1;
+  min-width: 250px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+.painel-info-card-icon {
+  font-size: 2em;
+  color: var(--primary-color);
+  margin-right: 15px;
+}
+.painel-info-card-title {
+  margin: 0 0 5px 0;
+  font-size: 1.2em;
+  color: var(--primary-colorh);
+}
+.painel-info-card-text {
+  margin: 0;
+  color: #666;
+}
+
+/* Seção de atalhos com grid de botões */
+.painel-buttons-grid-section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+.painel-buttons-grid-title {
+  margin-top: 0;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.painel-buttons-grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+.painel-button-custom-style {
+  padding: 10px;
+  background-color: var(--primary-colorBGeasy);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: var(--primary-colorh);
+  font-weight: bold;
+  transition: background-color 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.painel-button-custom-style:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* Footer */
+.painel-footer-section {
+  text-align: center;
+  padding: 10px;
+  color: #999;
+  font-size: 0.9em;
+}

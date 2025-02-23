@@ -62,10 +62,71 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('periodos')">Ver Períodos</button>
 
             </details>
+
+            <details class="details-menu-gestor">
+                <summary class="sumary-menu-gestor">Sistema</summary>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('corSistema')">Cor Sistema</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('relatorioSistema')">Relatorios</button>
+
+            </details>
         </div>
 
         <div class="info-gestor">
             <div id="conteudo">
+
+                <div class="conteudo-item" id="corSistema">
+
+                <div class="caixa-central-geral">
+    
+                    <div class="estrutura-caixa-configuracao">
+                        
+                        <div class="bloco-superior-informacoes">
+                            <h2><i class="fas fa-palette"></i> Personalizar Sistema</h2>
+                            <p><i class="fas fa-brush"></i> Escolha uma cor para personalizar o sistema</p>
+                        </div>
+
+                        <form action="" method="post" class="estrutura-formulario-ajuste">
+                            <div class="container-seletor-paleta">
+                                <button type="button" id="botao-seletor" class="botao-abrir-seletor">
+                                    <i class="fas fa-eyedropper"></i> Escolher Cor
+                                </button>
+                                <div id="color-picker"></div>
+                                <input type="hidden" name="color" id="selected-color">
+                            </div>
+
+                            <div class="botoes-area">
+                                <button name="enviarCorSistema" type="submit" class="botao-acao-confirmar">
+                                    <i class="fas fa-save"></i> Salvar Cor
+                                </button>
+                                <button type="reset" class="botao-acao-reset">
+                                    <i class="fas fa-times"></i> Resetar
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const botaoSeletor = document.getElementById("botao-seletor");
+                        const inputColor = document.getElementById("selected-color");
+
+                        const picker = new Picker({
+                            parent: botaoSeletor,
+                            popup: "bottom",
+                            alpha: false,
+                            color: "#ff7b00",
+                            onChange: (color) => {
+                                inputColor.value = color.hex;
+                                botaoSeletor.style.backgroundColor = color.hex;
+                            }
+                        });
+
+                        botaoSeletor.addEventListener("click", () => picker.open());
+                    });
+                </script>
+                </div>
 
                 <div id="periodos" class="conteudo-item">
 
@@ -893,34 +954,102 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                     </div>
                 </div>
 
-                <div id="painel-frontal-gestor" class="painel-frontal-gestor conteudo-item active">
-                    <img src="https://telegra.ph/file/14ab586a79f8002b24880.png" alt="IMAGEM BRAZÃO">
-                    <h1>PAINEL ADMINISTRATIVO</h1>
-                    <div class="painel-buttons">
-                        <button class="painel-button" onclick="mostrarConteudo('alunos')">Alunos</button>
-                        <button class="painel-button" onclick="mostrarConteudo('provas')">Provas</button>
-                        <button class="painel-button" onclick="mostrarConteudo('AddAluno')">Adicionar Aluno</button>
-                        <button class="painel-button" onclick="mostrarConteudo('materias')">Materias</button>
-                        <button class="painel-button" onclick="mostrarConteudo('adicionarMateria')">Adicionar
-                            Materia</button>
-                        <button class="painel-button" onclick="mostrarConteudo('adicionarProfessor')">Adicionar
-                            Professor</button>
-                        <button class="painel-button" onclick="mostrarConteudo('verProfessores')">Ver
-                            Professores</button>
-                        <button class="painel-button" onclick="mostrarConteudo('adicionarTurma')">Adicionar
-                            Turma</button>
-                        <button class="painel-button" onclick="mostrarConteudo('verTurmas')">Ver Turmas</button>
-                        <button class="painel-button" onclick="mostrarConteudo('database')">Backups</button>
-                        <button class="painel-button" onclick="mostrarConteudo('logsADM')">Logs ADM</button>
-                        <button class="painel-button" onclick="mostrarConteudo('logsProfessor')">Logs Professor</button>
-                        <button class="painel-button" onclick="mostrarConteudo('addperiodo')">Adicionar Período</button>
-                        <button class="painel-button" onclick="mostrarConteudo('periodos')">Períodos</button>
-                        <br><br><br>
-                        <br><br><br>
-                    </div>
-                    <br><br><br>
-                    <br><br><br>
-                </div>
+                <div id="painel-frontal-gestor" class="painel-frontal-gestor conteudo-item active painel-customized-layout">
+  <!-- Cabeçalho -->
+  <header class="painel-header-section">
+    <div class="painel-header-image-wrapper">
+      <img src="https://telegra.ph/file/14ab586a79f8002b24880.png" alt="IMAGEM BRAZÃO" class="painel-header-image">
+    </div>
+    <div class="painel-header-text-wrapper">
+      <h1 class="painel-header-title">PAINEL ADMINISTRATIVO</h1>
+      <p class="painel-header-subtitle">
+        Bem-vindo ao painel do gestor. Aqui você pode gerenciar alunos, professores e muito mais!
+      </p>
+    </div>
+  </header>
+
+
+  <section class="painel-info-cards-section">
+    <div class="painel-info-card">
+      <div class="painel-info-card-icon"><i class="fas fa-user-graduate"></i></div>
+      <div class="painel-info-card-content">
+        <h3 class="painel-info-card-title">Alunos</h3>
+        <p class="painel-info-card-text">Gerencie os dados dos alunos de forma rápida e eficiente.</p>
+      </div>
+    </div>
+    <div class="painel-info-card">
+      <div class="painel-info-card-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+      <div class="painel-info-card-content">
+        <h3 class="painel-info-card-title">Professores</h3>
+        <p class="painel-info-card-text">Adicione e verifique informações dos professores.</p>
+      </div>
+    </div>
+    <div class="painel-info-card">
+      <div class="painel-info-card-icon"><i class="fas fa-book"></i></div>
+      <div class="painel-info-card-content">
+        <h3 class="painel-info-card-title">Matérias</h3>
+        <p class="painel-info-card-text">Organize e adicione matérias facilmente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="painel-buttons-grid-section">
+    <h2 class="painel-buttons-grid-title"><i class="fas fa-th"></i> Atalhos Rápidos</h2>
+    <div class="painel-buttons-grid-wrapper">
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('alunos')">
+        <i class="fas fa-user-graduate"></i> Alunos
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('provas')">
+        <i class="fas fa-file-alt"></i> Provas
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('AddAluno')">
+        <i class="fas fa-user-plus"></i> Adicionar Aluno
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('materias')">
+        <i class="fas fa-book-open"></i> Matérias
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('adicionarMateria')">
+        <i class="fas fa-plus-circle"></i> Adicionar Matéria
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('adicionarProfessor')">
+        <i class="fas fa-chalkboard-teacher"></i> Adicionar Professor
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('verProfessores')">
+        <i class="fas fa-eye"></i> Ver Professores
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('adicionarTurma')">
+        <i class="fas fa-users"></i> Adicionar Turma
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('verTurmas')">
+        <i class="fas fa-eye"></i> Ver Turmas
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('adicionarPFA')">
+        <i class="fas fa-eye"></i> Adicionar PFA
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('verPFA')">
+        <i class="fas fa-eye"></i> Ver PFA's
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('database')">
+        <i class="fas fa-database"></i> Backups
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('logsADM')">
+        <i class="fas fa-file-alt"></i> Logs ADM
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('logsProfessor')">
+        <i class="fas fa-file-alt"></i> Logs Professor
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('addperiodo')">
+        <i class="fas fa-calendar-plus"></i> Adicionar Período
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('periodos')">
+        <i class="fas fa-calendar-alt"></i> Períodos
+      </button>
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('corSistema')">
+        <i class="fas fa-paint-brush"></i> Cor do Sistema
+      </button>
+    </div>
+  </section>
+</div>
 
             </div>
     </section>
