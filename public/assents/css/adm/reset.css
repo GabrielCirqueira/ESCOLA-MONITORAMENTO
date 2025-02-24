@@ -1,0 +1,59 @@
+
+  .container-backup-completo {
+    max-width: 800px;
+    margin: 30px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .cabecalho-backup-detalhado {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .cabecalho-backup-detalhado h1 {
+    margin: 0;
+    font-size: 2em;
+  }
+  
+  .conteudo-backup-explicativo {
+    padding: 20px;
+    color: #333;
+  }
+  
+  .conteudo-backup-explicativo p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  .box-botao-backup {
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .botao-download-backup {
+    display: inline-block;
+    background-color: var(--primary-colorBGeasy);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .botao-download-backup:hover {
+    background-color: var(--primary-colorh);
+  }
+  
+  .rodape-backup-detalhado {
+    background-color: #eee;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.9em;
+    color: #666;
+  }
+  

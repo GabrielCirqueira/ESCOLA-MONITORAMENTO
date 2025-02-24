@@ -1,4 +1,6 @@
 <main class="main-home-aluno">
+    <section class="main-home-aluno-section">
+
     <br><br>
     <center>
 
@@ -30,11 +32,8 @@
 
         </div>
 
-
-
     </center>
     <br>
-
 
     <center>
         <div class="titulo-area-provas">
@@ -44,7 +43,6 @@
     </center>
 
     <?php
-
 
 $provas_finalizadas = [];
 $temProvaPendente = false;
@@ -379,4 +377,5 @@ $contador2++;
         <div>
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
         </div>
-</main>
+    </section>
+    </main>

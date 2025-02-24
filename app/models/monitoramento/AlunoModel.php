@@ -70,6 +70,42 @@ class AlunoModel
         }
     }
 
+    public static function provasFinalizadas()
+    {
+        $sql = "SELECT * FROM  gabarito_alunos WHERE metodo = 'prova' ORDER BY data_aluno DESC";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+        if ($query->rowCount() > 0) {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function GetAtividadesFinalizadas()
+    {
+        $sql = "SELECT * FROM gabarito_alunos WHERE metodo = 'atividade' ORDER BY data_aluno DESC";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+        if ($query->rowCount() > 0) {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
+    public static function GetAmaFinalizadas()
+    {
+        $sql = "SELECT * FROM gabarito_alunos WHERE metodo = 'ama' ORDER BY data_aluno DESC";
+        $query = Database::GetInstance()->prepare($sql);
+        $query->execute();
+        if ($query->rowCount() > 0) {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        } else {
+            return false;
+        }
+    }
+
     public static function Inserir_dados_prova($dados, $string)
     {
         $sql = "INSERT INTO gabarito_alunos

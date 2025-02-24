@@ -1,162 +1,52 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Provas - Gabriel Cirqueira</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #0500ffff;
-            --primary-colorh: #030099;
-            --primary-colorBG: #0500ffff33;
-            --primary-colorBGeasy: #0500ffffd;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--primary-colorBG);
-            color: #333;
-            line-height: 1.6;
-        }
-        header {
-            background: var(--primary-color);
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 2.5em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-        header p {
-            font-size: 1.2em;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-        .card {
-            background: #fff;
-            border: 1px solid var(--primary-colorBGeasy);
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .card h2 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            font-size: 1.8em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .card p {
-            margin-bottom: 15px;
-            text-align: justify;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .btn {
-            display: inline-block;
-            background: var(--primary-color);
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
-        .btn:hover {
-            background: var(--primary-colorh);
-        }
-        footer {
-            background: var(--primary-color);
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-        }
-        .feature-list {
-            list-style: none;
-            padding-left: 0;
-        }
-        .feature-list li {
-            margin-bottom: 10px;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1><i class="fas fa-laptop-code"></i>Sistema de Provas</h1>
-        <p>Desenvolvido por Gabriel Cirqueira</p>
-    </header>
-    <div class="container">
-        <div class="card">
-            <h2><i class="fas fa-info-circle"></i> Sobre o Sistema</h2>
-            <p>Eu, Gabriel Cirqueira, desenvolvi este sistema do zero enquanto estava no 3º ano do ensino médio na escola <i class="fas fa-school"></i> "NOSSA SENHORA DE LOURDES". Programei o sistema sozinho, criando uma solução completa para gerenciamento e monitoramento de provas.</p>
+<section class="sistema-container">
+    
+    <div class="sistema-caixa-central">
+
+    <div class="presentation">
+            <img src="public/assents/img/sistema/eu.png" alt="Gabriel Cirqueira" class="profile-pic">
+            <h1><a href="https://linktr.ee/GabrielCirqueira" target="_blank">Gabriel Cirqueira</a></h1>
+            <p>Desenvolvi este sistema enquanto ainda estudava no 3º ano do ensino médio, buscando criar uma solução prática e eficiente para o gerenciamento de provas e acompanhamento de resultados no ambiente escolar.</p>
+            <i class="fas fa-code"></i> <i class="fas fa-laptop-code"></i> <i class="fas fa-terminal"></i>
         </div>
-        <div class="grid">
-            <div class="card">
-                <h2><i class="fas fa-user-shield"></i> Área do Administrador</h2>
-                <p>A tela de administrador permite inserir professores, alunos, matérias, períodos de provas, realizar backups, adicionar turmas e gerenciar provas.</p>
-                <ul class="feature-list">
-                    <li><i class="fas fa-user-plus"></i> Inserir Professores e Alunos</li>
-                    <li><i class="fas fa-book"></i> Gerenciar Matérias</li>
-                    <li><i class="fas fa-calendar-alt"></i> Configurar Períodos de Provas</li>
-                    <li><i class="fas fa-database"></i> Realizar Backups</li>
-                    <li><i class="fas fa-users"></i> Adicionar Turmas</li>
-                </ul>
-                <a href="#" class="btn"><i class="fas fa-cogs"></i> Acessar Admin</a>
-            </div>
-            <div class="card">
-                <h2><i class="fas fa-chalkboard-teacher"></i> Área do Professor</h2>
-                <p>Na área do professor, é possível selecionar as turmas para a realização de provas, criar um gabarito espelho e acessar relatórios detalhados.</p>
-                <ul class="feature-list">
-                    <li><i class="fas fa-clipboard-list"></i> Selecionar Turmas</li>
-                    <li><i class="fas fa-edit"></i> Criar Gabarito Espelho</li>
-                    <li><i class="fas fa-chart-bar"></i> Visualizar Relatórios</li>
-                </ul>
-                <a href="#" class="btn"><i class="fas fa-chart-bar"></i> Acessar Professor</a>
-            </div>
-            <div class="card">
-                <h2><i class="fas fa-user-graduate"></i> Área do Aluno</h2>
-                <p>Na área do aluno, todas as provas realizadas são listadas. O aluno pode lançar seu gabarito e enviar as respostas para correção automática, comparando com o gabarito do professor.</p>
-                <ul class="feature-list">
-                    <li><i class="fas fa-list"></i> Listar Provas Realizadas</li>
-                    <li><i class="fas fa-pen"></i> Lançar Gabarito</li>
-                    <li><i class="fas fa-check"></i> Correção Automática</li>
-                </ul>
-                <a href="#" class="btn"><i class="fas fa-check-circle"></i> Acessar Aluno</a>
-            </div>
-            <div class="card">
-                <h2><i class="fas fa-chart-line"></i> Área do Gestor</h2>
-                <p>A área do gestor oferece acesso completo a todos os dados, com gráficos interativos e filtros por professor, turma e disciplina para análise detalhada dos resultados.</p>
-                <ul class="feature-list">
-                    <li><i class="fas fa-filter"></i> Filtros Avançados</li>
-                    <li><i class="fas fa-chart-pie"></i> Gráficos Interativos</li>
-                    <li><i class="fas fa-search"></i> Análise de Resultados</li>
-                </ul>
-                <a href="#" class="btn"><i class="fas fa-tasks"></i> Acessar Gestor</a>
-            </div>
+
+        <h1 class="sistema-titulo">Sistema de Provas e Monitoramento</h1>
+        
+        <div class="sistema-secao">
+            <h2 class="sistema-subtitulo"><i class="fas fa-cogs sistema-icone"></i>Sobre o Sistema</h2>
+            <p class="sistema-texto">O sistema foi criado do zero utilizando PHP, JavaScript, HTML e CSS, além de algumas bibliotecas externas. Ele foi desenvolvido para facilitar o gerenciamento de provas escolares, permitindo um fluxo completo de criação, aplicação e correção automática. O objetivo principal é garantir que tanto professores quanto alunos tenham uma experiência mais prática e dinâmica no dia a dia escolar, tornando o processo de avaliação mais transparente e ágil.</p>
+            <p class="sistema-texto">Com funcionalidades específicas para cada tipo de usuário, o sistema tem como foco a integração entre professores, alunos e gestores, facilitando a comunicação e análise dos resultados. A solução automatiza diversas etapas, reduzindo a carga de trabalho manual e aumentando a eficiência no processo de avaliação educacional.</p>
         </div>
+        
+        <div class="sistema-secao">
+            <h2 class="sistema-subtitulo"><i class="fas fa-user-cog sistema-icone"></i>Área do Administrador</h2>
+            <p class="sistema-texto">Nesta área, os administradores têm total controle sobre a gestão do sistema. É possível inserir professores, alunos, matérias, e configurar os períodos de provas. Também é possível realizar backups do sistema e adicionar turmas de forma simples e rápida, garantindo a segurança e organização dos dados. A gestão das provas é centralizada nesta área, onde os administradores podem definir configurações e garantir o bom funcionamento do sistema.</p>
+            <img src="public/assents/img/sistema/painel.png" alt="Painel Administrativo" class="system-image">
+            <p class="sistema-texto">Além disso, os administradores têm acesso a ferramentas para monitorar a utilização do sistema, garantir que todos os dados estejam atualizados e realizar ajustes sempre que necessário, promovendo uma administração eficaz e simplificada de todas as operações do sistema.</p>
+        </div>
+        
+        <div class="sistema-secao">
+            <h2 class="sistema-subtitulo"><i class="fas fa-chalkboard-teacher sistema-icone"></i>Área do Professor</h2>
+            <p class="sistema-texto">Os professores têm à disposição uma plataforma intuitiva onde podem selecionar as turmas que irão realizar determinadas provas. Eles também podem criar gabaritos espelhos, facilitando o processo de correção, e têm acesso à correção automática das provas dos alunos assim que as mesmas são submetidas. O sistema também oferece ferramentas de análise, permitindo que os professores visualizem relatórios detalhados sobre o desempenho de suas turmas e sobre cada aluno individualmente.</p>
+            <img src="public/assents/img/sistema/professor.png" alt="Painel Administrativo" class="system-image">
+            <p class="sistema-texto">Essa área visa agilizar o processo de correção e fornecer insights valiosos sobre o desempenho acadêmico, ajudando os professores a melhorar suas práticas pedagógicas e a fornecer feedback mais eficiente para os alunos.</p>
+        </div>
+        
+        <div class="sistema-secao">
+            <h2 class="sistema-subtitulo"><i class="fas fa-user-graduate sistema-icone"></i>Área do Aluno</h2>
+            <p class="sistema-texto">A área do aluno foi pensada para ser uma plataforma prática e fácil de usar. Nela, os alunos podem acessar todas as provas que realizaram e inserir seus gabaritos de forma rápida. Após a submissão, o sistema realiza a correção automática, permitindo que os alunos visualizem seus resultados de forma quase imediata. Caso o professor libere o acesso, os alunos podem ver as respostas corrigidas, o que contribui para um aprendizado contínuo e transparente.</p>
+            <img src="public/assents/img/sistema/aluno.png" alt="Painel Administrativo" class="system-image">
+            <p class="sistema-texto">Além disso, os alunos têm acesso a um histórico completo de suas provas, permitindo que acompanhem seu progresso ao longo do tempo e identifiquem áreas de melhoria, o que torna o processo de aprendizagem mais dinâmico e adaptável às suas necessidades.</p>
+        </div>
+        
+        <div class="sistema-secao">
+            <h2 class="sistema-subtitulo"><i class="fas fa-chart-line sistema-icone"></i>Área do Gestor</h2>
+            <p class="sistema-texto">Os gestores escolares possuem um painel completo com gráficos detalhados que mostram o desempenho das turmas, professores e disciplinas. Eles podem filtrar os dados conforme necessário para obter informações específicas sobre qualquer parte do sistema. A área oferece uma visão estratégica de todo o funcionamento da plataforma, permitindo a tomada de decisões baseadas em dados reais e atualizados.</p>
+            <img src="public/assents/img/sistema/grafico.png" alt="Painel Administrativo" class="system-image">
+            <p class="sistema-texto">Essa funcionalidade é crucial para garantir que os gestores tenham uma visão clara e precisa do desempenho acadêmico e da utilização do sistema, auxiliando na criação de estratégias para a melhoria contínua do ensino e acompanhamento do progresso escolar.</p>
+        </div>
+
+        <div class="sistema-secao">
+            <h2 class="sistema-subtitulo">3ºI01 INFO ( TECNICO )/2024</h2>
+            <img src="public/assents/img/sistema/turma.png" alt="Painel Administrativo" class="system-image">
     </div>
-    <footer>
-        <p>&copy; 2025 - Sistema de Provas | Desenvolvido por Gabriel Cirqueira</p>
-    </footer>
-</body>
-</html>
+</section>

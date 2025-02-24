@@ -3,6 +3,7 @@
 namespace app\controllers\monitoramento;
 
 use app\models\monitoramento\GestorModel;
+use app\controllers\monitoramento\GestorController;
 
 class MainController{
 
@@ -82,7 +83,7 @@ class MainController{
     }
 
     public static function sistema()
-    {
+    {   
         MainController::Templates("public/views/plates/cirqueira.php");
     }
 

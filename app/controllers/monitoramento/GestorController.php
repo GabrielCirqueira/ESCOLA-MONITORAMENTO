@@ -1192,22 +1192,424 @@ class GestorController
                 'enable_php' => true,
             ];
 
-            // instantiate and use the dompdf class
             $dompdf = new Dompdf($options);
             $dompdf->loadHtml($html_content);
     
-            // (Optional) Setup the paper size and orientation
             $dompdf->setPaper('A4', 'portrait');
     
-            // Render the HTML as PDF
             $dompdf->render();
     
-            // Output the generated PDF to Browser
             $dompdf->stream("gabarito.pdf", [
                 "Attachment" => false
             ]);
         }
 
         exit;
+    }
+
+    public static function gerarSuperArrayCompleto() {
+        // Verifica se o gestor está autenticado
+        if (!$_SESSION["GESTOR"]) {
+            header("location: adm");
+            exit();
+        }
+    
+        // Busca todas as provas, atividades e AMA finalizadas
+        $provas = AlunoModel::GetProvasFinalizadas();
+        $atividades = AlunoModel::GetAtividadesFinalizadas();
+        $provaAma = AlunoModel::GetAmaFinalizadas();
+    
+        // Inicializa o super array
+        $superArray = [
+            "geral" => [
+                "provas" => [],
+                "atividades" => [],
+                "ama" => [],
+                "por_turma" => [],
+                "por_serie" => [],
+                "por_turno" => [],
+                "por_disciplina" => [],
+            ],
+            "por_periodo" => [
+                "provas" => [],
+                "atividades" => [],
+                "ama" => [],
+            ],
+        ];
+    
+        // Processa os dados gerais
+        $superArray["geral"]["provas"] = self::processarDadosGerais($provas);
+        $superArray["geral"]["atividades"] = self::processarDadosGerais($atividades);
+        $superArray["geral"]["ama"] = self::processarDadosGerais($provaAma);
+    
+        // Processa os dados por turma
+        $superArray["geral"]["por_turma"]["provas"] = self::processarDadosPorTurma($provas);
+        $superArray["geral"]["por_turma"]["atividades"] = self::processarDadosPorTurma($atividades);
+        $superArray["geral"]["por_turma"]["ama"] = self::processarDadosPorTurma($provaAma);
+    
+        // Processa os dados por série
+        $superArray["geral"]["por_serie"]["provas"] = self::processarDadosPorSerie($provas);
+        $superArray["geral"]["por_serie"]["atividades"] = self::processarDadosPorSerie($atividades);
+        $superArray["geral"]["por_serie"]["ama"] = self::processarDadosPorSerie($provaAma);
+    
+        // Processa os dados por turno
+        $superArray["geral"]["por_turno"]["provas"] = self::processarDadosPorTurno($provas);
+        $superArray["geral"]["por_turno"]["atividades"] = self::processarDadosPorTurno($atividades);
+        $superArray["geral"]["por_turno"]["ama"] = self::processarDadosPorTurno($provaAma);
+    
+        // Processa os dados por disciplina
+        $superArray["geral"]["por_disciplina"]["provas"] = self::processarDadosPorDisciplina($provas);
+        $superArray["geral"]["por_disciplina"]["atividades"] = self::processarDadosPorDisciplina($atividades);
+        $superArray["geral"]["por_disciplina"]["ama"] = self::processarDadosPorDisciplina($provaAma);
+    
+        // Processa os dados por período
+        $superArray["por_periodo"]["provas"] = self::processarDadosPorPeriodoCompleto($provas);
+        $superArray["por_periodo"]["atividades"] = self::processarDadosPorPeriodoCompleto($atividades);
+        $superArray["por_periodo"]["ama"] = self::processarDadosPorPeriodoCompleto($provaAma);
+    
+        return $superArray;
+    }
+    
+    private static function processarDadosPorPeriodoCompleto($dados) {
+        // Obtém os períodos cadastrados
+        $periodos = ADModel::GetPeriodos();
+        $dadosPorPeriodo = [];
+    
+        // Inicializa o array de dados por período
+        foreach ($periodos as $periodo) {
+            $dadosPorPeriodo[$periodo["nome"]] = [
+                "total_alunos" => 0,
+                "soma_porcentagem" => 0,
+                "alunos_acima_60" => 0,
+                "por_turno" => [],
+            ];
+        }
+    
+        // Processa cada item (prova, atividade ou AMA)
+        foreach ($dados as $item) {
+            $dataInsercao = $item["data_aluno"]; // Supondo que a data de inserção está nesse campo
+            $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
+            $turno = $item["turno"];
+            $serie = $item["serie"];
+            $turma = $item["turma"];
+            $disciplina = $item["disciplina"];
+    
+            // Encontra o período correspondente à data de inserção
+            foreach ($periodos as $periodo) {
+                $dataInicial = $periodo["data_inicial"];
+                $dataFinal = $periodo["data_final"];
+    
+                if ($dataInsercao >= $dataInicial && $dataInsercao <= $dataFinal) {
+                    $nomePeriodo = $periodo["nome"];
+    
+                    // Atualiza os dados gerais do período
+                    $dadosPorPeriodo[$nomePeriodo]["total_alunos"]++;
+                    $dadosPorPeriodo[$nomePeriodo]["soma_porcentagem"] += $porcentagem;
+    
+                    if ($porcentagem >= 60) {
+                        $dadosPorPeriodo[$nomePeriodo]["alunos_acima_60"]++;
+                    }
+    
+                    // Inicializa os dados do turno, se necessário
+                    if (!isset($dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno])) {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno] = [
+                            "total_alunos" => 0,
+                            "soma_porcentagem" => 0,
+                            "alunos_acima_60" => 0,
+                            "por_serie" => [],
+                        ];
+                    }
+    
+                    // Atualiza os dados do turno
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["total_alunos"]++;
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["soma_porcentagem"] += $porcentagem;
+    
+                    if ($porcentagem >= 60) {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["alunos_acima_60"]++;
+                    }
+    
+                    // Inicializa os dados da série, se necessário
+                    if (!isset($dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie])) {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie] = [
+                            "total_alunos" => 0,
+                            "soma_porcentagem" => 0,
+                            "alunos_acima_60" => 0,
+                            "turmas" => [],
+                        ];
+                    }
+    
+                    // Atualiza os dados da série
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["total_alunos"]++;
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["soma_porcentagem"] += $porcentagem;
+    
+                    if ($porcentagem >= 60) {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["alunos_acima_60"]++;
+                    }
+    
+                    // Inicializa os dados da turma, se necessário
+                    if (!isset($dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma])) {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma] = [
+                            "total_alunos" => 0,
+                            "soma_porcentagem" => 0,
+                            "alunos_acima_60" => 0,
+                            "disciplinas" => [],
+                        ];
+                    }
+    
+                    // Atualiza os dados da turma
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["total_alunos"]++;
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["soma_porcentagem"] += $porcentagem;
+    
+                    if ($porcentagem >= 60) {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["alunos_acima_60"]++;
+                    }
+    
+                    // Inicializa os dados da disciplina, se necessário
+                    if (!isset($dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina])) {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina] = [
+                            "total_alunos" => 0,
+                            "soma_porcentagem" => 0,
+                            "alunos_acima_60" => 0,
+                        ];
+                    }
+    
+                    // Atualiza os dados da disciplina
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["total_alunos"]++;
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["soma_porcentagem"] += $porcentagem;
+    
+                    if ($porcentagem >= 60) {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["alunos_acima_60"]++;
+                    }
+    
+                    break; // Sai do loop após encontrar o período correspondente
+                }
+            }
+        }
+    
+        // Calcula médias e porcentagens para cada nível
+        foreach ($dadosPorPeriodo as $nomePeriodo => $dadosPeriodo) {
+            if ($dadosPeriodo["total_alunos"] > 0) {
+                $dadosPorPeriodo[$nomePeriodo]["media_porcentagem"] = number_format($dadosPeriodo["soma_porcentagem"] / $dadosPeriodo["total_alunos"], 2);
+                $dadosPorPeriodo[$nomePeriodo]["porcentagem_acima_60"] = number_format(($dadosPeriodo["alunos_acima_60"] / $dadosPeriodo["total_alunos"]) * 100, 2);
+            } else {
+                $dadosPorPeriodo[$nomePeriodo]["media_porcentagem"] = 0;
+                $dadosPorPeriodo[$nomePeriodo]["porcentagem_acima_60"] = 0;
+            }
+    
+            foreach ($dadosPeriodo["por_turno"] as $turno => $dadosTurno) {
+                if ($dadosTurno["total_alunos"] > 0) {
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["media_porcentagem"] = number_format($dadosTurno["soma_porcentagem"] / $dadosTurno["total_alunos"], 2);
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["porcentagem_acima_60"] = number_format(($dadosTurno["alunos_acima_60"] / $dadosTurno["total_alunos"]) * 100, 2);
+                } else {
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["media_porcentagem"] = 0;
+                    $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["porcentagem_acima_60"] = 0;
+                }
+    
+                foreach ($dadosTurno["por_serie"] as $serie => $dadosSerie) {
+                    if ($dadosSerie["total_alunos"] > 0) {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["media_porcentagem"] = number_format($dadosSerie["soma_porcentagem"] / $dadosSerie["total_alunos"], 2);
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["porcentagem_acima_60"] = number_format(($dadosSerie["alunos_acima_60"] / $dadosSerie["total_alunos"]) * 100, 2);
+                    } else {
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["media_porcentagem"] = 0;
+                        $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["porcentagem_acima_60"] = 0;
+                    }
+    
+                    foreach ($dadosSerie["turmas"] as $turma => $dadosTurma) {
+                        if ($dadosTurma["total_alunos"] > 0) {
+                            $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["media_porcentagem"] = number_format($dadosTurma["soma_porcentagem"] / $dadosTurma["total_alunos"], 2);
+                            $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["porcentagem_acima_60"] = number_format(($dadosTurma["alunos_acima_60"] / $dadosTurma["total_alunos"]) * 100, 2);
+                        } else {
+                            $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["media_porcentagem"] = 0;
+                            $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["porcentagem_acima_60"] = 0;
+                        }
+    
+                        foreach ($dadosTurma["disciplinas"] as $disciplina => $dadosDisciplina) {
+                            if ($dadosDisciplina["total_alunos"] > 0) {
+                                $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["media_porcentagem"] = number_format($dadosDisciplina["soma_porcentagem"] / $dadosDisciplina["total_alunos"], 2);
+                                $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["porcentagem_acima_60"] = number_format(($dadosDisciplina["alunos_acima_60"] / $dadosDisciplina["total_alunos"]) * 100, 2);
+                            } else {
+                                $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["media_porcentagem"] = 0;
+                                $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["porcentagem_acima_60"] = 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+        return $dadosPorPeriodo;
+    }
+    // Função para processar dados gerais
+    private static function processarDadosGerais($dados) {
+        $total = count($dados);
+        $somaPorcentagem = 0;
+        $alunosAcima60 = 0;
+    
+        foreach ($dados as $item) {
+            $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
+            $somaPorcentagem += $porcentagem;
+    
+            if ($porcentagem >= 60) {
+                $alunosAcima60++;
+            }
+        }
+    
+        return [
+            "total_alunos" => $total,
+            "media_porcentagem" => $total > 0 ? number_format($somaPorcentagem / $total, 2) : 0,
+            "porcentagem_acima_60" => $total > 0 ? number_format(($alunosAcima60 / $total) * 100, 2) : 0,
+        ];
+    }
+    
+    // Função para processar dados por turma
+    private static function processarDadosPorTurma($dados) {
+        $dadosPorTurma = [];
+    
+        foreach ($dados as $item) {
+            $turma = $item["turma"];
+            $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
+    
+            if (!isset($dadosPorTurma[$turma])) {
+                $dadosPorTurma[$turma] = [
+                    "total_alunos" => 0,
+                    "soma_porcentagem" => 0,
+                    "alunos_acima_60" => 0,
+                ];
+            }
+    
+            $dadosPorTurma[$turma]["total_alunos"]++;
+            $dadosPorTurma[$turma]["soma_porcentagem"] += $porcentagem;
+    
+            if ($porcentagem >= 60) {
+                $dadosPorTurma[$turma]["alunos_acima_60"]++;
+            }
+        }
+    
+        // Calcula médias e porcentagens
+        foreach ($dadosPorTurma as $turma => $dados) {
+            if ($dados["total_alunos"] > 0) {
+                $dadosPorTurma[$turma]["media_porcentagem"] = number_format($dados["soma_porcentagem"] / $dados["total_alunos"], 2);
+                $dadosPorTurma[$turma]["porcentagem_acima_60"] = number_format(($dados["alunos_acima_60"] / $dados["total_alunos"]) * 100, 2);
+            } else {
+                $dadosPorTurma[$turma]["media_porcentagem"] = 0;
+                $dadosPorTurma[$turma]["porcentagem_acima_60"] = 0;
+            }
+        }
+    
+        return $dadosPorTurma;
+    }
+    
+    // Função para processar dados por série
+    private static function processarDadosPorSerie($dados) {
+        $dadosPorSerie = [];
+    
+        foreach ($dados as $item) {
+            $serie = $item["serie"];
+            $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
+    
+            if (!isset($dadosPorSerie[$serie])) {
+                $dadosPorSerie[$serie] = [
+                    "total_alunos" => 0,
+                    "soma_porcentagem" => 0,
+                    "alunos_acima_60" => 0,
+                ];
+            }
+    
+            $dadosPorSerie[$serie]["total_alunos"]++;
+            $dadosPorSerie[$serie]["soma_porcentagem"] += $porcentagem;
+    
+            if ($porcentagem >= 60) {
+                $dadosPorSerie[$serie]["alunos_acima_60"]++;
+            }
+        }
+    
+        // Calcula médias e porcentagens
+        foreach ($dadosPorSerie as $serie => $dados) {
+            if ($dados["total_alunos"] > 0) {
+                $dadosPorSerie[$serie]["media_porcentagem"] = number_format($dados["soma_porcentagem"] / $dados["total_alunos"], 2);
+                $dadosPorSerie[$serie]["porcentagem_acima_60"] = number_format(($dados["alunos_acima_60"] / $dados["total_alunos"]) * 100, 2);
+            } else {
+                $dadosPorSerie[$serie]["media_porcentagem"] = 0;
+                $dadosPorSerie[$serie]["porcentagem_acima_60"] = 0;
+            }
+        }
+    
+        return $dadosPorSerie;
+    }
+    
+    // Função para processar dados por turno
+    private static function processarDadosPorTurno($dados) {
+        $dadosPorTurno = [];
+    
+        foreach ($dados as $item) {
+            $turno = $item["turno"];
+            $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
+    
+            if (!isset($dadosPorTurno[$turno])) {
+                $dadosPorTurno[$turno] = [
+                    "total_alunos" => 0,
+                    "soma_porcentagem" => 0,
+                    "alunos_acima_60" => 0,
+                ];
+            }
+    
+            $dadosPorTurno[$turno]["total_alunos"]++;
+            $dadosPorTurno[$turno]["soma_porcentagem"] += $porcentagem;
+    
+            if ($porcentagem >= 60) {
+                $dadosPorTurno[$turno]["alunos_acima_60"]++;
+            }
+        }
+    
+        // Calcula médias e porcentagens
+        foreach ($dadosPorTurno as $turno => $dados) {
+            if ($dados["total_alunos"] > 0) {
+                $dadosPorTurno[$turno]["media_porcentagem"] = number_format($dados["soma_porcentagem"] / $dados["total_alunos"], 2);
+                $dadosPorTurno[$turno]["porcentagem_acima_60"] = number_format(($dados["alunos_acima_60"] / $dados["total_alunos"]) * 100, 2);
+            } else {
+                $dadosPorTurno[$turno]["media_porcentagem"] = 0;
+                $dadosPorTurno[$turno]["porcentagem_acima_60"] = 0;
+            }
+        }
+    
+        return $dadosPorTurno;
+    }
+    
+    // Função para processar dados por disciplina
+    private static function processarDadosPorDisciplina($dados) {
+        $dadosPorDisciplina = [];
+    
+        foreach ($dados as $item) {
+            $disciplina = $item["disciplina"];
+            $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
+    
+            if (!isset($dadosPorDisciplina[$disciplina])) {
+                $dadosPorDisciplina[$disciplina] = [
+                    "total_alunos" => 0,
+                    "soma_porcentagem" => 0,
+                    "alunos_acima_60" => 0,
+                ];
+            }
+    
+            $dadosPorDisciplina[$disciplina]["total_alunos"]++;
+            $dadosPorDisciplina[$disciplina]["soma_porcentagem"] += $porcentagem;
+    
+            if ($porcentagem >= 60) {
+                $dadosPorDisciplina[$disciplina]["alunos_acima_60"]++;
+            }
+        }
+    
+        // Calcula médias e porcentagens
+        foreach ($dadosPorDisciplina as $disciplina => $dados) {
+            if ($dados["total_alunos"] > 0) {
+                $dadosPorDisciplina[$disciplina]["media_porcentagem"] = number_format($dados["soma_porcentagem"] / $dados["total_alunos"], 2);
+                $dadosPorDisciplina[$disciplina]["porcentagem_acima_60"] = number_format(($dados["alunos_acima_60"] / $dados["total_alunos"]) * 100, 2);
+            } else {
+                $dadosPorDisciplina[$disciplina]["media_porcentagem"] = 0;
+                $dadosPorDisciplina[$disciplina]["porcentagem_acima_60"] = 0;
+            }
+        }
+    
+        return $dadosPorDisciplina;
     }
 }

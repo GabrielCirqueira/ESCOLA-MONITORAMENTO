@@ -66,13 +66,58 @@ usort($materias, function ($a, $b) {return strcmp($a['nome'], $b['nome']);});?>
             <details class="details-menu-gestor">
                 <summary class="sumary-menu-gestor">Sistema</summary>
                 <button class="button-details-menu-gestor" onclick="mostrarConteudo('corSistema')">Cor Sistema</button>
-                <button class="button-details-menu-gestor" onclick="mostrarConteudo('relatorioSistema')">Relatorios</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('relatorioSistema')">Relatorio Geral</button>
+                <button class="button-details-menu-gestor" onclick="mostrarConteudo('reset')">Reset</button>
 
             </details>
         </div>
 
         <div class="info-gestor">
             <div id="conteudo">
+
+            <div class="conteudo-item" id="reset">
+            <div class="container-backup-completo">
+                <header class="cabecalho-backup-detalhado">
+                <h1><i class="fa fa-database"></i> Backup do Ano Anterior</h1>
+                </header>
+                <main class="conteudo-backup-explicativo">
+                <p>Esta página oferece a opção de baixar os dados de backup referentes ao ano anterior. Ao clicar no botão abaixo, você fará o download de uma pasta compactada que contém o backup SQL completo do banco de dados e o relatório em formato XLSX.</p>
+                <p>Esses arquivos são essenciais para a manutenção, auditoria e verificação dos dados, garantindo a integridade e a segurança das informações armazenadas.</p>
+                <div class="box-botao-backup">
+                    <a href="app\config\backups\relatorio_Geral.zip" class="botao-enviar-relatorio" download>
+                    <i class="fa fa-download"></i> Baixar Backup
+                    </a>
+                </div>
+                </main>
+            </div>
+            </div>
+
+            <div class="conteudo-item" id="relatorioSistema">
+
+                <section class="relatorio-sistema-detalhado">
+                    <div class="container-informacao-relatorio">
+                        <h2><i class="fa fa-file-alt"></i> Relatório do Sistema</h2>
+                        <p class="texto-explicativo-relatorio">Este relatório oferece uma visão abrangente sobre os turnos, provas, turmas e disciplinas do sistema. Com informações detalhadas, o relatório permite análises precisas para auxiliar na tomada de decisões estratégicas e no acompanhamento do desempenho acadêmico.</p>
+                        <div class="caixa-detalhes-relatorio">
+                        <ul class="lista-detalhe-relatorio">
+                            <li><i class="fa fa-clock"></i> <strong>Turnos:</strong> Intermediario & Vespertino</li>
+                            <li><i class="fa fa-pencil-alt"></i> <strong>Provas:</strong> Avaliações periódicas e simulados e AMA</li>
+                            <li><i class="fa fa-users"></i> <strong>Turmas:</strong> 1º, 2º, 3º séries com grupos diversificados</li>
+                            <li><i class="fa fa-book"></i> <strong>Disciplinas:</strong> Matemática, Português, História...</li>
+                        </ul>
+                        </div>
+                        <div class="caixa-botao-relatorio">
+                            <p class="texto-adicional-relatorio">Ao enviar, o sistema processará os dados e gerará um relatório completo em XLSX, pronto para download.</p>
+                            <form action="" method="post">
+                                <button name="enviarRelatorio" type="submit" class="botao-enviar-relatorio">
+                                <i class="fa fa-download"></i> Enviar e Baixar Relatório
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
 
                 <div class="conteudo-item" id="corSistema">
 
@@ -1047,6 +1092,14 @@ $disciplinas = explode(";", $professor["disciplinas"]);
       <button class="painel-button-custom-style" onclick="mostrarConteudo('corSistema')">
         <i class="fas fa-paint-brush"></i> Cor do Sistema
       </button>
+
+      <button class="painel-button-custom-style" onclick="mostrarConteudo('relatorioSistema')">
+        <i class="fas fa-chart-line"></i> Relatórios
+        </button>
+
+        <button class="painel-button-custom-style" onclick="mostrarConteudo('reset')">
+        <i class="fas fa-cog"></i> Reset
+        </button>
     </div>
   </section>
 </div>

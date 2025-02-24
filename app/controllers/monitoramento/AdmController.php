@@ -3,9 +3,13 @@
 namespace app\controllers\monitoramento;
 
 use app\controllers\monitoramento\MainController;
+use app\controllers\monitoramento\RelatorioPeriodo;
+use app\controllers\monitoramento\Relatorio;
 use app\models\monitoramento\ADModel;
 use app\models\monitoramento\AlunoModel;
 use app\models\monitoramento\ProfessorModel;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class AdmController
 {
@@ -334,10 +338,14 @@ class AdmController
             }
         }
 
+        if (isset($_POST["enviarRelatorio"])) {
+            self::gerarRelatorioGeral();
+        }
+
         if (isset($_POST["enviarCorSistema"])) {
             $primaryColor = $_POST['color'];
 
-            $primaryColorH = self::darkenColor($primaryColor, 40);
+            $primaryColorH = self::darkenColor($primaryColor, 30);
             $primaryColorBG = self::transparentColor($primaryColor, 0.2);
             $primaryColorBGeasy = self::transparentColor($primaryColor, 0.05);
 
@@ -350,7 +358,7 @@ class AdmController
 
             file_put_contents('public/assents/css/variaveis.css', $cssContent);
 
-                self::inserirLogsADM("A Cor do Sistema foi alterada.");
+                self::inserirLogsADM("A Cor do Sistema foi alterada para {$primaryColor}.");
 
                 $_SESSION["PopUp_Cor_Sistema"] = true;
                 header("location: adm_home");
@@ -544,6 +552,251 @@ class AdmController
     {
         $turmas = ADModel::GetTurmas();
         return $turmas;
+    }
+
+    public static function gerarRelatorioGeral(){
+        $superArray = GestorController::gerarSuperArrayCompleto();
+        $superArrayPeriodo = self::gerarSuperArrayDetalhado();
+    
+        // Cria uma nova instância do Spreadsheet
+        $spreadsheet = new Spreadsheet();
+    
+        // Remove a aba padrão criada automaticamente
+        $spreadsheet->removeSheetByIndex(0);
+    
+        // Gera as abas da primeira planilha
+        $filename1 = Relatorio::gerarRelatorioGeral($superArray);
+        $reader1 = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $spreadsheet1 = $reader1->load($filename1);
+    
+        // Adiciona as abas da primeira planilha ao novo Spreadsheet
+        foreach ($spreadsheet1->getSheetNames() as $sheetName) {
+            $sheet = $spreadsheet1->getSheetByName($sheetName);
+    
+            // Usa addExternalSheet para adicionar a aba de forma segura
+            try {
+                $spreadsheet->addExternalSheet($sheet);
+            } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
+                // Se o nome da aba já existir, renomeia a aba
+                $originalSheetName = $sheetName;
+                $counter = 1;
+                while ($spreadsheet->sheetNameExists($sheetName)) {
+                    $sheetName = $originalSheetName . ' (' . $counter . ')';
+                    $counter++;
+                }
+                $sheet->setTitle($sheetName);
+                $spreadsheet->addExternalSheet($sheet);
+            }
+        }
+    
+        // Gera as abas da segunda planilha
+        $filename2 = RelatorioPeriodo::gerarRelatorioGeral($superArrayPeriodo);
+        $reader2 = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+        $spreadsheet2 = $reader2->load($filename2);
+    
+        // Adiciona as abas da segunda planilha ao novo Spreadsheet
+        foreach ($spreadsheet2->getSheetNames() as $sheetName) {
+            $sheet = $spreadsheet2->getSheetByName($sheetName);
+    
+            // Usa addExternalSheet para adicionar a aba de forma segura
+            try {
+                $spreadsheet->addExternalSheet($sheet);
+            } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
+                // Se o nome da aba já existir, renomeia a aba
+                $originalSheetName = $sheetName;
+                $counter = 1;
+                while ($spreadsheet->sheetNameExists($sheetName)) {
+                    $sheetName = $originalSheetName . ' (' . $counter . ')';
+                    $counter++;
+                }
+                $sheet->setTitle($sheetName);
+                $spreadsheet->addExternalSheet($sheet);
+            }
+        }
+    
+        // Salva o arquivo final
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'relatorio_completo.xlsx';
+        $writer->save($filename);
+    
+        // Envia o arquivo para o navegador
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+    
+        readfile($filename);
+        unlink($filename);
+        unlink($filename1);
+        unlink($filename2);
+        exit;
+    }
+
+    public static function gerarSuperArrayDetalhado() {
+        // Verifica se o gestor está autenticado
+        $provas = AlunoModel::provasFinalizadas();
+        $atividades = AlunoModel::GetAtividadesFinalizadas();
+        $provaAma = AlunoModel::GetAmaFinalizadas();
+    
+        // Inicializa o super array
+        $superArray = [
+            "geral" => [
+                "provas" => [],
+                "atividades" => [],
+                "ama" => [],
+            ],
+            "por_periodo" => [
+                "provas" => [],
+                "atividades" => [],
+                "ama" => [],
+            ],
+        ];
+    
+        // Processa os dados gerais
+        $superArray["geral"]["provas"] = self::processarDadosGerais($provas);
+        $superArray["geral"]["atividades"] = self::processarDadosGerais($atividades);
+        $superArray["geral"]["ama"] = self::processarDadosGerais($provaAma);
+    
+        // Processa os dados por período
+        $superArray["por_periodo"]["provas"] = self::processarDadosPorPeriodoDetalhado($provas);
+        $superArray["por_periodo"]["atividades"] = self::processarDadosPorPeriodoDetalhado($atividades);
+        $superArray["por_periodo"]["ama"] = self::processarDadosPorPeriodoDetalhado($provaAma);
+    
+        return $superArray;
+    }
+    
+    // Função para processar dados gerais
+    private static function processarDadosGerais($dados) {
+        $total = count($dados);
+        $somaPorcentagem = 0;
+        $alunosAcima60 = 0;
+    
+        foreach ($dados as $item) {
+            $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
+            $somaPorcentagem += $porcentagem;
+    
+            if ($porcentagem >= 60) {
+                $alunosAcima60++;
+            }
+        }
+    
+        return [
+            "total_alunos" => $total,
+            "media_porcentagem" => $total > 0 ? number_format($somaPorcentagem / $total, 2) : 0,
+            "porcentagem_acima_60" => $total > 0 ? number_format(($alunosAcima60 / $total) * 100, 2) : 0,
+        ];
+    }
+    
+    // Função para processar dados por período (com detalhes de turmas e disciplinas)
+    private static function processarDadosPorPeriodoDetalhado($dados) {
+        // Obtém os períodos cadastrados
+        $periodos = ADModel::GetPeriodos();
+        $dadosPorPeriodo = [];
+    
+        // Inicializa o array de dados por período
+        foreach ($periodos as $periodo) {
+            $dadosPorPeriodo[$periodo["nome"]] = [
+                "total_alunos" => 0,
+                "soma_porcentagem" => 0,
+                "alunos_acima_60" => 0,
+                "turmas" => [],
+            ];
+        }
+    
+        // Processa cada item (prova, atividade ou AMA)
+        foreach ($dados as $item) {
+            $dataInsercao = $item["data_aluno"]; // Supondo que a data de inserção está nesse campo
+            $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
+            $turma = $item["turma"];
+            $disciplina = $item["disciplina"];
+    
+            // Encontra o período correspondente à data de inserção
+            foreach ($periodos as $periodo) {
+                $dataInicial = $periodo["data_inicial"];
+                $dataFinal = $periodo["data_final"];
+    
+                if ($dataInsercao >= $dataInicial && $dataInsercao <= $dataFinal) {
+                    $nomePeriodo = $periodo["nome"];
+    
+                    // Atualiza os dados gerais do período
+                    $dadosPorPeriodo[$nomePeriodo]["total_alunos"]++;
+                    $dadosPorPeriodo[$nomePeriodo]["soma_porcentagem"] += $porcentagem;
+    
+                    if ($porcentagem >= 60) {
+                        $dadosPorPeriodo[$nomePeriodo]["alunos_acima_60"]++;
+                    }
+    
+                    // Inicializa os dados da turma, se necessário
+                    if (!isset($dadosPorPeriodo[$nomePeriodo]["turmas"][$turma])) {
+                        $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma] = [
+                            "total_alunos" => 0,
+                            "soma_porcentagem" => 0,
+                            "alunos_acima_60" => 0,
+                            "disciplinas" => [],
+                        ];
+                    }
+    
+                    // Atualiza os dados da turma
+                    $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["total_alunos"]++;
+                    $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["soma_porcentagem"] += $porcentagem;
+    
+                    if ($porcentagem >= 60) {
+                        $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["alunos_acima_60"]++;
+                    }
+    
+                    // Inicializa os dados da disciplina, se necessário
+                    if (!isset($dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina])) {
+                        $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina] = [
+                            "total_alunos" => 0,
+                            "soma_porcentagem" => 0,
+                            "alunos_acima_60" => 0,
+                        ];
+                    }
+    
+                    // Atualiza os dados da disciplina
+                    $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["total_alunos"]++;
+                    $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["soma_porcentagem"] += $porcentagem;
+    
+                    if ($porcentagem >= 60) {
+                        $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["alunos_acima_60"]++;
+                    }
+    
+                    break; // Sai do loop após encontrar o período correspondente
+                }
+            }
+        }
+    
+        // Calcula médias e porcentagens para cada período, turma e disciplina
+        foreach ($dadosPorPeriodo as $nomePeriodo => $dadosPeriodo) {
+            if ($dadosPeriodo["total_alunos"] > 0) {
+                $dadosPorPeriodo[$nomePeriodo]["media_porcentagem"] = number_format($dadosPeriodo["soma_porcentagem"] / $dadosPeriodo["total_alunos"], 2);
+                $dadosPorPeriodo[$nomePeriodo]["porcentagem_acima_60"] = number_format(($dadosPeriodo["alunos_acima_60"] / $dadosPeriodo["total_alunos"]) * 100, 2);
+            } else {
+                $dadosPorPeriodo[$nomePeriodo]["media_porcentagem"] = 0;
+                $dadosPorPeriodo[$nomePeriodo]["porcentagem_acima_60"] = 0;
+            }
+    
+            foreach ($dadosPeriodo["turmas"] as $turma => $dadosTurma) {
+                if ($dadosTurma["total_alunos"] > 0) {
+                    $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["media_porcentagem"] = number_format($dadosTurma["soma_porcentagem"] / $dadosTurma["total_alunos"], 2);
+                    $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["porcentagem_acima_60"] = number_format(($dadosTurma["alunos_acima_60"] / $dadosTurma["total_alunos"]) * 100, 2);
+                } else {
+                    $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["media_porcentagem"] = 0;
+                    $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["porcentagem_acima_60"] = 0;
+                }
+    
+                foreach ($dadosTurma["disciplinas"] as $disciplina => $dadosDisciplina) {
+                    if ($dadosDisciplina["total_alunos"] > 0) {
+                        $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["media_porcentagem"] = number_format($dadosDisciplina["soma_porcentagem"] / $dadosDisciplina["total_alunos"], 2);
+                        $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["porcentagem_acima_60"] = number_format(($dadosDisciplina["alunos_acima_60"] / $dadosDisciplina["total_alunos"]) * 100, 2);
+                    } else {
+                        $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["media_porcentagem"] = 0;
+                        $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["porcentagem_acima_60"] = 0;
+                    }
+                }
+            }
+        }
+    
+        return $dadosPorPeriodo;
     }
 
 }

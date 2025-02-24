@@ -1,0 +1,81 @@
+.presentation {
+    text-align: center;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-color);
+}
+
+.presentation a {
+    color: var(--primary-color);
+    transition: 0.3s ease-in;
+  }
+
+  .presentation a:hover {
+    color: var(--primary-colorh);
+  }
+  
+  .sistema-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.sistema-caixa-central {
+    max-width: 1024px;
+    width: 100%;
+    background: white;
+    padding: 30px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.sistema-titulo {
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.sistema-descricao {
+    text-align: center;
+    font-size: 18px;
+    color: var(--primary-colorh);
+    margin-bottom: 30px;
+}
+
+.sistema-secao {
+    background: var(--primary-colorBG);
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sistema-subtitulo {
+    color: var(--primary-color);
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.sistema-texto {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+.sistema-icone {
+    font-size: 24px;
+    color: var(--primary-color);
+    display: block;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.system-image{
+    width: 100%;
+}
