@@ -1208,18 +1208,15 @@ class GestorController
     }
 
     public static function gerarSuperArrayCompleto() {
-        // Verifica se o gestor está autenticado
         if (!$_SESSION["GESTOR"]) {
             header("location: adm");
             exit();
         }
     
-        // Busca todas as provas, atividades e AMA finalizadas
         $provas = AlunoModel::GetProvasFinalizadas();
         $atividades = AlunoModel::GetAtividadesFinalizadas();
         $provaAma = AlunoModel::GetAmaFinalizadas();
     
-        // Inicializa o super array
         $superArray = [
             "geral" => [
                 "provas" => [],
@@ -1237,32 +1234,26 @@ class GestorController
             ],
         ];
     
-        // Processa os dados gerais
         $superArray["geral"]["provas"] = self::processarDadosGerais($provas);
         $superArray["geral"]["atividades"] = self::processarDadosGerais($atividades);
         $superArray["geral"]["ama"] = self::processarDadosGerais($provaAma);
     
-        // Processa os dados por turma
         $superArray["geral"]["por_turma"]["provas"] = self::processarDadosPorTurma($provas);
         $superArray["geral"]["por_turma"]["atividades"] = self::processarDadosPorTurma($atividades);
         $superArray["geral"]["por_turma"]["ama"] = self::processarDadosPorTurma($provaAma);
     
-        // Processa os dados por série
         $superArray["geral"]["por_serie"]["provas"] = self::processarDadosPorSerie($provas);
         $superArray["geral"]["por_serie"]["atividades"] = self::processarDadosPorSerie($atividades);
         $superArray["geral"]["por_serie"]["ama"] = self::processarDadosPorSerie($provaAma);
     
-        // Processa os dados por turno
         $superArray["geral"]["por_turno"]["provas"] = self::processarDadosPorTurno($provas);
         $superArray["geral"]["por_turno"]["atividades"] = self::processarDadosPorTurno($atividades);
         $superArray["geral"]["por_turno"]["ama"] = self::processarDadosPorTurno($provaAma);
     
-        // Processa os dados por disciplina
         $superArray["geral"]["por_disciplina"]["provas"] = self::processarDadosPorDisciplina($provas);
         $superArray["geral"]["por_disciplina"]["atividades"] = self::processarDadosPorDisciplina($atividades);
         $superArray["geral"]["por_disciplina"]["ama"] = self::processarDadosPorDisciplina($provaAma);
     
-        // Processa os dados por período
         $superArray["por_periodo"]["provas"] = self::processarDadosPorPeriodoCompleto($provas);
         $superArray["por_periodo"]["atividades"] = self::processarDadosPorPeriodoCompleto($atividades);
         $superArray["por_periodo"]["ama"] = self::processarDadosPorPeriodoCompleto($provaAma);
@@ -1271,11 +1262,9 @@ class GestorController
     }
     
     private static function processarDadosPorPeriodoCompleto($dados) {
-        // Obtém os períodos cadastrados
         $periodos = ADModel::GetPeriodos();
         $dadosPorPeriodo = [];
     
-        // Inicializa o array de dados por período
         foreach ($periodos as $periodo) {
             $dadosPorPeriodo[$periodo["nome"]] = [
                 "total_alunos" => 0,
@@ -1285,16 +1274,14 @@ class GestorController
             ];
         }
     
-        // Processa cada item (prova, atividade ou AMA)
         foreach ($dados as $item) {
-            $dataInsercao = $item["data_aluno"]; // Supondo que a data de inserção está nesse campo
+            $dataInsercao = $item["data_aluno"];
             $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
             $turno = $item["turno"];
             $serie = $item["serie"];
             $turma = $item["turma"];
             $disciplina = $item["disciplina"];
     
-            // Encontra o período correspondente à data de inserção
             foreach ($periodos as $periodo) {
                 $dataInicial = $periodo["data_inicial"];
                 $dataFinal = $periodo["data_final"];
@@ -1302,7 +1289,6 @@ class GestorController
                 if ($dataInsercao >= $dataInicial && $dataInsercao <= $dataFinal) {
                     $nomePeriodo = $periodo["nome"];
     
-                    // Atualiza os dados gerais do período
                     $dadosPorPeriodo[$nomePeriodo]["total_alunos"]++;
                     $dadosPorPeriodo[$nomePeriodo]["soma_porcentagem"] += $porcentagem;
     
@@ -1310,7 +1296,6 @@ class GestorController
                         $dadosPorPeriodo[$nomePeriodo]["alunos_acima_60"]++;
                     }
     
-                    // Inicializa os dados do turno, se necessário
                     if (!isset($dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno])) {
                         $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno] = [
                             "total_alunos" => 0,
@@ -1320,7 +1305,6 @@ class GestorController
                         ];
                     }
     
-                    // Atualiza os dados do turno
                     $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["total_alunos"]++;
                     $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["soma_porcentagem"] += $porcentagem;
     
@@ -1328,7 +1312,6 @@ class GestorController
                         $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["alunos_acima_60"]++;
                     }
     
-                    // Inicializa os dados da série, se necessário
                     if (!isset($dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie])) {
                         $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie] = [
                             "total_alunos" => 0,
@@ -1338,7 +1321,6 @@ class GestorController
                         ];
                     }
     
-                    // Atualiza os dados da série
                     $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["total_alunos"]++;
                     $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["soma_porcentagem"] += $porcentagem;
     
@@ -1346,7 +1328,6 @@ class GestorController
                         $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["alunos_acima_60"]++;
                     }
     
-                    // Inicializa os dados da turma, se necessário
                     if (!isset($dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma])) {
                         $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma] = [
                             "total_alunos" => 0,
@@ -1356,7 +1337,6 @@ class GestorController
                         ];
                     }
     
-                    // Atualiza os dados da turma
                     $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["total_alunos"]++;
                     $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["soma_porcentagem"] += $porcentagem;
     
@@ -1364,7 +1344,6 @@ class GestorController
                         $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["alunos_acima_60"]++;
                     }
     
-                    // Inicializa os dados da disciplina, se necessário
                     if (!isset($dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina])) {
                         $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina] = [
                             "total_alunos" => 0,
@@ -1373,7 +1352,6 @@ class GestorController
                         ];
                     }
     
-                    // Atualiza os dados da disciplina
                     $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["total_alunos"]++;
                     $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["soma_porcentagem"] += $porcentagem;
     
@@ -1381,12 +1359,11 @@ class GestorController
                         $dadosPorPeriodo[$nomePeriodo]["por_turno"][$turno]["por_serie"][$serie]["turmas"][$turma]["disciplinas"][$disciplina]["alunos_acima_60"]++;
                     }
     
-                    break; // Sai do loop após encontrar o período correspondente
+                    break;
                 }
             }
         }
     
-        // Calcula médias e porcentagens para cada nível
         foreach ($dadosPorPeriodo as $nomePeriodo => $dadosPeriodo) {
             if ($dadosPeriodo["total_alunos"] > 0) {
                 $dadosPorPeriodo[$nomePeriodo]["media_porcentagem"] = number_format($dadosPeriodo["soma_porcentagem"] / $dadosPeriodo["total_alunos"], 2);
@@ -1439,7 +1416,6 @@ class GestorController
     
         return $dadosPorPeriodo;
     }
-    // Função para processar dados gerais
     private static function processarDadosGerais($dados) {
         $total = count($dados);
         $somaPorcentagem = 0;
@@ -1461,7 +1437,6 @@ class GestorController
         ];
     }
     
-    // Função para processar dados por turma
     private static function processarDadosPorTurma($dados) {
         $dadosPorTurma = [];
     
@@ -1485,7 +1460,6 @@ class GestorController
             }
         }
     
-        // Calcula médias e porcentagens
         foreach ($dadosPorTurma as $turma => $dados) {
             if ($dados["total_alunos"] > 0) {
                 $dadosPorTurma[$turma]["media_porcentagem"] = number_format($dados["soma_porcentagem"] / $dados["total_alunos"], 2);
@@ -1499,7 +1473,6 @@ class GestorController
         return $dadosPorTurma;
     }
     
-    // Função para processar dados por série
     private static function processarDadosPorSerie($dados) {
         $dadosPorSerie = [];
     
@@ -1523,7 +1496,6 @@ class GestorController
             }
         }
     
-        // Calcula médias e porcentagens
         foreach ($dadosPorSerie as $serie => $dados) {
             if ($dados["total_alunos"] > 0) {
                 $dadosPorSerie[$serie]["media_porcentagem"] = number_format($dados["soma_porcentagem"] / $dados["total_alunos"], 2);
@@ -1537,7 +1509,6 @@ class GestorController
         return $dadosPorSerie;
     }
     
-    // Função para processar dados por turno
     private static function processarDadosPorTurno($dados) {
         $dadosPorTurno = [];
     
@@ -1561,7 +1532,6 @@ class GestorController
             }
         }
     
-        // Calcula médias e porcentagens
         foreach ($dadosPorTurno as $turno => $dados) {
             if ($dados["total_alunos"] > 0) {
                 $dadosPorTurno[$turno]["media_porcentagem"] = number_format($dados["soma_porcentagem"] / $dados["total_alunos"], 2);
@@ -1575,7 +1545,6 @@ class GestorController
         return $dadosPorTurno;
     }
     
-    // Função para processar dados por disciplina
     private static function processarDadosPorDisciplina($dados) {
         $dadosPorDisciplina = [];
     
@@ -1599,7 +1568,6 @@ class GestorController
             }
         }
     
-        // Calcula médias e porcentagens
         foreach ($dadosPorDisciplina as $disciplina => $dados) {
             if ($dados["total_alunos"] > 0) {
                 $dadosPorDisciplina[$disciplina]["media_porcentagem"] = number_format($dados["soma_porcentagem"] / $dados["total_alunos"], 2);

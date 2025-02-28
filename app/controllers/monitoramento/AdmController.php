@@ -558,26 +558,20 @@ class AdmController
         $superArray = GestorController::gerarSuperArrayCompleto();
         $superArrayPeriodo = self::gerarSuperArrayDetalhado();
     
-        // Cria uma nova instância do Spreadsheet
         $spreadsheet = new Spreadsheet();
     
-        // Remove a aba padrão criada automaticamente
         $spreadsheet->removeSheetByIndex(0);
     
-        // Gera as abas da primeira planilha
         $filename1 = Relatorio::gerarRelatorioGeral($superArray);
         $reader1 = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $spreadsheet1 = $reader1->load($filename1);
     
-        // Adiciona as abas da primeira planilha ao novo Spreadsheet
         foreach ($spreadsheet1->getSheetNames() as $sheetName) {
             $sheet = $spreadsheet1->getSheetByName($sheetName);
     
-            // Usa addExternalSheet para adicionar a aba de forma segura
             try {
                 $spreadsheet->addExternalSheet($sheet);
             } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
-                // Se o nome da aba já existir, renomeia a aba
                 $originalSheetName = $sheetName;
                 $counter = 1;
                 while ($spreadsheet->sheetNameExists($sheetName)) {
@@ -589,20 +583,16 @@ class AdmController
             }
         }
     
-        // Gera as abas da segunda planilha
         $filename2 = RelatorioPeriodo::gerarRelatorioGeral($superArrayPeriodo);
         $reader2 = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $spreadsheet2 = $reader2->load($filename2);
     
-        // Adiciona as abas da segunda planilha ao novo Spreadsheet
         foreach ($spreadsheet2->getSheetNames() as $sheetName) {
             $sheet = $spreadsheet2->getSheetByName($sheetName);
     
-            // Usa addExternalSheet para adicionar a aba de forma segura
             try {
                 $spreadsheet->addExternalSheet($sheet);
             } catch (\PhpOffice\PhpSpreadsheet\Exception $e) {
-                // Se o nome da aba já existir, renomeia a aba
                 $originalSheetName = $sheetName;
                 $counter = 1;
                 while ($spreadsheet->sheetNameExists($sheetName)) {
@@ -614,12 +604,10 @@ class AdmController
             }
         }
     
-        // Salva o arquivo final
         $writer = new Xlsx($spreadsheet);
         $filename = 'relatorio_completo.xlsx';
         $writer->save($filename);
     
-        // Envia o arquivo para o navegador
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header('Content-Disposition: attachment;filename="' . $filename . '"');
         header('Cache-Control: max-age=0');
@@ -632,12 +620,10 @@ class AdmController
     }
 
     public static function gerarSuperArrayDetalhado() {
-        // Verifica se o gestor está autenticado
         $provas = AlunoModel::provasFinalizadas();
         $atividades = AlunoModel::GetAtividadesFinalizadas();
         $provaAma = AlunoModel::GetAmaFinalizadas();
     
-        // Inicializa o super array
         $superArray = [
             "geral" => [
                 "provas" => [],
@@ -651,12 +637,10 @@ class AdmController
             ],
         ];
     
-        // Processa os dados gerais
         $superArray["geral"]["provas"] = self::processarDadosGerais($provas);
         $superArray["geral"]["atividades"] = self::processarDadosGerais($atividades);
         $superArray["geral"]["ama"] = self::processarDadosGerais($provaAma);
     
-        // Processa os dados por período
         $superArray["por_periodo"]["provas"] = self::processarDadosPorPeriodoDetalhado($provas);
         $superArray["por_periodo"]["atividades"] = self::processarDadosPorPeriodoDetalhado($atividades);
         $superArray["por_periodo"]["ama"] = self::processarDadosPorPeriodoDetalhado($provaAma);
@@ -664,7 +648,6 @@ class AdmController
         return $superArray;
     }
     
-    // Função para processar dados gerais
     private static function processarDadosGerais($dados) {
         $total = count($dados);
         $somaPorcentagem = 0;
@@ -686,13 +669,10 @@ class AdmController
         ];
     }
     
-    // Função para processar dados por período (com detalhes de turmas e disciplinas)
     private static function processarDadosPorPeriodoDetalhado($dados) {
-        // Obtém os períodos cadastrados
         $periodos = ADModel::GetPeriodos();
         $dadosPorPeriodo = [];
     
-        // Inicializa o array de dados por período
         foreach ($periodos as $periodo) {
             $dadosPorPeriodo[$periodo["nome"]] = [
                 "total_alunos" => 0,
@@ -702,14 +682,12 @@ class AdmController
             ];
         }
     
-        // Processa cada item (prova, atividade ou AMA)
         foreach ($dados as $item) {
-            $dataInsercao = $item["data_aluno"]; // Supondo que a data de inserção está nesse campo
+            $dataInsercao = $item["data_aluno"];
             $porcentagem = ($item["acertos"] / $item["QNT_perguntas"]) * 100;
             $turma = $item["turma"];
             $disciplina = $item["disciplina"];
     
-            // Encontra o período correspondente à data de inserção
             foreach ($periodos as $periodo) {
                 $dataInicial = $periodo["data_inicial"];
                 $dataFinal = $periodo["data_final"];
@@ -717,7 +695,6 @@ class AdmController
                 if ($dataInsercao >= $dataInicial && $dataInsercao <= $dataFinal) {
                     $nomePeriodo = $periodo["nome"];
     
-                    // Atualiza os dados gerais do período
                     $dadosPorPeriodo[$nomePeriodo]["total_alunos"]++;
                     $dadosPorPeriodo[$nomePeriodo]["soma_porcentagem"] += $porcentagem;
     
@@ -725,7 +702,6 @@ class AdmController
                         $dadosPorPeriodo[$nomePeriodo]["alunos_acima_60"]++;
                     }
     
-                    // Inicializa os dados da turma, se necessário
                     if (!isset($dadosPorPeriodo[$nomePeriodo]["turmas"][$turma])) {
                         $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma] = [
                             "total_alunos" => 0,
@@ -735,7 +711,6 @@ class AdmController
                         ];
                     }
     
-                    // Atualiza os dados da turma
                     $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["total_alunos"]++;
                     $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["soma_porcentagem"] += $porcentagem;
     
@@ -743,7 +718,6 @@ class AdmController
                         $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["alunos_acima_60"]++;
                     }
     
-                    // Inicializa os dados da disciplina, se necessário
                     if (!isset($dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina])) {
                         $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina] = [
                             "total_alunos" => 0,
@@ -752,7 +726,6 @@ class AdmController
                         ];
                     }
     
-                    // Atualiza os dados da disciplina
                     $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["total_alunos"]++;
                     $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["soma_porcentagem"] += $porcentagem;
     
@@ -760,12 +733,11 @@ class AdmController
                         $dadosPorPeriodo[$nomePeriodo]["turmas"][$turma]["disciplinas"][$disciplina]["alunos_acima_60"]++;
                     }
     
-                    break; // Sai do loop após encontrar o período correspondente
+                    break;
                 }
             }
         }
     
-        // Calcula médias e porcentagens para cada período, turma e disciplina
         foreach ($dadosPorPeriodo as $nomePeriodo => $dadosPeriodo) {
             if ($dadosPeriodo["total_alunos"] > 0) {
                 $dadosPorPeriodo[$nomePeriodo]["media_porcentagem"] = number_format($dadosPeriodo["soma_porcentagem"] / $dadosPeriodo["total_alunos"], 2);
