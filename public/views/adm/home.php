@@ -1000,7 +1000,6 @@ $disciplinas = explode(";", $professor["disciplinas"]);
                 </div>
 
                 <div id="painel-frontal-gestor" class="painel-frontal-gestor conteudo-item active painel-customized-layout">
-  <!-- Cabeçalho -->
   <header class="painel-header-section">
     <div class="painel-header-image-wrapper">
       <img src="https://telegra.ph/file/14ab586a79f8002b24880.png" alt="IMAGEM BRAZÃO" class="painel-header-image">
